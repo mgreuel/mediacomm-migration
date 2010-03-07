@@ -1,24 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿#region Using Directives
+
 using System.Web.Mvc;
+
+#endregion
 
 namespace MediaCommMVC.UI.Controllers
 {
+    /// <summary>Controller for the welcome page.</summary>
     [HandleError]
+    [Authorize]
     public class HomeController : Controller
     {
+        #region Public Methods
+
+        /// <summary>Handles Errors.</summary>
+        /// <returns>The error view.</returns>
+        public ActionResult Error()
+        {
+            return this.View();
+        }
+
+        /// <summary>The welcome page.</summary>
+        /// <returns>The welcome view.</returns>
         public ActionResult Index()
         {
-            ViewData["Message"] = "Welcome to ASP.NET MVC!";
-
-            return View();
+            return this.View();
         }
 
-        public ActionResult About()
-        {
-            return View();
-        }
+        #endregion
     }
 }
