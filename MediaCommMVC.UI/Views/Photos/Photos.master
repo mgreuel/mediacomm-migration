@@ -1,0 +1,25 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true"
+    Inherits="System.Web.Mvc.ViewMasterPage<MediaCommMVC.UI.ViewModel.PhotoViewData>" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
+    <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="content">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    </div>
+    <div class="sitenav">
+        <h1>
+            <%= Html.ActionLink(Resources.Photos.Upload, "Upload") %>
+         </h1>
+         <h1> <%= Resources.Photos.Albums %> </h1>
+         <ul>
+         <% foreach (MediaCommMVC.UI.ViewModel.PhotoAlbumInfo albumInfo in Model.PhotoAlbums)
+{ %>
+    <li>
+        <%= Html.ActionLink(albumInfo.Name, "Album", new { id = albumInfo.Id })%>
+    </li>         
+<% } %>
+         </ul>
+    </div>
+</asp:Content>

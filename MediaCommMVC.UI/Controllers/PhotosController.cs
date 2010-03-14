@@ -1,7 +1,10 @@
 #region Using Directives
 
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,6 +14,7 @@ using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Photos;
 using MediaCommMVC.Core.Model.Users;
 using MediaCommMVC.UI.Infrastructure;
+using MediaCommMVC.UI.ViewModel;
 
 #endregion
 
@@ -66,7 +70,7 @@ namespace MediaCommMVC.UI.Controllers
 
             this.logger.Debug("Displaying view with photo album " + album);
 
-            return this.View(album);
+            return this.View(new PhotoAlbumViewData { Album = album, PhotoAlbums = this.GetPhotoAlbumInfo() });
         }
 
         /// <summary>The index page.</summary>
@@ -74,7 +78,7 @@ namespace MediaCommMVC.UI.Controllers
         public ActionResult Index()
         {
             this.logger.Debug("Displaying photos index");
-            return this.View();
+            return this.View(new PhotoViewData { PhotoAlbums = this.GetPhotoAlbumInfo() });
         }
 
         /// <summary>Displays a single photo.</summary>
@@ -95,7 +99,7 @@ namespace MediaCommMVC.UI.Controllers
         public ActionResult Upload()
         {
             this.logger.Debug("Displaying photo upload page");
-            return this.View();
+            return this.View(new PhotoViewData { PhotoAlbums = this.GetPhotoAlbumInfo() });
         }
 
         /// <summary>Uploads the zip file containing the photos.</summary>
@@ -130,7 +134,21 @@ namespace MediaCommMVC.UI.Controllers
                 this.logger.Warn("No file was sent to the server");
             }
 
-            return this.View();
+            return this.View(new PhotoViewData { PhotoAlbums = this.GetPhotoAlbumInfo() });
+        }
+
+        #endregion
+
+        #region helper methods
+
+        /// <summary>
+        /// Gets the photo album info.
+        /// </summary>
+        /// <returns>The list of photo album infos.</returns>
+        private IEnumerable<PhotoAlbumInfo> GetPhotoAlbumInfo()
+        {
+#warning Needs to be implemented!
+            return new List<PhotoAlbumInfo>();
         }
 
         #endregion

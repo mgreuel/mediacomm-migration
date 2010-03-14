@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Indigo.Master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Forums.Forum>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Admin/Admin.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Forums.Forum>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     CreateForum
@@ -43,6 +43,4 @@
     <div>
         <%=Html.ActionLink("Back to List", "Index") %>
     </div>
-    <%= Html.ClientSideValidation("Forum", typeof(MediaCommMVC.Core.Model.Forums.Forum))
-        .UseValidationSummary("validationSummary", Resources.General.ValidationSummary) %>
 </asp:Content>

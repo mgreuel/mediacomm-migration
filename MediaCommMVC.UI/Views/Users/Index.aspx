@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Indigo.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Core.Model.Users.MediaCommUser>>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Core.Model.Users.MediaCommUser>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
@@ -7,7 +7,7 @@
     <h2>
     <%= Resources.Users.Userlist %>
     </h2>
-    <table id="userTable" style="min-width:500px">
+    <table id="userTable">
         <thead>
             <tr>
                 <th>

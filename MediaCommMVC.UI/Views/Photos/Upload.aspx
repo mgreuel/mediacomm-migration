@@ -1,17 +1,16 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Indigo.Master" Inherits="System.Web.Mvc.ViewPage" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.PhotoViewData>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Upload
+    <%= Resources.Photos.Upload %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
     <link href="../../Content/UploadIfy/uploadify.css" rel="stylesheet" type="text/css" />
 
     <script src="../../Scripts/swfobject.js" type="text/javascript"></script>
 
     <script src="../../Scripts/jquery.uploadify.v2.1.0.js" type="text/javascript"></script>
 
-    <h2>
-        Upload</h2>
     <% using (Html.BeginForm())
        {%>
        

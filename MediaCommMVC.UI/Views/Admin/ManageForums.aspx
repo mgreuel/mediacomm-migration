@@ -1,7 +1,7 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Indigo.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Core.Model.Forums.Forum>>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Admin/Admin.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Core.Model.Forums.Forum>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    ManageForums
+   <%= Resources.Admin.ManageForums %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
@@ -21,9 +21,7 @@
     </div>
     <input type="submit" />
     <% } %>
-    <p>
-        <%= Html.ActionLink("Create New", "Create") %>
-    </p>
+
     <style type="text/css">
         #sortable
         {

@@ -61,11 +61,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Administration.
+        /// </summary>
+        internal static string Administration {
+            get {
+                return ResourceManager.GetString("Administration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Forum.
         /// </summary>
         internal static string CreateForum {
             get {
                 return ResourceManager.GetString("CreateForum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Forums.
+        /// </summary>
+        internal static string ManageForums {
+            get {
+                return ResourceManager.GetString("ManageForums", resourceCulture);
             }
         }
     }

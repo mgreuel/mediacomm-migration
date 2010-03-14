@@ -44,12 +44,11 @@
             </div>
         </div>
         <div class="main">
-            <div class="content">
-                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-            </div>
-            <asp:ContentPlaceHolder ID="SideNavContainer" runat="server" />
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
             <div class="clearer">
-                &nbsp;</div>
+                &nbsp;
+            </div>
         </div>
     </div>
     <div class="footer">

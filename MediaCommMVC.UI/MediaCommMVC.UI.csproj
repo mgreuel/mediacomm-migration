@@ -195,6 +195,9 @@
     <Compile Include="AccountModels\ValidatePasswordLengthAttribute.cs" />
     <Compile Include="AccountModels\ValidationUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\PhotoAlbumInfo.cs" />
+    <Compile Include="ViewModel\PhotoAlbumViewData.cs" />
+    <Compile Include="ViewModel\PhotoViewData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\DataTables\css\demo_table_jui.css" />
@@ -260,6 +263,10 @@
     <Content Include="Content\jQuery-ui-lightness\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\jQuery-ui-lightness\jquery-ui-1.8.1-rc1.css" />
     <Content Include="Content\Style.css" />
+    <Content Include="Content\UploadIfy\cancel.png" />
+    <Content Include="Content\UploadIfy\expressInstall.swf" />
+    <Content Include="Content\UploadIfy\uploadify.css" />
+    <Content Include="Content\UploadIfy\uploadify.swf" />
     <Content Include="Global.asax" />
     <Content Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -275,6 +282,7 @@
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.uploadify.v2.1.0.js" />
     <Content Include="Scripts\jquery.uploadify.v2.1.0.min.js" />
+    <Content Include="Scripts\swfobject.js" />
     <Content Include="Views\Admin\CreateForum.aspx" />
     <Content Include="Views\Admin\Index.aspx" />
     <Content Include="Views\Admin\ManageForums.aspx" />
@@ -323,6 +331,8 @@
     <None Include="Content\Highslide\graphics\outlines\Outlines.psd" />
     <Content Include="Views\Shared\Site.Master" />
     <None Include="Settings.StyleCop" />
+    <Content Include="Views\Photos\Photos.master" />
+    <Content Include="Views\Admin\Admin.master" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Admin.resx">

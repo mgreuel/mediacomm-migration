@@ -1,0 +1,39 @@
+Account:
+- Remove Registration
+- Multilanguage
+
+Admin:
+- Movie Qual + Language
+- Create User
+- Navigation
+- Forums Administration
+
+Forums:
+- UI
+- Navigation
+
+Home:
+- What's new
+
+Movies:
+- Input Validation
+- Edit
+- Header Style
+
+Photos:
+- 2. Level Navigation: 
+		- Accordion/Categories
+		- Hover Information
+- Upload: DropDownLists / ComboBoxes
+- Encapsulate ImageCreation
+
+Users:
+- Formatting
+
+General:
+- Buttons
+
+Install:
+- Web-Install
+- DB Creation
+- Admin Creation
