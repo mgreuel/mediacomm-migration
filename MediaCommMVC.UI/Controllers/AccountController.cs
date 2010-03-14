@@ -22,22 +22,10 @@ namespace MediaCommMVC.UI.Controllers
         // the default forms authentication and membership providers.
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="AccountController"/> class.</summary>
         public AccountController()
-            : this(null, null)
         {
-        }
-
-        // This constructor is not used by the MVC framework but is instead provided for ease
-        // of unit testing this type. See the comments in AccountModels.cs for more information.
-
-        /// <summary>Initializes a new instance of the <see cref="AccountController"/> class.</summary>
-        /// <param name="formsService">The forms service.</param>
-        /// <param name="membershipService">The membership service.</param>
-        public AccountController(IFormsAuthenticationService formsService, IMembershipService membershipService)
-        {
-            this.FormsService = formsService ?? new FormsAuthenticationService();
-            this.MembershipService = membershipService ?? new AccountMembershipService();
+            this.FormsService = new FormsAuthenticationService();
+            this.MembershipService =  new AccountMembershipService();
         }
 
         #endregion

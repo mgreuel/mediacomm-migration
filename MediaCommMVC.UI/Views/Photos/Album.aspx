@@ -1,18 +1,14 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Indigo.Master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Photos.PhotoAlbum>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.PhotoAlbumViewData>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Album
+    <%= Html.Encode(this.Model.Name) %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
     <script src="../../Scripts/highslide-full.js" type="text/javascript"></script>
-
     <link href="../../Content/Highslide/highslide.css" rel="stylesheet" type="text/css" />
     <!--[if lt IE 7]>
 <link href="../../Content/Highslide/highslide-ie6.css" rel="stylesheet" type="text/css" />
 <![endif]-->
-    <h2>
-        Album</h2>
     <div class="hidden-container">
         <% foreach (var photo in Model.Photos)
            { %>
@@ -21,13 +17,13 @@
         <% } %>
     </div>
     <%--<div id="gallery-area" style="width: 620px; height: 520px; margin: 0 auto; border: 1px solid silver">--%>
-    <div id="gallery-area" style="width: 770px; height: 654px; margin: 0 auto; border: 1px solid silver; margin-bottom:10px;">
+    <div id="gallery-area" style="width: 770px; height: 654px; margin: 0 auto; border: 1px solid silver;
+        margin-bottom: 10px;">
     </div>
     <style type="text/css">
         .highslide-image
         {
-            border: 1px solid black;
-            /*left: 1px !important;*/
+            border: 1px solid black; /*left: 1px !important;*/
         }
         .highslide-controls
         {
@@ -52,14 +48,13 @@
         }
         .in-page
         {
-            top: 130px !important;            
+            top: 130px !important;
         }
-        
     </style>
-
     <script type="text/javascript">
 
-        $(document).ready(function() {
+        $(document).ready(function ()
+        {
             $(".highslide").eq(0).click();
         });
 
@@ -110,27 +105,33 @@
         //        });
 
         // Cancel the default action for image click and do next instead
-        hs.Expander.prototype.onImageClick = function() {
+        hs.Expander.prototype.onImageClick = function ()
+        {
             if (/in-page/.test(this.wrapper.className)) return hs.next();
         }
 
         // Under no circumstances should the static popup be closed
-        hs.Expander.prototype.onBeforeClose = function() {
+        hs.Expander.prototype.onBeforeClose = function ()
+        {
             if (/in-page/.test(this.wrapper.className)) return false;
         }
         // ... nor dragged
-        hs.Expander.prototype.onDrag = function() {
+        hs.Expander.prototype.onDrag = function ()
+        {
             if (/in-page/.test(this.wrapper.className)) return false;
         }
 
         // Keep the position after window resize
-        hs.addEventListener(window, 'resize', function() {
+        hs.addEventListener(window, 'resize', function ()
+        {
             var i, exp;
             hs.getPageSize();
 
-            for (i = 0; i < hs.expanders.length; i++) {
+            for (i = 0; i < hs.expanders.length; i++)
+            {
                 exp = hs.expanders[i];
-                if (exp) {
+                if (exp)
+                {
                     var x = exp.x,
 				y = exp.y;
 
@@ -156,5 +157,4 @@
         });
         //]]>
     </script>
-
 </asp:Content>
