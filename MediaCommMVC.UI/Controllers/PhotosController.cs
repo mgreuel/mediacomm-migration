@@ -1,13 +1,11 @@
 #region Using Directives
 
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Threading;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 using MediaCommMVC.Common.Config;
 using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
@@ -147,8 +145,16 @@ namespace MediaCommMVC.UI.Controllers
         /// <returns>The list of photo album infos.</returns>
         private IEnumerable<PhotoAlbumInfo> GetPhotoAlbumInfo()
         {
-#warning Needs to be implemented!
-            return new List<PhotoAlbumInfo>();
+#warning Add category information
+
+            List<PhotoAlbumInfo> albumInfos = new List<PhotoAlbumInfo>();
+
+            foreach (PhotoCategory cat in this.photoRepository.GetAllCategories())
+            {
+                albumInfos.AddRange(cat.Albums.Select(a => new PhotoAlbumInfo { Id = a.Id, Name = a.Name, PictureCount = a.PhotoCount }));
+            }
+
+            return albumInfos;
         }
 
         #endregion

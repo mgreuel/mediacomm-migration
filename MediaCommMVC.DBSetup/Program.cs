@@ -54,12 +54,6 @@ namespace MediaCommMVC.DBSetup
                     config.BuildSessionFactory();
 
                     Console.WriteLine("Successfully created DB Schema.");
-
-                    SessionManager sessionManager = new SessionManager();
-
-                    ISession session = sessionManager.Session;
-
-                    //session.Connection.
                 }
                 else
                 {

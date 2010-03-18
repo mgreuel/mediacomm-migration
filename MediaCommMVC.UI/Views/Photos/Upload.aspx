@@ -21,7 +21,7 @@
     <input id="fileInput" name="fileInput" type="file" />
     
     <input type="button" value="Submit" onclick="javascript:startUpload();" />
-
+    
     <script type="text/javascript">
 
         function startUpload() {            
