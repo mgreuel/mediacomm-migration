@@ -22,7 +22,7 @@ namespace MediaCommMVC.Core.Model.Users
 
         /// <summary>Initializes a new instance of the <see cref="MediaCommUser"/> class.
         /// The empty constructor is needed by the ORM.</summary>
-        public MediaCommUser()
+        protected MediaCommUser()
         {
         }
 
@@ -97,6 +97,31 @@ namespace MediaCommMVC.Core.Model.Users
         public override string ToString()
         {
             return string.Format("Username: '{0}', Id: '{1}", this.UserName, this.Id);
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
+        /// <returns>
+        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            MediaCommUser user = obj as MediaCommUser;
+
+            return user != null && user.UserName.Equals(this.UserName, StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return this.UserName == null ? base.GetHashCode() : this.UserName.GetHashCode();
         }
 
         #endregion

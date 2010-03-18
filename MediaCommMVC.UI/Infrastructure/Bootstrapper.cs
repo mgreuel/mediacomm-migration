@@ -69,7 +69,6 @@ namespace MediaCommMVC.UI.Infrastructure
             this.logger.Debug("Configuring unity container");
 
             this.container.RegisterInstance(typeof(ILogger), this.logger);
-            //this.container.RegisterType(typeof(AccountController), typeof(AccountController));
             this.container.RegisterType(typeof(IConfigAccessor), typeof(FileConfigAccessor));
 
             this.RegisterNHibernateComponents();

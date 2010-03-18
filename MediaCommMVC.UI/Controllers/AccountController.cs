@@ -14,7 +14,9 @@ using MediaCommMVC.UI.AccountModels;
 
 namespace MediaCommMVC.UI.Controllers
 {
-    /// <summary>The account controller.</summary>
+    /// <summary>
+    /// The account controller.
+    /// </summary>
     [HandleError]
     public class AccountController : Controller
     {
@@ -22,10 +24,13 @@ namespace MediaCommMVC.UI.Controllers
         // the default forms authentication and membership providers.
         #region Constructors and Destructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        /// </summary>
         public AccountController()
         {
             this.FormsService = new FormsAuthenticationService();
-            this.MembershipService =  new AccountMembershipService();
+            this.MembershipService = new AccountMembershipService();
         }
 
         #endregion

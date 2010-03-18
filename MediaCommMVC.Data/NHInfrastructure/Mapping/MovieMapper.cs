@@ -22,9 +22,9 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
         {
             mapping.Table("Movies");
             mapping.Map(m => m.Title).Not.Nullable();
-            mapping.References(m => m.Language).Not.Nullable();
-            mapping.References(m => m.Quality).Not.Nullable();
-            mapping.References(m => m.Owner).Not.Nullable();
+            mapping.References(m => m.Language).Not.Nullable().Cascade.SaveUpdate();
+            mapping.References(m => m.Quality).Not.Nullable().Cascade.SaveUpdate();
+            mapping.References(m => m.Owner).Not.Nullable().Cascade.SaveUpdate();
         }
 
         #endregion

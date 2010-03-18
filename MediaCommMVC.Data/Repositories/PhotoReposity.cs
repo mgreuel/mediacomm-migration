@@ -90,6 +90,7 @@ namespace MediaCommMVC.Data.Repositories
         /// <param name="uploader">The uploader.</param>
         public void ExtractAndAddPhotos(string zipFilename, PhotoAlbum album, MediaCommUser uploader)
         {
+#warning encapsulate
             this.Logger.Debug("Extracting and adding photos. ZipFilename: '{0}', Album: '{1}, Uploader: '{2}'", zipFilename, album, uploader);
 
             string targetPath = this.GetTargetPath(album);

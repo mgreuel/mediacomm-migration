@@ -1,4 +1,6 @@
-﻿namespace MediaCommMVC.Core.Model.Photos
+﻿using System.Collections.Generic;
+
+namespace MediaCommMVC.Core.Model.Photos
 {
     /// <summary>Represents a category containing photo albums.</summary>
     public class PhotoCategory
@@ -20,6 +22,12 @@
         /// <summary>Gets or sets the photo count.</summary>
         /// <value>The photo count.</value>
         public virtual int PhotoCount { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets the albums.
+        /// </summary>
+        /// <value>The albums.</value>
+        public virtual IEnumerable<PhotoAlbum> Albums { get; set; }
 
         #endregion
 

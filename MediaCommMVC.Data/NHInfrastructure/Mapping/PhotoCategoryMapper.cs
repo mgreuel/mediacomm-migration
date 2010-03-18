@@ -24,6 +24,7 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
             mapping.Map(c => c.Name).Not.Nullable().Unique();
             mapping.Map(c => c.PhotoCount).Formula("(SELECT COUNT(*) FROM photos p JOIN photoAlbums a ON (p.AlbumID = a.Id) WHERE a.CategoryID = Id)");
             mapping.Map(c => c.AlbumCount).Formula("(SELECT COUNT(*) FROM photoAlbums a WHERE a.CategoryID = Id)");
+            mapping.HasMany(c => c.Albums).Inverse();
         }
 
         #endregion
