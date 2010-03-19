@@ -22,8 +22,8 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
         {
             mapping.Table("Photos");
             mapping.Map(p => p.FileName).Not.Nullable().UniqueKey("uk_nameAlbum");
-            mapping.References(p => p.Album).Not.Nullable().UniqueKey("uk_nameAlbum");
-            mapping.References(p => p.Uploader).Not.Nullable();
+            mapping.References(p => p.Album).Not.Nullable().UniqueKey("uk_nameAlbum").Cascade.SaveUpdate();
+            mapping.References(p => p.Uploader).Not.Nullable().Cascade.SaveUpdate();
         }
 
         #endregion
