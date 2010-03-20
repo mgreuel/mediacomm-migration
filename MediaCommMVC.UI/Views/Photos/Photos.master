@@ -11,15 +11,39 @@
     <div class="sitenav">
         <h1>
             <%= Html.ActionLink(Resources.Photos.Upload, "Upload") %>
-         </h1>
-         <h1> <%= Resources.Photos.Albums %> </h1>
-         <ul>
-         <% foreach (MediaCommMVC.UI.ViewModel.PhotoAlbumInfo albumInfo in Model.PhotoAlbums)
-{ %>
-    <li>
-        <%= Html.ActionLink(albumInfo.Name, "Album", new { id = albumInfo.Id })%>
-    </li>         
-<% } %>
-         </ul>
+        </h1>
+        <h1>
+            <%= Resources.Photos.Categories %>
+        </h1>
+        <div id="photoCategories">
+            <h2>
+                <a href="#">Sample Cat1</a>
+            </h2>
+            <div>
+                <p>
+                    sample albums1
+                </p>
+            </div>
+            <h2>
+                <a href="#">Sample Cat2</a>
+            </h2>
+            <div>
+                <p>
+                    sample albums2
+                </p>
+            </div>
+        </div>
+<%--        <% foreach (MediaCommMVC.UI.ViewModel.PhotoAlbumInfo albumInfo in Model.PhotoAlbums)
+           { %>
+        <li>
+            <%= Html.ActionLink(albumInfo.Name, "Album", new { id = albumInfo.Id })%>
+        </li>
+        <% } %>--%>
     </div>
+    <script language="javascript" type="text/javascript">
+        jQuery(document).ready(function ()
+        {
+            //$("#photoCategories").accordion();
+        });
+    </script>
 </asp:Content>

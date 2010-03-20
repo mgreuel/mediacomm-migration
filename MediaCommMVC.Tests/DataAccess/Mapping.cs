@@ -6,6 +6,8 @@ using System.Text;
 using FluentNHibernate.Testing;
 
 using MbUnit.Framework;
+
+using MediaCommMVC.Core.Model.Forums;
 using MediaCommMVC.Core.Model.Movies;
 using MediaCommMVC.Core.Model.Photos;
 using MediaCommMVC.Core.Model.Users;
@@ -117,6 +119,43 @@ namespace MediaCommMVC.Tests.DataAccess
                 .VerifyTheMappings();
         }
 
+        [Test]
+        public void CanMapForum()
+        {
+            new PersistenceSpecification<Forum>(this.sessionManager.Session)
+                .CheckProperty(f => f.Description, "my forum desc")
+                .CheckProperty(f => f.DisplayOrderIndex, 1)
+                .CheckProperty(f => f.HasUnreadPosts, false)
+                .CheckProperty(f => f.Title, "my forum")
+                .CheckProperty(f => f.PostCount, 0)
+                .CheckProperty(f => f.TopicCount, 0)
+                .VerifyTheMappings();
+        }
 
+        [Test]
+        public void CanMapTopic()
+        {
+            new PersistenceSpecification<Topic>(this.sessionManager.Session)
+                .CheckProperty(t => t.Created, DateTime.Today)
+                .CheckProperty(t => t.CreatedBy, "some member")
+                .CheckProperty(t => t.DisplayPriority, 2)
+                .CheckProperty(t => t.Forum, new Forum { Title = "my topic's forum" })
+                .CheckProperty(t => t.PostCount, 0)
+                .CheckProperty(t => t.Title, "my topic")
+                .CheckProperty(t => t.LastPostTime, DateTime.Today)
+                .CheckProperty(t => t.LastPostAuthor, "some other user")
+                .VerifyTheMappings();
+        }
+
+        [Test]
+        public void CanMapPost()
+        {
+            new PersistenceSpecification<Post>(this.sessionManager.Session)
+                .CheckProperty(p => p.Author, new MediaCommUser("some poster", "test@host.local"))
+                .CheckProperty(p => p.Created, DateTime.Today)
+                .CheckProperty(p => p.Text, "My post text")
+                .CheckProperty(p => p.Topic, new Topic { Created = DateTime.Today, CreatedBy = "some poster", Forum = new Forum { Title = "my post's forum" }, LastPostTime = DateTime.Today })
+                .VerifyTheMappings();
+        }
     }
 }
