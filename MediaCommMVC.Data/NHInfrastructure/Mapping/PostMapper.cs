@@ -21,8 +21,8 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
         public void Override(AutoMapping<Post> mapping)
         {
             mapping.Table("ForumPosts");
-            mapping.References(p => p.Topic).Not.Nullable();
-            mapping.References(p => p.Author).Not.Nullable();
+            mapping.References(p => p.Topic).Not.Nullable().Cascade.SaveUpdate();
+            mapping.References(p => p.Author).Not.Nullable().Cascade.SaveUpdate();
             mapping.Map(p => p.Text).CustomSqlType("nvarchar(MAX)");
         }
 

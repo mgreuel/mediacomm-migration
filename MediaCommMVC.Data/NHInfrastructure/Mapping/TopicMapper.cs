@@ -21,7 +21,7 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
         public void Override(AutoMapping<Topic> mapping)
         {
             mapping.Table("ForumTopics");
-            mapping.References(t => t.Forum).Not.Nullable();
+            mapping.References(t => t.Forum).Not.Nullable().Cascade.SaveUpdate();
             mapping.Map(t => t.PostCount).Formula("(SELECT COUNT(*) FROM forumPosts p where p.TopicID = Id)");
             mapping.Map(t => t.CreatedBy).Not.Nullable();
         }
