@@ -1,5 +1,5 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true"
-    Inherits="System.Web.Mvc.ViewMasterPage<MediaCommMVC.UI.ViewModel.PhotoViewData>" %>
+    Inherits="System.Web.Mvc.ViewMasterPage<MediaCommMVC.UI.ViewModel.PhotoNavigationViewData>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
@@ -33,12 +33,24 @@
                 </p>
             </div>
         </div>
-<%--        <% foreach (MediaCommMVC.UI.ViewModel.PhotoAlbumInfo albumInfo in Model.PhotoAlbums)
+        <% foreach (MediaCommMVC.UI.ViewModel.PhotoCategoryInfo categoryInfo in Model.PhotoCategories)
            { %>
-        <li>
-            <%= Html.ActionLink(albumInfo.Name, "Album", new { id = albumInfo.Id })%>
-        </li>
-        <% } %>--%>
+        <h3>
+            <a href="#">
+                <%= categoryInfo.Name %>
+            </a>
+        </h3>
+        <div>
+            <ul>
+                <% foreach (var albumInfo in categoryInfo.Albums)
+                   { %>
+                <li>
+                    <%= Html.ActionLink(albumInfo.Name, "Album", new { id = albumInfo.Id }) %>
+                </li>
+                <% } %>
+            </ul>
+        </div>
+        <% } %>
     </div>
     <script language="javascript" type="text/javascript">
         jQuery(document).ready(function ()

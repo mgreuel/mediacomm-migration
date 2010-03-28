@@ -320,7 +320,7 @@ namespace MediaCommMVC.Data.Repositories
         {
             this.Logger.Debug("Deleting all posts in the topic: " + topic);
             session.Linq<Post>().Where(p => p.Topic.Equals(topic)).ToList()
-                .ForEach(p => session.Delete(p));
+                .ForEach(session.Delete);
 
             this.Logger.Debug("Deleting topic: " + topic);
             session.Delete(topic);

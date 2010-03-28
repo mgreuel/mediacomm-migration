@@ -1,5 +1,6 @@
 #region Using Directives
 
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -68,7 +69,7 @@ namespace MediaCommMVC.UI.Controllers
 
             this.logger.Debug("Displaying view with photo album " + album);
 
-            return this.View(new PhotoAlbumViewData { Album = album, PhotoAlbums = this.GetPhotoAlbumInfo() });
+            return this.View(new PhotoAlbumViewData { Album = album, PhotoCategories = this.GetCategoriesViewData() });
         }
 
         /// <summary>The index page.</summary>
@@ -76,7 +77,8 @@ namespace MediaCommMVC.UI.Controllers
         public ActionResult Index()
         {
             this.logger.Debug("Displaying photos index");
-            return this.View(new PhotoViewData { PhotoAlbums = this.GetPhotoAlbumInfo() });
+            return this.View(new PhotoNavigationViewData { PhotoCategories = this.GetCategoriesViewData() });
+
         }
 
         /// <summary>Displays a single photo.</summary>
@@ -97,7 +99,7 @@ namespace MediaCommMVC.UI.Controllers
         public ActionResult Upload()
         {
             this.logger.Debug("Displaying photo upload page");
-            return this.View(new PhotoViewData { PhotoAlbums = this.GetPhotoAlbumInfo() });
+            return this.View();
         }
 
         /// <summary>Uploads the zip file containing the photos.</summary>
@@ -132,29 +134,29 @@ namespace MediaCommMVC.UI.Controllers
                 this.logger.Warn("No file was sent to the server");
             }
 
-            return this.View(new PhotoViewData { PhotoAlbums = this.GetPhotoAlbumInfo() });
+            return this.View(new PhotoNavigationViewData { PhotoCategories = this.GetCategoriesViewData() });
         }
+
+
+
 
         #endregion
 
         #region helper methods
 
         /// <summary>
-        /// Gets the photo album info.
+        /// Gets the categories view data.
         /// </summary>
-        /// <returns>The list of photo album infos.</returns>
-        private IEnumerable<PhotoAlbumInfo> GetPhotoAlbumInfo()
+        /// <returns>The view data for displaying photo categories.</returns>
+        private IEnumerable<PhotoCategoryInfo> GetCategoriesViewData()
         {
-#warning Add category information
-
-            List<PhotoAlbumInfo> albumInfos = new List<PhotoAlbumInfo>();
-
-            foreach (PhotoCategory cat in this.photoRepository.GetAllCategories())
-            {
-                albumInfos.AddRange(cat.Albums.Select(a => new PhotoAlbumInfo { Id = a.Id, Name = a.Name, PictureCount = a.PhotoCount }));
-            }
-
-            return albumInfos;
+            return this.photoRepository.GetAllCategories().Select(cat => new PhotoCategoryInfo
+                {
+                    AlbumCount = cat.AlbumCount,
+                    Id = cat.Id,
+                    Name = cat.Name,
+                    Albums = cat.Albums.Select(a => new PhotoAlbumInfo { Id = a.Id, Name = a.Name, PictureCount = a.PhotoCount })
+                }).ToList();
         }
 
         #endregion
