@@ -142,7 +142,7 @@ namespace MediaCommMVC.Data.Repositories
         {
             this.Logger.Debug("Getting all photo catgories");
 
-            IEnumerable<PhotoCategory> categories = this.Session.Linq<PhotoCategory>();
+            IEnumerable<PhotoCategory> categories = this.Session.Linq<PhotoCategory>().ToList();
 
             this.Logger.Debug("Got {0} photo categories", categories.Count());
             return categories;

@@ -8,12 +8,12 @@ namespace MediaCommMVC.UI.ViewModel
     /// <summary>
     /// Contains information needed to display photo pages.
     /// </summary>
-    public class PhotoViewData
+    public class PhotoNavigationViewData
     {
         /// <summary>
         /// Gets or sets the PhotoAlbums which can be viewed.
         /// </summary>
         /// <value>The list of photo albums.</value>
-        public IEnumerable<PhotoAlbumInfo> PhotoAlbums { get; set; }
+        public IEnumerable<PhotoCategoryInfo> PhotoCategories { get; set; }
     }
 }
