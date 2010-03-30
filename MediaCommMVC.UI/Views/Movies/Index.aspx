@@ -7,7 +7,7 @@
     <h2 style="padding-top: 10px; padding-bottom: 10px;">
         <%= Resources.Movies.Movielist %></h2>
     <p>
-        <a href="javascript:ShowAddPopup();">
+        <a href="javascript:ShowAddPopup();" id="showAddPopup">
             <%= Resources.Movies.Add %>
         </a>
     </p>
@@ -72,7 +72,7 @@
             <% } %>
         </tbody>
     </table>
-    <div style="display: none;">
+    <div id="editMoviePopup" style="display: none;">
         <div id="editMovie">
             <% using (Html.BeginForm())
                {%>

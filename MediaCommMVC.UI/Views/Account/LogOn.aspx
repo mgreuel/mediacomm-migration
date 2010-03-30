@@ -12,7 +12,7 @@
     <%= Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.") %>
 
     <% using (Html.BeginForm()) { %>
-        <div>
+        <div id="login">
             <fieldset>
                 <legend>Account Information</legend>
                 
@@ -38,7 +38,7 @@
                 </div>
                 
                 <p>
-                    <input type="submit" value="Log On" />
+                    <input id="loginButton" type="submit" value="Log On" />
                 </p>
             </fieldset>
         </div>
