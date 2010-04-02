@@ -111,7 +111,8 @@
                 </tr>
             </table>
             <div class="centerDiv">
-                <%  
+                <% 
+                    Writer.AddAttribute("id", "submitMovie");
                     Writer.AddAttribute("type", "submit");
                     Writer.AddAttribute("value", Resources.General.Save, true);
                     Writer.RenderBeginTag(HtmlTextWriterTag.Input);
