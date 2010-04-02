@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
+
 using Gallio.Framework;
 using MbUnit.Framework;
 using MbUnit.Framework.ContractVerifiers;
@@ -9,6 +11,7 @@ using MediaCommMVC.WebTests.Framework;
 using MediaCommMVC.WebTests.Pages.Movies;
 
 using WatiN.Core;
+using WatiN.Core.Constraints;
 
 namespace MediaCommMVC.WebTests.Tests.Movies
 {
@@ -36,30 +39,16 @@ namespace MediaCommMVC.WebTests.Tests.Movies
         }
 
         [Test]
-        [Browser(BrowserType.IE)]
-        [Browser(BrowserType.FireFox)]
-        public void CanGoToPage()
-        {
-            MoviesIndexPage.GoTo(Browser);
-            var page = Browser.Page<MoviesIndexPage>();
-
-            Assert.IsTrue(page.Document.Table("movieTable").Exists);
-        }
-
-        [Test]
-        [Browser(BrowserType.IE)]
-        [Browser(BrowserType.FireFox)]
+        //[Browser(BrowserType.FireFox)]
         public void AddMoviePopIsNotDisplayed()
         {
             MoviesIndexPage.GoTo(Browser);
             var page = Browser.Page<MoviesIndexPage>();
 
-            Div popupDiv = page.Document.Div("editMoviePopup");
-            Assert.IsTrue(popupDiv.GetAttributeValue("style").Contains("display: none;"));
+            Assert.IsFalse(page.editMoviePopup.Exists);
         }
 
         [Test]
-        [Browser(BrowserType.IE)]
         [Browser(BrowserType.FireFox)]
         public void AddMoviePopIsDisplayedAfterDisplayClick()
         {
@@ -68,9 +57,28 @@ namespace MediaCommMVC.WebTests.Tests.Movies
 
             page.ShowPopUpLink.Click();
 
-            Div popupDiv = page.Document.Div("editMoviePopup");
+            page.editMoviePopup.WaitUntilExists(10);
+        }
 
-            Console.WriteLine();
+        [Test]
+        [Browser(BrowserType.FireFox)]
+        public void CanAddMovie()
+        {
+            MoviesIndexPage.GoTo(Browser);
+            var page = Browser.Page<MoviesIndexPage>();
+
+            page.ShowPopUpLink.Click();
+            page.editMoviePopup.WaitUntilExists(10);
+
+            page.MovieTitleTextfield.TypeText("my test movie");
+            page.MovieInfoLinkTextfield.TypeText("http://movieinfo.text/myMovie");
+            
+            page.SubmitMovieButton.Click();
+
+            TableRow row = page.movieTable.FindRow(new Regex(".*?my test movie.*?"), 0);
+
+            Assert.IsNotNull(row);
+            Assert.IsTrue(row.InnerHtml.Contains("http://movieinfo.text/myMovie"));
         }
     }
 }

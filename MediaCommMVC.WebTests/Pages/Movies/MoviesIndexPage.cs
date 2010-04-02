@@ -12,8 +12,26 @@ namespace MediaCommMVC.WebTests.Pages.Movies
         [FindBy(Id = "showAddPopup")]
         public Link ShowPopUpLink;
 
-        [FindBy(Id = "editMoviePopup")]
-        public Div editMoviePopup;
+        [FindBy(Id = "ui-dialog-title-editMovie")]
+        public Span editMoviePopup;
+
+        [FindBy(Name = "Movie.Title")]
+        public TextField MovieTitleTextfield;
+
+        [FindBy(Name = "Movie.InfoLink")]
+        public TextField MovieInfoLinkTextfield;
+
+        [FindBy(Id = "languageID")]
+        public SelectList MovieLanguageSelect;
+
+        [FindBy(Id = "qualityID")]
+        public SelectList MovieQualitySelect;
+
+        [FindBy(Id = "submitMovie")]
+        public Button SubmitMovieButton;
+
+        [FindBy(Id = "movieTable")]
+        public Table movieTable;
 
         public static void GoTo(Browser browser)
         {
