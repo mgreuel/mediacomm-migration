@@ -43,6 +43,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
@@ -67,7 +68,12 @@
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Pages\Movies\MoviesIndexPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\Movies\MoviesIndexPageTest.cs" />
+    <Compile Include="Tests\Admin\AdminUsersPageTests.cs" />
+    <Compile Include="Tests\LoginPageTests.cs" />
+    <Compile Include="Tests\Movies\MoviesIndexPageTests.cs" />
+    <Compile Include="Tests\Photos\PhotosAlbumPageTests.cs" />
+    <Compile Include="Tests\Photos\PhotosIndexPageTests.cs" />
+    <Compile Include="Tests\Photos\PhotosUploadPageTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

@@ -36,5 +36,17 @@ namespace MediaCommMVC.WebTests.Pages
             this.RememberMe.Checked = true;
             this.SubmitButton.Click();
         }
+
+        public static void GoTo(Browser browser)
+        {
+            browser.GoTo(ConfigurationManager.AppSettings["baseUrl"]);
+        }
+
+        public void LoginUsingDefaultAdmin()
+        {
+            this.Login(
+                ConfigurationManager.AppSettings["defaultAdmin"],
+             ConfigurationManager.AppSettings["defaultAdminPassword"]);
+        }
     }
 }

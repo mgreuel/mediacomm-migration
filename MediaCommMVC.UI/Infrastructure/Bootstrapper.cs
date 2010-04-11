@@ -28,7 +28,7 @@ namespace MediaCommMVC.UI.Infrastructure
 
         /// <summary>The logger.
         /// It is created in the Global.asax file.</summary>
-        private ILogger logger;
+        private readonly ILogger logger;
 
         #endregion
 

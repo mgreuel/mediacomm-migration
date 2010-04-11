@@ -3,6 +3,7 @@
 using System;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 using MediaCommMVC.Common.Logging;
 using MediaCommMVC.UI.Infrastructure;
@@ -58,6 +59,8 @@ namespace MediaCommMVC.UI
                 }
 
                 new Bootstrapper(container, this.logger).Run();
+
+                //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
             }
             catch (Exception ex)
             {

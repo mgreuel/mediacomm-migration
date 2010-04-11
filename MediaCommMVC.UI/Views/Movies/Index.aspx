@@ -37,7 +37,7 @@
         <tbody>
             <% foreach (var movie in Model)
                { %>
-            <tr>
+            <tr id='<%=string.Concat("movie_", movie.Id) %>'>
                 <td>
                     <%= movie.Id %>
                 </td>
@@ -64,7 +64,8 @@
                 <td class="deleteMovie">
                     <% if (Page.User.IsInRole("Administrators") || Page.User.Identity.Name.Equals(movie.Owner.UserName, StringComparison.OrdinalIgnoreCase))
                        { %>
-                    <%= Resources.General.Delete %>
+                    <a href="#" id='<%= string.Concat("del_", movie.Id) %>'>
+                        <%= Resources.General.Delete %></a>
                     <% } 
                     %>
                 </td>
@@ -79,7 +80,7 @@
             <table>
                 <tr>
                     <td class="leftTd">
-                        <%= Resources.Movies.Title %>: 
+                        <%= Resources.Movies.Title %>:
                     </td>
                     <td class="rightTd">
                         <%= Html.TextBox("Movie.Title") %>
@@ -87,7 +88,7 @@
                 </tr>
                 <tr>
                     <td class="leftTd">
-                        <%= Resources.Movies.InfoLink %>: 
+                        <%= Resources.Movies.InfoLink %>:
                     </td>
                     <td class="rightTd">
                         <%= Html.TextBox("Movie.InfoLink") %>
@@ -95,7 +96,7 @@
                 </tr>
                 <tr>
                     <td class="leftTd">
-                        <%= Resources.Movies.Language %>: 
+                        <%= Resources.Movies.Language %>:
                     </td>
                     <td class="rightTd">
                         <%= Html.DropDownList("languageID", ViewData["movieLanguages"] as SelectList) %>
@@ -103,7 +104,7 @@
                 </tr>
                 <tr>
                     <td class="leftTd">
-                        <%= Resources.Movies.Quality %>: 
+                        <%= Resources.Movies.Quality %>:
                     </td>
                     <td class="rightTd">
                         <%= Html.DropDownList("qualityID", ViewData["movieQualities"] as SelectList) %>
@@ -122,11 +123,10 @@
             <% } %>
         </div>
     </div>
-
     <script language="javascript" type="text/javascript">
         var oTable;
 
-        $(document).ready(function()
+        $(document).ready(function ()
         {
             oTable = $("#movieTable").dataTable(
             {
@@ -146,16 +146,16 @@
 
             oTable.fnSetColumnVis(0, false);
 
-            $(".deleteMovie").each(function()
+            $(".deleteMovie").each(function ()
             {
                 var deleteCell = $(this);
 
                 if (deleteCell.text().length > 2)
                 {
-                    deleteCell.css("cursor", "hand");
+                    deleteCell.css("cursor", "pointer");
                     deleteCell.css("text-decoration", "underline");
 
-                    deleteCell.click(function()
+                    deleteCell.click(function ()
                     {
                         var aPos = oTable.fnGetPosition(this);
                         var row = aPos[0];
@@ -166,7 +166,7 @@
                         if (confirm("Do you really want to delete the movie '" + movieName + "' ?"))
                         {
 
-                            $.post("/Movies/DeleteMovie/" + movieId, null, function(result)
+                            $.post("/Movies/DeleteMovie/" + movieId, null, function (result)
                             {
                                 if (result.success === true)
                                 {
@@ -190,5 +190,4 @@
             });
         } 
     </script>
-
 </asp:Content>

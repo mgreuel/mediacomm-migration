@@ -186,13 +186,27 @@ namespace MediaCommMVC.Data.Repositories
         /// <summary>Gets all photos in the album.</summary>
         /// <param name="albumId">The album id.</param>
         /// <returns>The photos.</returns>
-        public IEnumerable<Photo> GetPhotosForAlbum(int albumId)
+        public IEnumerable<Photo> GetPhotosForAlbumId(int albumId)
         {
             this.Logger.Debug("Getting photos for album with id '{0}'", albumId);
             IEnumerable<Photo> photos = this.Session.Linq<Photo>().Where(p => p.Album.Id.Equals(albumId)).ToList();
 
             this.Logger.Debug("Got {0} photos", photos.Count());
             return photos;
+        }
+
+        /// <summary>
+        /// Gets the albums with the specified category id.
+        /// </summary>
+        /// <param name="catId">The category id.</param>
+        /// <returns>The albums.</returns>
+        public IEnumerable<PhotoAlbum> GetAlbumsForCategoryId(int catId)
+        {
+            this.Logger.Debug("Getting albums for category id '{0}'", catId);
+            IEnumerable<PhotoAlbum> albums = this.Session.Linq<PhotoAlbum>().Where(a => a.Category.Id == catId).ToList();
+
+            this.Logger.Debug("Got {0} Albums", albums.Count());
+            return albums;
         }
 
         #endregion

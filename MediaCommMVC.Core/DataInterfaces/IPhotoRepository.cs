@@ -56,7 +56,14 @@ namespace MediaCommMVC.Core.DataInterfaces
         /// <summary>Gets all photos in the album.</summary>
         /// <param name="albumId">The album id.</param>
         /// <returns>The photos.</returns>
-        IEnumerable<Photo> GetPhotosForAlbum(int albumId);
+        IEnumerable<Photo> GetPhotosForAlbumId(int albumId);
+
+        /// <summary>
+        /// Gets the albums with the specified category id.
+        /// </summary>
+        /// <param name="catId">The category id.</param>
+        /// <returns>The albums.</returns>
+        IEnumerable<PhotoAlbum> GetAlbumsForCategoryId(int catId);
 
         #endregion
     }

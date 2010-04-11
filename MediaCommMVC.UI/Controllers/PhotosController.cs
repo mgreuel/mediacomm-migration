@@ -78,7 +78,6 @@ namespace MediaCommMVC.UI.Controllers
         {
             this.logger.Debug("Displaying photos index");
             return this.View(new PhotoNavigationViewData { PhotoCategories = this.GetCategoriesViewData() });
-
         }
 
         /// <summary>Displays a single photo.</summary>
@@ -99,7 +98,7 @@ namespace MediaCommMVC.UI.Controllers
         public ActionResult Upload()
         {
             this.logger.Debug("Displaying photo upload page");
-            return this.View();
+            return this.View(new PhotoNavigationViewData { PhotoCategories = this.GetCategoriesViewData() });
         }
 
         /// <summary>Uploads the zip file containing the photos.</summary>
@@ -115,9 +114,9 @@ namespace MediaCommMVC.UI.Controllers
             {
                 category.Name = category.Name.Trim();
                 album.Name = album.Name.Trim();
-                this.photoRepository.AddCategory(category);
+                //this.photoRepository.AddCategory(category);
                 album.Category = category;
-                this.photoRepository.AddAlbum(album);
+                //this.photoRepository.AddAlbum(album);
 
                 HttpPostedFileBase file = this.Request.Files[0];
                 string targetPath = Path.Combine(this.configAccessor.GetConfigValue("PhotoRootDir"), file.FileName);
@@ -137,8 +136,24 @@ namespace MediaCommMVC.UI.Controllers
             return this.View(new PhotoNavigationViewData { PhotoCategories = this.GetCategoriesViewData() });
         }
 
+        /// <summary>
+        /// Gets the albums for the specified category id.
+        /// </summary>
+        /// <param name="id">The cat id.</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult GetAlbumsForCategoryId(int id)
+        {
+            if(id <= 0)
+            {
+                this.logger.Error("CatId '{0}' is invalid", id);
+                return null;
+            }
 
+            IEnumerable<PhotoAlbum> albums = this.photoRepository.GetAlbumsForCategoryId(id);
 
+            return this.Json(albums.Select(a => a.Name), JsonRequestBehavior.AllowGet);
+        }
 
         #endregion
 

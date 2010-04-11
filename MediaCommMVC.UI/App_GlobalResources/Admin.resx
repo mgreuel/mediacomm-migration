@@ -123,6 +123,9 @@
   <data name="CreateForum" xml:space="preserve">
     <value>Create Forum</value>
   </data>
+  <data name="CreateUser" xml:space="preserve">
+    <value>Create User</value>
+  </data>
   <data name="ManageForums" xml:space="preserve">
     <value>Manage Forums</value>
   </data>

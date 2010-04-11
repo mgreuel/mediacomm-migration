@@ -97,6 +97,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\NHibernate\NHibernate.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="RouteDebug">
+      <HintPath>..\libs\RouteDebug.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.60.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
@@ -195,6 +198,7 @@
     <Compile Include="AccountModels\ValidatePasswordLengthAttribute.cs" />
     <Compile Include="AccountModels\ValidationUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\CreateUserInfo.cs" />
     <Compile Include="ViewModel\PhotoAlbumInfo.cs" />
     <Compile Include="ViewModel\PhotoAlbumViewData.cs" />
     <Compile Include="ViewModel\PhotoCategoryInfo.cs" />
@@ -274,17 +278,16 @@
     </Content>
     <Content Include="Scripts\highslide-full.js" />
     <Content Include="Scripts\highslide-full.min.js" />
-    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
-    <Content Include="Scripts\jquery-ui-1.8.1-rc1.js" />
-    <Content Include="Scripts\jquery-ui-1.8.1-rc1.min.js" />
+    <Content Include="Scripts\jquery-1.4.2-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.2.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.custom.min.js" />
     <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.uploadify.v2.1.0.js" />
     <Content Include="Scripts\jquery.uploadify.v2.1.0.min.js" />
     <Content Include="Scripts\swfobject.js" />
     <Content Include="Views\Admin\CreateForum.aspx" />
+    <Content Include="Views\Admin\CreateUser.aspx" />
     <Content Include="Views\Admin\Index.aspx" />
     <Content Include="Views\Admin\ManageForums.aspx" />
     <Content Include="Views\Forums\CreateTopic.aspx" />
