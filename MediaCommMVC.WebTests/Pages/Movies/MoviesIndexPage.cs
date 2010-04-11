@@ -33,7 +33,7 @@ namespace MediaCommMVC.WebTests.Pages.Movies
         [FindBy(Id = "movieTable")]
         public Table movieTable;
 
-        public static void GoTo(Browser browser)
+        public static new void GoTo(Browser browser)
         {
             browser.GoTo(ConfigurationManager.AppSettings["baseUrl"] + "/Movies");
         }

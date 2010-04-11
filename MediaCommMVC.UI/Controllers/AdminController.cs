@@ -5,6 +5,7 @@ using System.Web.Mvc;
 
 using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Forums;
+using MediaCommMVC.UI.ViewModel;
 
 #endregion
 
@@ -19,15 +20,22 @@ namespace MediaCommMVC.UI.Controllers
         /// <summary>The forum repository.</summary>
         private readonly IForumRepository forumRepository;
 
+        /// <summary>
+        /// The user repository.
+        /// </summary>
+        private readonly IUserRepository userRepository;
+
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="AdminController"/> class.</summary>
         /// <param name="forumRepository">The forum repository.</param>
-        public AdminController(IForumRepository forumRepository)
+        /// <param name="userRepository">The user repository.</param>
+        public AdminController(IForumRepository forumRepository, IUserRepository userRepository)
         {
             this.forumRepository = forumRepository;
+            this.userRepository = userRepository;
         }
 
         #endregion
@@ -51,6 +59,26 @@ namespace MediaCommMVC.UI.Controllers
             this.forumRepository.AddForum(forum);
 
             return this.RedirectToAction("Index");
+        }
+
+        /// <summary>Displays the create user page.</summary>
+        /// <returns>The create forum view.</returns>
+        [HttpGet]
+        public ActionResult CreateUser()
+        {
+            return this.View();
+        }
+
+        /// <summary>
+        /// Creates a new user.
+        /// </summary>
+        /// <param name="userInfo">The user info.</param>
+        /// <returns>The user created view.</returns>
+        [HttpPost]
+        public ActionResult CreateUser(CreateUserInfo userInfo)
+        {
+            //this.userRepository.CreateUser();
+            return null;
         }
 
         /// <summary>Displays the admin index.</summary>

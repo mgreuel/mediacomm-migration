@@ -96,6 +96,17 @@ namespace MediaCommMVC.Tests.DataAccess
         }
 
         [Test]
+        public void CanMapAlbumsToCategory()
+        {
+            PhotoCategory category = new PhotoCategory { Name = "MyTestCat" };
+
+            PhotoAlbum album1 = new PhotoAlbum { Category = category, Name = "album1" };
+            PhotoAlbum album2 = new PhotoAlbum { Category = category, Name = "album2" };
+
+           // category.Albums
+        }
+
+        [Test]
         public void CanMapPhotoAlbum()
         {
             new PersistenceSpecification<PhotoAlbum>(this.sessionManager.Session)

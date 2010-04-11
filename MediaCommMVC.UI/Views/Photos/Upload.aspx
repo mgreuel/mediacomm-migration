@@ -4,31 +4,41 @@
     <%= Resources.Photos.Upload %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
     <link href="../../Content/UploadIfy/uploadify.css" rel="stylesheet" type="text/css" />
-
     <script src="../../Scripts/swfobject.js" type="text/javascript"></script>
-
     <script src="../../Scripts/jquery.uploadify.v2.1.0.js" type="text/javascript"></script>
-
     <% using (Html.BeginForm())
        {%>
-       
-       Category: <%= Html.TextBox("Category.Name") %>
-       <br />
-       Album: <%= Html.TextBox("Album.Name") %>
-       <br />
+    Category:
+    <%= Html.DropDownList("Category.Name", new SelectList(Model.PhotoCategories, "Id", "Name")) %>
+    <br />
+    Album:
+    <%= Html.TextBox("Album.Name") %>
+    <br />
     <input id="fileInput" name="fileInput" type="file" />
-    
     <input type="button" value="Submit" onclick="javascript:startUpload();" />
-    
     <script type="text/javascript">
 
-        function startUpload() {            
+        function startUpload()
+        {
             $('#fileInput').uploadifySettings('scriptData', { 'Category.Name': $('#Category_Name').val(), 'Album.Name': $('#Album_Name').val() });
             $('#fileInput').uploadifyUpload();
         }
-        $(document).ready(function() {
+
+        $(document).ready(function ()
+        {
+            registerUploadify();
+
+            $("#Album_Name").autocomplete(
+            {
+                source: "/Photos/GetAlbumsForCategoryId/" + $("#Category_Name").val(),
+                minLength: 1
+            });
+
+        });
+
+        function registerUploadify()
+        {
             $('#fileInput').uploadify({
                 'uploader': '/Content/UploadIfy/uploadify.swf',
                 'script': '/Photos/Upload',
@@ -37,7 +47,8 @@
                 'fileExt': '*.zip',
                 'fileDesc': 'Zip Archive',
                 'scriptData': { 'album.Name': 'my album' },
-                onError: function(a, b, c, d) {
+                onError: function (a, b, c, d)
+                {
                     if (d.status == 404)
                         alert("Could not find upload script. Use a path relative to: " + "<?= getcwd() ?>");
                     else if (d.type === "HTTP")
@@ -48,9 +59,9 @@
                         alert("error " + d.type + ": " + d.text);
                 }
             });
-        });
-    </script>
+        }
 
+    </script>
     <%
         }%>
 </asp:Content>
