@@ -78,7 +78,9 @@ namespace MediaCommMVC.UI.Controllers
         public ActionResult CreateUser(CreateUserInfo userInfo)
         {
             //this.userRepository.CreateUser();
-            return null;
+
+            this.TempData["UserName"] = userInfo.UserName;
+            return this.RedirectToAction("UserCreated");
         }
 
         /// <summary>Displays the admin index.</summary>
@@ -104,6 +106,12 @@ namespace MediaCommMVC.UI.Controllers
         public ActionResult ManageForums([Bind(Include = "Id")] IList<Forum> forums)
         {
             return this.RedirectToAction("ManageForums");
+        }
+
+        [HttpGet]
+        public ActionResult UserCreated()
+        {
+            return this.View();
         }
 
         #endregion

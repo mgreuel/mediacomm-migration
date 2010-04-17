@@ -95,5 +95,23 @@ namespace Resources {
                 return ResourceManager.GetString("ManageForums", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The User &lt;%= TempData[&quot;UserName&quot;] %&gt;  was successfully created..
+        /// </summary>
+        internal static string UserCreatedText {
+            get {
+                return ResourceManager.GetString("UserCreatedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User successfully created.
+        /// </summary>
+        internal static string UserCreatedTitle {
+            get {
+                return ResourceManager.GetString("UserCreatedTitle", resourceCulture);
+            }
+        }
     }
 }

@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        internal static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string Save {
@@ -142,7 +151,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://mediacomm-mvc.net.
+        ///   Looks up a localized string similar to &lt;a href=&quot;http://mediacomm-mvc.net&quot;&gt;http://mediacomm-mvc.net&lt;/a&gt;.
         /// </summary>
         internal static string WebSite {
             get {
