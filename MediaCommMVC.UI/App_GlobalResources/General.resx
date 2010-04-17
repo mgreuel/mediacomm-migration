@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add" xml:space="preserve">
     <value>Add</value>
@@ -135,6 +135,9 @@
   <data name="ErrorMessage" xml:space="preserve">
     <value>Sorry, an error occurred while processing your request.</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
@@ -145,7 +148,7 @@
     <value>Please fix the following errors:</value>
   </data>
   <data name="WebSite" xml:space="preserve">
-    <value>http://mediacomm-mvc.net</value>
+    <value>&lt;a href="http://mediacomm-mvc.net"&gt;http://mediacomm-mvc.net&lt;/a&gt;</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Welcome</value>

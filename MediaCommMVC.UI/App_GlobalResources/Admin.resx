@@ -129,4 +129,10 @@
   <data name="ManageForums" xml:space="preserve">
     <value>Manage Forums</value>
   </data>
+  <data name="UserCreatedText" xml:space="preserve">
+    <value>The User &lt;%= TempData["UserName"] %&gt;  was successfully created.</value>
+  </data>
+  <data name="UserCreatedTitle" xml:space="preserve">
+    <value>User successfully created</value>
+  </data>
 </root>
