@@ -1,11 +1,9 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Admin/Admin.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Core.Model.Forums.Forum>>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Core.Model.Forums.Forum>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-   <%= Resources.Admin.ManageForums %>
+    <%= Resources.Admin.ManageForums %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>
-        ManageForums</h2>
     <% using (Html.BeginForm())
        {
            int index = 0; %>
@@ -13,16 +11,16 @@
         <% foreach (var forum in Model)
            { %>
         <div class="ui-state-default">
-            <%= Html.Hidden("forums[" + index + "].Id", forum.Id) %>            
+            <%= Html.Hidden("forums[" + index + "].Id", forum.Id) %>
             <%= Html.Encode(forum.Title)%></div>
         <%
             index++;
            } %>
     </div>
-    <input type="submit" />
+    <input type="submit" value='<%= Resources.General.Save %>' />
     <% } %>
 
-    <style type="text/css">
+<%--    <style type="text/css">
         #sortable
         {
             list-style-type: none;
@@ -47,10 +45,9 @@
             height: 1.5em;
             line-height: 1.2em;
         }
-    </style>
-
+    </style>--%>
     <script type="text/javascript">
-        $(function()
+        $(function ()
         {
             $("#sortable").sortable({
                 placeholder: 'ui-state-highlight'
@@ -58,5 +55,4 @@
             $("#sortable").disableSelection();
         });
     </script>
-
 </asp:Content>

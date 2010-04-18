@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Admin/Admin.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Forums.Forum>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Forums.Forum>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%= Resources.Admin.CreateForum %>
@@ -9,33 +9,32 @@
     </div>
     <% using (Html.BeginForm())
        {%>
-    <table>
+    <table id="createForumTable">
         <tr>
-            <td>
+            <td class="firstColumn">
                 <label for="Forum.Title">
                     Title:</label>
             </td>
-            <td>
+            <td class="secondColumn">
                 <%= Html.TextBox("Forum.Title") %>
             </td>
         </tr>
         <tr>
-            <td>
+            <td class="firstColumn">
                 <label for="Forum.Description">
                     Description:</label>
             </td>
-            <td>
+            <td class="secondColumn">
                 <%= Html.TextArea("Forum.Description") %>
             </td>
         </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" value='<%= Resources.General.Create %>' />
+            </td>
+        </tr>
     </table>
-    <p>
-        <%  
-            Writer.AddAttribute("type", "submit");
-            Writer.AddAttribute("value", Resources.General.Create, true);
-            Writer.RenderBeginTag(HtmlTextWriterTag.Input);
-            Writer.RenderEndTag();
-        %>
-    </p>
     <% } %>
 </asp:Content>

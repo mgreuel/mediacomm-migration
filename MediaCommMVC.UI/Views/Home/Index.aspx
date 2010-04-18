@@ -3,7 +3,8 @@
 <asp:Content ID="indexTitle" ContentPlaceHolderID="TitleContent" runat="server">
     <%= Resources.General.Home %>
 </asp:Content>
-
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">
- Home
+    <p>
+        Home
+    </p>
 </asp:Content>

@@ -123,6 +123,9 @@
   <data name="Categories" xml:space="preserve">
     <value>Categories</value>
   </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
   <data name="PhotosTitle" xml:space="preserve">
     <value>Photos</value>
   </data>

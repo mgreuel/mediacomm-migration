@@ -70,11 +70,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change your password.
+        /// </summary>
+        internal static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.
         /// </summary>
         internal static string City {
             get {
                 return ResourceManager.GetString("City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your current password.
+        /// </summary>
+        internal static string CurrentPassword {
+            get {
+                return ResourceManager.GetString("CurrentPassword", resourceCulture);
             }
         }
         
@@ -142,6 +160,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login was unsuccessful. Please correct the errors and try again..
+        /// </summary>
+        internal static string LoginFailed {
+            get {
+                return ResourceManager.GetString("LoginFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mobile.
         /// </summary>
         internal static string MobilePhoneNumber {
@@ -156,6 +192,33 @@ namespace Resources {
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password changed.
+        /// </summary>
+        internal static string PasswordChanged {
+            get {
+                return ResourceManager.GetString("PasswordChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changing the password failed, please try again..
+        /// </summary>
+        internal static string PasswordChangeFailed {
+            get {
+                return ResourceManager.GetString("PasswordChangeFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The new password and confirmation password do not match..
+        /// </summary>
+        internal static string PasswordsMustMatchError {
+            get {
+                return ResourceManager.GetString("PasswordsMustMatchError", resourceCulture);
             }
         }
         
