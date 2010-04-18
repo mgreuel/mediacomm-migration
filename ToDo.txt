@@ -1,11 +1,8 @@
 Account:
-- Remove Registration
 - Multilanguage
 
 Admin:
 - Movie Qual + Language
-- Create User
-- Navigation
 - Forums Administration
 
 Forums:
@@ -31,7 +28,7 @@ Users:
 - Formatting
 
 General:
-- Buttons
+- Multilanguage Display Attributes for Model
 
 Install:
 - Web-Install

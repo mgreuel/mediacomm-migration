@@ -10,44 +10,43 @@
     </div>
     <% using (Html.BeginForm())
        {%>
-    <table>
+    <table id="createUserTable">
         <tr>
-            <td>
+            <td class="firstColumn">
                 <label for="UserInfo.UserName">
                     <%= Resources.Users.UserName %>:</label>
             </td>
-            <td>
-                <%= Html.TextBox("userInfo.UserName")%>
+            <td class="secondColumn">
+                <%= Html.TextBox("userName")%>
             </td>
         </tr>
         <tr>
-            <td>
+            <td class="firstColumn">
                 <label for="UserInfo.Password">
                     <%= Resources.Users.Password %>
                     :</label>
             </td>
-            <td>
-                <%= Html.TextArea("userInfo.Password")%>
+            <td class="secondColumn">
+                <%= Html.TextBox("password")%>
             </td>
         </tr>
         <tr>
-            <td>
+            <td class="firstColumn">
                 <label for="UserInfo.MailAddress">
                     <%= Resources.Users.EMailAddress %>
                     :</label>
             </td>
+            <td class="secondColumn">
+                <%= Html.TextBox("mailAddress")%>
+            </td>
+        </tr>
+        <tr>
             <td>
-                <%= Html.TextArea("userInfo.MailAddress")%>
+            </td>
+            <td>
+                <input type="submit" value='<%= Resources.General.Create%>' />
             </td>
         </tr>
     </table>
-    <p>
-        <%  
-            Writer.AddAttribute("type", "submit");
-            Writer.AddAttribute("value", Resources.General.Create, true);
-            Writer.RenderBeginTag(HtmlTextWriterTag.Input);
-            Writer.RenderEndTag();
-        %>
-    </p>
     <% } %>
 </asp:Content>

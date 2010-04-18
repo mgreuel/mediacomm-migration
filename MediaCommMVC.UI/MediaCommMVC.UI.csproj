@@ -334,7 +334,6 @@
     <Content Include="Scripts\swfobject.js" />
     <Content Include="Views\Admin\CreateForum.aspx" />
     <Content Include="Views\Admin\CreateUser.aspx" />
-    <Content Include="Views\Admin\Index.aspx" />
     <Content Include="Views\Admin\ManageForums.aspx" />
     <Content Include="Views\Admin\UserCreated.aspx" />
     <Content Include="Views\Forums\CreateTopic.aspx" />
@@ -381,7 +380,6 @@
     <Content Include="Views\Shared\Site.Master" />
     <None Include="Settings.StyleCop" />
     <Content Include="Views\Photos\Photos.master" />
-    <Content Include="Views\Admin\Admin.master" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Admin.resx">

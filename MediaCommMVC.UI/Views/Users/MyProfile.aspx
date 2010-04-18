@@ -85,4 +85,6 @@
     </table>
     <input type="submit" />
     <% } %>
+
+    <%= Html.ActionLink(Resources.Users.ChangePassword, "ChangePassword", "Account") %>
 </asp:Content>

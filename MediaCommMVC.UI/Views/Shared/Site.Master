@@ -7,7 +7,7 @@
         <%= Resources.General.Title %>
     </title>
     <!-- <link href="../../Content/DataTables/css/demo_table_jui.css" rel="stylesheet" type="text/css" /> -->
-    <link href="../../Content/Style.css" rel="stylesheet" type="text/css" />
+    <%-- <link href="../../Content/Style.css" rel="stylesheet" type="text/css" />--%>
     <link rel="stylesheet" type="text/css" href="../../Content/jQuery-ui-cupertino/jquery-ui-1.8.custom.css" />
     <link href="../../Content/Multiflex/css/mf54_reset.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/Multiflex/css/mf54_grid_nosidebar.css" rel="stylesheet"
@@ -23,6 +23,13 @@
 <!-- Following line MUST remain as a comment to have the proper effect -->
 <!--[if IE]><style type="text/css"> body {word-wrap: break-word;}</style><![endif]-->
 <body>
+    <script language="javascript" type="text/javascript">
+        $(function ()
+        {
+            $("button, input:submit").button();
+        });
+
+    </script>
     <!-- CONTAINER FOR ENTIRE PAGE -->
     <div class="container">
         <!-- A. HEADER -->
@@ -53,7 +60,7 @@
                     <% Html.RenderPartial("LogOnUserControl"); %>
                 </div>
                 <!-- A.3 GLOBAL NAVIGATION -->
-<%--                <div class="navglobal">
+                <%--                <div class="navglobal">
                     <ul>
                         <li><a href="#" title="">About</a></li>
                         <li><a href="#" title="">Contact</a></li>
@@ -81,6 +88,17 @@
             <ul>
                 <li>
                     <%= Html.ActionLink(Resources.Navigation.Photos, "Index", "Photos") %>
+                    <ul>
+                        <li>
+                            <%= Html.ActionLink(Resources.Photos.Overview, "Index", "Photos") %></li>
+                        <li>
+                            <%= Html.ActionLink(Resources.Photos.Upload, "Upload", "Photos") %></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <%= Html.ActionLink(Resources.Navigation.Movies, "Index", "Movies") %>
                 </li>
             </ul>
             <ul>
@@ -91,39 +109,40 @@
             <% if (Page.User.IsInRole("Administrators"))
                { %>
             <ul>
-                <li>
-                    <%= Html.ActionLink(Resources.Navigation.Admin, "Index", "Admin")%>
+                <li><a>
+                    <%= Resources.Navigation.Admin %></a>
+                    <ul>
+                        <li>
+                            <%= Html.ActionLink(Resources.Admin.CreateUser, "CreateUser", "Admin") %>
+                        </li>
+                        <li>
+                            <%= Html.ActionLink(Resources.Admin.CreateForum, "CreateForum", "Admin") %>
+                        </li>
+                        <li>
+                            <%= Html.ActionLink(Resources.Admin.ManageForums, "ManageForums", "Admin") %>
+                        </li>
+                    </ul>
                 </li>
             </ul>
             <% } %>
-            <ul>
-                <li><a href="#">Content Toolbox</a>
-                    <ul>
-                        <li><a href="mf54_content.html">With sidebar</a></li>
-                        <li><a href="mf54_content_nosidebar.html">Without sidebar</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul>
-                <li><a href="#">Drop-down Menu</a>
-                    <ul>
-                        <li><a href="#">Menu subitem 1</a></li>
-                        <li><a href="#">Menu subitem 2</a></li>
-                        <li><a href="#">Menu subitem 3</a></li>
-                        <li><a href="#">Menu subitem 4</a></li>
-                        <li><a href="#">Menu subitem 5</a></li>
-                    </ul>
-                </li>
-            </ul>
         </div>
         <!-- C. MAIN SECTION -->
         <div class="main">
             <!-- <h1 class="pagetitle">
-                <asp:ContentPlaceHolder ID="TitleContent" runat="server" /></h1> -->
+               </h1> -->
             <!-- C.1 CONTENT -->
             <div class="content">
-                <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                </asp:ContentPlaceHolder>
+                <div class="corner-content-1col-top">
+                </div>
+                <div class="content-1col-nobox">
+                    <h1 class="noicon">
+                        <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+                    </h1>
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                <div class="corner-content-1col-bottom">
+                </div>
             </div>
         </div>
         <!-- D. FOOTER -->
@@ -140,42 +159,4 @@
         </div>
     </div>
 </body>
-<!--
-<body>
-    <div class="container">
-        <div class="header">
-            <div class="title">
-                <h1>
-                   
-                </h1>
-            </div>
-            <div id="logindisplay">
-                
-            </div>
-            <div class="navigation">
-
-                <div class="clearer">
-                    <span></span>
-                </div>
-            </div>
-        </div>
-        <div class="main">
-
-            <div class="clearer">
-                &nbsp;
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        <div class="left">
-            &copy; 2009 <a href="/">
-               </a>
-        </div>
-        <div class="right">
-            <a href="http://templates.arcsin.se/">Website template</a> by <a href="http://arcsin.se/">
-                Arcsin</a></div>
-        <div class="clearer">
-            &nbsp;</div>
-    </div>
-</body>-->
 </html>

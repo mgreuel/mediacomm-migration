@@ -11,8 +11,6 @@ namespace MediaCommMVC.Core.DataInterfaces
     /// <summary>Interface for all user repositories.</summary>
     public interface IUserRepository
     {
-        #region Public Methods
-
         /// <summary>Gets all users.</summary>
         /// <returns>The users.</returns>
         IEnumerable<MediaCommUser> GetAllUsers();
@@ -26,6 +24,12 @@ namespace MediaCommMVC.Core.DataInterfaces
         /// <param name="user">The user to update.</param>
         void UpdateUser(MediaCommUser user);
 
-        #endregion
+        /// <summary>
+        /// Creates a new user.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <param name="mailAddress">The mail address.</param>
+        void CreateUser(string username, string password, string mailAddress);
     }
 }

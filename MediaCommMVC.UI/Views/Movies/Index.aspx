@@ -128,56 +128,56 @@
 
         $(document).ready(function ()
         {
-            oTable = $("#movieTable").dataTable(
-            {
-                "bJQueryUI": true,
-                "bStateSave": true,
-                "aoColumns":
-                [
-                    null,
-                    null,
-                    null,
-                    null,
-                    { "bSortable": false },
-                    null,
-                    { "bSortable": false }
-                ]
-            });
+//            oTable = $("#movieTable").dataTable(
+//            {
+//                "bJQueryUI": true,
+//                "bStateSave": true,
+//                "aoColumns":
+//                [
+//                    null,
+//                    null,
+//                    null,
+//                    null,
+//                    { "bSortable": false },
+//                    null,
+//                    { "bSortable": false }
+//                ]
+//            });
 
-            oTable.fnSetColumnVis(0, false);
+//            oTable.fnSetColumnVis(0, false);
 
-            $(".deleteMovie").each(function ()
-            {
-                var deleteCell = $(this);
+//            $(".deleteMovie").each(function ()
+//            {
+//                var deleteCell = $(this);
 
-                if (deleteCell.text().length > 2)
-                {
-                    deleteCell.css("cursor", "pointer");
-                    deleteCell.css("text-decoration", "underline");
+//                if (deleteCell.text().length > 2)
+//                {
+//                    deleteCell.css("cursor", "pointer");
+//                    deleteCell.css("text-decoration", "underline");
 
-                    deleteCell.click(function ()
-                    {
-                        var aPos = oTable.fnGetPosition(this);
-                        var row = aPos[0];
+//                    deleteCell.click(function ()
+//                    {
+//                        var aPos = oTable.fnGetPosition(this);
+//                        var row = aPos[0];
 
-                        var movieName = oTable.fnGetData(row)[1];
-                        var movieId = oTable.fnGetData(row)[0];
+//                        var movieName = oTable.fnGetData(row)[1];
+//                        var movieId = oTable.fnGetData(row)[0];
 
-                        if (confirm("Do you really want to delete the movie '" + movieName + "' ?"))
-                        {
+//                        if (confirm("Do you really want to delete the movie '" + movieName + "' ?"))
+//                        {
 
-                            $.post("/Movies/DeleteMovie/" + movieId, null, function (result)
-                            {
-                                if (result.success === true)
-                                {
-                                    oTable.fnDeleteRow(row);
-                                }
-                            },
-                            "json");
-                        }
-                    });
-                }
-            });
+//                            $.post("/Movies/DeleteMovie/" + movieId, null, function (result)
+//                            {
+//                                if (result.success === true)
+//                                {
+//                                    oTable.fnDeleteRow(row);
+//                                }
+//                            },
+//                            "json");
+//                        }
+//                    });
+//                }
+//            });
         });
 
         function ShowAddPopup()

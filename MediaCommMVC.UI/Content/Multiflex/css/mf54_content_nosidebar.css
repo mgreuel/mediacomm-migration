@@ -32,7 +32,7 @@
 .content h1
 {
     margin: 0;
-    padding: 5px 50px 12px 20px;
+    padding: 0px 50px 5px 20px;
     border-bottom: solid 1px rgb(215,215,215);
     background: url(../img/icon_celltitle_level1.gif) no-repeat;
     background-position: 914px 5px;
@@ -358,7 +358,7 @@
 {
     clear: both;
     width: 920px;
-    margin: 2.0em 0 0.2em 20px;
+    margin: 1.5em 0 1.2em 20px;
     table-layout: fixed;
     border-collapse: collapse;
     empty-cells: show;
@@ -886,3 +886,102 @@
 /*  then add them here in order to avoid  */
 /*  a mixup with the default styles.      */
 /******************************************/
+
+.submitRow
+{
+    /*border-left: none !important;*/
+}
+
+.submitRow td
+{
+    /*border-left: none !important;*/
+    
+}
+
+#createUserTable
+{
+    width: 340px;
+}
+
+#createUserTable .firstColumn
+{
+    width: 110px !important;
+    font-weight: bold !important;
+    text-align: right !important;
+}
+
+#createUserTable .secondColumn
+{
+    width: 200px;
+}
+
+#createUserTable .secondColumn input
+{
+    width: 200px;
+}
+
+#changePasswordTable
+{
+    width: 250px;
+}
+
+#changePasswordTable .firstColumn
+{
+    width: 110px !important;
+    font-weight: bold !important;
+    text-align: right !important;
+}
+
+#changePasswordTable .secondColumn
+{
+    width: 140px;
+}
+
+#changePasswordTable .secondColumn input
+{
+    width: 136px;
+}
+
+#loginTable
+{
+    width:300px;
+}
+
+#loginTable .firstColumn
+{
+    width: 100px !important;
+    font-weight: bold !important;
+    text-align: right !important;
+}
+
+#loginTable .secondColumn
+{
+    width: 200px;
+}
+
+#loginTable .secondColumn input
+{
+    width: 200px;
+}
+
+#createForumTable
+{
+    width: 400px;
+}
+
+#createForumTable .firstColumn
+{
+    width: 100px !important;
+    font-weight: bold !important;
+    text-align: right !important;
+}
+
+#createForumTable .secondColumn
+{
+    width: 300px;
+}
+
+#createForumTable .secondColumn input, textarea
+{
+    width: 296px;
+}

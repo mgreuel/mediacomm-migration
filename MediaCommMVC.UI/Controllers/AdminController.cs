@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web.Security;
 
 using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Forums;
@@ -72,22 +73,17 @@ namespace MediaCommMVC.UI.Controllers
         /// <summary>
         /// Creates a new user.
         /// </summary>
-        /// <param name="userInfo">The user info.</param>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <param name="mailAddress">The mail address.</param>
         /// <returns>The user created view.</returns>
         [HttpPost]
-        public ActionResult CreateUser(CreateUserInfo userInfo)
+        public ActionResult CreateUser(string username, string password, string mailAddress)
         {
-            //this.userRepository.CreateUser();
-
-            this.TempData["UserName"] = userInfo.UserName;
+            this.userRepository.CreateUser(username, password, mailAddress);
+            
+            this.TempData["UserName"] = username;
             return this.RedirectToAction("UserCreated");
-        }
-
-        /// <summary>Displays the admin index.</summary>
-        /// <returns>The admin index view.</returns>
-        public ActionResult Index()
-        {
-            return this.View();
         }
 
         /// <summary>Displays the manage forums page.</summary>

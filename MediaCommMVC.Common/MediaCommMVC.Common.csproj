@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="Config\FileConfigAccessor.cs" />
     <Compile Include="Config\IConfigAccessor.cs" />
+    <Compile Include="Exceptions\CreateUserException.cs" />
+    <Compile Include="Exceptions\MediaCommException.cs" />
     <Compile Include="Logging\EntLibLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

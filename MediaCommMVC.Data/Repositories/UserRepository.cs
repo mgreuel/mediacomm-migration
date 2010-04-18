@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Security;
 
 using MediaCommMVC.Common.Config;
 using MediaCommMVC.Common.Logging;
@@ -11,6 +12,7 @@ using MediaCommMVC.Core.Model.Users;
 using MediaCommMVC.Data.NHInfrastructure;
 
 using NHibernate.Linq;
+using MediaCommMVC.Common.Exceptions;
 
 #endregion
 
@@ -67,6 +69,31 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Updating user: " + user);
             this.InvokeTransaction(s => s.Update(user));
             this.Logger.Debug("Finished updating user");
+        }
+
+        /// <summary>
+        /// Creates a new user.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <param name="mailAddress">The mail address.</param>
+        public void CreateUser(string username, string password, string mailAddress)
+        {
+            this.Logger.Debug("Creating user with username '{0}', password '{1}', mailAddress: '{2}'", username, password, mailAddress);
+
+            Membership.CreateUser(username, password, mailAddress);
+            try
+            {
+                this.InvokeTransaction(s => s.Save(new MediaCommUser(username, mailAddress)));
+            }
+            catch (Exception ex)
+            {
+                Membership.DeleteUser(username);
+
+                throw new CreateUserException(username, password, mailAddress);
+            }
+
+            this.Logger.Debug("Finished creating user");
         }
 
         #endregion

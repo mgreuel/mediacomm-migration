@@ -14,12 +14,16 @@
 /******************/
 /* GLOBAL LAYOUT  */
 /******************/
-
+html
+{
+    height: 100%;
+}
 body
 {
     font-size: 62.5%;
     background-color: rgb(240,240,240);
     font-family: arial,sans-serif;
+    height: 100%;
 }
 /*Font-size: 1.0em = 10px when browser default size is 16px*/
 .container
@@ -33,19 +37,19 @@ body
 .header
 {
     width: 958px;
-    min-height: 75px /*Non-IE6*/;
+    min-height: 50px /*Non-IE6*/;
     height: auto !important /*Non-IE6*/;
-    height: 75px /*IE6*/;
+    height: 50px /*IE6*/;
     border-left: solid 10px rgb(200,200,200);
     border-right: solid 10px rgb(200,200,200);
-    background: rgb(225,225,225) url(../img/bg_header.jpg) repeat-x /*Total header background image entered here. Height: 125px*/;
+    /*background: rgb(225,225,225) url(../img/bg_header.jpg) repeat-x;*/ /*Total header background image entered here. Height: 125px*/
     font-size: 1.0em;
 }
 .header-top
 {
     clear: both;
     width: 958px;
-    height: 75px;
+    height: 50px;
     background: rgb(218,218,218) url(../img/bg_header_top.jpg) repeat-x /*Top header background image entered here. Height: 100px*/;
     font-size: 1.0em;
 }
@@ -76,11 +80,12 @@ body
 {
     clear: both;
     width: 958px;
-    padding: 10px 0 20px 0;
+    padding: 10px 0 12px 0;
     border-left: solid 10px rgb(200,200,200);
     border-right: solid 10px rgb(200,200,200);
     background-color: rgb(200,200,200);
     font-size: 1.0em;
+    min-height:250px;
 }
 .content
 {
@@ -126,7 +131,7 @@ body
     height: 70px;
     position: absolute;
     z-index: 1;
-    margin: 27px 0 0 95px;
+    margin: 6px 0 0 15px;
     overflow: hidden;
 }
 .sitename h1
@@ -591,7 +596,7 @@ body
 {
     width: 978px;
     height: 10px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     background: transparent url(../img/bg_corner_page_bottom.gif) no-repeat;
     overflow: hidden;
 }
@@ -610,7 +615,7 @@ body
     clear: both;
     width: 958px;
     height: 7px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     background: transparent url(../img/bg_corner_content_nosidebar_1col_bottom.gif) no-repeat;
     overflow: hidden;
 }
@@ -727,21 +732,15 @@ p:after
 
 #loginInfo
 {
-    font-size: 130%; /*width: 400px;*/ /*position: absolute;*/
+    font-size: 130%; 
     float: right;
     z-index: 2;
     color: #646464;
-    margin-top: 56px;
-    margin-right: 4px;
-    margin-bottom: 2px; /*margin-left: 807px !important;     margin-left: 790px;*/
+    margin-top: 30px;
+    margin-right: 4px;    
 }
 
 #loginInfo a
 {
     color: #467AA7;
-}
-
-#userTable
-{
-    margin-bottom: 14px;
 }
