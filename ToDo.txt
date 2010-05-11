@@ -15,7 +15,6 @@ Home:
 Movies:
 - Input Validation
 - Edit
-- Header Style
 
 Photos:
 - 2. Level Navigation: 
@@ -23,9 +22,6 @@ Photos:
 		- Hover Information
 - Upload: DropDownLists / ComboBoxes
 - Encapsulate ImageCreation
-
-Users:
-- Formatting
 
 General:
 - Multilanguage Display Attributes for Model
