@@ -8,7 +8,6 @@ using System.Web.Routing;
 using System.Web.Security;
 
 using MediaCommMVC.UI.AccountModels;
-using MediaCommMVC.UI.AccountModels;
 
 #endregion
 

@@ -1,11 +1,9 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Core.Model.Movies.Movie>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Index
+    <%= Resources.Movies.Movielist %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2 style="padding-top: 10px; padding-bottom: 10px;">
-        <%= Resources.Movies.Movielist %></h2>
     <p>
         <a href="javascript:ShowAddPopup();" id="showAddPopup">
             <%= Resources.Movies.Add %>
@@ -64,7 +62,7 @@
                 <td class="deleteMovie">
                     <% if (Page.User.IsInRole("Administrators") || Page.User.Identity.Name.Equals(movie.Owner.UserName, StringComparison.OrdinalIgnoreCase))
                        { %>
-                    <a href="#" id='<%= string.Concat("del_", movie.Id) %>'>
+                    <a id='<%= string.Concat("del_", movie.Id) %>'>
                         <%= Resources.General.Delete %></a>
                     <% } 
                     %>
@@ -73,6 +71,10 @@
             <% } %>
         </tbody>
     </table>
+
+    <div style="margin-top: 20px;">
+    </div>
+
     <div id="editMoviePopup" style="display: none;">
         <div id="editMovie">
             <% using (Html.BeginForm())
@@ -112,13 +114,7 @@
                 </tr>
             </table>
             <div class="centerDiv">
-                <% 
-                    Writer.AddAttribute("id", "submitMovie");
-                    Writer.AddAttribute("type", "submit");
-                    Writer.AddAttribute("value", Resources.General.Save, true);
-                    Writer.RenderBeginTag(HtmlTextWriterTag.Input);
-                    Writer.RenderEndTag();
-                %>
+                <input type="submit" value='<%= Resources.General.Save %>' id="sumitMovie" />
             </div>
             <% } %>
         </div>
@@ -128,56 +124,56 @@
 
         $(document).ready(function ()
         {
-//            oTable = $("#movieTable").dataTable(
-//            {
-//                "bJQueryUI": true,
-//                "bStateSave": true,
-//                "aoColumns":
-//                [
-//                    null,
-//                    null,
-//                    null,
-//                    null,
-//                    { "bSortable": false },
-//                    null,
-//                    { "bSortable": false }
-//                ]
-//            });
+            oTable = $("#movieTable").dataTable(
+                                {
+                                    "bJQueryUI": true,
+                                    "bStateSave": true,
+                                    "bAutoWidth": false,
+                                    "aoColumns":
+                                    [
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        { "bSortable": false },
+                                        null,
+                                        { "bSortable": false }
+                                    ]
+                                });
 
-//            oTable.fnSetColumnVis(0, false);
+            oTable.fnSetColumnVis(0, false);
 
-//            $(".deleteMovie").each(function ()
-//            {
-//                var deleteCell = $(this);
+            $(".deleteMovie").each(function ()
+            {
+                var deleteCell = $(this);
 
-//                if (deleteCell.text().length > 2)
-//                {
-//                    deleteCell.css("cursor", "pointer");
-//                    deleteCell.css("text-decoration", "underline");
+                if (deleteCell.text().length > 2)
+                {
+                    deleteCell.css("cursor", "pointer");                    
 
-//                    deleteCell.click(function ()
-//                    {
-//                        var aPos = oTable.fnGetPosition(this);
-//                        var row = aPos[0];
+                    deleteCell.click(function ()
+                    {
+                        var aPos = oTable.fnGetPosition(this);
+                        var row = aPos[0];
 
-//                        var movieName = oTable.fnGetData(row)[1];
-//                        var movieId = oTable.fnGetData(row)[0];
+                        var movieName = oTable.fnGetData(row)[1];
+                        var movieId = oTable.fnGetData(row)[0];
 
-//                        if (confirm("Do you really want to delete the movie '" + movieName + "' ?"))
-//                        {
+                        if (confirm("Do you really want to delete the movie '" + movieName + "' ?"))
+                        {
 
-//                            $.post("/Movies/DeleteMovie/" + movieId, null, function (result)
-//                            {
-//                                if (result.success === true)
-//                                {
-//                                    oTable.fnDeleteRow(row);
-//                                }
-//                            },
-//                            "json");
-//                        }
-//                    });
-//                }
-//            });
+                            $.post("/Movies/DeleteMovie/" + movieId, null, function (result)
+                            {
+                                if (result.success === true)
+                                {
+                                    oTable.fnDeleteRow(row);
+                                }
+                            },
+                                                "json");
+                        }
+                    });
+                }
+            });
         });
 
         function ShowAddPopup()

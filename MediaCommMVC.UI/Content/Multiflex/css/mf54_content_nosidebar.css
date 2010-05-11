@@ -895,7 +895,6 @@
 .submitRow td
 {
     /*border-left: none !important;*/
-    
 }
 
 #createUserTable
@@ -944,7 +943,7 @@
 
 #loginTable
 {
-    width:300px;
+    width: 300px;
 }
 
 #loginTable .firstColumn
@@ -984,4 +983,114 @@
 #createForumTable .secondColumn input, textarea
 {
     width: 296px;
+}
+
+#createTopicTable .firstColumn
+{
+    width: 100px !important;
+    font-weight: bold !important;
+    text-align: right !important;
+    vertical-align: top;
+}
+
+#userProfileTable
+{
+    width: 250px !important;
+}
+
+#userProfileTable .firstColumn
+{
+    width: 100px !important;
+    text-align: right !important;
+}
+
+#userProfileTable .secondColumn
+{
+    width: 150px !important;
+    color: Black;
+    padding-left: 6px;
+}
+
+#myProfileTable
+{
+    width: 300px;
+}
+
+#myProfileTable .firstColumn
+{
+    width: 100px !important;
+    text-align: right !important;
+}
+
+#myProfileTable .secondColumn
+{
+    width: 200px !important;
+}
+
+#myProfileTable .secondColumn input[type=text]
+{
+    width: 98%;
+}
+
+.cke_editor
+{
+    margin: 0 0 0 0 !important;
+}
+
+.css_right
+{
+    float: right;
+}
+
+.dataTables_length
+{
+    width: 40%;
+    float: left;
+}
+
+.dataTables_filter
+{
+    width: 50%;
+    float: right;
+    text-align: right;
+}
+
+.fg-toolbar
+{
+    padding: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 105%;
+}
+
+#movieTable
+{
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.dataTables_paginate
+{
+    float: right;
+    text-align: right;
+    width: auto;
+}
+
+.dataTables_info
+{
+    float: left;
+    width: 50%;
+    padding-top: 2px;
+}
+
+.paging_two_button .fg-button
+{
+    cursor: pointer;
+    float: left;
+}
+
+
+.content table th, .content table td
+{
+    height: 2em !important;
 }

@@ -59,7 +59,7 @@ namespace MediaCommMVC.UI.Controllers
         {
             this.forumRepository.AddForum(forum);
 
-            return this.RedirectToAction("Index");
+            return this.RedirectToAction("Index", "Forums");
         }
 
         /// <summary>Displays the create user page.</summary>

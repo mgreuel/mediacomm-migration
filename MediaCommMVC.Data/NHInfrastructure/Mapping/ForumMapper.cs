@@ -22,7 +22,7 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
         {
             mapping.Table("Forums");
             mapping.IgnoreProperty(f => f.HasUnreadPosts);
-            mapping.Map(f => f.Title).Nullable();
+            mapping.Map(f => f.Title).Not.Nullable();
             mapping.Map(f => f.DisplayOrderIndex).Default("0");
             mapping.Map(f => f.TopicCount).Formula("(SELECT COUNT(*) FROM forumTopics p where p.ForumID = Id)");
             mapping.Map(f => f.PostCount).Formula(
