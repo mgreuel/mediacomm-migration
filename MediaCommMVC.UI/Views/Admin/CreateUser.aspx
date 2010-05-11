@@ -44,7 +44,7 @@
             <td>
             </td>
             <td>
-                <input type="submit" value='<%= Resources.General.Create%>' />
+                <input type="submit" id="submitUser" value='<%= Resources.General.Create%>' />
             </td>
         </tr>
     </table>

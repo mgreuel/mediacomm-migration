@@ -90,7 +90,7 @@ namespace MediaCommMVC.Data.Repositories
             {
                 Membership.DeleteUser(username);
 
-                throw new CreateUserException(username, password, mailAddress);
+                throw new CreateUserException(username, password, mailAddress, ex);
             }
 
             this.Logger.Debug("Finished creating user");

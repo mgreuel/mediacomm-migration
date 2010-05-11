@@ -87,7 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\Mapping.cs" />
+    <Compile Include="DataAccess\MappingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestImplementations\ConsoleLogger.cs" />
     <Compile Include="TestImplementations\SessionManager.cs" />

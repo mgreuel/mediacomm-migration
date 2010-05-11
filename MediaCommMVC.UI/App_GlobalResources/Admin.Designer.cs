@@ -97,7 +97,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The User &lt;%= TempData[&quot;UserName&quot;] %&gt;  was successfully created..
+        ///   Looks up a localized string similar to The User {0}  was successfully created..
         /// </summary>
         internal static string UserCreatedText {
             get {

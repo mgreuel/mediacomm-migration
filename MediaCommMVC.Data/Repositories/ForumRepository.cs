@@ -336,8 +336,6 @@ namespace MediaCommMVC.Data.Repositories
         {
             this.Logger.Debug("Checking if the post '{0}' is the first of its topic", post);
 
-            List<Post> posts = session.Linq<Post>().Where(p => p.Topic.Id.Equals(post.Topic.Id)).ToList();
-
             bool topicHasOlderPosts =
                 session.Linq<Post>().Where(p => p.Topic.Id.Equals(post.Topic.Id) && p.Id < post.Id).Any();
 

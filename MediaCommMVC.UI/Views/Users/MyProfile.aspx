@@ -1,18 +1,16 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Users.MediaCommUser>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    MyProfile
+    <%= Resources.Users.MyProfile %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>
-        MyProfile</h2>
     <% using (Html.BeginForm())
        {%>
     <%= Html.Hidden("username", Model.UserName) %>
-    <table>
+    <table id="myProfileTable">
         <tr>
             <td>
-                <%= Resources.Users.FirstName%>
+                <%= Resources.Users.FirstName%>:
             </td>
             <td>
                 <%= Html.TextBox("user.FirstName", Model.FirstName)%>
@@ -20,7 +18,7 @@
         </tr>
         <tr>
             <td>
-                <%= Resources.Users.LastName%>
+                <%= Resources.Users.LastName%>:
             </td>
             <td>
                 <%= Html.TextBox("user.LastName", Model.LastName)%>
@@ -28,7 +26,7 @@
         </tr>
         <tr>
             <td>
-                <%= Resources.Users.Street%>
+                <%= Resources.Users.Street%>:
             </td>
             <td>
                 <%= Html.TextBox("user.Street", Model.Street)%>
@@ -36,7 +34,7 @@
         </tr>
         <tr>
             <td>
-                <%= Resources.Users.ZipCode%>
+                <%= Resources.Users.ZipCode%>:
             </td>
             <td>
                 <%= Html.TextBox("user.ZipCode", Model.ZipCode)%>
@@ -44,7 +42,7 @@
         </tr>
         <tr>
             <td>
-                <%= Resources.Users.City%>
+                <%= Resources.Users.City%>:
             </td>
             <td>
                 <%= Html.TextBox("user.City", Model.City)%>
@@ -52,7 +50,7 @@
         </tr>
         <tr>
             <td>
-                <%= Resources.Users.PhoneNumber%>
+                <%= Resources.Users.PhoneNumber%>:
             </td>
             <td>
                 <%= Html.TextBox("user.PhoneNumber", Model.PhoneNumber)%>
@@ -60,7 +58,7 @@
         </tr>
         <tr>
             <td>
-                <%= Resources.Users.MobilePhoneNumber%>
+                <%= Resources.Users.MobilePhoneNumber%>:
             </td>
             <td>
                 <%= Html.TextBox("user.MobilePhoneNumber", Model.MobilePhoneNumber)%>
@@ -68,7 +66,7 @@
         </tr>
         <tr>
             <td>
-                <%= Resources.Users.ICQUin%>
+                <%= Resources.Users.ICQUin%>:
             </td>
             <td>
                 <%= Html.TextBox("user.IcqUin", Model.IcqUin)%>
@@ -76,15 +74,32 @@
         </tr>
         <tr>
             <td>
-                <%= Resources.Users.SkypeNick%>
+                <%= Resources.Users.SkypeNick%>:
             </td>
             <td>
                 <%= Html.TextBox("user.SkypeNick", Model.SkypeNick)%>
             </td>
         </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" value='<%= Resources.General.Save %>' />
+            </td>
+        </tr>
     </table>
-    <input type="submit" />
     <% } %>
+    <p style="padding-top: 10px">
+        <%= Html.ActionLink(Resources.Users.ChangePassword, "ChangePassword", "Account") %>
+    </p>
 
-    <%= Html.ActionLink(Resources.Users.ChangePassword, "ChangePassword", "Account") %>
+        <script language="javascript" type="text/javascript">
+
+            $(document).ready(function ()
+            {
+                $("#myProfileTable > tbody > tr > td:nth-child(odd)")._addClass("firstColumn");
+                $("#myProfileTable > tbody > tr > td:nth-child(even)")._addClass("secondColumn");
+            });
+        
+    </script>
 </asp:Content>

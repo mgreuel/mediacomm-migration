@@ -24,6 +24,7 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
             mapping.References(t => t.Forum).Not.Nullable().Cascade.SaveUpdate();
             mapping.Map(t => t.PostCount).Formula("(SELECT COUNT(*) FROM forumPosts p where p.TopicID = Id)");
             mapping.Map(t => t.CreatedBy).Not.Nullable();
+            mapping.Map(t => t.Title).Not.Nullable();
         }
 
         #endregion

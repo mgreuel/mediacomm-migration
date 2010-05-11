@@ -8,6 +8,7 @@ namespace MediaCommMVC.Common.Exceptions
     /// <summary>
     /// Base class for media comm exceptions.
     /// </summary>
+    [Serializable]
     public class MediaCommException : Exception
     {
         /// <summary>

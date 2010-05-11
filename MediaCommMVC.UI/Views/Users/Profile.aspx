@@ -5,19 +5,15 @@
     <%= Resources.Users.Profile %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>
-        <%= Model.UserName %>'s
-        <%= Resources.Users.Profile %>
-    </h2>
-    <table id="userProfile">
+    <table id="userProfileTable">
         <thead>
         </thead>
         <tbody>
             <tr>
-                <td>
+                <td style="font-weight:bold">
                     <%= Resources.Users.UserName %>:
                 </td>
-                <td>
+                <td style="font-weight:bold">
                     <%= Html.Encode(Model.UserName) %>
                 </td>
             </tr>
@@ -50,7 +46,7 @@
                     <%= Resources.Users.DateOfBirth %>:
                 </td>
                 <td>
-                    <%= Html.Encode(String.Format("{0:g}", Model.DateOfBirth)) %>
+                    <%= Html.Encode(String.Format("{0:d}", Model.DateOfBirth)) %>
                 </td>
             </tr>
             <tr>
@@ -129,9 +125,10 @@
 
     <script language="javascript" type="text/javascript">
 
-        $(document).ready(function()
+        $(document).ready(function ()
         {
-            $("#userProfile > tbody > tr > td:nth-child(even)").css("color", "Black").css("padding-left", "6px");
+            $("#userProfileTable > tbody > tr > td:nth-child(odd)")._addClass("firstColumn");
+            $("#userProfileTable > tbody > tr > td:nth-child(even)")._addClass("secondColumn");           
         });
         
     </script>

@@ -192,4 +192,7 @@
   <data name="PasswordsMustMatchError" xml:space="preserve">
     <value>The new password and confirmation password do not match.</value>
   </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>My Profile</value>
+  </data>
 </root>
