@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MediaCommMVC.DBSetup</RootNamespace>
     <AssemblyName>MediaCommMVC.DBSetup</AssemblyName>
@@ -29,6 +29,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime">
@@ -63,6 +66,8 @@
     <Reference Include="System.Data.SQLite">
       <HintPath>..\libs\NHibernate\System.Data.SQLite.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -83,6 +88,10 @@
       <Project>{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}</Project>
       <Name>MediaCommMVC.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MediaCommMVC.Core\MediaCommMVC.Core.csproj">
+      <Project>{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5}</Project>
+      <Name>MediaCommMVC.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MediaCommMVC.Data\MediaCommMVC.Data.csproj">
       <Project>{6060137F-843B-412E-95FE-B43A1421B813}</Project>
       <Name>MediaCommMVC.Data</Name>
@@ -93,6 +102,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
