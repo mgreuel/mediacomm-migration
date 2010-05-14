@@ -132,4 +132,7 @@
   <data name="Upload" xml:space="preserve">
     <value>Upload</value>
   </data>
+	<data name="Browse">
+		<value xml:space="preserve">Browse</value>
+	</data>
 </root>

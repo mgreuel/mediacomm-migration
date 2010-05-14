@@ -16,7 +16,9 @@
     <%= Html.TextBox("Album.Name") %>
     <br />
     <input id="fileInput" name="fileInput" type="file" />
-    <input type="button" value="Submit" onclick="javascript:startUpload();" />
+
+    <input type="button" value='<%= Resources.Photos.Upload %>' onclick="javascript:startUpload();" />
+
     <script type="text/javascript">
 
         function startUpload()
@@ -43,6 +45,8 @@
                 'uploader': '/Content/UploadIfy/uploadify.swf',
                 'script': '/Photos/Upload',
                 'cancelImg': '/Content/UploadIfy/cancel.png',
+                'buttonText': '<%= GetGlobalResourceObject("Photos", "Browse") %>',
+                'buttonImg': '/Content/UploadIfy/Browse.png',
                 'folder': '/uploads',
                 'fileExt': '*.zip',
                 'fileDesc': 'Zip Archive',
