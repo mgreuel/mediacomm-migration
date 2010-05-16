@@ -11,7 +11,9 @@ namespace MediaCommMVC.UI.Infrastructure
     {
         #region Properties
 
-        /// <summary>Gets the unity container.</summary>
+        /// <summary>
+        ///   Gets the unity container.
+        /// </summary>
         /// <value>The unity container.</value>
         IUnityContainer Container { get; }
 

@@ -1,8 +1,12 @@
-﻿using System;
+﻿#region Using Directives
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+
+#endregion
 
 namespace MediaCommMVC.UI.AccountModels
 {
@@ -12,12 +16,16 @@ namespace MediaCommMVC.UI.AccountModels
     {
         #region Constants and Fields
 
-        /// <summary>The _default error message.</summary>
-        [SuppressMessage("Microsoft.StyleCop.CSharp.NamingRules", "SA1303:ConstFieldNamesMustBeginWithUpperCaseLetter",
+        /// <summary>
+        ///   The _default error message.
+        /// </summary>
+        [SuppressMessage("Microsoft.StyleCop.CSharp.NamingRules", "SA1303:ConstFieldNamesMustBeginWithUpperCaseLetter", 
             Justification = "Reviewed. Suppression is OK here.")]
         private const string defaultErrorMessage = "'{0}' and '{1}' do not match.";
 
-        /// <summary>The _type id.</summary>
+        /// <summary>
+        ///   The _type id.
+        /// </summary>
         private readonly object typeId = new object();
 
         #endregion
@@ -38,15 +46,21 @@ namespace MediaCommMVC.UI.AccountModels
 
         #region Properties
 
-        /// <summary>Gets ConfirmProperty.</summary>
+        /// <summary>
+        ///   Gets ConfirmProperty.
+        /// </summary>
         /// <value>The confirm property.</value>
         public string ConfirmProperty { get; private set; }
 
-        /// <summary>Gets OriginalProperty.</summary>
+        /// <summary>
+        ///   Gets OriginalProperty.
+        /// </summary>
         /// <value>The original property.</value>
         public string OriginalProperty { get; private set; }
 
-        /// <summary>Gets TypeId.</summary>
+        /// <summary>
+        ///   Gets TypeId.
+        /// </summary>
         /// <value>The type id.</value>
         public override object TypeId
         {
@@ -77,7 +91,7 @@ namespace MediaCommMVC.UI.AccountModels
             PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(value);
             object originalValue = properties.Find(this.OriginalProperty, true /* ignoreCase */).GetValue(value);
             object confirmValue = properties.Find(this.ConfirmProperty, true /* ignoreCase */).GetValue(value);
-            return Object.Equals(originalValue, confirmValue);
+            return Equals(originalValue, confirmValue);
         }
 
         #endregion

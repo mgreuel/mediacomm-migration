@@ -1,6 +1,5 @@
 ﻿#region Using Directives
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -29,8 +28,10 @@ namespace MediaCommMVC.Data.Repositories
     {
         #region Constants and Fields
 
-        /// <summary>Folder containing unprocessed files.</summary>
-        private static string unprocessedPhotosFolder = "unprocessed";
+        /// <summary>
+        ///   Folder containing unprocessed files.
+        /// </summary>
+        private const string UnprocessedPhotosFolder = "unprocessed";
 
         #endregion
 
@@ -95,27 +96,13 @@ namespace MediaCommMVC.Data.Repositories
 
             string targetPath = this.GetTargetPath(album);
             string supportedPhotoExt = this.ConfigAccessor.GetConfigValue("SupportedPhotoExt");
-            string unprocessedPath = Path.Combine(targetPath, unprocessedPhotosFolder);
+            string unprocessedPath = Path.Combine(targetPath, UnprocessedPhotosFolder);
 
             this.ExtractAndDeleteZip(zipFilename, targetPath, supportedPhotoExt);
+
+            this.MovePhotos(targetPath, unprocessedPath);
+
             this.AddPicturesToDB(targetPath, album, uploader);
-
-            IEnumerable<string> files = Directory.GetFiles(unprocessedPath);
-
-            this.Logger.Debug("Moving {2} photos from '{0}' to '{1}'", unprocessedPath, targetPath, files.Count());
-
-            foreach (string file in files)
-            {
-                string newPath = file.Replace("\\" + unprocessedPhotosFolder, string.Empty);
-                try
-                {
-                    File.Copy(file, newPath);
-                }
-                catch (IOException ex)
-                {
-                    this.Logger.Error(string.Format("Unable to copy file '{0}' to '{1}'", file, newPath), ex);
-                }
-            }
 
             this.GenerateSmallerPhotos(targetPath);
 
@@ -136,6 +123,18 @@ namespace MediaCommMVC.Data.Repositories
             return album;
         }
 
+        /// <summary>Gets the albums with the specified category id.</summary>
+        /// <param name="catId">The category id.</param>
+        /// <returns>The albums.</returns>
+        public IEnumerable<PhotoAlbum> GetAlbumsForCategoryId(int catId)
+        {
+            this.Logger.Debug("Getting albums for category id '{0}'", catId);
+            IEnumerable<PhotoAlbum> albums = this.Session.Linq<PhotoAlbum>().Where(a => a.PhotoCategory.Id == catId).ToList();
+
+            this.Logger.Debug("Got {0} Albums", albums.Count());
+            return albums;
+        }
+
         /// <summary>Gets all categories.</summary>
         /// <returns>All photo categories.</returns>
         public IEnumerable<PhotoCategory> GetAllCategories()
@@ -146,6 +145,18 @@ namespace MediaCommMVC.Data.Repositories
 
             this.Logger.Debug("Got {0} photo categories", categories.Count());
             return categories;
+        }
+
+        /// <summary>Gets the category by id.</summary>
+        /// <param name="id">The category id.</param>
+        /// <returns>THe photo category.</returns>
+        public PhotoCategory GetCategoryById(int id)
+        {
+            PhotoCategory category = this.Session.Get<PhotoCategory>(id);
+
+            this.Logger.Debug("Got category {0} for category id '{1}'", category, id);
+
+            return category;
         }
 
         /// <summary>Gets the image path.</summary>
@@ -162,7 +173,7 @@ namespace MediaCommMVC.Data.Repositories
             string imagePath =
                 Path.Combine(
                     this.ConfigAccessor.GetConfigValue("PhotoRootDir"), 
-                    Path.Combine(this.GetValidDirectoryName(photo.Album.Category.Name), Path.Combine(this.GetValidDirectoryName(photo.Album.Name), fileName)));
+                    Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.PhotoCategory.Name), Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.Name), fileName)));
 
             this.Logger.Debug("Getting image from '{0}'", imagePath);
             Image image = Image.FromFile(imagePath);
@@ -189,24 +200,10 @@ namespace MediaCommMVC.Data.Repositories
         public IEnumerable<Photo> GetPhotosForAlbumId(int albumId)
         {
             this.Logger.Debug("Getting photos for album with id '{0}'", albumId);
-            IEnumerable<Photo> photos = this.Session.Linq<Photo>().Where(p => p.Album.Id.Equals(albumId)).ToList();
+            IEnumerable<Photo> photos = this.Session.Linq<Photo>().Where(p => p.PhotoAlbum.Id.Equals(albumId)).ToList();
 
             this.Logger.Debug("Got {0} photos", photos.Count());
             return photos;
-        }
-
-        /// <summary>
-        /// Gets the albums with the specified category id.
-        /// </summary>
-        /// <param name="catId">The category id.</param>
-        /// <returns>The albums.</returns>
-        public IEnumerable<PhotoAlbum> GetAlbumsForCategoryId(int catId)
-        {
-            this.Logger.Debug("Getting albums for category id '{0}'", catId);
-            IEnumerable<PhotoAlbum> albums = this.Session.Linq<PhotoAlbum>().Where(a => a.Category.Id == catId).ToList();
-
-            this.Logger.Debug("Got {0} Albums", albums.Count());
-            return albums;
         }
 
         #endregion
@@ -214,6 +211,25 @@ namespace MediaCommMVC.Data.Repositories
         #endregion
 
         #region Methods
+
+        /// <summary>Gets all files in the directory recursively.</summary>
+        /// <param name="dirInfo">The dirrecory info.</param>
+        /// <returns>All files.</returns>
+        private static IEnumerable<FileInfo> GetFilesRecursive(DirectoryInfo dirInfo)
+        {
+            foreach (DirectoryInfo di in dirInfo.GetDirectories())
+            {
+                foreach (FileInfo fi in GetFilesRecursive(di))
+                {
+                    yield return fi;
+                }
+            }
+
+            foreach (FileInfo fi in dirInfo.GetFiles())
+            {
+                yield return fi;
+            }
+        }
 
         /// <summary>Adds the pictures to DB.</summary>
         /// <param name="path">The target path.</param>
@@ -223,33 +239,27 @@ namespace MediaCommMVC.Data.Repositories
         {
             this.Logger.Debug("Adding photos from the folder '{0} to the database. Album: '{1}', Uploader: '{2}'", path, album, uploader);
 
-            string unprocessedFullPath = Path.Combine(path, unprocessedPhotosFolder);
-            DirectoryInfo dir = new DirectoryInfo(unprocessedFullPath);
+            DirectoryInfo dir = new DirectoryInfo(path);
 
             this.InvokeTransaction(delegate(ISession session)
                 {
-                    foreach (FileInfo file in dir.GetFiles())
+                    FileInfo[] files = dir.GetFiles();
+
+                    foreach (FileInfo file in files)
                     {
                         Bitmap bmp = new Bitmap(file.FullName);
-                        string fileName = file.Name;
-
-                        while (File.Exists(Path.Combine(path, fileName)))
-                        {
-                            string newFileName = fileName + DateTime.Now.Millisecond;
-
-                            this.Logger.Debug("File '{0}' exists already, renaming it to '{1}'", Path.Combine(path, fileName), newFileName);
-                            File.Move(
-                                Path.Combine(unprocessedFullPath, fileName), Path.Combine(unprocessedFullPath, newFileName));
-                        }
+                        int height = bmp.Height;
+                        int width = bmp.Width;
+                        bmp.Dispose();
 
                         Photo photo = new Photo
                             {
-                                Album = album, 
-                                FileName = fileName, 
+                                PhotoAlbum = album, 
+                                FileName = file.Name, 
                                 FileSize = file.Length, 
-                                Height = bmp.Height, 
+                                Height = height, 
                                 Uploader = uploader, 
-                                Width = bmp.Width
+                                Width = width
                             };
 
                         this.Logger.Debug("Adding photo '{0}' to the database");
@@ -269,7 +279,7 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Extracting files with the extensions '{0}' from '{1}' to '{2}'", extensionsToExtract, filename, targetPath);
 
             FastZip zip = new FastZip();
-            string unprocessedTargetPath = Path.Combine(targetPath, unprocessedPhotosFolder);
+            string unprocessedTargetPath = Path.Combine(targetPath, UnprocessedPhotosFolder);
             zip.ExtractZip(filename, unprocessedTargetPath, extensionsToExtract);
 
             this.Logger.Debug("Deleting file '{0}'", filename);
@@ -284,7 +294,7 @@ namespace MediaCommMVC.Data.Repositories
         {
             this.Logger.Debug("Generating smaller resolutions for photos in '{0}'", pathToPhotos);
 
-            string sourcePath = Path.Combine(pathToPhotos, unprocessedPhotosFolder);
+            string sourcePath = Path.Combine(pathToPhotos, UnprocessedPhotosFolder);
 
             sourcePath = string.Format("{0}\\*", sourcePath.TrimEnd('\\'));
             pathToPhotos = string.Format("{0}\\", pathToPhotos.TrimEnd('\\'));
@@ -295,7 +305,7 @@ namespace MediaCommMVC.Data.Repositories
 
             this.Logger.Debug("Executing '{0}' with parameters '{1}'", photoCreatorBatchPath, param);
 
-            Process p = Process.Start(photoCreatorBatchPath, param);
+            Process.Start(photoCreatorBatchPath, param);
         }
 
         /// <summary>Gets the path where the photos will be stored.</summary>
@@ -307,7 +317,7 @@ namespace MediaCommMVC.Data.Repositories
 
             string targetPath = Path.Combine(
                 this.ConfigAccessor.GetConfigValue("PhotoRootDir"), 
-                Path.Combine(this.GetValidDirectoryName(album.Category.Name), this.GetValidDirectoryName(album.Name)));
+                Path.Combine(this.GetValidDirectoryName(album.PhotoCategory.Name), this.GetValidDirectoryName(album.Name)));
 
             this.Logger.Debug("Photos will be stored in the directory '{0}'", targetPath);
 
@@ -335,6 +345,43 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Got '{0}' as valid directory name", validName);
 
             return validName;
+        }
+
+        /// <summary>Moves the photos to the final folder and renames duplicates.</summary>
+        /// <param name="targetPath">The target path.</param>
+        /// <param name="unprocessedPath">The path containing the unprocessed photos.</param>
+        private void MovePhotos(string targetPath, string unprocessedPath)
+        {
+            IEnumerable<FileInfo> allFiles = GetFilesRecursive(new DirectoryInfo(unprocessedPath)).ToList();
+
+            this.Logger.Debug("Moving {2} photos from '{0}' to '{1}'", unprocessedPath, targetPath, allFiles.Count());
+
+            foreach (FileInfo file in allFiles)
+            {
+                string newPath = Path.Combine(targetPath, file.Name);
+                string newFilename = file.Name;
+
+                try
+                {
+                    // Copy files from subdirectories to the unprocessed folder
+                    if (!file.FullName.Equals(Path.Combine(unprocessedPath, file.Name)))
+                    {
+                        if (File.Exists(Path.Combine(unprocessedPath, file.Name)))
+                        {
+                            newFilename = file.Name.Replace(file.Extension, file.Directory.Name) + file.Extension;
+                            newPath = Path.Combine(targetPath, newFilename);
+                        }
+
+                        File.Copy(file.FullName, Path.Combine(unprocessedPath, newFilename));
+                    }
+                    
+                    File.Copy(file.FullName, newPath);
+                }
+                catch (IOException ex)
+                {
+                    this.Logger.Error(string.Format("Unable to copy file '{0}' to '{1}'", file, newPath), ex);
+                }
+            }
         }
 
         #endregion

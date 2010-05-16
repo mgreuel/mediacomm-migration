@@ -1,4 +1,8 @@
-﻿using System.Web.Security;
+﻿#region Using Directives
+
+using System.Web.Security;
+
+#endregion
 
 namespace MediaCommMVC.UI.AccountModels
 {
@@ -7,7 +11,9 @@ namespace MediaCommMVC.UI.AccountModels
     {
         #region Properties
 
-        /// <summary>Gets MinPasswordLength.</summary>
+        /// <summary>
+        ///   Gets MinPasswordLength.
+        /// </summary>
         /// <value>The min password length.</value>
         int MinPasswordLength { get; }
 

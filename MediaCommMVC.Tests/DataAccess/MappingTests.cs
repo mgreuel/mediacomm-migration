@@ -100,8 +100,8 @@ namespace MediaCommMVC.Tests.DataAccess
         {
             PhotoCategory category = new PhotoCategory { Name = "MyTestCat" };
 
-            PhotoAlbum album1 = new PhotoAlbum { Category = category, Name = "album1" };
-            PhotoAlbum album2 = new PhotoAlbum { Category = category, Name = "album2" };
+            PhotoAlbum album1 = new PhotoAlbum { PhotoCategory = category, Name = "album1" };
+            PhotoAlbum album2 = new PhotoAlbum { PhotoCategory = category, Name = "album2" };
 
            // category.Albums
         }
@@ -110,7 +110,7 @@ namespace MediaCommMVC.Tests.DataAccess
         public void CanMapPhotoAlbum()
         {
             new PersistenceSpecification<PhotoAlbum>(this.sessionManager.Session)
-                .CheckProperty(a => a.Category, new PhotoCategory { Name = "Album cat" })
+                .CheckProperty(a => a.PhotoCategory, new PhotoCategory { Name = "Album cat" })
                 .CheckProperty(a => a.Name, "an album")
                 .VerifyTheMappings();
         }
@@ -121,7 +121,7 @@ namespace MediaCommMVC.Tests.DataAccess
             PhotoCategory photoCategory = new PhotoCategory { Name = "my cat" };
 
             new PersistenceSpecification<Photo>(this.sessionManager.Session)
-                .CheckProperty(p => p.Album, new PhotoAlbum { Category = photoCategory, Name = "my album" })
+                .CheckProperty(p => p.PhotoAlbum, new PhotoAlbum { PhotoCategory = photoCategory, Name = "my album" })
                 .CheckProperty(p => p.FileName, @"\path\mypic.jpg")
                 .CheckProperty(p => p.FileSize, 12345L)
                 .CheckProperty(p => p.Height, 1000)

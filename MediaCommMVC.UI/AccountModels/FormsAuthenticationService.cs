@@ -2,8 +2,6 @@
 
 using System.Web.Security;
 
-using MediaCommMVC.UI.AccountModels;
-
 #endregion
 
 namespace MediaCommMVC.UI.AccountModels
@@ -42,10 +40,6 @@ namespace MediaCommMVC.UI.AccountModels
 
         #endregion
     }
-
-    #endregion
-
-    #region Models
 
     #endregion
 

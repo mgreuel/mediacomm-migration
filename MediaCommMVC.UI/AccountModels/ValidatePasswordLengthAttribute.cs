@@ -1,8 +1,12 @@
-﻿using System;
+﻿#region Using Directives
+
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Web.Security;
+
+#endregion
 
 namespace MediaCommMVC.UI.AccountModels
 {
@@ -12,19 +16,25 @@ namespace MediaCommMVC.UI.AccountModels
     {
         #region Constants and Fields
 
-        /// <summary>The _default error message.</summary>
-        [SuppressMessage("Microsoft.StyleCop.CSharp.NamingRules", "SA1303:ConstFieldNamesMustBeginWithUpperCaseLetter",
+        /// <summary>
+        ///   The _default error message.
+        /// </summary>
+        [SuppressMessage("Microsoft.StyleCop.CSharp.NamingRules", "SA1303:ConstFieldNamesMustBeginWithUpperCaseLetter", 
             Justification = "Reviewed. Suppression is OK here.")]
         private const string defaultErrorMessage = "'{0}' must be at least {1} characters long.";
 
-        /// <summary>The _min characters.</summary>
+        /// <summary>
+        ///   The _min characters.
+        /// </summary>
         private readonly int minCharacters = Membership.Provider.MinRequiredPasswordLength;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="ValidatePasswordLengthAttribute"/> class.</summary>
+        /// <summary>
+        ///   Initializes a new instance of the <see cref = "ValidatePasswordLengthAttribute" /> class.
+        /// </summary>
         public ValidatePasswordLengthAttribute()
             : base(defaultErrorMessage)
         {

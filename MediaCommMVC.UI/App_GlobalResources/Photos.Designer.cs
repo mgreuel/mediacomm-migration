@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Album.
+        /// </summary>
+        internal static string Album {
+            get {
+                return ResourceManager.GetString("Album", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Photo Albums.
         /// </summary>
         internal static string Albums {
@@ -88,6 +97,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        internal static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Overview.
         /// </summary>
         internal static string Overview {
@@ -111,6 +129,24 @@ namespace Resources {
         internal static string Upload {
             get {
                 return ResourceManager.GetString("Upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The photos were successfully uploaded.
+        /// </summary>
+        internal static string UploadSuccessfullText {
+            get {
+                return ResourceManager.GetString("UploadSuccessfullText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload successfull.
+        /// </summary>
+        internal static string UploadSuccessfullTitle {
+            get {
+                return ResourceManager.GetString("UploadSuccessfullTitle", resourceCulture);
             }
         }
     }

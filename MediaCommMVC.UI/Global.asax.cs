@@ -3,7 +3,6 @@
 using System;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 
 using MediaCommMVC.Common.Logging;
 using MediaCommMVC.UI.Infrastructure;
@@ -22,17 +21,23 @@ namespace MediaCommMVC.UI
     {
         #region Constants and Fields
 
-        /// <summary>The logger.</summary>
+        /// <summary>
+        ///   The logger.
+        /// </summary>
         private readonly ILogger logger = new EntLibLogger();
 
-        /// <summary>The unity IoC container.</summary>
+        /// <summary>
+        ///   The unity IoC container.
+        /// </summary>
         private static IUnityContainer container;
 
         #endregion
 
         #region Properties
 
-        /// <summary>Gets the unity container.</summary>
+        /// <summary>
+        ///   Gets the unity container.
+        /// </summary>
         /// <value>The unity container.</value>
         public IUnityContainer Container
         {
@@ -60,7 +65,7 @@ namespace MediaCommMVC.UI
 
                 new Bootstrapper(container, this.logger).Run();
 
-                //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
+                // RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
             }
             catch (Exception ex)
             {

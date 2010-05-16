@@ -13,7 +13,7 @@ namespace MediaCommMVC.Core.Model.Photos
 
         /// <summary>Gets or sets the category.</summary>
         /// <value>The category.</value>
-        public virtual PhotoCategory Category { get; set; }
+        public virtual PhotoCategory PhotoCategory { get; set; }
 
         /// <summary>Gets or sets the id.</summary>
         /// <value>The album id.</value>
@@ -39,7 +39,9 @@ namespace MediaCommMVC.Core.Model.Photos
         /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
         public override string ToString()
         {
-            return string.Format("Id: '{0}, Title: '{1}', Category: '{2}'", this.Id, this.Name, this.Category.Name);
+            string categoryName = this.PhotoCategory == null ? string.Empty : this.PhotoCategory.Name;
+
+            return string.Format("Id: '{0}, Title: '{1}', Category: '{2}'", this.Id, this.Name, categoryName);
         }
 
         /// <summary>

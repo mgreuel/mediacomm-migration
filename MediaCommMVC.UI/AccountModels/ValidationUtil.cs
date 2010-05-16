@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region Using Directives
+
+using System;
 using System.Diagnostics.CodeAnalysis;
+
+#endregion
 
 namespace MediaCommMVC.UI.AccountModels
 {
@@ -8,8 +12,10 @@ namespace MediaCommMVC.UI.AccountModels
     {
         #region Constants and Fields
 
-        /// <summary>The _string required error message.</summary>
-        [SuppressMessage("Microsoft.StyleCop.CSharp.NamingRules", "SA1303:ConstFieldNamesMustBeginWithUpperCaseLetter",
+        /// <summary>
+        ///   The _string required error message.
+        /// </summary>
+        [SuppressMessage("Microsoft.StyleCop.CSharp.NamingRules", "SA1303:ConstFieldNamesMustBeginWithUpperCaseLetter", 
             Justification = "Reviewed. Suppression is OK here.")]
         private const string stringRequiredErrorMessage = "Value cannot be null or empty.";
 

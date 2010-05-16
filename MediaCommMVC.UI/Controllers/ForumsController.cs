@@ -19,23 +19,33 @@ namespace MediaCommMVC.UI.Controllers
     {
         #region Constants and Fields
 
-        /// <summary>The forum repository.</summary>
+        /// <summary>
+        ///   The forum repository.
+        /// </summary>
         private readonly IForumRepository forumRepository;
 
-        /// <summary>The user repository.</summary>
+        /// <summary>
+        ///   The user repository.
+        /// </summary>
         private readonly IUserRepository userRepository;
 
-        /// <summary>The logger.</summary>
+        /// <summary>
+        ///   The logger.
+        /// </summary>
         private readonly ILogger logger;
 
 #warning get from config!
 
-        /// <summary>The number of topics displayed per page.</summary>
+        /// <summary>
+        ///   The number of topics displayed per page.
+        /// </summary>
         private int topicPageSize = 25;
 
 #warning get from config!
 
-        /// <summary>The number of posts displayed per page.</summary>
+        /// <summary>
+        ///   The number of posts displayed per page.
+        /// </summary>
         private int postPageSize = 10;
 
         #endregion
@@ -75,7 +85,7 @@ namespace MediaCommMVC.UI.Controllers
 
             PagingParameters pagingParameters = new PagingParameters
                 {
-                    CurrentPage = page, PageSize = this.topicPageSize 
+                   CurrentPage = page, PageSize = this.topicPageSize 
                 };
             IEnumerable<Topic> topics = this.forumRepository.GetTopicsForForum(id, pagingParameters);
             return this.View(topics);
@@ -91,7 +101,7 @@ namespace MediaCommMVC.UI.Controllers
 
             PagingParameters pagingParameters = new PagingParameters
                 {
-                    CurrentPage = page, PageSize = this.postPageSize 
+                   CurrentPage = page, PageSize = this.postPageSize 
                 };
             return this.View(this.forumRepository.GetPostsForTopic(id, pagingParameters));
         }

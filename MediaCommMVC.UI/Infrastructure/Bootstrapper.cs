@@ -10,7 +10,6 @@ using MediaCommMVC.Data.NHInfrastructure;
 using MediaCommMVC.Data.NHInfrastructure.Config;
 using MediaCommMVC.Data.NHInfrastructure.Mapping;
 using MediaCommMVC.Data.Repositories;
-using MediaCommMVC.UI.Controllers;
 
 using Microsoft.Practices.Unity;
 
@@ -23,11 +22,15 @@ namespace MediaCommMVC.UI.Infrastructure
     {
         #region Constants and Fields
 
-        /// <summary>The unity container.</summary>
+        /// <summary>
+        ///   The unity container.
+        /// </summary>
         private readonly IUnityContainer container;
 
-        /// <summary>The logger.
-        /// It is created in the Global.asax file.</summary>
+        /// <summary>
+        ///   The logger.
+        ///   It is created in the Global.asax file.
+        /// </summary>
         private readonly ILogger logger;
 
         #endregion
@@ -92,9 +95,10 @@ namespace MediaCommMVC.UI.Infrastructure
             this.container.RegisterType(typeof(IAutoMapGenerator), typeof(AutoMapGenerator));
             this.container.RegisterType(typeof(IConfigurationGenerator), typeof(ConfigurationGenerator));
 
-            WebSessionManager webSessionManager = new WebSessionManager(
-                (IConfigurationGenerator)this.container.Resolve(typeof(IConfigurationGenerator)),
-                (ILogger)this.container.Resolve(typeof(ILogger)));
+            WebSessionManager webSessionManager =
+                new WebSessionManager(
+                    (IConfigurationGenerator)this.container.Resolve(typeof(IConfigurationGenerator)), 
+                    (ILogger)this.container.Resolve(typeof(ILogger)));
             this.container.RegisterInstance(typeof(ISessionManager), webSessionManager);
 
             this.logger.Debug("Finished registering nHibernate components");
@@ -106,20 +110,20 @@ namespace MediaCommMVC.UI.Infrastructure
             this.logger.Debug("Registering repositories");
 
             this.container.RegisterType(
-                typeof(IForumRepository),
-                typeof(ForumRepository),
+                typeof(IForumRepository), 
+                typeof(ForumRepository), 
                 new HttpContextLifetimeManager<ForumRepository>());
             this.container.RegisterType(
-                typeof(IPhotoRepository),
-                typeof(PhotoRepository),
+                typeof(IPhotoRepository), 
+                typeof(PhotoRepository), 
                 new HttpContextLifetimeManager<PhotoRepository>());
             this.container.RegisterType(
-                typeof(IMovieRepository),
-                typeof(MovieRepository),
+                typeof(IMovieRepository), 
+                typeof(MovieRepository), 
                 new HttpContextLifetimeManager<MovieRepository>());
             this.container.RegisterType(
-                typeof(IUserRepository),
-                typeof(UserRepository),
+                typeof(IUserRepository), 
+                typeof(UserRepository), 
                 new HttpContextLifetimeManager<UserRepository>());
 
             this.logger.Debug("Finished registering repositories");
@@ -137,49 +141,49 @@ namespace MediaCommMVC.UI.Infrastructure
 #warning clean routes
 
             routes.MapRoute(
-                "ViewForum",
-                "Forums/Forum/{id}/{page}",
+                "ViewForum", 
+                "Forums/Forum/{id}/{page}", 
                 new { controller = "Forums", action = "Forum", page = 1 });
 
             routes.MapRoute(
-                "ViewTopic",
-                "Forums/Topic/{id}/{page}",
+                "ViewTopic", 
+                "Forums/Topic/{id}/{page}", 
                 new { controller = "Forums", action = "Topic", page = 1 });
 
             routes.MapRoute(
-                "CreateTopic",
-                "Forums/CreateTopic/{id}",
+                "CreateTopic", 
+                "Forums/CreateTopic/{id}", 
                 new { controller = "Forums", action = "CreateTopic" });
 
             routes.MapRoute(
-                "PhotoOverview",
-                "Photos/Photo/{id}",
+                "PhotoOverview", 
+                "Photos/Photo/{id}", 
                 new { controller = "Photos", action = "Photo" });
 
             routes.MapRoute(
-                "GetPhoto",
-                "Photos/Photo/{id}/{size}",
+                "GetPhoto", 
+                "Photos/Photo/{id}/{size}", 
                 new { controller = "Photos", action = "Photo" });
 
             routes.MapRoute(
-                "MyProfile",
-                "Users/MyProfile",
+                "MyProfile", 
+                "Users/MyProfile", 
                 new { controller = "Users", action = "MyProfile" });
 
             routes.MapRoute(
-                "Profile",
-                "Users/{username}",
+                "Profile", 
+                "Users/{username}", 
                 new { controller = "Users", action = "Profile" });
 
             routes.MapRoute(
-                "DefaultWithId",
+                "DefaultWithId", 
                 "{controller}/{action}/{id}");
 
             routes.MapRoute("Error", "Error", new { controller = "Home", action = "Error" });
 
             routes.MapRoute(
-                "Default",
-                "{controller}/{action}",
+                "Default", 
+                "{controller}/{action}", 
                 new { controller = "Home", action = "Index" });
 
             this.logger.Debug("Finished registering routes");

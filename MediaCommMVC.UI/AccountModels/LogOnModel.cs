@@ -1,5 +1,9 @@
-﻿using System.ComponentModel;
+﻿#region Using Directives
+
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+
+#endregion
 
 namespace MediaCommMVC.UI.AccountModels
 {
@@ -8,19 +12,25 @@ namespace MediaCommMVC.UI.AccountModels
     {
         #region Properties
 
-        /// <summary>Gets or sets Password.</summary>
+        /// <summary>
+        ///   Gets or sets Password.
+        /// </summary>
         /// <value>The password.</value>
         [Required]
         [DataType(DataType.Password)]
         [DisplayName("Password")]
         public string Password { get; set; }
 
-        /// <summary>Gets or sets a value indicating whether RememberMe.</summary>
+        /// <summary>
+        ///   Gets or sets a value indicating whether RememberMe.
+        /// </summary>
         /// <value>The remember me.</value>
         [DisplayName("Remember me?")]
         public bool RememberMe { get; set; }
 
-        /// <summary>Gets or sets UserName.</summary>
+        /// <summary>
+        ///   Gets or sets UserName.
+        /// </summary>
         /// <value>The user name.</value>
         [Required]
         [DisplayName("User name")]

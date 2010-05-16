@@ -7,6 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+
 using MediaCommMVC.Common.Config;
 using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
@@ -14,27 +16,35 @@ using MediaCommMVC.Core.Model.Photos;
 using MediaCommMVC.Core.Model.Users;
 using MediaCommMVC.UI.Infrastructure;
 using MediaCommMVC.UI.ViewModel;
+using System.Web.Caching;
 
 #endregion
 
 namespace MediaCommMVC.UI.Controllers
 {
     /// <summary>The photos controller.</summary>
-    [Authorize]
     public class PhotosController : Controller
     {
         #region Constants and Fields
 
-        /// <summary>The config accessor.</summary>
+        /// <summary>
+        ///   The config accessor.
+        /// </summary>
         private readonly IConfigAccessor configAccessor;
 
-        /// <summary>The logger.</summary>
+        /// <summary>
+        ///   The logger.
+        /// </summary>
         private readonly ILogger logger;
 
-        /// <summary>The photo repsository.</summary>
+        /// <summary>
+        ///   The photo repsository.
+        /// </summary>
         private readonly IPhotoRepository photoRepository;
 
-        /// <summary>The user repository.</summary>
+        /// <summary>
+        ///   The user repository.
+        /// </summary>
         private readonly IUserRepository userRepository;
 
         #endregion
@@ -61,29 +71,81 @@ namespace MediaCommMVC.UI.Controllers
         /// <summary>Displays a photo gallery.</summary>
         /// <param name="id">The album id.</param>
         /// <returns>The album view.</returns>
+        [Authorize]
         public ActionResult Album(int id)
         {
             this.logger.Debug("Displaying photo album with id " + id);
 
             PhotoAlbum album = this.photoRepository.GetAlbumById(id);
 
+#warning Load via ajax
+
             this.logger.Debug("Displaying view with photo album " + album);
 
-            return this.View(new PhotoAlbumViewData { Album = album, PhotoCategories = this.GetCategoriesViewData() });
+            return this.View(album);
+        }
+
+        /// <summary>Shows the photo category.</summary>
+        /// <param name="id">The category id.</param>
+        /// <returns>The category view.</returns>
+        [HttpGet]
+        [Authorize]
+        public ActionResult Category(int id)
+        {
+            PhotoCategory category = this.photoRepository.GetCategoryById(id);
+
+            return this.View(category);
+        }
+
+        /// <summary>Gets the albums for the specified category id.</summary>
+        /// <param name="id">The cat id.</param>
+        /// <param name="term">The term the album starts with.</param>
+        /// <returns>All matching albums.</returns>
+        [HttpGet]
+        [Authorize]
+        public ActionResult GetAlbumsForCategoryId(int id, string term)
+        {
+            if (id <= 0)
+            {
+                this.logger.Error("CatId '{0}' is invalid", id);
+                return null;
+            }
+
+            IEnumerable<PhotoAlbum> albums = this.photoRepository.GetAlbumsForCategoryId(id).Where(a => a.Name.StartsWith(term, StringComparison.OrdinalIgnoreCase));
+
+            return this.Json(albums.Select(a => a.Name), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>Gets all photo categories.</summary>
+        /// <returns>The photo categories as Json string.</returns>
+        [HttpGet]
+        [Authorize]
+        [OutputCache(Duration = 3600, VaryByParam = "None")]
+        public ActionResult GetCategories()
+        {
+            IEnumerable<PhotoCategory> categories = this.photoRepository.GetAllCategories();
+
+            var categoryViewModels = categories.Select(c => new { c.Name, c.Id, c.AlbumCount });
+
+            return this.Json(categoryViewModels, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>The index page.</summary>
         /// <returns>The index view.</returns>
+        [Authorize]
+        [HttpGet]
         public ActionResult Index()
         {
             this.logger.Debug("Displaying photos index");
-            return this.View(new PhotoNavigationViewData { PhotoCategories = this.GetCategoriesViewData() });
+            return this.View();
         }
 
         /// <summary>Displays a single photo.</summary>
         /// <param name="id">The photo id.</param>
         /// <param name="size">The photo size.</param>
         /// <returns>The photo.</returns>
+        [Authorize]
+        [HttpGet]
         public ActionResult Photo(int id, string size)
         {
             this.logger.Debug("Displaying photo with id '{0}' and size '{1}'", id, size);
@@ -95,37 +157,49 @@ namespace MediaCommMVC.UI.Controllers
 
         /// <summary>The upload page.</summary>
         /// <returns>The upload view.</returns>
+        [Authorize]
+        [HttpGet]
         public ActionResult Upload()
         {
             this.logger.Debug("Displaying photo upload page");
-            return this.View(new PhotoNavigationViewData { PhotoCategories = this.GetCategoriesViewData() });
+
+            IEnumerable<PhotoCategory> categories = this.photoRepository.GetAllCategories();
+            
+            return this.View(categories);
         }
 
         /// <summary>Uploads the zip file containing the photos.</summary>
         /// <param name="category">The category.</param>
         /// <param name="album">The album.</param>
+        /// <param name="token">The authentication token.</param>
         /// <returns>The uploaded view.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Upload(PhotoCategory category, PhotoAlbum album)
+        public ActionResult Upload(PhotoCategory category, PhotoAlbum album, string token)
         {
             this.logger.Debug("Uploading file with category '{0}' and album '{1}'", category, album);
 
             if (this.Request.Files.Count > 0)
             {
+                FormsIdentity uploaderIdentity = this.GetUploaderIdentity(token);
+
                 category.Name = category.Name.Trim();
                 album.Name = album.Name.Trim();
-                //this.photoRepository.AddCategory(category);
-                album.Category = category;
-                //this.photoRepository.AddAlbum(album);
+                album.PhotoCategory = category;
 
                 HttpPostedFileBase file = this.Request.Files[0];
-                string targetPath = Path.Combine(this.configAccessor.GetConfigValue("PhotoRootDir"), file.FileName);
+                string directoryPath = this.configAccessor.GetConfigValue("PhotoRootDir");
+                string targetPath = Path.Combine(directoryPath, file.FileName);
+
+                if (!Directory.Exists(directoryPath))
+                {
+                    this.logger.Debug("The path '{0}' does not exist, creating now.", directoryPath);
+                    Directory.CreateDirectory(directoryPath);
+                }
 
                 this.logger.Debug("Saving file '{0}'", targetPath);
                 file.SaveAs(targetPath);
 
-                MediaCommUser uploader = this.userRepository.GetUserByName(this.User.Identity.Name);
-
+                MediaCommUser uploader = this.userRepository.GetUserByName(uploaderIdentity.Name);
                 this.photoRepository.ExtractAndAddPhotos(targetPath, album, uploader);
             }
             else
@@ -133,45 +207,41 @@ namespace MediaCommMVC.UI.Controllers
                 this.logger.Warn("No file was sent to the server");
             }
 
-            return this.View(new PhotoNavigationViewData { PhotoCategories = this.GetCategoriesViewData() });
+            return this.Content("true");
         }
 
-        /// <summary>
-        /// Gets the albums for the specified category id.
-        /// </summary>
-        /// <param name="id">The cat id.</param>
-        /// <returns></returns>
+        /// <summary>Shows the uploads success full page.</summary>
+        /// <returns>The upload successfull view.</returns>
         [HttpGet]
-        public ActionResult GetAlbumsForCategoryId(int id)
+        public ActionResult UploadSuccessFull()
         {
-            if(id <= 0)
-            {
-                this.logger.Error("CatId '{0}' is invalid", id);
-                return null;
-            }
-
-            IEnumerable<PhotoAlbum> albums = this.photoRepository.GetAlbumsForCategoryId(id);
-
-            return this.Json(albums.Select(a => a.Name), JsonRequestBehavior.AllowGet);
+            return this.View();
         }
 
         #endregion
 
-        #region helper methods
+        #region Methods
 
-        /// <summary>
-        /// Gets the categories view data.
-        /// </summary>
-        /// <returns>The view data for displaying photo categories.</returns>
-        private IEnumerable<PhotoCategoryInfo> GetCategoriesViewData()
+        /// <summary>Gets the uploader identity from the sepcified authentication token.</summary>
+        /// <param name="token">The token.</param>
+        /// <returns>The identity.</returns>
+        private FormsIdentity GetUploaderIdentity(string token)
         {
-            return this.photoRepository.GetAllCategories().Select(cat => new PhotoCategoryInfo
-                {
-                    AlbumCount = cat.AlbumCount,
-                    Id = cat.Id,
-                    Name = cat.Name,
-                    Albums = cat.Albums.Select(a => new PhotoAlbumInfo { Id = a.Id, Name = a.Name, PictureCount = a.PhotoCount })
-                }).ToList();
+            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(token);
+
+            if (ticket == null)
+            {
+                throw new UnauthorizedAccessException("Only authenticated users can upload files.");
+            }
+
+            FormsIdentity formsIdentity = new FormsIdentity(ticket);
+
+            if (!formsIdentity.IsAuthenticated)
+            {
+                throw new UnauthorizedAccessException("Only authenticated users can upload files.");
+            }
+
+            return formsIdentity;
         }
 
         #endregion

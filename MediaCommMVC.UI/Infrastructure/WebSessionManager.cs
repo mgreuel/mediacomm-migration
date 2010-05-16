@@ -15,11 +15,13 @@ using NHibernate.Context;
 namespace MediaCommMVC.UI.Infrastructure
 {
     /// <summary>Handles the NHibernate session management in an web application.</summary>
-    public class WebSessionManager : ISessionManager, IDisposable
+    public sealed class WebSessionManager : ISessionManager, IDisposable
     {
         #region Constants and Fields
 
-        /// <summary>The logger.</summary>
+        /// <summary>
+        ///   The logger.
+        /// </summary>
         private readonly ILogger logger;
 
         #endregion
@@ -39,7 +41,9 @@ namespace MediaCommMVC.UI.Infrastructure
 
         #region Properties
 
-        /// <summary>Gets the NHibernate session.</summary>
+        /// <summary>
+        ///   Gets the NHibernate session.
+        /// </summary>
         /// <value>The NHibernate session.</value>
         public ISession Session
         {
@@ -56,7 +60,9 @@ namespace MediaCommMVC.UI.Infrastructure
             }
         }
 
-        /// <summary>Gets the NHibernate session factory.</summary>
+        /// <summary>
+        ///   Gets the NHibernate session factory.
+        /// </summary>
         /// <value>The NHibernate session factory.</value>
         public ISessionFactory SessionFactory { get; private set; }
 

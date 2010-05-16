@@ -11,7 +11,7 @@ namespace MediaCommMVC.UI.Infrastructure
 {
     /// <summary>The http context lifetime manager.</summary>
     /// <typeparam name="T">The type of the object to be stored in the HttpContext.</typeparam>
-    public class HttpContextLifetimeManager<T> : LifetimeManager, IDisposable
+    public sealed class HttpContextLifetimeManager<T> : LifetimeManager, IDisposable
     {
         #region Public Methods
 

@@ -14,7 +14,9 @@ namespace MediaCommMVC.UI.Infrastructure
     {
         #region Properties
 
-        /// <summary>Gets or sets the image.</summary>
+        /// <summary>
+        ///   Gets or sets the image.
+        /// </summary>
         /// <value>The image.</value>
         public Image Image { get; set; }
 
@@ -28,7 +30,7 @@ namespace MediaCommMVC.UI.Infrastructure
         {
             if (this.Image == null)
             {
-                throw new ArgumentNullException("Image");
+                throw new NullReferenceException("Image");
             }
   
             context.HttpContext.Response.Clear();

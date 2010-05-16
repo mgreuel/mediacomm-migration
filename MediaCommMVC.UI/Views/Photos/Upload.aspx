@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.PhotoNavigationViewData>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Core.Model.Photos.PhotoCategory>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%= Resources.Photos.Upload %>
@@ -9,26 +9,62 @@
     <script src="../../Scripts/jquery.uploadify.v2.1.0.js" type="text/javascript"></script>
     <% using (Html.BeginForm())
        {%>
-    Category:
-    <%= Html.DropDownList("Category.Name", new SelectList(Model.PhotoCategories, "Id", "Name")) %>
-    <br />
-    Album:
-    <%= Html.TextBox("Album.Name") %>
-    <br />
-    <input id="fileInput" name="fileInput" type="file" />
-
-    <input type="button" value='<%= Resources.Photos.Upload %>' onclick="javascript:startUpload();" />
-
+    <table id="uploadTable">
+        <thead>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <%= Resources.Photos.Category %>
+                </td>
+                <td>
+                    <%= Html.DropDownList("Category.Name", new SelectList(Model, "Id", "Name")) %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <%= Resources.Photos.Album %>
+                </td>
+                <td>
+                    <%= Html.TextBox("Album.Name") %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <%= Resources.Photos.PhotosTitle %>
+                </td>
+                <td>
+                    <input id="fileInput" name="fileInput" type="file" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <input type="button" class="button" value='<%= Resources.Photos.Upload %>' onclick="javascript:startUpload();" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <script type="text/javascript">
 
         function startUpload()
         {
-            $('#fileInput').uploadifySettings('scriptData', { 'Category.Name': $('#Category_Name').val(), 'Album.Name': $('#Album_Name').val() });
+
+// ReSharper disable PossibleNullReferenceException
+            var auth = "<% = Request.Cookies[FormsAuthentication.FormsCookieName]==null ? string.Empty : Request.Cookies[FormsAuthentication.FormsCookieName].Value %>";
+// ReSharper restore PossibleNullReferenceException
+
+            $('#fileInput').uploadifySettings('scriptData', { 'Category.Id': $('#Category_Name').val(), 'Category.Name': $('#Category_Name :selected').text(), 'Album.Name': $('#Album_Name').val(), "token": auth });
             $('#fileInput').uploadifyUpload();
         }
 
         $(document).ready(function ()
         {
+
+            $("#uploadTable > tbody > tr > td:nth-child(odd)")._addClass("firstColumn");
+            $("#uploadTable > tbody > tr > td:nth-child(even)")._addClass("secondColumn");
+
             registerUploadify();
 
             $("#Album_Name").autocomplete(
@@ -46,11 +82,9 @@
                 'script': '/Photos/Upload',
                 'cancelImg': '/Content/UploadIfy/cancel.png',
                 'buttonText': '<%= GetGlobalResourceObject("Photos", "Browse") %>',
-                'buttonImg': '/Content/UploadIfy/Browse.png',
                 'folder': '/uploads',
                 'fileExt': '*.zip',
                 'fileDesc': 'Zip Archive',
-                'scriptData': { 'album.Name': 'my album' },
                 onError: function (a, b, c, d)
                 {
                     if (d.status == 404)
@@ -61,9 +95,14 @@
                         alert(c.name + " " + d.type + " Limit: " + Math.round(d.sizeLimit / 1024) + "KB");
                     else
                         alert("error " + d.type + ": " + d.text);
+                },
+                onComplete: function ()
+                {
+                    location.href = "/Photos/UploadSuccessFull";
                 }
             });
-        }
+        }    
+
 
     </script>
     <%

@@ -7,6 +7,7 @@ using MediaCommMVC.Common.Config;
 using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Movies;
+using MediaCommMVC.Core.Model.Users;
 using MediaCommMVC.Data.NHInfrastructure;
 
 using NHibernate;
@@ -45,7 +46,7 @@ namespace MediaCommMVC.Data.Repositories
             this.InvokeTransaction(delegate(ISession session)
                 {
                     Movie movie = session.Get<Movie>(movieId);
-
+                    
                     this.Logger.Debug("Deleting movie: " + movie);
                     session.Delete(movie);
                 });
