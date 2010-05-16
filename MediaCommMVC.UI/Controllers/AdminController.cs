@@ -2,11 +2,9 @@
 
 using System.Collections.Generic;
 using System.Web.Mvc;
-using System.Web.Security;
 
 using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Forums;
-using MediaCommMVC.UI.ViewModel;
 
 #endregion
 
@@ -18,11 +16,13 @@ namespace MediaCommMVC.UI.Controllers
     {
         #region Constants and Fields
 
-        /// <summary>The forum repository.</summary>
+        /// <summary>
+        ///   The forum repository.
+        /// </summary>
         private readonly IForumRepository forumRepository;
 
         /// <summary>
-        /// The user repository.
+        ///   The user repository.
         /// </summary>
         private readonly IUserRepository userRepository;
 
@@ -70,9 +70,7 @@ namespace MediaCommMVC.UI.Controllers
             return this.View();
         }
 
-        /// <summary>
-        /// Creates a new user.
-        /// </summary>
+        /// <summary>Creates a new user.</summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
         /// <param name="mailAddress">The mail address.</param>
@@ -104,6 +102,8 @@ namespace MediaCommMVC.UI.Controllers
             return this.RedirectToAction("ManageForums");
         }
 
+        /// <summary>Shows the user created page.</summary>
+        /// <returns>The user created view.</returns>
         [HttpGet]
         public ActionResult UserCreated()
         {

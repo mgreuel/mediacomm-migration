@@ -40,13 +40,13 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
         /// <returns>The auto persistence model.</returns>
         public AutoPersistenceModel Generate()
         {
-            string namespaceToAdd = "MediaCommMVC.Core.Model";
+            const string NamespaceToAdd = "MediaCommMVC.Core.Model";
 
-            this.logger.Debug("Generating fluent NHibernate automap for the namespace '{0}'", namespaceToAdd);
+            this.logger.Debug("Generating fluent NHibernate automap for the namespace '{0}'", NamespaceToAdd);
 
             // The Forum type can be replaced by any other type in the core assembly
             var autoPersistenceModel = AutoMap.AssemblyOf<Forum>()
-                .Where(t => t.Namespace.StartsWith(namespaceToAdd, StringComparison.Ordinal))
+                .Where(t => t.Namespace.StartsWith(NamespaceToAdd, StringComparison.Ordinal))
                 .UseOverridesFromAssemblyOf<AutoMapGenerator>()
                 .Conventions.AddFromAssemblyOf<AutoMapGenerator>();
 

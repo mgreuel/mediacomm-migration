@@ -17,10 +17,14 @@ namespace MediaCommMVC.UI.Controllers
     {
         #region Constants and Fields
 
-        /// <summary>The logger.</summary>
+        /// <summary>
+        ///   The logger.
+        /// </summary>
         private readonly ILogger logger;
 
-        /// <summary>The user repository.</summary>
+        /// <summary>
+        ///   The user repository.
+        /// </summary>
         private readonly IUserRepository userRepository;
 
         #endregion

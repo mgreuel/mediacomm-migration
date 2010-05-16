@@ -42,7 +42,7 @@
             <td>
                 <% if (!string.IsNullOrEmpty(forum.LastPostAuthor))
                    { %>
-                <%= Html.Encode(forum.LastPostTime + " " + Resources.Forums.By + " ") %>
+                <%= Html.Encode(forum.LastPostTime + @" " + Resources.Forums.By + @" ") %>
                  <%= Html.ActionLink(forum.LastPostAuthor, "Profile", "Users", new { username = forum.LastPostAuthor },null) %>
                 <% } %>
             </td>

@@ -38,9 +38,19 @@ namespace MediaCommMVC.Core.DataInterfaces
         /// <returns>The album.</returns>
         PhotoAlbum GetAlbumById(int albumId);
 
+        /// <summary>Gets the albums with the specified category id.</summary>
+        /// <param name="catId">The category id.</param>
+        /// <returns>The albums.</returns>
+        IEnumerable<PhotoAlbum> GetAlbumsForCategoryId(int catId);
+
         /// <summary>Gets all categories.</summary>
         /// <returns>All photo categories.</returns>
         IEnumerable<PhotoCategory> GetAllCategories();
+
+        /// <summary>Gets the category by id.</summary>
+        /// <param name="id">The category id.</param>
+        /// <returns>THe photo category.</returns>
+        PhotoCategory GetCategoryById(int id);
 
         /// <summary>Gets the image.</summary>
         /// <param name="photoId">The photo id.</param>
@@ -57,13 +67,6 @@ namespace MediaCommMVC.Core.DataInterfaces
         /// <param name="albumId">The album id.</param>
         /// <returns>The photos.</returns>
         IEnumerable<Photo> GetPhotosForAlbumId(int albumId);
-
-        /// <summary>
-        /// Gets the albums with the specified category id.
-        /// </summary>
-        /// <param name="catId">The category id.</param>
-        /// <returns>The albums.</returns>
-        IEnumerable<PhotoAlbum> GetAlbumsForCategoryId(int catId);
 
         #endregion
     }

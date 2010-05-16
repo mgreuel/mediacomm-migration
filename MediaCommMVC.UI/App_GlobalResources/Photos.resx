@@ -132,7 +132,19 @@
   <data name="Upload" xml:space="preserve">
     <value>Upload</value>
   </data>
-	<data name="Browse">
-		<value xml:space="preserve">Browse</value>
-	</data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="Album" xml:space="preserve">
+    <value>Album</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="UploadSuccessfullText" xml:space="preserve">
+    <value>The photos were successfully uploaded</value>
+  </data>
+  <data name="UploadSuccessfullTitle" xml:space="preserve">
+    <value>Upload successfull</value>
+  </data>
 </root>

@@ -156,4 +156,7 @@
   <data name="Welcome" xml:space="preserve">
     <value>Welcome</value>
   </data>
+  <data name="With" xml:space="preserve">
+    <value>with</value>
+  </data>
 </root>

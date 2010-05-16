@@ -13,7 +13,7 @@
     <RootNamespace>MediaCommMVC.UI</RootNamespace>
     <AssemblyName>MediaCommMVC.UI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <MvcBuildViews>false</MvcBuildViews>
+    <MvcBuildViews>true</MvcBuildViews>
     <SccProjectName>
     </SccProjectName>
     <SccLocalPath>
@@ -186,6 +186,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Infrastructure\Bootstrapper.cs" />
     <Compile Include="Infrastructure\HttpContextLifeTimeManager.cs" />
     <Compile Include="Infrastructure\ImageResult.cs" />
@@ -204,10 +205,6 @@
     <Compile Include="AccountModels\ValidationUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CreateUserInfo.cs" />
-    <Compile Include="ViewModel\PhotoAlbumInfo.cs" />
-    <Compile Include="ViewModel\PhotoAlbumViewData.cs" />
-    <Compile Include="ViewModel\PhotoCategoryInfo.cs" />
-    <Compile Include="ViewModel\PhotoViewData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\DataTables\css\demo_table_jui.css" />
@@ -233,9 +230,12 @@
     <Content Include="Content\Highslide\graphics\fullexpand.gif" />
     <Content Include="Content\Highslide\graphics\geckodimmer.png" />
     <Content Include="Content\Highslide\graphics\icon.gif" />
-    <Content Include="Content\Highslide\graphics\loader.gif" />
+    <Content Include="Content\Highslide\graphics\loader.big.black.gif" />
+    <Content Include="Content\Highslide\graphics\loader.big.white.gif" />
+    <Content Include="Content\Highslide\graphics\loader.black.gif" />
     <Content Include="Content\Highslide\graphics\loader.white.gif" />
     <Content Include="Content\Highslide\graphics\outlines\beveled.png" />
+    <Content Include="Content\Highslide\graphics\outlines\custom.png" />
     <Content Include="Content\Highslide\graphics\outlines\drop-shadow.png" />
     <Content Include="Content\Highslide\graphics\outlines\glossy-dark.png" />
     <Content Include="Content\Highslide\graphics\outlines\outer-glow.png" />
@@ -243,6 +243,7 @@
     <Content Include="Content\Highslide\graphics\outlines\rounded-white.png" />
     <Content Include="Content\Highslide\graphics\resize.gif" />
     <Content Include="Content\Highslide\graphics\scrollarrows.png" />
+    <Content Include="Content\Highslide\graphics\zoom.png" />
     <Content Include="Content\Highslide\graphics\zoomin.cur" />
     <Content Include="Content\Highslide\graphics\zoomout.cur" />
     <Content Include="Content\Highslide\highslide-ie6.css" />
@@ -318,8 +319,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\ckeditor\adapters\jquery.ckeditor.js" />
-    <Content Include="Scripts\ckeditor\ckeditor-config.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
+    <Content Include="Scripts\ckeditor\ckeditor_basic.js" />
+    <Content Include="Scripts\ckeditor\ckeditor_basic_source.js" />
+    <Content Include="Scripts\ckeditor\ckeditor_source.js" />
+    <Content Include="Scripts\ckeditor\config.js" />
+    <Content Include="Scripts\ckeditor\contents.css" />
     <Content Include="Scripts\ckeditor\images\spacer.gif" />
     <Content Include="Scripts\ckeditor\jquery.ckeditor.js" />
     <Content Include="Scripts\ckeditor\lang\af.js" />
@@ -467,8 +472,47 @@
     <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
     <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\wsc.css" />
     <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\wsc.js" />
-    <Content Include="Scripts\highslide-full.js" />
-    <Content Include="Scripts\highslide-full.min.js" />
+    <Content Include="Scripts\ckeditor\skins\kama\dialog.css" />
+    <Content Include="Scripts\ckeditor\skins\kama\editor.css" />
+    <Content Include="Scripts\ckeditor\skins\kama\icons.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\dialog_sides.gif" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\dialog_sides.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\dialog_sides_rtl.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\mini.gif" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\noimage.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\sprites.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\sprites_ie6.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\toolbar_start.gif" />
+    <Content Include="Scripts\ckeditor\skins\kama\skin.js" />
+    <Content Include="Scripts\ckeditor\skins\kama\templates.css" />
+    <Content Include="Scripts\ckeditor\skins\office2003\dialog.css" />
+    <Content Include="Scripts\ckeditor\skins\office2003\editor.css" />
+    <Content Include="Scripts\ckeditor\skins\office2003\icons.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\dialog_sides.gif" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\dialog_sides.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\dialog_sides_rtl.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\mini.gif" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\noimage.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\sprites.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\sprites_ie6.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\skin.js" />
+    <Content Include="Scripts\ckeditor\skins\office2003\templates.css" />
+    <Content Include="Scripts\ckeditor\skins\v2\dialog.css" />
+    <Content Include="Scripts\ckeditor\skins\v2\editor.css" />
+    <Content Include="Scripts\ckeditor\skins\v2\icons.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\dialog_sides.gif" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\dialog_sides.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\dialog_sides_rtl.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\mini.gif" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\noimage.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\sprites.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\sprites_ie6.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\toolbar_start.gif" />
+    <Content Include="Scripts\ckeditor\skins\v2\skin.js" />
+    <Content Include="Scripts\ckeditor\skins\v2\templates.css" />
+    <Content Include="Scripts\ckeditor\themes\default\theme.js" />
+    <Content Include="Scripts\highslide-with-gallery.packed.js" />
+    <Content Include="Scripts\highslide.config.js" />
     <Content Include="Scripts\jquery-1.4.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.custom.min.js" />
@@ -487,8 +531,10 @@
     <Content Include="Views\Forums\Topic.aspx" />
     <Content Include="Views\Movies\Index.aspx" />
     <Content Include="Views\Photos\Album.aspx" />
+    <Content Include="Views\Photos\Category.aspx" />
     <Content Include="Views\Photos\Index.aspx" />
     <Content Include="Views\Photos\Upload.aspx" />
+    <Content Include="Views\Photos\UploadSuccessfull.aspx" />
     <Content Include="Views\Shared\PostUserControl.ascx" />
     <Content Include="Views\Users\Index.aspx" />
     <Content Include="Views\Users\MyProfile.aspx" />
@@ -521,10 +567,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\Highslide\graphics\outlines\Outlines.psd" />
     <Content Include="Views\Shared\Site.Master" />
     <None Include="Settings.StyleCop" />
-    <Content Include="Views\Photos\Photos.master" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Admin.resx">

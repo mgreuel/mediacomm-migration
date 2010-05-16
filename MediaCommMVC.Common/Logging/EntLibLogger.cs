@@ -2,6 +2,7 @@
 #region Using Directives
 
 using System;
+using System.Collections;
 using System.Diagnostics;
 
 using Microsoft.Practices.EnterpriseLibrary.Logging;
@@ -221,7 +222,7 @@ namespace MediaCommMVC.Common.Logging
 
         /// <summary>Checks the data parameter.</summary>
         /// <param name="data">The data to check for null.</param>
-        private static void CheckDataParameterForNull(object[] data)
+        private static void CheckDataParameterForNull(IEnumerable data)
         {
             if (data == null)
             {
@@ -248,7 +249,9 @@ namespace MediaCommMVC.Common.Logging
             {
                 EventLog.WriteEntry("AdventureWorkCRM", message, EventLogEntryType.Error);
             }
+// ReSharper disable EmptyGeneralCatchClause
             catch
+// ReSharper restore EmptyGeneralCatchClause
             {
                 // No futher logging available
             }
@@ -274,7 +277,7 @@ namespace MediaCommMVC.Common.Logging
         /// <returns>The formatted log entry.</returns>
         private LogEntry CreateFormattedLogEntry(string message, object[] data)
         {
-            LogEntry entry = null;
+            LogEntry entry;
             try
             {
                 entry = new LogEntry { Message = string.Format(message, data) };

@@ -1,7 +1,9 @@
-﻿using System;
+﻿#region Using Directives
+
+using System;
 using System.Web.Security;
 
-using MediaCommMVC.UI.AccountModels;
+#endregion
 
 namespace MediaCommMVC.UI.AccountModels
 {
@@ -10,14 +12,18 @@ namespace MediaCommMVC.UI.AccountModels
     {
         #region Constants and Fields
 
-        /// <summary>The _provider.</summary>
+        /// <summary>
+        ///   The _provider.
+        /// </summary>
         private readonly MembershipProvider provider;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="AccountMembershipService"/> class.</summary>
+        /// <summary>
+        ///   Initializes a new instance of the <see cref = "AccountMembershipService" /> class.
+        /// </summary>
         public AccountMembershipService()
             : this(null)
         {
@@ -34,7 +40,9 @@ namespace MediaCommMVC.UI.AccountModels
 
         #region Properties
 
-        /// <summary>Gets MinPasswordLength.</summary>
+        /// <summary>
+        ///   Gets MinPasswordLength.
+        /// </summary>
         /// <value>The min password length.</value>
         public int MinPasswordLength
         {

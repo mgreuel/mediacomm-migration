@@ -826,13 +826,13 @@
 /* IMAGES */
 /**********/
 
-.main img
+/*.main img
 {
     clear: both;
     float: left;
     margin: 3px 15px 7px 0;
     border: solid 3px rgb(200,200,200);
-}
+}*/
 .main img.center
 {
     clear: both;
@@ -871,14 +871,14 @@
 }
 
 /*Image links */
-.main a img
+/*.main a img
 {
     border: solid 3px rgb(200,200,200);
 }
 .main a:hover img
 {
     border: solid 3px rgb(175,175,175);
-}
+}*/
 
 /******************************************/
 /*  ADDITIONAL USER STYLES                */
@@ -1032,6 +1032,33 @@
     width: 98%;
 }
 
+#uploadTable
+{
+    width: 450px;
+}
+
+#uploadTable .firstColumn
+{
+    width: 75px !important;
+    text-align: right !important;
+    vertical-align: top !important;
+}
+
+#uploadTable .secondColumn
+{
+    width: 375px !important;
+}
+
+#uploadTable .secondColumn input[type=text]
+{
+    width: 200px;
+}
+
+#uploadTable .secondColumn select
+{
+    width: 204px;
+}
+
 .cke_editor
 {
     margin: 0 0 0 0 !important;
@@ -1094,3 +1121,5 @@
 {
     height: 2em !important;
 }
+
+

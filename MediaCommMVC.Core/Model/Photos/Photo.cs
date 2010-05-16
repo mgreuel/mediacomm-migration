@@ -13,7 +13,7 @@ namespace MediaCommMVC.Core.Model.Photos
 
         /// <summary>Gets or sets the album the photo belongs to.</summary>
         /// <value>The album.</value>
-        public virtual PhotoAlbum Album { get; set; }
+        public virtual PhotoAlbum PhotoAlbum { get; set; }
 
         /// <summary>Gets or sets the name.</summary>
         /// <value>The Photo's name.</value>
@@ -47,7 +47,7 @@ namespace MediaCommMVC.Core.Model.Photos
         /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
         public override string ToString()
         {
-            return string.Format("Id: '{0}', Filename: '{1}', Album: '{2}'", this.Id, this.FileName, this.Album);
+            return string.Format("Id: '{0}', Filename: '{1}', Album: '{2}'", this.Id, this.FileName, this.PhotoAlbum);
         }
 
         /// <summary>
