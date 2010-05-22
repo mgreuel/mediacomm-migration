@@ -51,11 +51,11 @@
         function startUpload()
         {
 
-// ReSharper disable PossibleNullReferenceException
+            // ReSharper disable PossibleNullReferenceException
             var auth = "<% = Request.Cookies[FormsAuthentication.FormsCookieName]==null ? string.Empty : Request.Cookies[FormsAuthentication.FormsCookieName].Value %>";
-// ReSharper restore PossibleNullReferenceException
+            // ReSharper restore PossibleNullReferenceException
 
-            $('#fileInput').uploadifySettings('scriptData', { 'Category.Id': $('#Category_Name').val(), 'Category.Name': $('#Category_Name :selected').text(), 'Album.Name': $('#Album_Name').val(), "token": auth });
+            $('#fileInput').uploadifySettings('scriptData', { 'Category.Id': $('#Category_Name :selected').val(), 'Category.Name': $('#Category_Name :selected').text(), 'Album.Name': $('#Album_Name').val(), "token": auth });
             $('#fileInput').uploadifyUpload();
         }
 
@@ -69,11 +69,25 @@
 
             $("#Album_Name").autocomplete(
             {
-                source: "/Photos/GetAlbumsForCategoryId/" + $("#Category_Name").val(),
-                minLength: 1
+                source: function (request, response)
+                {
+                    $.getJSON(
+                        "/Photos/GetAlbumsForCategoryId/" + $("#Category_Name :selected").val() + "?term=" + request.term,
+                        function (data)
+                        {     
+                            response(data);
+                        });
+                },
+                minLength: 3
             });
 
         });
+
+        function getAlbums(request, response)
+        {
+
+            response("test");
+        }
 
         function registerUploadify()
         {

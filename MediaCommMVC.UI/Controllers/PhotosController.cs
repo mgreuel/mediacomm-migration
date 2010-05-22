@@ -111,7 +111,7 @@ namespace MediaCommMVC.UI.Controllers
                 return null;
             }
 
-            IEnumerable<PhotoAlbum> albums = this.photoRepository.GetAlbumsForCategoryId(id).Where(a => a.Name.StartsWith(term, StringComparison.OrdinalIgnoreCase));
+            IEnumerable<PhotoAlbum> albums = this.photoRepository.GetAlbumsForCategoryIdStartingWith(id, term);
 
             return this.Json(albums.Select(a => a.Name), JsonRequestBehavior.AllowGet);
         }
@@ -120,7 +120,7 @@ namespace MediaCommMVC.UI.Controllers
         /// <returns>The photo categories as Json string.</returns>
         [HttpGet]
         [Authorize]
-        [OutputCache(Duration = 3600, VaryByParam = "None")]
+        [OutputCache(Duration = 600, VaryByParam = "None")]
         public ActionResult GetCategories()
         {
             IEnumerable<PhotoCategory> categories = this.photoRepository.GetAllCategories();
@@ -163,8 +163,9 @@ namespace MediaCommMVC.UI.Controllers
         {
             this.logger.Debug("Displaying photo upload page");
 
+#warning get via ajax
             IEnumerable<PhotoCategory> categories = this.photoRepository.GetAllCategories();
-            
+
             return this.View(categories);
         }
 

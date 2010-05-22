@@ -1,5 +1,6 @@
 ﻿#region Using Directives
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -123,13 +124,19 @@ namespace MediaCommMVC.Data.Repositories
             return album;
         }
 
-        /// <summary>Gets the albums with the specified category id.</summary>
+        /// <summary>
+        /// Gets the albums with the specified category id.
+        /// </summary>
         /// <param name="catId">The category id.</param>
+        /// <param name="term">The term the results should start with.</param>
         /// <returns>The albums.</returns>
-        public IEnumerable<PhotoAlbum> GetAlbumsForCategoryId(int catId)
+        public IEnumerable<PhotoAlbum> GetAlbumsForCategoryIdStartingWith(int catId, string term)
         {
             this.Logger.Debug("Getting albums for category id '{0}'", catId);
-            IEnumerable<PhotoAlbum> albums = this.Session.Linq<PhotoAlbum>().Where(a => a.PhotoCategory.Id == catId).ToList();
+            IEnumerable<PhotoAlbum> albums =
+                this.Session.Linq<PhotoAlbum>().Where(
+                    a => a.PhotoCategory.Id == catId && a.Name.StartsWith(term, StringComparison.OrdinalIgnoreCase)).
+                    ToList();
 
             this.Logger.Debug("Got {0} Albums", albums.Count());
             return albums;
@@ -172,7 +179,7 @@ namespace MediaCommMVC.Data.Repositories
 
             string imagePath =
                 Path.Combine(
-                    this.ConfigAccessor.GetConfigValue("PhotoRootDir"), 
+                    this.ConfigAccessor.GetConfigValue("PhotoRootDir"),
                     Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.PhotoCategory.Name), Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.Name), fileName)));
 
             this.Logger.Debug("Getting image from '{0}'", imagePath);
@@ -254,11 +261,11 @@ namespace MediaCommMVC.Data.Repositories
 
                         Photo photo = new Photo
                             {
-                                PhotoAlbum = album, 
-                                FileName = file.Name, 
-                                FileSize = file.Length, 
-                                Height = height, 
-                                Uploader = uploader, 
+                                PhotoAlbum = album,
+                                FileName = file.Name,
+                                FileSize = file.Length,
+                                Height = height,
+                                Uploader = uploader,
                                 Width = width
                             };
 
@@ -316,7 +323,7 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Getting file system path for album: " + album);
 
             string targetPath = Path.Combine(
-                this.ConfigAccessor.GetConfigValue("PhotoRootDir"), 
+                this.ConfigAccessor.GetConfigValue("PhotoRootDir"),
                 Path.Combine(this.GetValidDirectoryName(album.PhotoCategory.Name), this.GetValidDirectoryName(album.Name)));
 
             this.Logger.Debug("Photos will be stored in the directory '{0}'", targetPath);
@@ -374,7 +381,7 @@ namespace MediaCommMVC.Data.Repositories
 
                         File.Copy(file.FullName, Path.Combine(unprocessedPath, newFilename));
                     }
-                    
+
                     File.Copy(file.FullName, newPath);
                 }
                 catch (IOException ex)
