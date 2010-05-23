@@ -4,7 +4,7 @@
     <%= Resources.Photos.Upload %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <link href="../../Content/UploadIfy/uploadify.css" rel="stylesheet" type="text/css" />
+    
     <script src="../../Scripts/swfobject.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.uploadify.v2.1.0.js" type="text/javascript"></script>
     <% using (Html.BeginForm())

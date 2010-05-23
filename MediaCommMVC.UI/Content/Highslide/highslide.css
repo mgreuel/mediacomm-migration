@@ -1017,7 +1017,7 @@ html > /**/ body .highslide-gallery ul img
 }
 .highslide-thumbstrip-vertical img
 {
-    width: 60px; /* t=5481 */
+    width: 175px; /* t=5481 */
 }
 .highslide-thumbstrip-vertical .highslide-marker
 {
@@ -1160,5 +1160,5 @@ html > /**/ body .highslide-gallery ul img
 }
 .highslide-thumbstrip-vertical img
 {
-    max-width: 120px;
+    max-width: 175px;
 }

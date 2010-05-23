@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript" src="../../Scripts/highslide-with-gallery.packed.js"></script>
     <script type="text/javascript" src="../../Scripts/highslide.config.js" charset="utf-8"></script>
-    <link rel="stylesheet" type="text/css" href="../../Content/Highslide/highslide.css" />
+    
     <!--[if lt IE 7]>
 <link rel="stylesheet" type="text/css" href="highslide/highslide-ie6.css" />
 <![endif]-->
@@ -16,11 +16,13 @@
                { %>
             <li>
                 <%= Html.ActionLink("_image_", "Photo", new { id = photo.Id, size = "medium" }, new { @class = "highslide", onclick = "return hs.expand(this, config1)" }).ToHtmlString()
-                        .Replace("_image_", string.Format("<img src='/Photos/Photo/{0}/small' />", photo.Id))%>
+                        .Replace("_image_", string.Format("<img class='img-ondemand' src='pix.gif' longdesc='/Photos/Photo/{0}/small' />", photo.Id))%>
             </li>
             <% } %>
         </ul>
         <div style="clear: both">
         </div>
     </div>
+
+<script src="../../Scripts/img.onDemand.js" type="text/javascript"></script>
 </asp:Content>
