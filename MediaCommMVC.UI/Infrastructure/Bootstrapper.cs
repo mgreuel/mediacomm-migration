@@ -15,6 +15,7 @@ using MediaCommMVC.Data.Repositories;
 using Microsoft.Practices.Unity;
 
 using ILogger = MediaCommMVC.Common.Logging.ILogger;
+using MediaCommMVC.Data;
 
 #endregion
 
@@ -76,6 +77,7 @@ namespace MediaCommMVC.UI.Infrastructure
 
             this.container.RegisterInstance(typeof(ILogger), this.logger);
             this.container.RegisterType(typeof(IConfigAccessor), typeof(FileConfigAccessor));
+            this.container.RegisterType(typeof(IImageGenerator), typeof(MixedImageGenerator));
 
             this.RegisterNHibernateComponents();
             this.RegisterRepositories();
