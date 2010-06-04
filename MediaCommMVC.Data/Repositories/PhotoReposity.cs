@@ -55,14 +55,15 @@ namespace MediaCommMVC.Data.Repositories
 
         /// <summary>Adds the album to the persistence layer.</summary>
         /// <param name="album">The album.</param>
-        public void AddAlbum(PhotoAlbum album)
-        {
-            this.Logger.Debug("Adding photo album: " + album);
+        //public void AddAlbum(PhotoAlbum album)
+        //{
+        //    this.Logger.Debug("Adding photo album: " + album);
 
-            this.InvokeTransaction(s => s.SaveOrUpdate(album));
+        //    album.LastPicturesAdded = DateTime.Now;
+        //    this.InvokeTransaction(s => s.SaveOrUpdate(album));
 
-            this.Logger.Debug("Finished adding photo album");
-        }
+        //    this.Logger.Debug("Finished adding photo album");
+        //}
 
         /// <summary>Adds the category to the persistence layer.</summary>
         /// <param name="category">The category.</param>
@@ -77,14 +78,14 @@ namespace MediaCommMVC.Data.Repositories
 
         /// <summary>Adds the photo to the persistence layer.</summary>
         /// <param name="photo">The photo.</param>
-        public void AddPhoto(Photo photo)
-        {
-            this.Logger.Debug("Adding photo: " + photo);
+        //public void AddPhoto(Photo photo)
+        //{
+        //    this.Logger.Debug("Adding photo: " + photo);
 
-            this.InvokeTransaction(s => s.Save(photo));
+        //    this.InvokeTransaction(s => s.Save(photo));
 
-            this.Logger.Debug("Finished adding photo");
-        }
+        //    this.Logger.Debug("Finished adding photo");
+        //}
 
         /// <summary>Extracts and deletes the zip file.</summary>
         /// <param name="zipFilename">The zip filename.</param>
@@ -101,9 +102,9 @@ namespace MediaCommMVC.Data.Repositories
 
             this.ExtractAndDeleteZip(zipFilename, targetPath, supportedPhotoExt);
 
-            this.MovePhotos(targetPath, unprocessedPath);
+            IEnumerable<FileInfo> newFiles = this.MovePhotos(targetPath, unprocessedPath);
 
-            this.AddPicturesToDB(targetPath, album, uploader);
+            this.AddPicturesToDB(newFiles, album, uploader);
 
             this.GenerateSmallerPhotos(targetPath);
 
@@ -185,6 +186,17 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Getting image from '{0}'", imagePath);
             Image image = Image.FromFile(imagePath);
 
+            // Increase viewcount if the image was not laoded as thumbnail
+            if (!size.Equals("small", StringComparison.OrdinalIgnoreCase))
+            {
+                this.InvokeTransaction(
+                    s =>
+                    {
+                        photo.ViewCount++;
+                        s.Update(photo);
+                    });
+            }
+
             this.Logger.Debug("Finished getting image");
             return image;
         }
@@ -204,14 +216,14 @@ namespace MediaCommMVC.Data.Repositories
         /// <summary>Gets all photos in the album.</summary>
         /// <param name="albumId">The album id.</param>
         /// <returns>The photos.</returns>
-        public IEnumerable<Photo> GetPhotosForAlbumId(int albumId)
-        {
-            this.Logger.Debug("Getting photos for album with id '{0}'", albumId);
-            IEnumerable<Photo> photos = this.Session.Linq<Photo>().Where(p => p.PhotoAlbum.Id.Equals(albumId)).ToList();
+        //public IEnumerable<Photo> GetPhotosForAlbumId(int albumId)
+        //{
+        //    this.Logger.Debug("Getting photos for album with id '{0}'", albumId);
+        //    IEnumerable<Photo> photos = this.Session.Linq<Photo>().Where(p => p.PhotoAlbum.Id.Equals(albumId)).ToList();
 
-            this.Logger.Debug("Got {0} photos", photos.Count());
-            return photos;
-        }
+        //    this.Logger.Debug("Got {0} photos", photos.Count());
+        //    return photos;
+        //}
 
         #endregion
 
@@ -238,21 +250,25 @@ namespace MediaCommMVC.Data.Repositories
             }
         }
 
-        /// <summary>Adds the pictures to DB.</summary>
-        /// <param name="path">The target path.</param>
+        /// <summary>
+        /// Adds the pictures to DB.
+        /// </summary>
+        /// <param name="filesToAdd">The files to add.</param>
         /// <param name="album">The album.</param>
         /// <param name="uploader">The uploader.</param>
-        private void AddPicturesToDB(string path, PhotoAlbum album, MediaCommUser uploader)
+        private void AddPicturesToDB(IEnumerable<FileInfo> filesToAdd, PhotoAlbum album, MediaCommUser uploader)
         {
-            this.Logger.Debug("Adding photos from the folder '{0} to the database. Album: '{1}', Uploader: '{2}'", path, album, uploader);
+            this.Logger.Debug("Adding {0} photos from the folder to the database. Album: '{1}', Uploader: '{2}'", filesToAdd.Count(), album, uploader);
 
-            DirectoryInfo dir = new DirectoryInfo(path);
+            PhotoAlbum photoAlbum =
+                this.Session.Linq<PhotoAlbum>().SingleOrDefault(
+                    a => a.Name.Equals(album.Name, StringComparison.OrdinalIgnoreCase)) ?? album;
+
+            photoAlbum.LastPicturesAdded = DateTime.Now;
 
             this.InvokeTransaction(delegate(ISession session)
                 {
-                    FileInfo[] files = dir.GetFiles();
-
-                    foreach (FileInfo file in files)
+                    foreach (FileInfo file in filesToAdd)
                     {
                         Bitmap bmp = new Bitmap(file.FullName);
                         int height = bmp.Height;
@@ -261,7 +277,7 @@ namespace MediaCommMVC.Data.Repositories
 
                         Photo photo = new Photo
                             {
-                                PhotoAlbum = album,
+                                PhotoAlbum = photoAlbum,
                                 FileName = file.Name,
                                 FileSize = file.Length,
                                 Height = height,
@@ -269,8 +285,17 @@ namespace MediaCommMVC.Data.Repositories
                                 Width = width
                             };
 
-                        this.Logger.Debug("Adding photo '{0}' to the database");
-                        session.Save(photo);
+                        if (!session.Linq<Photo>().Any(p =>
+                                p.FileName.Equals(photo.FileName, StringComparison.OrdinalIgnoreCase) &&
+                                p.PhotoAlbum.Id.Equals(photo.PhotoAlbum.Id)))
+                        {
+                            this.Logger.Debug("Adding photo '{0}' to the database");
+                            session.Save(photo);
+                        }
+                        else
+                        {
+                            this.Logger.Debug("The photo '{0}' already exists in the database");
+                        }
                     }
                 });
 
@@ -354,14 +379,19 @@ namespace MediaCommMVC.Data.Repositories
             return validName;
         }
 
-        /// <summary>Moves the photos to the final folder and renames duplicates.</summary>
+        /// <summary>
+        /// Moves the photos to the final folder and renames duplicates.
+        /// </summary>
         /// <param name="targetPath">The target path.</param>
         /// <param name="unprocessedPath">The path containing the unprocessed photos.</param>
-        private void MovePhotos(string targetPath, string unprocessedPath)
+        /// <returns>A list of all file path.</returns>
+        private IEnumerable<FileInfo> MovePhotos(string targetPath, string unprocessedPath)
         {
             IEnumerable<FileInfo> allFiles = GetFilesRecursive(new DirectoryInfo(unprocessedPath)).ToList();
 
             this.Logger.Debug("Moving {2} photos from '{0}' to '{1}'", unprocessedPath, targetPath, allFiles.Count());
+
+            List<FileInfo> newFiles = new List<FileInfo>();
 
             foreach (FileInfo file in allFiles)
             {
@@ -383,12 +413,15 @@ namespace MediaCommMVC.Data.Repositories
                     }
 
                     File.Copy(file.FullName, newPath);
+                    newFiles.Add(new FileInfo(newPath));
                 }
                 catch (IOException ex)
                 {
                     this.Logger.Error(string.Format("Unable to copy file '{0}' to '{1}'", file, newPath), ex);
                 }
             }
+
+            return newFiles;
         }
 
         #endregion

@@ -99,17 +99,12 @@ namespace MediaCommMVC.DBSetup
                     IUserRepository userRepository = new UserRepository(
                         sessionManager, new FileConfigAccessor(new ConsoleLogger()), new ConsoleLogger());
 
-                    try
+                    if (Membership.GetUser(AdministratorUsername) != null)
                     {
-                        userRepository.CreateUser(AdministratorUsername, DefaultAdminPassword, "admin@localhost");
+                        Membership.DeleteUser(AdministratorUsername);
                     }
-                    catch (MembershipCreateUserException createUserException)
-                    {
-                        if (!createUserException.Message.Equals("The username is already in use."))
-                        {
-                            throw;
-                        }
-                    }
+
+                    userRepository.CreateUser(AdministratorUsername, DefaultAdminPassword, "admin@localhost");
 
                     ISession session = sessionManager.Session;
 

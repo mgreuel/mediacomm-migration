@@ -3,6 +3,7 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 
+using Combres;
 using MediaCommMVC.Common.Config;
 using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
@@ -12,6 +13,8 @@ using MediaCommMVC.Data.NHInfrastructure.Mapping;
 using MediaCommMVC.Data.Repositories;
 
 using Microsoft.Practices.Unity;
+
+using ILogger = MediaCommMVC.Common.Logging.ILogger;
 
 #endregion
 
@@ -136,6 +139,8 @@ namespace MediaCommMVC.UI.Infrastructure
 
             RouteCollection routes = RouteTable.Routes;
 
+            routes.AddCombresRoute("Combres Route");
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.IgnoreRoute("{*favicon}", new { favicon = @"(.*/)?favicon.ico(/.*)?" });
 #warning clean routes
@@ -156,12 +161,7 @@ namespace MediaCommMVC.UI.Infrastructure
                 new { controller = "Forums", action = "CreateTopic" });
 
             routes.MapRoute(
-                "PhotoOverview", 
-                "Photos/Photo/{id}", 
-                new { controller = "Photos", action = "Photo" });
-
-            routes.MapRoute(
-                "GetPhoto", 
+                "GetPhoto",
                 "Photos/Photo/{id}/{size}", 
                 new { controller = "Photos", action = "Photo" });
 
@@ -174,6 +174,10 @@ namespace MediaCommMVC.UI.Infrastructure
                 "Profile", 
                 "Users/{username}", 
                 new { controller = "Users", action = "Profile" });
+
+            routes.MapRoute(
+                "DefaultWithIdAndName",
+                "{controller}/{action}/{id}/{name}");
 
             routes.MapRoute(
                 "DefaultWithId", 

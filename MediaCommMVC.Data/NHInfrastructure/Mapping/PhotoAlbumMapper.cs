@@ -24,6 +24,8 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
             mapping.Map(a => a.Name).Not.Nullable().UniqueKey("uk_nameCat");
             mapping.References(a => a.PhotoCategory).Not.Nullable().UniqueKey("uk_nameCat").ForeignKey("PhotoCategoryID").Cascade.SaveUpdate();
             mapping.Map(a => a.PhotoCount).Formula("(SELECT COUNT(*) FROM photos WHERE photos.PhotoAlbumID = Id)");
+            mapping.Map(a => a.CoverPhotoId).Formula(
+                "(SELECT TOP 1 Id FROM photos WHERE photos.PhotoAlbumID = Id ORDER BY photos.ViewCount)");
             mapping.HasMany(a => a.Photos).Inverse();
         }
 

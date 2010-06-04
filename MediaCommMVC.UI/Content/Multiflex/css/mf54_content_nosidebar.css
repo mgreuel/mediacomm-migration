@@ -23,7 +23,7 @@
     background: url(../img/icon_pagetitle.gif) no-repeat;
     background-position: center left;
     color: rgb(255,255,255);
-    font-weight: bold;
+    /* font-weight: bold;*/
     font-size: 220% !important /*Non-IE6*/;
     font-size: 200% /*IE6*/;
 }
@@ -37,7 +37,7 @@
     background: url(../img/icon_celltitle_level1.gif) no-repeat;
     background-position: 914px 5px;
     color: rgb(75,75,75);
-    font-weight: bold;
+    /* font-weight: bold;*/
     font-size: 220% !important /*Non-IE6*/;
     font-size: 200% /*IE6*/;
 }
@@ -49,7 +49,7 @@
     background: url(../img/icon_celltitle_level1.gif) no-repeat;
     background-position: 430px 3px;
     color: rgb(75,75,75);
-    font-weight: bold;
+    /* font-weight: bold;*/
     font-size: 220% !important /*Non-IE6*/;
     font-size: 200% /*IE6*/;
 }
@@ -61,7 +61,7 @@
     background: url(../img/icon_celltitle_level1.gif) no-repeat;
     background-position: 269px 3px;
     color: rgb(75,75,75);
-    font-weight: bold;
+    /* font-weight: bold;*/
     font-size: 220% !important /*Non-IE6*/;
     font-size: 200% /*IE6*/;
 }
@@ -78,7 +78,7 @@
     background: url(../img/icon_celltitle_level2.gif) no-repeat;
     background-position: right 15px;
     color: rgb(75,75,75);
-    font-weight: bold;
+    /* font-weight: bold;*/
     font-size: 180% !important /*Non-IE6*/;
     font-size: 160% /*IE6*/;
 }
@@ -87,7 +87,7 @@
     margin: 1.0em 0 -0.3em 0;
     padding: 0 20px 0 20px;
     color: rgb(75,75,75);
-    font-weight: bold;
+    /* font-weight: bold;*/
     font-size: 180% !important /*Non-IE6*/;
     font-size: 160% /*IE6*/;
 }
@@ -106,7 +106,7 @@
     margin: 1.0em 0 -0.3em 0;
     padding: 0 20px 0 20px;
     color: rgb(75,75,75);
-    font-weight: bold;
+    /* font-weight: bold;*/
     font-size: 160% !important /*Non-IE6*/;
     font-size: 140% /*IE6*/;
 }
@@ -115,7 +115,7 @@
     margin: 1.0em 0 -0.5em 0;
     padding: 0 20px 0 20px;
     color: rgb(75,75,75);
-    font-weight: bold;
+    /* font-weight: bold;*/
     font-size: 140% !important /*Non-IE6*/;
     font-size: 125% /*IE6*/;
 }
@@ -393,7 +393,7 @@
     background-color: rgb(175,175,175);
     text-align: left;
     color: rgb(255,255,255);
-    font-weight: bold;
+    /* font-weight: bold;*/
     font-size: 120% !important /*Non-IE6*/;
     font-size: 110% /*IE6*/;
 }
@@ -405,7 +405,7 @@
     background-color: rgb(225,225,225);
     text-align: left;
     color: rgb(80,80,80);
-    font-weight: bold;
+    /* font-weight: bold;*/
     font-size: 120% !important /*Non-IE6*/;
     font-size: 110% /*IE6*/;
 }
@@ -450,7 +450,7 @@
     margin: 0 0 20px 5px /*IE6*/;
     padding: 0 2px 0 2px;
     color: rgb(80,80,80);
-    font-weight: bold;
+    /* font-weight: bold;*/
     font-size: 131%;
 }
 .contactform label.left
@@ -522,7 +522,7 @@
     margin: 0 0 20px 5px /*IE6*/;
     padding: 0 2px 0 2px;
     color: rgb(80,80,80);
-    font-weight: bold;
+    /* font-weight: bold;*/
     font-size: 131%;
 }
 .content-2col-nobox-leftcolumn .contactform label.left, .content-2col-nobox-rightcolumn .contactform label.left, .content-2col-box-leftcolumn .contactform label.left, .content-2col-box-rightcolumn .contactform label.left
@@ -594,7 +594,7 @@
     margin: 0 0 20px 5px /*IE6*/;
     padding: 0 2px 0 2px;
     color: rgb(80,80,80);
-    font-weight: bold;
+    /* font-weight: bold;*/
     font-size: 131%;
 }
 .content-3col-nobox-leftcolumn .contactform label.left, .content-3col-nobox-middlecolumn .contactform label.left, .content-3col-nobox-rightcolumn .contactform label.left, .content-3col-box-leftcolumn .contactform label.left, .content-3col-box-middlecolumn .contactform label.left, .content-3col-box-rightcolumn .contactform label.left
@@ -857,7 +857,7 @@
 .main a
 {
     color: rgb(70,122,167);
-    font-weight: bold;
+    /* font-weight: bold;*/
     text-decoration: none;
 }
 .main a:hover
@@ -1123,3 +1123,7 @@
 }
 
 
+.category-gallery a
+{
+    background-color: White !important;
+}

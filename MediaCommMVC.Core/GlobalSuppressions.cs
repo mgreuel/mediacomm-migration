@@ -9,3 +9,9 @@
 // You do not need to add suppressions to this file manually.
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Scope = "member", Target = "MediaCommMVC.Core.Model.Users.MediaCommUser.#.ctor(System.String,System.String)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Scope = "member", Target = "MediaCommMVC.Core.DataInterfaces.IForumRepository.#GetAllForums()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Scope = "member", Target = "MediaCommMVC.Core.DataInterfaces.IMovieRepository.#GetAllLanguages()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Scope = "member", Target = "MediaCommMVC.Core.DataInterfaces.IMovieRepository.#GetAllMovies()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Scope = "member", Target = "MediaCommMVC.Core.DataInterfaces.IMovieRepository.#GetAllQualities()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Scope = "member", Target = "MediaCommMVC.Core.DataInterfaces.IPhotoRepository.#GetAllCategories()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Scope = "member", Target = "MediaCommMVC.Core.DataInterfaces.IUserRepository.#GetAllUsers()")]

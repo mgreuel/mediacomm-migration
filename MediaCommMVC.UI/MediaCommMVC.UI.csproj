@@ -32,6 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\CodeAnalysis\Basic.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -53,6 +54,12 @@
     <Reference Include="Castle.DynamicProxy2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\NHibernate\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Combres">
+      <HintPath>..\libs\Combres.dll</HintPath>
+    </Reference>
+    <Reference Include="Combres.Mvc">
+      <HintPath>..\libs\Combres.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate, Version=1.0.0.593, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -204,9 +211,14 @@
     <Compile Include="AccountModels\ValidatePasswordLengthAttribute.cs" />
     <Compile Include="AccountModels\ValidationUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Content\Custom\photos.css" />
+    <Content Include="Content\jQuery-ui-cupertino\images\ui-anim_basic_16x16.gif" />
+    <Content Include="Scripts\custom\photos.js" />
+    <Content Include="Scripts\custom\movies.js" />
     <Compile Include="ViewModel\CreateUserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\combres.xml" />
     <Content Include="Content\DataTables\css\demo_table_jui.css" />
     <Content Include="Content\DataTables\images\back_disabled.jpg" />
     <Content Include="Content\DataTables\images\back_enabled.jpg" />
@@ -309,7 +321,6 @@
     <Content Include="Content\Multiflex\img\icon_rss.gif" />
     <Content Include="Content\Multiflex\img\image.jpg" />
     <Content Include="Content\Multiflex\img\image_author.jpg" />
-    <Content Include="Content\Style.css" />
     <Content Include="Content\UploadIfy\cancel.png" />
     <Content Include="Content\UploadIfy\expressInstall.swf" />
     <Content Include="Content\UploadIfy\uploadify.css" />
@@ -511,14 +522,13 @@
     <Content Include="Scripts\ckeditor\skins\v2\skin.js" />
     <Content Include="Scripts\ckeditor\skins\v2\templates.css" />
     <Content Include="Scripts\ckeditor\themes\default\theme.js" />
+    <Content Include="Scripts\global.js" />
     <Content Include="Scripts\highslide-with-gallery.packed.js" />
-    <Content Include="Scripts\highslide.config.js" />
     <Content Include="Scripts\img.onDemand.js" />
     <Content Include="Scripts\jquery-1.4.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.custom.min.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
-    <Content Include="Scripts\jquery.uploadify.v2.1.0.js" />
     <Content Include="Scripts\jquery.uploadify.v2.1.0.min.js" />
     <Content Include="Scripts\swfobject.js" />
     <Content Include="Views\Admin\CreateForum.aspx" />
@@ -549,7 +559,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\Account\ChangePassword.aspx" />
     <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
     <Content Include="Views\Account\LogOn.aspx" />
@@ -558,11 +567,12 @@
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Views\Shared\Site.Master" />
+    <None Include="App_Data\combres.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>

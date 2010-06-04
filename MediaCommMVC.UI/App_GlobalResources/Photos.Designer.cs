@@ -124,6 +124,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please wait while the photos are beeing processed..
+        /// </summary>
+        internal static string ProcessingUpload {
+            get {
+                return ResourceManager.GetString("ProcessingUpload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upload.
         /// </summary>
         internal static string Upload {
@@ -133,7 +142,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The photos were successfully uploaded.
+        ///   Looks up a localized string similar to The photos were successfully uploaded and are now beeing processed..
         /// </summary>
         internal static string UploadSuccessfullText {
             get {

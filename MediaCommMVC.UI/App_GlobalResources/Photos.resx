@@ -142,9 +142,12 @@
     <value>Category</value>
   </data>
   <data name="UploadSuccessfullText" xml:space="preserve">
-    <value>The photos were successfully uploaded</value>
+    <value>The photos were successfully uploaded and are now beeing processed.</value>
   </data>
   <data name="UploadSuccessfullTitle" xml:space="preserve">
     <value>Upload successfull</value>
+  </data>
+  <data name="ProcessingUpload" xml:space="preserve">
+    <value>Please wait while the photos are beeing processed.</value>
   </data>
 </root>

@@ -6,6 +6,6 @@
 
 <asp:Content ID="changePasswordSuccessContent" ContentPlaceHolderID="MainContent" runat="server">
     <p>
-        Your password has been changed successfully.
+        <%= Resources.Users.PasswordChangedText %>
     </p>
 </asp:Content>

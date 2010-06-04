@@ -195,4 +195,7 @@
   <data name="MyProfile" xml:space="preserve">
     <value>My Profile</value>
   </data>
+  <data name="PasswordChangedText" xml:space="preserve">
+    <value>Your password was successfully changed.</value>
+  </data>
 </root>

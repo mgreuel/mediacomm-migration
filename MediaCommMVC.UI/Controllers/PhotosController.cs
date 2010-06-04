@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 
 using MediaCommMVC.Common.Config;
+using MediaCommMVC.Common.Exceptions;
 using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Photos;
@@ -85,6 +86,26 @@ namespace MediaCommMVC.UI.Controllers
             return this.View(album);
         }
 
+        /// <summary>
+        /// Gets the photos for the specified album.
+        /// </summary>
+        /// <param name="id">The album id.</param>
+        /// <returns>The photo ids as json.</returns>
+        //[HttpGet]
+        //[Authorize]
+        //public ActionResult GetPhotosForAlbum(int id)
+        //{
+        //    if (id <= 0)
+        //    {
+        //        this.logger.Error("CatId '{0}' is invalid", id);
+        //        return null;
+        //    }
+
+        //    IEnumerable<Photo> photos = this.photoRepository.GetPhotosForAlbumId(id);
+
+        //    return this.Json(photos.Select(p => p.Id), JsonRequestBehavior.AllowGet);
+        //}
+
         /// <summary>Shows the photo category.</summary>
         /// <param name="id">The category id.</param>
         /// <returns>The category view.</returns>
@@ -120,12 +141,15 @@ namespace MediaCommMVC.UI.Controllers
         /// <returns>The photo categories as Json string.</returns>
         [HttpGet]
         [Authorize]
-        [OutputCache(Duration = 600, VaryByParam = "None")]
+        [OutputCache(Duration = 600, VaryByParam = "")]
         public ActionResult GetCategories()
         {
             IEnumerable<PhotoCategory> categories = this.photoRepository.GetAllCategories();
 
             var categoryViewModels = categories.Select(c => new { c.Name, c.Id, c.AlbumCount });
+
+            //this.Response.Cache.SetCacheability(HttpCacheability.Public);
+            //this.HttpContext.Response.Cache.SetExpires(DateTime.Now.AddMinutes(10));
 
             return this.Json(categoryViewModels, JsonRequestBehavior.AllowGet);
         }
@@ -175,40 +199,49 @@ namespace MediaCommMVC.UI.Controllers
         /// <param name="token">The authentication token.</param>
         /// <returns>The uploaded view.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Upload(PhotoCategory category, PhotoAlbum album, string token)
+        public string Upload(PhotoCategory category, PhotoAlbum album, string token)
         {
             this.logger.Debug("Uploading file with category '{0}' and album '{1}'", category, album);
 
             if (this.Request.Files.Count > 0)
             {
-                FormsIdentity uploaderIdentity = this.GetUploaderIdentity(token);
-
-                category.Name = category.Name.Trim();
-                album.Name = album.Name.Trim();
-                album.PhotoCategory = category;
-
-                HttpPostedFileBase file = this.Request.Files[0];
-                string directoryPath = this.configAccessor.GetConfigValue("PhotoRootDir");
-                string targetPath = Path.Combine(directoryPath, file.FileName);
-
-                if (!Directory.Exists(directoryPath))
+                try
                 {
-                    this.logger.Debug("The path '{0}' does not exist, creating now.", directoryPath);
-                    Directory.CreateDirectory(directoryPath);
+                    FormsIdentity uploaderIdentity = GetUploaderIdentity(token);
+
+                    category.Name = category.Name.Trim();
+                    album.Name = album.Name.Trim();
+                    album.PhotoCategory = category;
+
+                    HttpPostedFileBase file = this.Request.Files[0];
+                    string directoryPath = this.configAccessor.GetConfigValue("PhotoRootDir");
+                    string targetPath = Path.Combine(directoryPath, file.FileName);
+
+                    if (!Directory.Exists(directoryPath))
+                    {
+                        this.logger.Debug("The path '{0}' does not exist, creating now.", directoryPath);
+                        Directory.CreateDirectory(directoryPath);
+                    }
+
+                    this.logger.Debug("Saving file '{0}'", targetPath);
+                    file.SaveAs(targetPath);
+
+                    MediaCommUser uploader = this.userRepository.GetUserByName(uploaderIdentity.Name);
+                    this.photoRepository.ExtractAndAddPhotos(targetPath, album, uploader);
                 }
-
-                this.logger.Debug("Saving file '{0}'", targetPath);
-                file.SaveAs(targetPath);
-
-                MediaCommUser uploader = this.userRepository.GetUserByName(uploaderIdentity.Name);
-                this.photoRepository.ExtractAndAddPhotos(targetPath, album, uploader);
+                catch (Exception ex)
+                {
+                    this.logger.Error("Error uploading photo archive", ex);
+                    return "false";
+                }
             }
             else
             {
                 this.logger.Warn("No file was sent to the server");
+                return "false";
             }
 
-            return this.Content("true");
+            return "true";
         }
 
         /// <summary>Shows the uploads success full page.</summary>
@@ -226,7 +259,7 @@ namespace MediaCommMVC.UI.Controllers
         /// <summary>Gets the uploader identity from the sepcified authentication token.</summary>
         /// <param name="token">The token.</param>
         /// <returns>The identity.</returns>
-        private FormsIdentity GetUploaderIdentity(string token)
+        private static FormsIdentity GetUploaderIdentity(string token)
         {
             FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(token);
 
