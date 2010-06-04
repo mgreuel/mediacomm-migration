@@ -15,17 +15,9 @@ namespace MediaCommMVC.Core.DataInterfaces
     {
         #region Public Methods
 
-        /// <summary>Adds the album to the persistence layer.</summary>
-        /// <param name="album">The album.</param>
-       // void AddAlbum(PhotoAlbum album);
-
         /// <summary>Adds the category to the persistence layer.</summary>
         /// <param name="category">The category.</param>
         void AddCategory(PhotoCategory category);
-
-        /// <summary>Adds the photo to the persistence layer.</summary>
-        /// <param name="photo">The photo.</param>
-        //void AddPhoto(Photo photo);
 
         /// <summary>Extracts photos and adds them to the persistence layer.</summary>
         /// <param name="zipFileName">Name of the zip file.</param>
@@ -65,11 +57,6 @@ namespace MediaCommMVC.Core.DataInterfaces
         /// <param name="id">The photo id.</param>
         /// <returns>The photo.</returns>
         Photo GetPhotoById(int id);
-
-        /// <summary>Gets all photos in the album.</summary>
-        /// <param name="albumId">The album id.</param>
-        /// <returns>The photos.</returns>
-        //IEnumerable<Photo> GetPhotosForAlbumId(int albumId);
 
         #endregion
     }

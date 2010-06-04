@@ -53,18 +53,6 @@ namespace MediaCommMVC.Data.Repositories
 
         #region IPhotoRepository
 
-        /// <summary>Adds the album to the persistence layer.</summary>
-        /// <param name="album">The album.</param>
-        //public void AddAlbum(PhotoAlbum album)
-        //{
-        //    this.Logger.Debug("Adding photo album: " + album);
-
-        //    album.LastPicturesAdded = DateTime.Now;
-        //    this.InvokeTransaction(s => s.SaveOrUpdate(album));
-
-        //    this.Logger.Debug("Finished adding photo album");
-        //}
-
         /// <summary>Adds the category to the persistence layer.</summary>
         /// <param name="category">The category.</param>
         public void AddCategory(PhotoCategory category)
@@ -75,17 +63,6 @@ namespace MediaCommMVC.Data.Repositories
 
             this.Logger.Debug("Finished adding photo category");
         }
-
-        /// <summary>Adds the photo to the persistence layer.</summary>
-        /// <param name="photo">The photo.</param>
-        //public void AddPhoto(Photo photo)
-        //{
-        //    this.Logger.Debug("Adding photo: " + photo);
-
-        //    this.InvokeTransaction(s => s.Save(photo));
-
-        //    this.Logger.Debug("Finished adding photo");
-        //}
 
         /// <summary>Extracts and deletes the zip file.</summary>
         /// <param name="zipFilename">The zip filename.</param>
@@ -212,18 +189,6 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Finished getting photo");
             return photo;
         }
-
-        /// <summary>Gets all photos in the album.</summary>
-        /// <param name="albumId">The album id.</param>
-        /// <returns>The photos.</returns>
-        //public IEnumerable<Photo> GetPhotosForAlbumId(int albumId)
-        //{
-        //    this.Logger.Debug("Getting photos for album with id '{0}'", albumId);
-        //    IEnumerable<Photo> photos = this.Session.Linq<Photo>().Where(p => p.PhotoAlbum.Id.Equals(albumId)).ToList();
-
-        //    this.Logger.Debug("Got {0} photos", photos.Count());
-        //    return photos;
-        //}
 
         #endregion
 

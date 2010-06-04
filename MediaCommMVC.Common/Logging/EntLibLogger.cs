@@ -249,9 +249,7 @@ namespace MediaCommMVC.Common.Logging
             {
                 EventLog.WriteEntry("AdventureWorkCRM", message, EventLogEntryType.Error);
             }
-// ReSharper disable EmptyGeneralCatchClause
             catch
-// ReSharper restore EmptyGeneralCatchClause
             {
                 // No futher logging available
             }

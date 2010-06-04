@@ -10,14 +10,11 @@ using System.Web.Mvc;
 using System.Web.Security;
 
 using MediaCommMVC.Common.Config;
-using MediaCommMVC.Common.Exceptions;
 using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Photos;
 using MediaCommMVC.Core.Model.Users;
 using MediaCommMVC.UI.Infrastructure;
-using MediaCommMVC.UI.ViewModel;
-using System.Web.Caching;
 
 #endregion
 
@@ -86,26 +83,6 @@ namespace MediaCommMVC.UI.Controllers
             return this.View(album);
         }
 
-        /// <summary>
-        /// Gets the photos for the specified album.
-        /// </summary>
-        /// <param name="id">The album id.</param>
-        /// <returns>The photo ids as json.</returns>
-        //[HttpGet]
-        //[Authorize]
-        //public ActionResult GetPhotosForAlbum(int id)
-        //{
-        //    if (id <= 0)
-        //    {
-        //        this.logger.Error("CatId '{0}' is invalid", id);
-        //        return null;
-        //    }
-
-        //    IEnumerable<Photo> photos = this.photoRepository.GetPhotosForAlbumId(id);
-
-        //    return this.Json(photos.Select(p => p.Id), JsonRequestBehavior.AllowGet);
-        //}
-
         /// <summary>Shows the photo category.</summary>
         /// <param name="id">The category id.</param>
         /// <returns>The category view.</returns>
@@ -147,9 +124,6 @@ namespace MediaCommMVC.UI.Controllers
             IEnumerable<PhotoCategory> categories = this.photoRepository.GetAllCategories();
 
             var categoryViewModels = categories.Select(c => new { c.Name, c.Id, c.AlbumCount });
-
-            //this.Response.Cache.SetCacheability(HttpCacheability.Public);
-            //this.HttpContext.Response.Cache.SetExpires(DateTime.Now.AddMinutes(10));
 
             return this.Json(categoryViewModels, JsonRequestBehavior.AllowGet);
         }
