@@ -1,5 +1,6 @@
 ﻿#region Using Directives
 
+using System;
 using System.Collections.Generic;
 
 #endregion
@@ -30,6 +31,18 @@ namespace MediaCommMVC.Core.Model.Photos
         /// <summary>Gets or sets the photos.</summary>
         /// <value>The photos.</value>
         public virtual IEnumerable<Photo> Photos { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets the cover photo.
+        /// </summary>
+        /// <value>The cover photo.</value>
+        public virtual int CoverPhotoId { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets the date when the album was modifed.
+        /// </summary>
+        /// <value>The last modified date.</value>
+        public virtual DateTime LastPicturesAdded { get; set; }
 
         #endregion
 

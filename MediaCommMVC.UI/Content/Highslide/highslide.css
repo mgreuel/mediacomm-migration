@@ -168,7 +168,7 @@ a.highslide-credits:hover, a.highslide-credits:hover i
     float: left;
     width: 106px;
     height: 106px;
-    border: 1px solid silver !important;
+    border: 1px solid silver;
     background: #ededed;
     margin: 2px;
     line-height: 0;
@@ -339,7 +339,7 @@ html > /**/ body .highslide-gallery ul img
 /* Styles for the HTML popups											     */
 /* Remove these if you are not using Highslide HTML						     */
 /*****************************************************************************/
-.highslide-maincontent
+/*.highslide-maincontent
 {
     display: none;
 }
@@ -410,7 +410,7 @@ html > /**/ body .highslide-gallery ul img
 .highslide-resize
 {
     cursor: nw-resize;
-}
+}*/
 
 /*****************************************************************************/
 /* Styles for the Individual wrapper class names.							 */
@@ -419,7 +419,7 @@ html > /**/ body .highslide-gallery ul img
 /*****************************************************************************/
 
 /* hs.wrapperClassName = 'draggable-header' */
-.draggable-header .highslide-header
+/*.draggable-header .highslide-header
 {
     height: 18px;
     border-bottom: 1px solid #dddddd;
@@ -472,7 +472,7 @@ html > /**/ body .highslide-gallery ul img
 {
     padding-top: 1em;
 }
-
+*/
 /* hs.wrapperClassName = 'titlebar' */
 .titlebar .highslide-header
 {
@@ -1017,7 +1017,7 @@ html > /**/ body .highslide-gallery ul img
 }
 .highslide-thumbstrip-vertical img
 {
-    width: 175px; /* t=5481 */
+    /*width: 175px;*/ /* t=5481 */
 }
 .highslide-thumbstrip-vertical .highslide-marker
 {
@@ -1155,10 +1155,16 @@ html > /**/ body .highslide-gallery ul img
     width: 181px;
     height: 181px;
     border: 1px solid #D0D0D0;
-    background: #EDEDED;
+    /*background: #EDEDED;*/
+    background: White;
     margin: 2px;
 }
 .highslide-thumbstrip-vertical img
 {
     max-width: 175px;
+}
+
+.highslide-number
+{
+    color: White;
 }

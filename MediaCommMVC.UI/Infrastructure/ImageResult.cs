@@ -3,7 +3,11 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Web;
+using System.Web.Caching;
 using System.Web.Mvc;
+
+using MediaCommMVC.Common.Exceptions;
 
 #endregion
 
@@ -30,11 +34,13 @@ namespace MediaCommMVC.UI.Infrastructure
         {
             if (this.Image == null)
             {
-                throw new NullReferenceException("Image");
+                throw new MediaCommException("The Image must not be null");
             }
   
             context.HttpContext.Response.Clear();
             context.HttpContext.Response.ContentType = "image/jpeg";
+            context.HttpContext.Response.Cache.SetCacheability(HttpCacheability.Public);
+            context.HttpContext.Response.Cache.SetExpires(Cache.NoAbsoluteExpiration);
 
             this.Image.Save(context.HttpContext.Response.OutputStream, ImageFormat.Jpeg);
         }

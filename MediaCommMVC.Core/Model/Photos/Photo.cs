@@ -39,6 +39,12 @@ namespace MediaCommMVC.Core.Model.Photos
         /// <value>The width.</value>
         public virtual int Width { get; set; }
 
+        /// <summary>
+        /// Gets or sets the view count.
+        /// </summary>
+        /// <value>The view count.</value>
+        public virtual int ViewCount { get; set; }
+
         #endregion
 
         #region Public Methods
