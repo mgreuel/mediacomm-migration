@@ -27,6 +27,11 @@ namespace MediaCommMVC.Data.Repositories
     /// <summary>Implements the IPhotoRepository using NHibernate.</summary>
     public class PhotoRepository : RepositoryBase, IPhotoRepository
     {
+        /// <summary>
+        /// The image generator.
+        /// </summary>
+        private readonly IImageGenerator imageGenerator;
+
         #region Constants and Fields
 
         /// <summary>
@@ -38,13 +43,17 @@ namespace MediaCommMVC.Data.Repositories
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="PhotoRepository"/> class.</summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PhotoRepository"/> class.
+        /// </summary>
         /// <param name="sessionManager">The session manager.</param>
         /// <param name="configAccessor">The config Accessor.</param>
         /// <param name="logger">The logger.</param>
-        public PhotoRepository(ISessionManager sessionManager, IConfigAccessor configAccessor, ILogger logger)
+        /// <param name="imageGenerator">The image generator.</param>
+        public PhotoRepository(ISessionManager sessionManager, IConfigAccessor configAccessor, ILogger logger, IImageGenerator imageGenerator)
             : base(sessionManager, configAccessor, logger)
         {
+            this.imageGenerator = imageGenerator;
         }
 
         #endregion
@@ -70,7 +79,6 @@ namespace MediaCommMVC.Data.Repositories
         /// <param name="uploader">The uploader.</param>
         public void ExtractAndAddPhotos(string zipFilename, PhotoAlbum album, MediaCommUser uploader)
         {
-#warning encapsulate
             this.Logger.Debug("Extracting and adding photos. ZipFilename: '{0}', Album: '{1}, Uploader: '{2}'", zipFilename, album, uploader);
 
             string targetPath = this.GetTargetPath(album);
@@ -83,7 +91,7 @@ namespace MediaCommMVC.Data.Repositories
 
             this.AddPicturesToDB(newFiles, album, uploader);
 
-            this.GenerateSmallerPhotos(targetPath);
+            this.imageGenerator.GenerateImages(targetPath, UnprocessedPhotosFolder);
 
             this.Logger.Debug("Finished extracting and adding photos");
         }
@@ -283,26 +291,6 @@ namespace MediaCommMVC.Data.Repositories
             File.Delete(filename);
 
             this.Logger.Debug("Finished extracting and deleting zip file");
-        }
-
-        /// <summary>Generates the smaller photos.</summary>
-        /// <param name="pathToPhotos">The path to photos.</param>
-        private void GenerateSmallerPhotos(string pathToPhotos)
-        {
-            this.Logger.Debug("Generating smaller resolutions for photos in '{0}'", pathToPhotos);
-
-            string sourcePath = Path.Combine(pathToPhotos, UnprocessedPhotosFolder);
-
-            sourcePath = string.Format("{0}\\*", sourcePath.TrimEnd('\\'));
-            pathToPhotos = string.Format("{0}\\", pathToPhotos.TrimEnd('\\'));
-
-            string param = sourcePath + " " + pathToPhotos;
-
-            string photoCreatorBatchPath = this.ConfigAccessor.GetConfigValue("PathPhotoCreatorBatch");
-
-            this.Logger.Debug("Executing '{0}' with parameters '{1}'", photoCreatorBatchPath, param);
-
-            Process.Start(photoCreatorBatchPath, param);
         }
 
         /// <summary>Gets the path where the photos will be stored.</summary>
