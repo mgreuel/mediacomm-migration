@@ -22,8 +22,9 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
         {
             mapping.Table("MediaCommUsers");
             mapping.Map(u => u.DateOfBirth).Default("null");
+            mapping.Map(u => u.UserName).Not.Nullable().UniqueKey("UK_Username");
             mapping.Map(u => u.EMailAddress).Formula(
-                "(SELECT am.Email FROM aspnet_Membership am JOIN aspnet_Users au ON (am.UserId = au.UserId)  WHERE au.Username=Username)");
+                "(SELECT am.Email FROM aspnet_Membership am JOIN aspnet_Users au ON (am.UserId = au.UserId) WHERE au.Username=Username)");
         }
 
         #endregion

@@ -1,21 +1,19 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage" %>
 
+<asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
+    <script src="../../Content/tiny_mce/tiny_mce.js" type="text/javascript"></script>
+    <link href="../../Content/Custom/elementReset.css" rel="stylesheet" type="text/css" />
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-   <%= Resources.Forums.CreateTopic %>
+    <%= Resources.Forums.CreateTopic %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-    <script src="../../Scripts/ckeditor/ckeditor.js" type="text/javascript"></script>
-    <script src="../../Scripts/ckeditor/jquery.ckeditor.js" type="text/javascript"></script>
-    
-    <link href="../../Content/Multiflex/css/mf54_reset.css" rel="stylesheet" type="text/css" />
-
     <div id="validationSummary">
         <%= Html.ValidationSummary(Resources.General.ValidationSummary) %>
     </div>
     <% using (Html.BeginForm())
        {%>
-    <table id="createTopicTable">
+    <table id="createTopicTable" class="mceWrapper">
         <tr>
             <td class="firstColumn">
                 <label for="Topic.Title">
@@ -28,25 +26,38 @@
         <tr>
             <td class="firstColumn">
                 <label for="Post.Text">
-                    <%= Resources.Forums.Message %> :</label>
+                    <%= Resources.Forums.Message %>:</label>
             </td>
-            <td class="secondColumn">
+            <td class="secondColumn reset">
                 <%= Html.TextArea("Post.Text") %>
             </td>
         </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" value='<%= Resources.General.Save %>' />
+            </td>
+        </tr>
     </table>
-
     <% } %>
-
-     <script type="text/javascript" language="javascript">
-
-         $(document).ready(function ()
-         {
-             $('#Post_Text').ckeditor();
-         });
-
-   
-
+    <script type="text/javascript" language="javascript">
+        tinyMCE.init(
+        {
+            mode: "textareas",
+            theme: "simple"
+        });
     </script>
-
+    <style type="text/css">
+        #createTopicTable input[type=text]
+        {
+            width: 99%;
+        }
+        
+        #Post_Text
+        {
+            width: 99%;
+            height: 300px;
+        }
+    </style>
 </asp:Content>

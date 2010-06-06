@@ -21,7 +21,7 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
         public void Override(AutoMapping<Forum> mapping)
         {
             mapping.Table("Forums");
-            mapping.IgnoreProperty(f => f.HasUnreadPosts);
+            mapping.IgnoreProperty(f => f.HasUnreadTopics);
             mapping.Map(f => f.Title).Not.Nullable();
             mapping.Map(f => f.DisplayOrderIndex).Default("0");
             mapping.Map(f => f.TopicCount).Formula("(SELECT COUNT(*) FROM forumTopics p where p.ForumID = Id)");

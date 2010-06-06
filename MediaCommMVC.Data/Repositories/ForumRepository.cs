@@ -297,8 +297,8 @@ namespace MediaCommMVC.Data.Repositories
                 this.Logger.Debug("User's last visit: " + lastVisit);
                 foreach (Forum forum in forums)
                 {
-                    forum.HasUnreadPosts = this.Session.Linq<Post>().Where(p => p.Topic.Forum.Id.Equals(forum.Id) && p.Created > lastVisit).Any();
-                    this.Logger.Debug("User has unread posts in the forum '{0}': {1}", forum, forum.HasUnreadPosts);
+                    forum.HasUnreadTopics = this.Session.Linq<Post>().Where(p => p.Topic.Forum.Id.Equals(forum.Id) && p.Created > lastVisit).Any();
+                    this.Logger.Debug("User has unread posts in the forum '{0}': {1}", forum, forum.HasUnreadTopics);
                 }
             }
 

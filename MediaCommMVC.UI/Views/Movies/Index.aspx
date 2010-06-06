@@ -6,11 +6,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <p>
-        <a href="javascript:ShowAddPopup();" id="showAddPopup">
+        <a href="javascript:ShowAddPopup();" id="showAddPopup" class="button">
             <%= Resources.Movies.Add %>
         </a>
     </p>
-    <table id="movieTable">
+    <table id="movieTable" class="defaultTable">
         <thead>
             <tr>
                 <th>

@@ -5,7 +5,7 @@
     <%= Resources.Users.Profile %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <table id="userProfileTable">
+    <table id="userProfileTable" class="defaultTable">
         <thead>
         </thead>
         <tbody>

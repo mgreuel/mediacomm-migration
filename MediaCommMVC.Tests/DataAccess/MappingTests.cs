@@ -136,7 +136,7 @@ namespace MediaCommMVC.Tests.DataAccess
             new PersistenceSpecification<Forum>(this.sessionManager.Session)
                 .CheckProperty(f => f.Description, "my forum desc")
                 .CheckProperty(f => f.DisplayOrderIndex, 1)
-                .CheckProperty(f => f.HasUnreadPosts, false)
+                .CheckProperty(f => f.HasUnreadTopics, false)
                 .CheckProperty(f => f.Title, "my forum")
                 .CheckProperty(f => f.PostCount, 0)
                 .CheckProperty(f => f.TopicCount, 0)

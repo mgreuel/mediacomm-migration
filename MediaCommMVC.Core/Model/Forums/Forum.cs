@@ -1,6 +1,7 @@
 ﻿#region Using Directives
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 #endregion
@@ -24,7 +25,7 @@ namespace MediaCommMVC.Core.Model.Forums
 
         /// <summary>Gets or sets a value indicating whether this forum has unread posts.</summary>
         /// <value><c>true</c> if this forum has unread posts; otherwise, <c>false</c>.</value>
-        public virtual bool HasUnreadPosts { get; set; }
+        public virtual bool HasUnreadTopics { get; set; }
 
         /// <summary>Gets or sets the forum's id.
         /// Only the ORM should set the id.</summary>

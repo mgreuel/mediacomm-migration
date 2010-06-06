@@ -8,7 +8,7 @@
     <%= Html.CombresLink("uploadJs")%>
     <% using (Html.BeginForm())
        {%>
-    <table id="uploadTable">
+    <table id="uploadTable" class="defaultTable">
         <thead>
         </thead>
         <tbody>

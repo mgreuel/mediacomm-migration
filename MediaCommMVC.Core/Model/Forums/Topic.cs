@@ -45,6 +45,12 @@ namespace MediaCommMVC.Core.Model.Forums
         /// <value>The post count.</value>
         public virtual int PostCount { get; protected set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the thread was already [read by the current user].
+        /// </summary>
+        /// <value><c>true</c> if the thread was[read by current user]; otherwise, <c>false</c>.</value>
+        public virtual bool ReadByCurrentUser { get; set; }
+
         /// <summary>Gets or sets the topic's title.</summary>
         /// <value>The topic's title.</value>
         [Required]

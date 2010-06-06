@@ -7,7 +7,7 @@
     <% using (Html.BeginForm())
        {%>
     <%= Html.Hidden("username", Model.UserName) %>
-    <table id="myProfileTable">
+    <table id="myProfileTable" class="defaultTable">
         <tr>
             <td>
                 <%= Resources.Users.FirstName%>:

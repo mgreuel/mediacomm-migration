@@ -15,6 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.Tests", "Media
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7BD4A439-1E18-4529-BC39-F28D3D0F46B1}"
 	ProjectSection(SolutionItems) = preProject
+		tiny mce optionstxt.txt = tiny mce optionstxt.txt
 		ToDo.txt = ToDo.txt
 	EndProjectSection
 EndProject
