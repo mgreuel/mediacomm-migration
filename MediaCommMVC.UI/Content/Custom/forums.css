@@ -1,0 +1,15 @@
+﻿.forumTitle, .topicTitle
+{
+    font-size: 13px !important;
+    font-weight: bold !important;
+}
+
+.forumDesc
+{
+    font-size: 11px !important;
+}
+
+#newTopicButton
+{
+    margin: 12px 0 0 20px;
+}

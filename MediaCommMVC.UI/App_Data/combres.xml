@@ -10,6 +10,7 @@
       <resource path="~/Content/Multiflex/css/mf54_content_nosidebar.css" />
       <resource path="~/Content/jQuery-ui-cupertino/jquery-ui-1.8.custom.css" />      
       <resource path="~/Content/UploadIfy/uploadify.css" />
+      <resource path="~/Content/Custom/forums.css" />
     </resourceSet>
     <resourceSet name="photosCss" type="css">
       <resource path="~/Content/Highslide/highslide.css" />
@@ -19,7 +20,7 @@
       <resource path="~/Scripts/jquery-1.4.2.min.js" />
       <resource path="~/Scripts/jquery-ui-1.8.custom.min.js" />
       <resource path="~/Scripts/jquery.dataTables.min.js" />      
-      <resource path="~/Scripts/global.js"/>
+      <resource path="~/Scripts/custom/global.js"/>
     </resourceSet>
     <resourceSet name="uploadJs" type="js">
       <resource path="~/Scripts/swfobject.js" />

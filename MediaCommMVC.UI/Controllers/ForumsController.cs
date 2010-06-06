@@ -8,6 +8,7 @@ using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Forums;
 using MediaCommMVC.Core.Parameters;
+using MediaCommMVC.UI.ViewModel;
 
 #endregion
 
@@ -72,6 +73,8 @@ namespace MediaCommMVC.UI.Controllers
         public ActionResult Index()
         {
             this.logger.Debug("Displaying forums index.");
+#warning get read status
+
             return this.View(this.forumRepository.GetAllForums());
         }
 
@@ -85,10 +88,17 @@ namespace MediaCommMVC.UI.Controllers
 
             PagingParameters pagingParameters = new PagingParameters
                 {
-                   CurrentPage = page, PageSize = this.topicPageSize 
+                    CurrentPage = page,
+                    PageSize = this.topicPageSize
                 };
+
             IEnumerable<Topic> topics = this.forumRepository.GetTopicsForForum(id, pagingParameters);
-            return this.View(topics);
+
+            Forum forum = this.forumRepository.GetForumById(id);
+
+#warning set read status
+
+            return this.View(new ForumPage { Forum = forum, Topics = topics });
         }
 
         /// <summary>Displays the topic with the specified id.</summary>
@@ -101,9 +111,15 @@ namespace MediaCommMVC.UI.Controllers
 
             PagingParameters pagingParameters = new PagingParameters
                 {
-                   CurrentPage = page, PageSize = this.postPageSize 
+                    CurrentPage = page,
+                    PageSize = this.postPageSize
                 };
-            return this.View(this.forumRepository.GetPostsForTopic(id, pagingParameters));
+
+            IEnumerable<Post> posts = this.forumRepository.GetPostsForTopic(id, pagingParameters);
+
+            Topic topic = this.forumRepository.GetTopicById(id);
+
+            return this.View(new TopicPage { Topic = topic, Posts = posts });
         }
 
         /// <summary>Adds a new reply to the topic.</summary>
@@ -141,6 +157,7 @@ namespace MediaCommMVC.UI.Controllers
         /// <param name="id">The forum id.</param>
         /// <returns>The added topic view.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateInput(false)]
         public ActionResult CreateTopic(Topic topic, Post post, int id)
         {
             this.logger.Debug("Creating topic '{0}' with post '{1}' and forumId '{2}'", topic, post, id);

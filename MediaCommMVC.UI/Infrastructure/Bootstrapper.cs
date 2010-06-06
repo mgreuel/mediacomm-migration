@@ -149,12 +149,12 @@ namespace MediaCommMVC.UI.Infrastructure
 
             routes.MapRoute(
                 "ViewForum", 
-                "Forums/Forum/{id}/{page}", 
+                "Forums/Forum/{id}/{name}/{page}", 
                 new { controller = "Forums", action = "Forum", page = 1 });
 
             routes.MapRoute(
-                "ViewTopic", 
-                "Forums/Topic/{id}/{page}", 
+                "ViewTopic",
+                "Forums/Topic/{id}/{name}/{page}", 
                 new { controller = "Forums", action = "Topic", page = 1 });
 
             routes.MapRoute(

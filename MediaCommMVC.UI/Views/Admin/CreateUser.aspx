@@ -10,7 +10,7 @@
     </div>
     <% using (Html.BeginForm())
        {%>
-    <table id="createUserTable">
+    <table id="createUserTable" class="defaultTable">
         <tr>
             <td class="firstColumn">
                 <label for="UserInfo.UserName">

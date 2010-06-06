@@ -16,13 +16,8 @@ Movies:
 - Input Validation
 - Edit
 
-Photos:
-- Encapsulate ImageCreation
-
 General:
 - Multilanguage Display Attributes for Model
 
 Install:
 - Web-Install
-- DB Creation
-- Admin Creation

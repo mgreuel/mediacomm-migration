@@ -53,6 +53,8 @@ namespace MediaCommMVC.Data
         /// </summary>
         /// <param name="pathToPhotos">The path to photos.</param>
         /// <param name="unprocessedPhotosFolder">The unprocessed photos folder.</param>
+        [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.InheritanceDemand, Name = "FullTrust")]
+        [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.LinkDemand, Name = "FullTrust")]
         public void GenerateImages(string pathToPhotos, string unprocessedPhotosFolder)
         {
             this.logger.Debug("Generating smaller resolutions for photos in '{0}'", pathToPhotos);

@@ -3,10 +3,8 @@
     if (Request.IsAuthenticated)
     {
 %>
-Welcome <b>
-    <%= Html.ActionLink(Page.User.Identity.Name, "MyProfile", "Users")%></b>! [
-<%= Html.ActionLink("Log Off", "LogOff", "Account") %>
-]
+<%= Resources.General.Welcome %> <b>
+    <%= Html.ActionLink(Page.User.Identity.Name, "MyProfile", "Users")%></b>! [<%= Html.ActionLink("Log Off", "LogOff", "Account") %>]
 <%
     }
     else

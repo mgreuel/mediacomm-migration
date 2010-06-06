@@ -1,6 +1,9 @@
 ﻿#region Using Directives
 
 using System;
+using System.Collections.Generic;
+
+using MediaCommMVC.Core.Model.Forums;
 
 #endregion
 
@@ -121,7 +124,7 @@ namespace MediaCommMVC.Core.Model.Users
         /// </returns>
         public override int GetHashCode()
         {
-            return this.UserName == null ? base.GetHashCode() : this.UserName.GetHashCode();
+            return string.IsNullOrEmpty(this.UserName) ? base.GetHashCode() : this.UserName.GetHashCode();
         }
 
         #endregion

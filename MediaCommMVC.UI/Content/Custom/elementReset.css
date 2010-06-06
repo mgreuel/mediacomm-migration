@@ -1,0 +1,64 @@
+﻿.reset body, .reset div, .reset dl, .reset dt, .reset dd, .reset ul, .reset ol, .reset li, .reset h1, .reset h2, .reset h3, .reset h4, .reset h5, .reset h6, .reset pre, .reset code, .reset form, .reset fieldset, .reset legend, .reset input, .reset textarea, .reset p, .reset blockquote, .reset th, .reset td
+{
+    margin: 0;
+    padding: 0;
+}
+ .reset table
+{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+ .reset fieldset, .reset img
+{
+    border: 0;
+}
+
+ .reset address, .reset caption, .reset cite, .reset code, .reset dfn, .reset em, .reset strong, .reset th, .reset var
+{
+    font-style: normal;
+    font-weight: normal;
+}
+ .reset li
+{
+    list-style: none;
+}
+ .reset caption, .reset th
+{
+    text-align: left;
+}
+ .reset h1, .reset h2, .reset h3, .reset h4, .reset h5, .reset h6
+{
+    font-size: 100%;
+    font-weight: normal;
+}
+ .reset q:before, .reset q:after
+{
+    content: '';
+}
+ .reset abbr, .reset acronym
+{
+    border: 0;
+    font-variant: normal;
+}
+ .reset sup
+{
+    vertical-align: text-top;
+}
+/* to preserve line-height and selector appearance */
+ .reset sub
+{
+    vertical-align: text-bottom;
+}
+/* to preserve line-height and selector appearance */
+ .reset input, .reset textarea, .reset select
+{
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+/* to preserve line-height and selector appearance */
+ .reset legend
+{
+    color: rgb(0,0,0);
+}
+/*because legend doesn't inherit in IE */

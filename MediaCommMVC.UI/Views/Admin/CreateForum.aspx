@@ -9,7 +9,7 @@
     </div>
     <% using (Html.BeginForm())
        {%>
-    <table id="createForumTable">
+    <table id="createForumTable" class="defaultTable">
         <tr>
             <td class="firstColumn">
                 <label for="Forum.Title">

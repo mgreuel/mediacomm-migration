@@ -1,0 +1,11 @@
+
+tiny mce options:
+- bold
+- italic
+- underline
+- durchgestrichen?
+- smileys
+- font-color
+- hypterlink
+- list
+- numbered list
