@@ -13,6 +13,12 @@
         /// <value>The number of items per page.</value>
         public int PageSize { get; set; }
 
+        /// <summary>
+        /// Gets or sets the total item count.
+        /// </summary>
+        /// <value>The total item count.</value>
+        public int TotalCount { get; set; }
+
         #endregion
 
         #region Public Methods
@@ -21,7 +27,7 @@
         /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
         public override string ToString()
         {
-            return string.Format("CurrentPage: '{0}', PageSize: '{1}", this.CurrentPage, this.PageSize);
+            return string.Format("CurrentPage: '{0}', PageSize: '{1}', TotalCount: '{2}'", this.CurrentPage, this.PageSize, this.TotalCount);
         }
 
         #endregion

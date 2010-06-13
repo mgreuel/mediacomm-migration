@@ -22,10 +22,13 @@ namespace MediaCommMVC.Core.DataInterfaces
         /// <param name="post">The post to add.</param>
         void AddPost(Post post);
 
-        /// <summary>Adds the topic.</summary>
+        /// <summary>
+        /// Adds the topic.
+        /// </summary>
         /// <param name="topic">The topic.</param>
         /// <param name="post">The topic's first post.</param>
-        void AddTopic(Topic topic, Post post);
+        /// <returns>The added topic.</returns>
+        Topic AddTopic(Topic topic, Post post);
 
         /// <summary>Deletes the forum.</summary>
         /// <param name="forum">The forum.</param>

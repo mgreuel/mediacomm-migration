@@ -7,9 +7,16 @@
     <%=  Html.ActionLink(Model.Topic.Title, "Topic", new { name = Model.Topic.Title, id = Model.Topic.Id }) %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h5>
-        <%= Html.ActionLink(Resources.Forums.BackTo + Model.Topic.Forum.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Topic.Forum.Title), id = Model.Topic.Forum.Id })   %>
-    </h5>
+    <div id="topicHeader">
+        <div>
+            <h5>
+                <%= Html.ActionLink(Resources.Forums.BackTo + Model.Topic.Forum.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Topic.Forum.Title), id = Model.Topic.Forum.Id })   %>
+            </h5>
+        </div>
+        <div class="forumPager forumPagerTop">
+            <%= Html.Pager(Model.PagingParameters, string.Format("/Forums/Topic/{0}/{1}", Model.Topic.Id, Url.ToFriendlyUrl(Model.Topic.Title)))%>
+        </div>
+    </div>
     <table class="defaultTable">
         <thead>
             <tr>
@@ -42,6 +49,9 @@
             <% } %>
         </tbody>
     </table>
+    <div class="forumPager forumPagerBottom">
+        <%= Html.Pager(Model.PagingParameters, string.Format("/Forums/Topic/{0}/{1}", Model.Topic.Id, Url.ToFriendlyUrl(Model.Topic.Title)))%>
+    </div>
     <% using (Html.BeginForm())
        {%>
     <div id="reply">

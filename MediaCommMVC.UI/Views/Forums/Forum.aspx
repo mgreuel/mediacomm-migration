@@ -4,8 +4,13 @@
     <%= Model.Forum.Title %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div id="newTopicButton">
-        <%= Html.ActionLink(Resources.Forums.CreateTopic, "CreateTopic",null, new { @class = "button" }) %>
+    <div id="forumHeader">
+        <div id="newTopicButton">
+            <%= Html.ActionLink(Resources.Forums.CreateTopic, "CreateTopic",null, new { @class = "button" }) %>
+        </div>
+        <div class="forumPager forumPagerTop">
+            <%= Html.Pager(Model.PagingParameters, string.Format("/Forums/Forum/{0}/{1}", Model.Forum.Id, Url.ToFriendlyUrl(Model.Forum.Title))) %>
+        </div>
     </div>
     <table id="forumTable" class="defaultTable" width="100%">
         <thead>
@@ -32,7 +37,7 @@
                     <img src='<%= "/Content/Forum/" + Url.TopicIcon(topic) %>' />
                 </td>
                 <td class="topicTitle" width="100%">
-                    <%= Html.ActionLink(topic.Title, "Topic", new { id = topic.Id, name= topic.Title}) %>
+                    <%= Html.ActionLink(topic.Title, "Topic", new { id = topic.Id, name= Url.ToFriendlyUrl(topic.Title) }) %>
                 </td>
                 <td style="white-space: nowrap; text-align: center;">
                     <%= Html.ActionLink(topic.CreatedBy, "Profile", "Users", new { username = topic.CreatedBy}, null) %>
@@ -51,7 +56,7 @@
             <% } %>
         </tbody>
     </table>
-    <style type="text/css">
-
-    </style>
+    <div class="forumPager forumPagerBottom">
+        <%= Html.Pager(Model.PagingParameters, string.Format("/Forums/Forum/{0}/{1}", Model.Forum.Id, Url.ToFriendlyUrl(Model.Forum.Title))) %>
+    </div>
 </asp:Content>

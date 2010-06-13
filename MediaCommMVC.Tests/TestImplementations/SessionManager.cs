@@ -26,11 +26,14 @@ namespace MediaCommMVC.Tests.TestImplementations
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="SessionManager"/> class.</summary>
-        public SessionManager()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SessionManager"/> class.
+        /// </summary>
+        /// <param name="configurationGenerator">The configuration generator.</param>
+        public SessionManager(IConfigurationGenerator configurationGenerator)
         {
             // The default configuration generator
-            this.sessionFactory = BuildSessionFactory(new TestConfigurationGenerator());
+            this.sessionFactory = BuildSessionFactory(configurationGenerator);
         }
 
         #endregion
@@ -41,7 +44,7 @@ namespace MediaCommMVC.Tests.TestImplementations
         /// <value>The NHibernate session.</value>
         public ISession Session
         {
-            get 
+            get
             {
                 return this.session;
             }

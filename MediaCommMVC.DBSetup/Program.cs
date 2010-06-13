@@ -88,7 +88,7 @@ namespace MediaCommMVC.DBSetup
                 {
                     config.BuildSessionFactory();
 
-                    SessionManager sessionManager = new SessionManager();
+                    SessionManager sessionManager = new SessionManager(new TestConfigurationGenerator());
                     sessionManager.CreateNewSession();
 
                     if (!Roles.RoleExists(AdministratorRoleName))

@@ -66,10 +66,13 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Finished adding post");
         }
 
-        /// <summary>Adds the topic.</summary>
+        /// <summary>
+        /// Adds the topic.
+        /// </summary>
         /// <param name="topic">The topic.</param>
         /// <param name="post">The topic's first post.</param>
-        public void AddTopic(Topic topic, Post post)
+        /// <returns>The added topic.</returns>
+        public Topic AddTopic(Topic topic, Post post)
         {
             this.Logger.Debug("Adding topic {0} with first post: {1}", topic, post);
 
@@ -86,8 +89,10 @@ namespace MediaCommMVC.Data.Repositories
                     session.Save(topic);
                     session.Save(post);
                 });
-
+            
             this.Logger.Debug("Finished adding topic");
+
+            return topic;
         }
 
         /// <summary>Deletes the forum.</summary>
