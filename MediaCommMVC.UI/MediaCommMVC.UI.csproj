@@ -184,6 +184,7 @@
       <DependentUpon>Users.resx</DependentUpon>
     </Compile>
     <Compile Include="Helpers\IconHelper.cs" />
+    <Compile Include="Helpers\Pagination.cs" />
     <Compile Include="ViewModel\ForumPage.cs" />
     <Compile Include="ViewModel\TopicPage.cs" />
     <Content Include="Content\Custom\account.css" />

@@ -138,11 +138,23 @@
   <data name="ErrorMessage" xml:space="preserve">
     <value>Sorry, an error occurred while processing your request.</value>
   </data>
+  <data name="GoToPage" xml:space="preserve">
+    <value>Goto page</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>

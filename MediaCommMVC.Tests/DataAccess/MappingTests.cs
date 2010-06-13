@@ -26,7 +26,7 @@ namespace MediaCommMVC.Tests.DataAccess
         [FixtureSetUp]
         public void InitSessionManager()
         {
-            this.sessionManager = new SessionManager();
+            this.sessionManager = new SessionManager(new TestConfigurationGenerator());
         }
 
         [FixtureTearDown]

@@ -8,6 +8,7 @@ using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Forums;
 using MediaCommMVC.Core.Parameters;
+using MediaCommMVC.UI.Helpers;
 using MediaCommMVC.UI.ViewModel;
 
 #endregion
@@ -35,19 +36,15 @@ namespace MediaCommMVC.UI.Controllers
         /// </summary>
         private readonly ILogger logger;
 
-#warning get from config!
-
         /// <summary>
         ///   The number of topics displayed per page.
         /// </summary>
-        private int topicPageSize = 25;
-
-#warning get from config!
+        private const int TopicPageSize = 25;
 
         /// <summary>
         ///   The number of posts displayed per page.
         /// </summary>
-        private int postPageSize = 10;
+        private const int PostPageSize = 10;
 
         #endregion
 
@@ -89,16 +86,17 @@ namespace MediaCommMVC.UI.Controllers
             PagingParameters pagingParameters = new PagingParameters
                 {
                     CurrentPage = page,
-                    PageSize = this.topicPageSize
+                    PageSize = TopicPageSize
                 };
+
+            Forum forum = this.forumRepository.GetForumById(id);
+            pagingParameters.TotalCount = forum.TopicCount;
 
             IEnumerable<Topic> topics = this.forumRepository.GetTopicsForForum(id, pagingParameters);
 
-            Forum forum = this.forumRepository.GetForumById(id);
-
 #warning set read status
 
-            return this.View(new ForumPage { Forum = forum, Topics = topics });
+            return this.View(new ForumPage { Forum = forum, Topics = topics, PagingParameters = pagingParameters });
         }
 
         /// <summary>Displays the topic with the specified id.</summary>
@@ -112,14 +110,15 @@ namespace MediaCommMVC.UI.Controllers
             PagingParameters pagingParameters = new PagingParameters
                 {
                     CurrentPage = page,
-                    PageSize = this.postPageSize
+                    PageSize = PostPageSize
                 };
+
+            Topic topic = this.forumRepository.GetTopicById(id);
+            pagingParameters.TotalCount = topic.PostCount;
 
             IEnumerable<Post> posts = this.forumRepository.GetPostsForTopic(id, pagingParameters);
 
-            Topic topic = this.forumRepository.GetTopicById(id);
-
-            return this.View(new TopicPage { Topic = topic, Posts = posts });
+            return this.View(new TopicPage { Topic = topic, Posts = posts, PagingParameters = pagingParameters });
         }
 
         /// <summary>Adds a new reply to the topic.</summary>
@@ -138,7 +137,7 @@ namespace MediaCommMVC.UI.Controllers
 
             this.forumRepository.AddPost(post);
 
-            int lastPage = this.forumRepository.GetLastPageNumberForTopic(id, this.postPageSize);
+            int lastPage = this.forumRepository.GetLastPageNumberForTopic(id, PostPageSize);
 
             this.logger.Debug("Redirecting to page {0} of the topic with the id '{0}'", lastPage, id);
             return this.RedirectToAction("Topic", new { page = lastPage });
@@ -167,9 +166,9 @@ namespace MediaCommMVC.UI.Controllers
 
             topic.Forum = this.forumRepository.GetForumById(id);
 
-            this.forumRepository.AddTopic(topic, post);
+            Topic createdTopic = this.forumRepository.AddTopic(topic, post);
 
-            return this.View();
+            return this.RedirectToAction("Topic", new { id = createdTopic.Id, name = Url.ToFriendlyUrl(createdTopic.Title) });
         }
 
         #endregion
