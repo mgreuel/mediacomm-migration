@@ -186,7 +186,8 @@
     <Compile Include="Helpers\IconHelper.cs" />
     <Compile Include="ViewModel\ForumPage.cs" />
     <Compile Include="ViewModel\TopicPage.cs" />
-    <Content Include="Content\Custom\elementReset.css" />
+    <Content Include="Content\Custom\account.css" />
+    <Content Include="Content\Custom\admin.css" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ForumsController.cs" />
@@ -217,7 +218,9 @@
     <Compile Include="AccountModels\ValidationUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Content\Custom\forums.css" />
+    <Content Include="Content\Custom\movies.css" />
     <Content Include="Content\Custom\photos.css" />
+    <Content Include="Content\Custom\users.css" />
     <Content Include="Content\Forum\davbo.gif" />
     <Content Include="Content\Forum\folder.gif" />
     <Content Include="Content\Forum\folder_announce.gif" />
@@ -528,7 +531,6 @@
     <Content Include="Content\Highslide\graphics\zoom.png" />
     <Content Include="Content\Highslide\graphics\zoomin.cur" />
     <Content Include="Content\Highslide\graphics\zoomout.cur" />
-    <Content Include="Content\Highslide\highslide-ie6.css" />
     <Content Include="Content\Highslide\highslide.css" />
     <Content Include="Content\jQuery-ui-cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
     <Content Include="Content\jQuery-ui-cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
@@ -619,7 +621,6 @@
     <Content Include="Views\Photos\Index.aspx" />
     <Content Include="Views\Photos\Upload.aspx" />
     <Content Include="Views\Photos\UploadSuccessfull.aspx" />
-    <Content Include="Views\Shared\PostUserControl.ascx" />
     <Content Include="Views\Users\Index.aspx" />
     <Content Include="Views\Users\MyProfile.aspx" />
     <Content Include="Views\Users\Profile.aspx" />

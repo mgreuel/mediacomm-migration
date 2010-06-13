@@ -24,9 +24,9 @@
                 <% foreach (var item in Model)
                    { %>
                 <tr>
-                    <th scope="row">
+                    <td style="font-weight: bold">
                         <%= Html.Encode(item.UserName) %>
-                    </th>
+                    </td>
                     <td>
                         <%= Html.Encode(item.FirstName) %>
                     </td>

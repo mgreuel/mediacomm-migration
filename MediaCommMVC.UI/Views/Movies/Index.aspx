@@ -5,11 +5,11 @@
     <%= Resources.Movies.Movielist %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <p>
+    <div id="addMovie">
         <a href="javascript:ShowAddPopup();" id="showAddPopup" class="button">
             <%= Resources.Movies.Add %>
         </a>
-    </p>
+    </div>
     <table id="movieTable" class="defaultTable">
         <thead>
             <tr>
@@ -80,7 +80,7 @@
         <div id="editMovie">
             <% using (Html.BeginForm())
                {%>
-            <table>
+            <table style="margin-top: 6px;">
                 <tr>
                     <td class="leftTd">
                         <%= Resources.Movies.Title %>:
@@ -114,7 +114,7 @@
                     </td>
                 </tr>
             </table>
-            <div class="centerDiv">
+            <div style="text-align: center; margin-top:4px;">
                 <input type="submit" value='<%= Resources.General.Save %>' id="sumitMovie" />
             </div>
             <% } %>

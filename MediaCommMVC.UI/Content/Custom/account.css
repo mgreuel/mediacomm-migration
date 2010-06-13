@@ -1,0 +1,43 @@
+﻿#changePasswordTable
+{
+    width: 250px;
+}
+
+#changePasswordTable .firstColumn
+{
+    width: 110px !important;
+    font-weight: bold !important;
+    text-align: right !important;
+}
+
+#changePasswordTable .secondColumn
+{
+    width: 140px;
+}
+
+#changePasswordTable .secondColumn input
+{
+    width: 136px;
+}
+
+#loginTable
+{
+    width: 300px;
+}
+
+#loginTable .firstColumn
+{
+    width: 100px !important;
+    font-weight: bold !important;
+    text-align: right !important;
+}
+
+#loginTable .secondColumn
+{
+    width: 200px;
+}
+
+#loginTable .secondColumn input
+{
+    width: 200px;
+}

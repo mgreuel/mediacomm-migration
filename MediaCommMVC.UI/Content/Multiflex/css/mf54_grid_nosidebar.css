@@ -23,7 +23,7 @@ body
     font-size: 62.5%;
     background-color: rgb(240,240,240);
     font-family: arial,sans-serif;
-    min-height: 100%; /*height: 100%;*/
+    min-height: 100%;
 }
 /*Font-size: 1.0em = 10px when browser default size is 16px*/
 .container
@@ -37,12 +37,10 @@ body
 .header
 {
     width: 958px;
-    min-height: 50px /*Non-IE6*/;
-    height: auto !important /*Non-IE6*/;
-    height: 50px /*IE6*/;
+    min-height: 50px;
+    height: auto !important;
     border-left: solid 10px rgb(200,200,200);
     border-right: solid 10px rgb(200,200,200);
-    /*background: rgb(225,225,225) url(../img/bg_header.jpg) repeat-x;*/ /*Total header background image entered here. Height: 125px*/
     font-size: 1.0em;
 }
 .header-top
@@ -50,16 +48,14 @@ body
     clear: both;
     width: 958px;
     height: 50px;
-    /* background: rgb(218,218,218) url(../img/bg_header_top.jpg) repeat-x /*Top header background image entered here. Height: 100px;*/
     font-size: 1.0em;
 }
 .header-bottom
 {
     clear: both;
     width: 958px;
-    min-height: 30px /*Non-IE6*/;
-    height: auto !important /*Non-IE6*/;
-    height: 30px /*IE6*/;
+    min-height: 30px;
+    height: auto !important;
     background: rgb(225,225,225) url(../img/bg_header_bottom.jpg) repeat-x /*Bottom header background image entered here: Height: 25 px*/;
     font-size: 1.0em;
 }
@@ -72,8 +68,7 @@ body
     border-right: solid 10px rgb(200,200,200);
     background-color: rgb(225,225,225);
     font-family: tahoma,arial,sans-serif;
-    font-size: 130% !important /*Non-IE6*/;
-    font-size: 120% /*IE6*/;
+    font-size: 130% !important;
 }
 /*Color navigation bar normal mode*/
 .main
@@ -85,7 +80,7 @@ body
     border-right: solid 10px rgb(200,200,200);
     background-color: rgb(200,200,200);
     font-size: 1.0em;
-    min-height:250px;
+    min-height: 250px;
 }
 .content
 {
@@ -94,8 +89,7 @@ body
     width: 958px;
     background-color: rgb(200,200,200);
     font-size: 1.0em;
-    overflow: visible !important /*Non-IE6*/;
-    overflow: hidden /*IE6*/;
+    overflow: visible !important;
 }
 .footer
 {
@@ -105,10 +99,8 @@ body
     border-left: solid 10px rgb(200,200,200);
     border-right: solid 10px rgb(200,200,200);
     background-color: rgb(225,225,225);
-    font-size: 1.1em !important /*Non-IE6*/;
-    font-size: 1.0em /*IE6*/;
-    overflow: visible !important /*Non-IE6*/;
-    overflow: hidden /*IE6*/;
+    font-size: 1.1em !important;
+    overflow: visible !important;
 }
 
 /****************/
@@ -138,8 +130,7 @@ body
 {
     font-family: "trebuchet ms" ,arial,sans serif;
     font-weight: normal;
-    font-size: 290% !important /*Non-IE6*/;
-    font-size: 260% /*IE6*/;
+    font-size: 290% !important;
 }
 .sitename h2
 {
@@ -149,8 +140,7 @@ body
     color: rgb(125,125,125);
     height: 20px;
     font-weight: normal;
-    font-size: 130% !important /*Non-IE6*/;
-    font-size: 120% /*IE6*/;
+    font-size: 130% !important;
 }
 .sitename a
 {
@@ -169,8 +159,7 @@ body
     position: absolute;
     z-index: 2;
     margin-top: 26px;
-    margin-left: 547px !important /*Non-IE6*/;
-    margin-left: 550px /*IE6*/;
+    margin-left: 547px !important;
 }
 .navbutton ul
 {
@@ -201,8 +190,7 @@ body
     position: absolute;
     z-index: 3;
     margin-top: 65px;
-    margin-left: 349px !important /*Non-IE6*/;
-    margin-left: 351px /*IE6*/;
+    margin-left: 349px !important;
 }
 .navglobal ul
 {
@@ -221,8 +209,7 @@ body
     padding: 2px 5px 2px 5px;
     color: rgb(125,125,125);
     text-decoration: none;
-    font-size: 130% !important /*Non-IE6*/;
-    font-size: 120% /*IE6*/;
+    font-size: 130% !important;
 }
 .navglobal a:hover
 {
@@ -240,16 +227,14 @@ body
     float: left;
     width: 430px;
     list-style: none;
-    padding: 8px 0 3px 10px !important /*Non-IE6*/;
-    padding: 8px 0 3px 10px /*IE6*/;
+    padding: 8px 0 3px 10px !important;
 }
 .header-bottom ul li
 {
     display: inline;
     padding: 0 0 0 10px;
     background: transparent url(../img/bg_bullet_arrow.gif) no-repeat 0 50%;
-    font-size: 110% !important /*Non-IE6*/;
-    font-size: 100% /*IE6*/;
+    font-size: 110% !important;
 }
 .header-bottom ul li.nobullet
 {
@@ -260,8 +245,7 @@ body
 }
 .header-bottom ul a
 {
-    color: rgb(125,125,125);
-    /* font-weight: bold;*/
+    color: rgb(125,125,125); 
     text-decoration: none;
 }
 .header-bottom ul a:hover
@@ -286,12 +270,10 @@ body
 {
     width: 15.0em;
     height: 1.2em;
-    padding: 1px !important /*Non-IE6*/;
-    padding: 2px /*IE6*/;
+    padding: 1px !important ;
     border: solid 1px rgb(200,200,200);
     background-color: rgb(255,255,255);
-    font-size: 110% !important /*Non-IE6*/;
-    font-size: 100% /*IE6*/;
+    font-size: 110% !important;
 }
 .header-bottom .searchform input.button
 {
@@ -301,8 +283,7 @@ body
     border: solid 1px rgb(150,150,150);
     text-align: center;
     color: rgb(100,100,100);
-    font-size: 110% !important /*Non-IE6*/;
-    font-size: 100% /*IE6*/;
+    font-size: 110% !important;
 }
 .header-bottom .searchform input.button:hover
 {
@@ -324,14 +305,12 @@ body
 .navbar ul li
 {
     float: left;
-    z-index: auto !important /*Non-IE6*/;
-    z-index: 1000 /*IE6*/;
+    z-index: auto !important;
     background-color: rgb(225,225,225);
 }
 .navbar ul li a
 {
-    float: none !important /*Non-IE6*/;
-    float: left /*IE-6*/;
+    float: none !important;
     display: block;
     height: 3.1em;
     line-height: 3.1em;
@@ -346,8 +325,6 @@ body
     display: none;
     border: none;
 }
-
-/* SUBMENU (Non-IE6 hovering) */
 .navbar ul li:hover
 {
     position: relative;
@@ -395,15 +372,6 @@ body
 }
 /*Color subcells hovering mode*/
 
-/* SUBMENU (IE6 hovering) */
-.navbar table
-{
-    position: absolute;
-    z-index: 1000;
-    top: 0px;
-    left: -1px;
-    border-collapse: collapse;
-}
 .navbar ul li a:hover
 {
     position: relative /*Sylvain IE hack*/;
@@ -560,8 +528,7 @@ body
     clear: both;
     line-height: 1.3em;
     text-align: center;
-    color: rgb(125,125,125);
-    /* font-weight: bold;*/
+    color: rgb(125,125,125); /* font-weight: bold;*/
     font-size: 110%;
 }
 .footer p.credits
@@ -722,21 +689,15 @@ p:after
 
 #loginInfo
 {
-    font-size: 130%; 
+    font-size: 130%;
     float: right;
     z-index: 2;
     color: #646464;
     margin-top: 30px;
-    margin-right: 4px;    
+    margin-right: 4px;
 }
 
 #loginInfo a
 {
     color: #467AA7;
-}
-
-.uploadifyQueueItem img
-{
-    border: none !important;
-    margin-right: 0px !important;
 }
