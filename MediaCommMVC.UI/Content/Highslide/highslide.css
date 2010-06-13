@@ -144,7 +144,7 @@ a.highslide-credits:hover, a.highslide-credits:hover i
     width: 30px;
     height: 30px;
     cursor: pointer;
-    background: url(graphics/close.png); /* NOTE! For IE6, you also need to update the highslide-ie6.css file. */
+    background: url(graphics/close.png);
 }
 
 /*****************************************************************************/
@@ -900,7 +900,7 @@ html > /**/ body .highslide-gallery ul img
     height: 0;
     border-width: 0;
     border-style: solid;
-    border-color: transparent; /* change this to actual background color in highslide-ie6.css */
+    border-color: transparent; 
 }
 .highslide-thumbstrip-horizontal div
 {

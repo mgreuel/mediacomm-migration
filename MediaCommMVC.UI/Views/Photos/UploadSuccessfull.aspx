@@ -6,6 +6,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <p><%= Resources.Photos.UploadSuccessfullText %></p>
+    <p class="text"><%= Resources.Photos.UploadSuccessfullText %></p>
 
 </asp:Content>

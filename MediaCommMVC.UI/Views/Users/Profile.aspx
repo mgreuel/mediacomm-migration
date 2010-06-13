@@ -119,7 +119,7 @@
                 }%>
         </tbody>
     </table>
-    <p style="padding-top: 10px">
+    <p class="text">
         <%=Html.ActionLink(Resources.Users.BackToUserList, "Index") %>
     </p>
 

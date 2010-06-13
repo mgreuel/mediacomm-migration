@@ -1,0 +1,48 @@
+﻿#movieTable
+{
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+#addMovie
+{
+    margin: 8px 0 12px 20px;
+}
+
+#editMovie table input[type=text]
+{
+    width: 97.5%;
+}
+
+#editMovie table select
+{
+    width: 50%;
+}
+
+#editMovie table .leftTd
+{
+    text-align: right;
+    font-weight: bold;
+}
+
+#editMovie table .rightTd
+{
+    text-align: left;
+}
+
+#editMovie table
+{
+    width: 100%;
+    border-collapse: collapse;
+    empty-cells: show;
+    background-color: rgb(233,232,244);
+}
+
+#editMovie table td
+{
+    padding: 2px 4px 2px 4px;
+    height: 2.5em;
+    border: solid 2px rgb(245,245,245);
+    background-color: rgb(225,225,225);
+    color: rgb(80,80,80);
+}

@@ -3,7 +3,6 @@
 
 <%@ Import Namespace="Combres.Mvc" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
-<%= Html.CombresLink("photosCss")%>
 </asp:Content>
 <asp:Content runat="server" ID="Content" ContentPlaceHolderID="TitleContent">
     <%= Model.Name %>

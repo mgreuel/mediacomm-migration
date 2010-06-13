@@ -127,6 +127,7 @@ namespace MediaCommMVC.UI.Controllers
         /// <param name="post">The post to add.</param>
         /// <returns>The last page of the topic.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateInput(false)]
         public ActionResult Topic(int id, Post post)
         {
             this.logger.Debug("Adding post '{0}' to the topic with id '{1}'", post, id);

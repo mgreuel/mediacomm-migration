@@ -2,16 +2,12 @@
 
 <%@ Import Namespace="Combres.Mvc" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
-    <%= Html.CombresLink("photosCss")%>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%= Model.Name %>
     (<%= Model.PhotoCount %> <%= Resources.Photos.PhotosTitle %>)
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!--[if lt IE 7]>
-<link rel="stylesheet" type="text/css" href="highslide/highslide-ie6.css" />
-<![endif]-->
     <%= Html.CombresLink("photosJs")%>
     <div class="highslide-gallery">
         <ul>

@@ -4,7 +4,7 @@
     <%= Resources.Admin.UserCreatedTitle%>
 </asp:Content>
 <asp:Content runat="server" ID="Content1" ContentPlaceHolderID="MainContent">
-    <p>
+    <p class="text">
         <%= string.Format(Resources.Admin.UserCreatedText, TempData["UserName"]) %>
     </p>
 </asp:Content>

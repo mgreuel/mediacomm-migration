@@ -1,0 +1,48 @@
+﻿/* Create User Start */
+#createUserTable
+{
+    width: 340px;
+}
+
+#createUserTable .firstColumn
+{
+    width: 110px !important;
+    font-weight: bold !important;
+    text-align: right !important;
+}
+
+#createUserTable .secondColumn
+{
+    width: 200px;
+}
+
+#createUserTable .secondColumn input
+{
+    width: 200px;
+}
+/* Create User End */
+
+/* Create Forum Start */
+#createForumTable
+{
+    width: 400px;
+}
+
+#createForumTable .firstColumn
+{
+    width: 100px !important;
+    font-weight: bold !important;
+    text-align: right !important;
+    vertical-align: top;
+}
+
+#createForumTable .secondColumn
+{
+    width: 300px;
+}
+
+#createForumTable .secondColumn input, #createForumTable .secondColumn textarea
+{
+    width: 296px;
+}
+/* Create Forum End */

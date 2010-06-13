@@ -1,9 +1,9 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage" %>
 
+
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
-    <script src="../../Content/tiny_mce/tiny_mce.js" type="text/javascript"></script>
-    <link href="../../Content/Custom/elementReset.css" rel="stylesheet" type="text/css" />
-</asp:Content>
+    <script src="/Content/tiny_mce/tiny_mce.js" type="text/javascript"></script>
+ </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%= Resources.Forums.CreateTopic %>
 </asp:Content>
@@ -17,7 +17,7 @@
         <tr>
             <td class="firstColumn">
                 <label for="Topic.Title">
-                    <%= Resources.Forums.Subject %></label>
+                    <%= Resources.Forums.Subject %>:</label>
             </td>
             <td class="secondColumn">
                 <%= Html.TextBox("Topic.Title") %>
@@ -48,16 +48,4 @@
             theme: "simple"
         });
     </script>
-    <style type="text/css">
-        #createTopicTable input[type=text]
-        {
-            width: 99%;
-        }
-        
-        #Post_Text
-        {
-            width: 99%;
-            height: 300px;
-        }
-    </style>
 </asp:Content>

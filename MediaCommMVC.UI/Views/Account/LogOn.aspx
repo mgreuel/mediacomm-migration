@@ -7,7 +7,7 @@
     <%= Html.ValidationSummary(true, Resources.Users.LoginFailed) %>
     <% using (Html.BeginForm())
        { %>
-    <table id="loginTable">
+    <table id="loginTable" class="defaultTable">
         <tr>
             <td class="firstColumn">
                 <%= Html.LabelFor(m => m.UserName) %>
