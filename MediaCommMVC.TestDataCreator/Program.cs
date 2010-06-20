@@ -37,6 +37,8 @@ namespace MediaCommMVC.TestDataCreator
 
         private static IUserRepository userRepository;
 
+        private static MediaCommUser currentUser = new MediaCommUser("admim", "weg@seg.dw");
+
 
         static void Main()
         {
@@ -47,8 +49,7 @@ namespace MediaCommMVC.TestDataCreator
                 sessionManager = new SessionManager(new ConfigurationGenerator(new AutoMapGenerator(logger), logger));
                 sessionManager.CreateNewSession();
 
-                forumRepository = new ForumRepository(
-    sessionManager, new FileConfigAccessor(logger), logger);
+                forumRepository = new ForumRepository(sessionManager, new FileConfigAccessor(logger), logger);
 
                 userRepository = new UserRepository(sessionManager, new FileConfigAccessor(logger), logger);
 
@@ -70,12 +71,13 @@ namespace MediaCommMVC.TestDataCreator
 
         private static void CreatePosts()
         {
-            IEnumerable<Forum> forums = forumRepository.GetAllForums();
+            IEnumerable<Forum> forums = forumRepository.GetAllForums(currentUser);
 
             foreach (Forum forum in forums)
             {
+                
                 IEnumerable<Topic> topics = forumRepository.GetTopicsForForum(
-                    forum.Id, new PagingParameters { CurrentPage = 1, PageSize = 99999 });
+                    forum.Id, new PagingParameters { CurrentPage = 1, PageSize = 99999 }, currentUser);
 
                 MediaCommUser mediaCommUser = userRepository.GetAllUsers().First();
 
@@ -106,7 +108,7 @@ namespace MediaCommMVC.TestDataCreator
 
         private static void CreateTopics()
         {
-            IEnumerable<Forum> forums = forumRepository.GetAllForums();
+            IEnumerable<Forum> forums = forumRepository.GetAllForums(currentUser);
 
 
             Console.WriteLine("Filling {0} forums with posts", forums.Count());

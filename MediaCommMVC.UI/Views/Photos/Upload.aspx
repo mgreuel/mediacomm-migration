@@ -56,9 +56,7 @@
 
         function startUpload()
         {
-            // ReSharper disable PossibleNullReferenceException
             var auth = "<% = Request.Cookies[FormsAuthentication.FormsCookieName]==null ? string.Empty : Request.Cookies[FormsAuthentication.FormsCookieName].Value %>";
-            // ReSharper restore PossibleNullReferenceException
 
             $('#fileInput').uploadifySettings('scriptData', { 'Category.Id': $('#Category_Name :selected').val(), 'Category.Name': $('#Category_Name :selected').text(), 'Album.Name': $('#Album_Name').val(), "token": auth });
             $('#fileInput').uploadifyUpload();

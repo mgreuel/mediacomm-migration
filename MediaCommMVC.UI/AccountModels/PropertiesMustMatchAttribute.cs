@@ -17,14 +17,12 @@ namespace MediaCommMVC.UI.AccountModels
         #region Constants and Fields
 
         /// <summary>
-        ///   The _default error message.
+        ///   The default error message.
         /// </summary>
-        [SuppressMessage("Microsoft.StyleCop.CSharp.NamingRules", "SA1303:ConstFieldNamesMustBeginWithUpperCaseLetter", 
-            Justification = "Reviewed. Suppression is OK here.")]
-        private const string defaultErrorMessage = "'{0}' and '{1}' do not match.";
+        private const string DefaultErrorMessage = "'{0}' and '{1}' do not match.";
 
         /// <summary>
-        ///   The _type id.
+        ///   The type id.
         /// </summary>
         private readonly object typeId = new object();
 
@@ -36,7 +34,7 @@ namespace MediaCommMVC.UI.AccountModels
         /// <param name="originalProperty">The original property.</param>
         /// <param name="confirmProperty">The confirm property.</param>
         public PropertiesMustMatchAttribute(string originalProperty, string confirmProperty)
-            : base(defaultErrorMessage)
+            : base(DefaultErrorMessage)
         {
             this.OriginalProperty = originalProperty;
             this.ConfirmProperty = confirmProperty;

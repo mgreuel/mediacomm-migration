@@ -88,9 +88,7 @@ namespace MediaCommMVC.UI.Controllers
         /// <returns>The manage forums view.</returns>
         public ActionResult ManageForums()
         {
-            IEnumerable<Forum> forums = this.forumRepository.GetAllForums();
-
-            return this.View(forums);
+            return this.View();
         }
 
         /// <summary>Saves changes made to the forums.</summary>

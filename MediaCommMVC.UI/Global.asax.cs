@@ -55,6 +55,8 @@ namespace MediaCommMVC.UI
         /// <summary>Configures the application during start up.</summary>
         protected void Application_Start()
         {
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize(); 
+
             AreaRegistration.RegisterAllAreas();
 
             try
@@ -63,14 +65,19 @@ namespace MediaCommMVC.UI
                 {
                     container = new UnityContainer();
                 }
-
+                
                 new Bootstrapper(container, this.logger).Run();
 
                 // RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
             }
+            catch (HttpUnhandledException unhandledException)
+            {
+                this.logger.Error(unhandledException.InnerException.ToString());
+                throw unhandledException.InnerException;
+            }
             catch (Exception ex)
             {
-                this.logger.Error(ex.InnerException.ToString());
+                this.logger.Error(ex.ToString());
                 throw;
             }
         }

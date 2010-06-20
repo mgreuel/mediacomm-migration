@@ -46,7 +46,7 @@ namespace MediaCommMVC.UI.Helpers
         {
             string filename = "folder";
 
-            if (!forum.HasUnreadTopics)
+            if (forum.HasUnreadTopics)
             {
                 filename = filename + "_new";
             }

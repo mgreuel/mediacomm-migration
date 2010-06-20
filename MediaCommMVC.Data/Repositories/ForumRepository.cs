@@ -22,6 +22,15 @@ namespace MediaCommMVC.Data.Repositories
     /// <summary>Implements the IForumRepository using NHibernate.</summary>
     public class ForumRepository : RepositoryBase, IForumRepository
     {
+        #region Constants and Fields
+
+        /// <summary>
+        ///   The timespan a topic can be marked as unread.
+        /// </summary>
+        private readonly TimeSpan topicUnreadValidity = new TimeSpan(days: 30, hours: 0, minutes: 0, seconds: 0);
+
+        #endregion
+
         #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="ForumRepository"/> class.</summary>
@@ -46,8 +55,6 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Adding forum to the DB: " + forum);
 
             this.InvokeTransaction(s => s.Save(forum));
-
-            this.Logger.Debug("Finished adding forum");
         }
 
         /// <summary>Adds the post.</summary>
@@ -60,15 +67,11 @@ namespace MediaCommMVC.Data.Repositories
                 delegate(ISession session)
                 {
                     session.Save(post);
-                    this.UpdateLastPostInfo(session, post.Topic);
+                    this.UpdateLastPostInfo(session, post);
                 });
-
-            this.Logger.Debug("Finished adding post");
         }
 
-        /// <summary>
-        /// Adds the topic.
-        /// </summary>
+        /// <summary>Adds the topic.</summary>
         /// <param name="topic">The topic.</param>
         /// <param name="post">The topic's first post.</param>
         /// <returns>The added topic.</returns>
@@ -88,8 +91,10 @@ namespace MediaCommMVC.Data.Repositories
 
                     session.Save(topic);
                     session.Save(post);
+
+                    this.UpdateLastPostInfo(session, post);
                 });
-            
+
             this.Logger.Debug("Finished adding topic");
 
             return topic;
@@ -129,23 +134,45 @@ namespace MediaCommMVC.Data.Repositories
                         this.Logger.Debug("Post was the first in its topic. Topic will also be deleted");
 
                         this.DeleteTopic(post.Topic, session);
+
+                        Post lastPost =
+                            session.Linq<Post>().Where(p => p.Topic.Forum.Id.Equals(post.Topic.Forum.Id)).OrderByDescending(
+                                p => p.Created).ThenByDescending(p => p.Id).First();
+
+                        this.UpdateLastPostInfo(session, lastPost);
                     }
                     else
                     {
-                        this.UpdateLastPostInfo(session, post.Topic);
+                        Post lastPost =
+                            session.Linq<Post>().Where(p => p.Topic.Id.Equals(post.Topic.Id)).OrderByDescending(
+                                p => p.Created).ThenByDescending(p => p.Id).First();
+
+                        this.UpdateLastPostInfo(session, lastPost);
                     }
                 });
-
-            this.Logger.Debug("Finished deleting post");
         }
 
         /// <summary>Gets all forums.</summary>
+        /// <param name="currentUser">The current user.</param>
         /// <returns>The list of forums.</returns>
-        public IEnumerable<Forum> GetAllForums()
+        public IEnumerable<Forum> GetAllForums(MediaCommUser currentUser)
         {
-            this.Logger.Debug("Getting all forums");
+            List<Forum> allForums = this.Session.Linq<Forum>().ToList();
 
-            var allForums = this.Session.Linq<Forum>();
+            foreach (Forum forum in allForums)
+            {
+                forum.HasUnreadTopics =
+                   bool.Parse(this.Session.CreateSQLQuery(
+                        @"select case when COUNT(id) = 0 then 'False' else 'True' end
+                        from ForumTopics 
+                        where ForumID = :forumId
+	                        and LastPostTime > DATEADD(day, -30, GETDATE())
+	                        and Id not in 
+		                        (select ReadTopicID from TopicRead where ReadByUserID = :userId and LastVisit > DATEADD(day, -30, GETDATE()))")
+                    .SetParameter("forumId", forum.Id)
+                    .SetParameter("userId", currentUser.Id)
+                    .UniqueResult<string>());
+            }
 
             this.Logger.Debug("Got {0} forums", allForums.Count());
 
@@ -196,11 +223,12 @@ namespace MediaCommMVC.Data.Repositories
             return post;
         }
 
-        /// <summary>Gets the posts for the topic.</summary>
+        /// <summary>Gets the posts for the specified page of the topic.</summary>
         /// <param name="topicId">The topic ID.</param>
         /// <param name="pagingParameters">The paging parameters.</param>
+        /// <param name="currentUser">The current user.</param>
         /// <returns>The posts.</returns>
-        public IEnumerable<Post> GetPostsForTopic(int topicId, PagingParameters pagingParameters)
+        public IEnumerable<Post> GetPostsForTopic(int topicId, PagingParameters pagingParameters, MediaCommUser currentUser)
         {
             this.Logger.Debug("Getting posts for topic with id '{0}' and paging parameters: {1}", topicId, pagingParameters);
 
@@ -212,6 +240,26 @@ namespace MediaCommMVC.Data.Repositories
                     .ThenBy(p => p.Id)
                     .Skip(postsToSkip)
                     .Take(pagingParameters.PageSize).ToList();
+
+            int lastPage = ((pagingParameters.TotalCount - 1) / pagingParameters.PageSize) + 1;
+            bool isLastPage = pagingParameters.CurrentPage == lastPage;
+
+            if (isLastPage)
+            {
+                this.InvokeTransaction(
+                    s =>
+                    {
+                        TopicRead topicRead =
+                            s.Linq<TopicRead>().SingleOrDefault(
+                                r =>
+                                r.ReadByUser.Id.Equals(currentUser.Id) && r.ReadTopic.Id.Equals(topicId)) ??
+                            new TopicRead { ReadByUser = currentUser, ReadTopic = s.Get<Topic>(topicId) };
+
+                        topicRead.LastVisit = DateTime.Now;
+
+                        s.SaveOrUpdate(topicRead);
+                    });
+            }
 
             this.Logger.Debug("Got {0} posts", posts.Count());
 
@@ -235,18 +283,19 @@ namespace MediaCommMVC.Data.Repositories
         /// <summary>Gets the topics for the forum.</summary>
         /// <param name="forumId">The forum id.</param>
         /// <param name="pagingParameters">The paging parameters.</param>
+        /// <param name="currentUser">The current user.</param>
         /// <returns>The topics.</returns>
-        public IEnumerable<Topic> GetTopicsForForum(int forumId, PagingParameters pagingParameters)
+        public IEnumerable<Topic> GetTopicsForForum(int forumId, PagingParameters pagingParameters, MediaCommUser currentUser)
         {
             this.Logger.Debug("Getting topics for forum with id '{0}' and paging parameters: {1}", forumId, pagingParameters);
 
-            IEnumerable<Topic> topics =
-                this.Session.Linq<Topic>().Where(t => t.Forum.Id.Equals(forumId))
-                    .OrderByDescending(t => t.DisplayPriority)
-                    .ThenByDescending(t => t.LastPostTime)
-                    .ThenByDescending(t => t.Id)
-                    .Skip((pagingParameters.CurrentPage - 1) * pagingParameters.PageSize)
-                    .Take(pagingParameters.PageSize).ToList();
+            List<Topic> topics =
+                this.Session.Linq<Topic>().Where(t => t.Forum.Id.Equals(forumId)).OrderByDescending(
+                    t => t.DisplayPriority).ThenByDescending(t => t.LastPostTime).ThenByDescending(t => t.Id).Skip(
+                        (pagingParameters.CurrentPage - 1) * pagingParameters.PageSize).Take(pagingParameters.PageSize).
+                    ToList();
+
+            this.UpdateTopicReadStatus(topics.Where(t => t.LastPostTime > DateTime.Now - this.topicUnreadValidity), currentUser);
 
             this.Logger.Debug("Got '{0}' topics", topics.Count());
 
@@ -284,32 +333,6 @@ namespace MediaCommMVC.Data.Repositories
             this.InvokeTransaction(s => s.Update(topic));
 
             this.Logger.Debug("Finished updating topic");
-        }
-
-        /// <summary>Updates the forums with information about unread posts.</summary>
-        /// <param name="forums">The forums.</param>
-        /// <param name="userName">Name of the user.</param>
-        /// <returns>The updated forums.</returns>
-        public IEnumerable<Forum> UpdateUnreadPosts(IEnumerable<Forum> forums, string userName)
-        {
-            this.Logger.Debug("Updating forums unread posts status for username: '{0}'", userName);
-
-            DateTime? lastVisit =
-                this.Session.Linq<MediaCommUser>().Where(u => u.UserName.Equals(userName)).Single().LastVisit;
-
-            if (lastVisit != null)
-            {
-                this.Logger.Debug("User's last visit: " + lastVisit);
-                foreach (Forum forum in forums)
-                {
-                    forum.HasUnreadTopics = this.Session.Linq<Post>().Where(p => p.Topic.Forum.Id.Equals(forum.Id) && p.Created > lastVisit).Any();
-                    this.Logger.Debug("User has unread posts in the forum '{0}': {1}", forum, forum.HasUnreadTopics);
-                }
-            }
-
-            this.Logger.Debug("Finished updating forums unread status");
-
-            return forums;
         }
 
         #endregion
@@ -351,24 +374,33 @@ namespace MediaCommMVC.Data.Repositories
 
         /// <summary>Updates the last post info.</summary>
         /// <param name="session">The session.</param>
-        /// <param name="topic">The topic.</param>
-        private void UpdateLastPostInfo(ISession session, Topic topic)
+        /// <param name="post">The post.</param>
+        private void UpdateLastPostInfo(ISession session, Post post)
         {
-            this.Logger.Debug("Updating topic's last post info. Topic: " + topic);
+            post.Topic.LastPostTime = post.Created;
+            post.Topic.LastPostAuthor = post.Author.UserName;
 
-            topic.LastPostAuthor =
-                session.Linq<Post>().Where(p => p.Topic.Id.Equals(topic.Id))
-                    .OrderByDescending(p => p.Created)
-                    .ThenByDescending(p => p.Id).First().Author.UserName;
+            post.Topic.Forum.LastPostAuthor = post.Author.UserName;
+            post.Topic.Forum.LastPostTime = post.Created;
 
-            topic.LastPostTime =
-                session.Linq<Post>().Where(p => p.Topic.Id.Equals(topic.Id))
-                    .OrderByDescending(p => p.Created)
-                    .ThenByDescending(p => p.Id).First().Created;
+            session.Update(post);
+        }
 
-            this.Logger.Debug("Setting lastPostAuthor to '{0}' and lastPostTIme to '{1}'", topic.LastPostAuthor, topic.LastPostTime);
+        /// <summary>Updates the topic read status.</summary>
+        /// <param name="topics">The topics.</param>
+        /// <param name="currentUser">The current user.</param>
+        private void UpdateTopicReadStatus(IEnumerable<Topic> topics, MediaCommUser currentUser)
+        {
+            IEnumerable<TopicRead> readTopics = this.Session.Linq<TopicRead>().Where(r => r.LastVisit > DateTime.Now - this.topicUnreadValidity).ToList();
 
-            session.Update(topic);
+            foreach (Topic topic in topics)
+            {
+                topic.ReadByCurrentUser =
+                    readTopics.Any(
+                        r =>
+                        r.ReadByUser.Id.Equals(currentUser.Id) && r.ReadTopic.Id.Equals(topic.Id) &&
+                        topic.LastPostTime < r.LastVisit);
+            }
         }
 
         #endregion

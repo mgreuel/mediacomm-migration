@@ -34,11 +34,11 @@ namespace MediaCommMVC.Core.Model.Forums
 
         /// <summary>Gets or sets the author of the last post.</summary>
         /// <value>The author of the last post.</value>
-        public virtual string LastPostAuthor { get; protected set; }
+        public virtual string LastPostAuthor { get; set; }
 
         /// <summary>Gets or sets the time of the last post.</summary>
         /// <value>The last time of the last post.</value>
-        public virtual DateTime LastPostTime { get; protected set; }
+        public virtual DateTime? LastPostTime { get; set; }
 
         /// <summary>Gets or sets the post count.</summary>
         /// <value>The post count.</value>

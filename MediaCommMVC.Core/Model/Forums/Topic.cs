@@ -28,10 +28,9 @@ namespace MediaCommMVC.Core.Model.Forums
         /// <value>The forum the post belongs to.</value>
         public virtual Forum Forum { get; set; }
 
-        /// <summary>Gets or sets the id.
-        /// Only the ORM should set the id.</summary>
+        /// <summary>Gets or sets the id. </summary>
         /// <value>The topic's id.</value>
-        public virtual int Id { get; protected set; }
+        public virtual int Id { get; set; }
 
         /// <summary>Gets or sets the name of the last post's author.</summary>
         /// <value>The name of the last post's author.</value>
@@ -43,7 +42,7 @@ namespace MediaCommMVC.Core.Model.Forums
 
         /// <summary>Gets or sets the post count.</summary>
         /// <value>The post count.</value>
-        public virtual int PostCount { get; protected set; }
+        public virtual int PostCount { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the thread was already [read by the current user].
