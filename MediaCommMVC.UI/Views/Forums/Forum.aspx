@@ -16,7 +16,7 @@
         <thead>
             <tr>
                 <th colspan="2">
-                    <%= Resources.Forums.Topics %>
+                    <%= Resources.Forums.Topic %>
                 </th>
                 <th>
                     <%= Resources.Forums.Author %>

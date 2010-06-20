@@ -27,11 +27,6 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
             mapping.Map(f => f.TopicCount).Formula("(SELECT COUNT(*) FROM forumTopics p where p.ForumID = Id)");
             mapping.Map(f => f.PostCount).Formula(
                 "(select COUNT(*) from forumPosts p JOIN forumTopics t ON (t.Id = p.TopicID) WHERE t.ForumID = Id)");
-            mapping.Map(f => f.LastPostTime).Formula(
-                "(select Top 1 p.Created from forumPosts p JOIN forumTopics t ON (t.Id = p.TopicID) WHERE t.ForumID = Id ORDER BY p.Created DESC, p.Id DESC)");
-            mapping.Map(f => f.LastPostAuthor).Formula(
-                @"(select Top 1 u.UserName from forumPosts p JOIN forumTopics t ON (t.Id = p.TopicID) JOIN mediaCommUsers u ON (u.Id = p.AuthorID) 
-                    WHERE t.ForumID = Id ORDER BY p.Created DESC, p.Id DESC)");
         }
 
         #endregion

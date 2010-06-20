@@ -76,8 +76,6 @@ namespace MediaCommMVC.UI.Controllers
 
             PhotoAlbum album = this.photoRepository.GetAlbumById(id);
 
-#warning Load via ajax
-
             this.logger.Debug("Displaying view with photo album " + album);
 
             return this.View(album);
@@ -161,7 +159,6 @@ namespace MediaCommMVC.UI.Controllers
         {
             this.logger.Debug("Displaying photo upload page");
 
-#warning get via ajax
             IEnumerable<PhotoCategory> categories = this.photoRepository.GetAllCategories();
 
             return this.View(categories);

@@ -1,6 +1,7 @@
 #region Using Directives
 
 using System;
+using System.Data;
 
 using MediaCommMVC.Common.Config;
 using MediaCommMVC.Common.Logging;
@@ -65,7 +66,7 @@ namespace MediaCommMVC.Data.Repositories
         /// <param name="action">The action.</param>
         protected void InvokeTransaction(Action<ISession> action)
         {
-            using (ITransaction transaction = this.Session.BeginTransaction())
+            using (ITransaction transaction = this.Session.BeginTransaction(IsolationLevel.ReadUncommitted))
             {
                 try
                 {

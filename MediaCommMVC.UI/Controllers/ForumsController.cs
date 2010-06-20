@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Forums;
+using MediaCommMVC.Core.Model.Users;
 using MediaCommMVC.Core.Parameters;
 using MediaCommMVC.UI.Helpers;
 using MediaCommMVC.UI.ViewModel;
@@ -22,19 +23,9 @@ namespace MediaCommMVC.UI.Controllers
         #region Constants and Fields
 
         /// <summary>
-        ///   The forum repository.
+        ///   The number of posts displayed per page.
         /// </summary>
-        private readonly IForumRepository forumRepository;
-
-        /// <summary>
-        ///   The user repository.
-        /// </summary>
-        private readonly IUserRepository userRepository;
-
-        /// <summary>
-        ///   The logger.
-        /// </summary>
-        private readonly ILogger logger;
+        private const int PostPageSize = 10;
 
         /// <summary>
         ///   The number of topics displayed per page.
@@ -42,9 +33,24 @@ namespace MediaCommMVC.UI.Controllers
         private const int TopicPageSize = 25;
 
         /// <summary>
-        ///   The number of posts displayed per page.
+        ///   The forum repository.
         /// </summary>
-        private const int PostPageSize = 10;
+        private readonly IForumRepository forumRepository;
+
+        /// <summary>
+        ///   The logger.
+        /// </summary>
+        private readonly ILogger logger;
+
+        /// <summary>
+        ///   The user repository.
+        /// </summary>
+        private readonly IUserRepository userRepository;
+
+        /// <summary>
+        ///   The current user.
+        /// </summary>
+        private MediaCommUser currentUser;
 
         #endregion
 
@@ -65,14 +71,30 @@ namespace MediaCommMVC.UI.Controllers
 
         #region Public Methods
 
-        /// <summary>The forums index.</summary>
-        /// <returns>The forums index view.</returns>
-        public ActionResult Index()
+        /// <summary>Displays the create topic page.</summary>
+        /// <returns>The create topic view.</returns>
+        public ActionResult CreateTopic()
         {
-            this.logger.Debug("Displaying forums index.");
-#warning get read status
+            this.logger.Debug("Displaying create topic page.");
+            return this.View();
+        }
 
-            return this.View(this.forumRepository.GetAllForums());
+        /// <summary>Creates the topic.</summary>
+        /// <param name="topic">The topic.</param>
+        /// <param name="post">The first post.</param>
+        /// <param name="id">The forum id.</param>
+        /// <returns>The added topic view.</returns>
+        [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateInput(false)]
+        public ActionResult CreateTopic(Topic topic, Post post, int id)
+        {
+            this.logger.Debug("Creating topic '{0}' with post '{1}' and forumId '{2}'", topic, post, id);
+
+            post.Author = this.userRepository.GetUserByName(this.User.Identity.Name);
+            topic.Forum = this.forumRepository.GetForumById(id);
+            Topic createdTopic = this.forumRepository.AddTopic(topic, post);
+
+            return this.RedirectToAction("Topic", new { id = createdTopic.Id, name = this.Url.ToFriendlyUrl(createdTopic.Title) });
         }
 
         /// <summary>Displays the forum with the provided Id.</summary>
@@ -83,20 +105,21 @@ namespace MediaCommMVC.UI.Controllers
         {
             this.logger.Debug("Displaying page {0} of the forum with id '{1}'", page, id);
 
-            PagingParameters pagingParameters = new PagingParameters
-                {
-                    CurrentPage = page,
-                    PageSize = TopicPageSize
-                };
+            PagingParameters pagingParameters = new PagingParameters { CurrentPage = page, PageSize = TopicPageSize };
 
             Forum forum = this.forumRepository.GetForumById(id);
             pagingParameters.TotalCount = forum.TopicCount;
 
-            IEnumerable<Topic> topics = this.forumRepository.GetTopicsForForum(id, pagingParameters);
-
-#warning set read status
+            IEnumerable<Topic> topics = this.forumRepository.GetTopicsForForum(id, pagingParameters, this.GetCurrentUser());
 
             return this.View(new ForumPage { Forum = forum, Topics = topics, PagingParameters = pagingParameters });
+        }
+
+        /// <summary>The forums index.</summary>
+        /// <returns>The forums index view.</returns>
+        public ActionResult Index()
+        {
+            return this.View(this.forumRepository.GetAllForums(this.GetCurrentUser()));
         }
 
         /// <summary>Displays the topic with the specified id.</summary>
@@ -107,16 +130,12 @@ namespace MediaCommMVC.UI.Controllers
         {
             this.logger.Debug("Displaying page {0} of the topic with id '{1}'", page, id);
 
-            PagingParameters pagingParameters = new PagingParameters
-                {
-                    CurrentPage = page,
-                    PageSize = PostPageSize
-                };
+            PagingParameters pagingParameters = new PagingParameters { CurrentPage = page, PageSize = PostPageSize };
 
             Topic topic = this.forumRepository.GetTopicById(id);
             pagingParameters.TotalCount = topic.PostCount;
 
-            IEnumerable<Post> posts = this.forumRepository.GetPostsForTopic(id, pagingParameters);
+            IEnumerable<Post> posts = this.forumRepository.GetPostsForTopic(id, pagingParameters, this.userRepository.GetUserByName(this.User.Identity.Name));
 
             return this.View(new TopicPage { Topic = topic, Posts = posts, PagingParameters = pagingParameters });
         }
@@ -143,32 +162,15 @@ namespace MediaCommMVC.UI.Controllers
             return this.RedirectToAction("Topic", new { page = lastPage });
         }
 
-        /// <summary>Displays the create topic page.</summary>
-        /// <returns>The create topic view.</returns>
-        public ActionResult CreateTopic()
+        #endregion
+
+        #region Methods
+
+        /// <summary>Gets the current user.</summary>
+        /// <returns>The current user.</returns>
+        private MediaCommUser GetCurrentUser()
         {
-            this.logger.Debug("Displaying create topic page.");
-            return this.View();
-        }
-
-        /// <summary>Creates the topic.</summary>
-        /// <param name="topic">The topic.</param>
-        /// <param name="post">The first post.</param>
-        /// <param name="id">The forum id.</param>
-        /// <returns>The added topic view.</returns>
-        [AcceptVerbs(HttpVerbs.Post)]
-        [ValidateInput(false)]
-        public ActionResult CreateTopic(Topic topic, Post post, int id)
-        {
-            this.logger.Debug("Creating topic '{0}' with post '{1}' and forumId '{2}'", topic, post, id);
-
-            post.Author = this.userRepository.GetUserByName(this.User.Identity.Name);
-
-            topic.Forum = this.forumRepository.GetForumById(id);
-
-            Topic createdTopic = this.forumRepository.AddTopic(topic, post);
-
-            return this.RedirectToAction("Topic", new { id = createdTopic.Id, name = Url.ToFriendlyUrl(createdTopic.Title) });
+            return this.currentUser ?? (this.currentUser = this.userRepository.GetUserByName(this.User.Identity.Name));
         }
 
         #endregion

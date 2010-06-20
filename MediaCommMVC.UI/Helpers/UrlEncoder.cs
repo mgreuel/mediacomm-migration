@@ -20,12 +20,7 @@ namespace MediaCommMVC.UI.Helpers
         /// <returns>The friendly Url.</returns>
         public static string ToFriendlyUrl(this UrlHelper helper, string urlToEncode)
         {
-            if (string.IsNullOrEmpty(urlToEncode))
-            {
-                return string.Empty;
-            }
-
-            return urlToEncode.Replace(" ", "_").Replace("&", Resources.General.And);
+            return string.IsNullOrEmpty(urlToEncode) ? string.Empty : urlToEncode.Replace(" ", "_").Replace("&", Resources.General.And);
         }
     }
 }

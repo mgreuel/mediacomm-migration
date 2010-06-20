@@ -3,10 +3,10 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 
-using Combres;
 using MediaCommMVC.Common.Config;
 using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
+using MediaCommMVC.Data;
 using MediaCommMVC.Data.NHInfrastructure;
 using MediaCommMVC.Data.NHInfrastructure.Config;
 using MediaCommMVC.Data.NHInfrastructure.Mapping;
@@ -14,8 +14,7 @@ using MediaCommMVC.Data.Repositories;
 
 using Microsoft.Practices.Unity;
 
-using ILogger = MediaCommMVC.Common.Logging.ILogger;
-using MediaCommMVC.Data;
+using WebExtensions = Combres.WebExtensions;
 
 #endregion
 
@@ -141,7 +140,7 @@ namespace MediaCommMVC.UI.Infrastructure
 
             RouteCollection routes = RouteTable.Routes;
 
-            routes.AddCombresRoute("Combres Route");
+            WebExtensions.AddCombresRoute(routes, "Combres Route");
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.IgnoreRoute("{*favicon}", new { favicon = @"(.*/)?favicon.ico(/.*)?" });
@@ -153,7 +152,7 @@ namespace MediaCommMVC.UI.Infrastructure
                 new { controller = "Forums", action = "Forum", page = 1 });
 
             routes.MapRoute(
-                "ViewTopic",
+                "ViewTopic", 
                 "Forums/Topic/{id}/{name}/{page}", 
                 new { controller = "Forums", action = "Topic", page = 1 });
 
@@ -163,7 +162,7 @@ namespace MediaCommMVC.UI.Infrastructure
                 new { controller = "Forums", action = "CreateTopic" });
 
             routes.MapRoute(
-                "GetPhoto",
+                "GetPhoto", 
                 "Photos/Photo/{id}/{size}", 
                 new { controller = "Photos", action = "Photo" });
 
@@ -178,7 +177,7 @@ namespace MediaCommMVC.UI.Infrastructure
                 new { controller = "Users", action = "Profile" });
 
             routes.MapRoute(
-                "DefaultWithIdAndName",
+                "DefaultWithIdAndName", 
                 "{controller}/{action}/{id}/{name}");
 
             routes.MapRoute(

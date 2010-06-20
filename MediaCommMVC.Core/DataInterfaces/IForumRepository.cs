@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 
 using MediaCommMVC.Core.Model.Forums;
+using MediaCommMVC.Core.Model.Users;
 using MediaCommMVC.Core.Parameters;
 
 #endregion
@@ -12,6 +13,10 @@ namespace MediaCommMVC.Core.DataInterfaces
     /// <summary>The interface for all forum repositories.</summary>
     public interface IForumRepository
     {
+        #region Properties
+
+        #endregion
+
         #region Public Methods
 
         /// <summary>Adds the the forum to the persistence layer.</summary>
@@ -22,9 +27,7 @@ namespace MediaCommMVC.Core.DataInterfaces
         /// <param name="post">The post to add.</param>
         void AddPost(Post post);
 
-        /// <summary>
-        /// Adds the topic.
-        /// </summary>
+        /// <summary>Adds the topic.</summary>
         /// <param name="topic">The topic.</param>
         /// <param name="post">The topic's first post.</param>
         /// <returns>The added topic.</returns>
@@ -38,9 +41,12 @@ namespace MediaCommMVC.Core.DataInterfaces
         /// <param name="post">The post to delete.</param>
         void DeletePost(Post post);
 
-        /// <summary>Gets all forums.</summary>
+        /// <summary>
+        /// Gets all forums.
+        /// </summary>
+        /// <param name="currentUser">The current user.</param>
         /// <returns>The list of forums.</returns>
-        IEnumerable<Forum> GetAllForums();
+        IEnumerable<Forum> GetAllForums(MediaCommUser currentUser);
 
         /// <summary>Gets a single forum by id.</summary>
         /// <param name="id">The forum's id.</param>
@@ -58,22 +64,28 @@ namespace MediaCommMVC.Core.DataInterfaces
         /// <returns>The post with the id.</returns>
         Post GetPostById(int id);
 
-        /// <summary>Gets the posts for the topic.</summary>
+        /// <summary>
+        /// Gets the posts for the topic.
+        /// </summary>
         /// <param name="topicId">The topic ID.</param>
         /// <param name="pagingParameters">The paging parameters.</param>
+        /// <param name="currentUser">The current user.</param>
         /// <returns>The posts.</returns>
-        IEnumerable<Post> GetPostsForTopic(int topicId, PagingParameters pagingParameters);
+        IEnumerable<Post> GetPostsForTopic(int topicId, PagingParameters pagingParameters, MediaCommUser currentUser);
 
         /// <summary>Gets the topic by id.</summary>
         /// <param name="id">The forum id.</param>
         /// <returns>The forum.</returns>
         Topic GetTopicById(int id);
 
-        /// <summary>Gets the topics for the forum.</summary>
+        /// <summary>
+        /// Gets the topics for the forum.
+        /// </summary>
         /// <param name="forumId">The forum id.</param>
         /// <param name="pagingParameters">The paging parameters.</param>
+        /// <param name="currentUser">The current user.</param>
         /// <returns>The topics.</returns>
-        IEnumerable<Topic> GetTopicsForForum(int forumId, PagingParameters pagingParameters);
+        IEnumerable<Topic> GetTopicsForForum(int forumId, PagingParameters pagingParameters, MediaCommUser currentUser);
 
         /// <summary>Updates the forum in the persistence layer.</summary>
         /// <param name="forum">The forum to update.</param>
@@ -86,12 +98,6 @@ namespace MediaCommMVC.Core.DataInterfaces
         /// <summary>Updates the topic.</summary>
         /// <param name="topic">The topic.</param>
         void UpdateTopic(Topic topic);
-
-        /// <summary>Updates the forums with information about unread posts.</summary>
-        /// <param name="forums">The forums.</param>
-        /// <param name="userName">Name of the user.</param>
-        /// <returns>The updated forums.</returns>
-        IEnumerable<Forum> UpdateUnreadPosts(IEnumerable<Forum> forums, string userName);
 
         #endregion
     }

@@ -6,18 +6,21 @@ Admin:
 - Forums Administration
 
 Forums:
-- UI
-- Navigation
+- edit
+- delete
+- "birthday" threads
+- polls
+- goto first new post
 
 Home:
 - What's new
 
 Movies:
-- Input Validation
 - Edit
 
 General:
-- Multilanguage Display Attributes for Model
+- Input Validation
+- Multilanguage Display Attributes for Model??
 
 Install:
 - Web-Install
