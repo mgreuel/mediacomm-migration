@@ -58,14 +58,23 @@
         <h2>
             <%= Resources.Forums.Reply %>
         </h2>
-        <%= Html.TextArea("post.Text")%>
-        <input type="submit" value='<%= Resources.Forums.Reply %>' />
+        <%= Html.TextArea("post.Text", null, new { @class = "required", minlength = "3" }) %>
+
+        <input id="submitReply" type="submit" value='<%= Resources.Forums.Reply %>' />
     </div>
     <% } %>
     <script type="text/javascript">
         $(document).ready(function ()
         {
             $("tbody > tr:odd > td").css("background-color", "#dfeffc");
+
+            $('#submitReply').click(function ()
+            {
+                var content = tinyMCE.activeEditor.getContent();
+                $('#post_Text').val(content);
+            });
+
+            $("form").validate();
         });
 
         tinyMCE.init(

@@ -32,7 +32,7 @@ namespace MediaCommMVC.UI.Helpers
         {
             int totalPages = (int)Math.Ceiling(pagingParameters.TotalCount / (decimal)pagingParameters.PageSize);
 
-            if (totalPages == 1)
+            if (totalPages <= 1)
             {
                 return MvcHtmlString.Empty;
             }

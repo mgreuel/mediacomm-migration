@@ -1,10 +1,21 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Core.Model.Photos.PhotoCategory>>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.PhotoUpload>" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%= Resources.Photos.Upload %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
+<%
+    if (false)
+    {
+    %>
+    <script src="../../Scripts/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.validate.min.js" type="text/javascript"></script>
+<%
+    }
+%>
+
     <%= Html.CombresLink("uploadJs")%>
     <% using (Html.BeginForm())
        {%>
@@ -17,7 +28,7 @@
                     <%= Resources.Photos.Category %>
                 </td>
                 <td>
-                    <%= Html.DropDownList("Category.Name", new SelectList(Model, "Id", "Name")) %>
+                    <%= Html.DropDownList("Category.Name", new SelectList(Model.Categories, "Id", "Name"), new { @class = "required"} ) %>
                 </td>
             </tr>
             <tr>
@@ -25,7 +36,7 @@
                     <%= Resources.Photos.Album %>
                 </td>
                 <td>
-                    <%= Html.TextBox("Album.Name") %>
+                    <%= Html.TextBox("Album.Name", null, new { @class = "required", minlength = "2" } ) %>
                 </td>
             </tr>
             <tr>
@@ -33,7 +44,7 @@
                     <%= Resources.Photos.PhotosTitle %>
                 </td>
                 <td>
-                    <input id="fileInput" name="fileInput" type="file" />
+                    <input id="fileInput" name="fileInput" type="file" class="required" />
                 </td>
             </tr>
             <tr>
@@ -47,15 +58,12 @@
     </table>
     <%
         }%>
-    <div id="processing" style="display: none;">
-        <h1 style="font-size:200%; margin: 6px; padding: 6px;">
-            <%= Resources.Photos.ProcessingUpload %>
-        </h1>
-    </div>
     <script type="text/javascript">
-
+         
         function startUpload()
         {
+            $("form").validate().form();
+
             var auth = "<% = Request.Cookies[FormsAuthentication.FormsCookieName]==null ? string.Empty : Request.Cookies[FormsAuthentication.FormsCookieName].Value %>";
 
             $('#fileInput').uploadifySettings('scriptData', { 'Category.Id': $('#Category_Name :selected').val(), 'Category.Name': $('#Category_Name :selected').text(), 'Album.Name': $('#Album_Name').val(), "token": auth });
@@ -64,6 +72,8 @@
 
         $(document).ready(function ()
         {
+            $("form").validate();
+
             $("#uploadTable > tbody > tr > td:nth-child(odd)")._addClass("firstColumn");
             $("#uploadTable > tbody > tr > td:nth-child(even)")._addClass("secondColumn");
 

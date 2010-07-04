@@ -16,7 +16,7 @@
                     Title:</label>
             </td>
             <td class="secondColumn">
-                <%= Html.TextBox("Forum.Title") %>
+                <%= Html.TextBox("Forum.Title", null , new { @class="required", minlength = "3", maxlength = "75" }) %>
             </td>
         </tr>
         <tr>
@@ -25,7 +25,7 @@
                     Description:</label>
             </td>
             <td class="secondColumn">
-                <%= Html.TextArea("Forum.Description") %>
+                <%= Html.TextArea("Forum.Description", null , new { minlength = "6", maxlength = "250" }) %>
             </td>
         </tr>
         <tr>
@@ -37,4 +37,10 @@
         </tr>
     </table>
     <% } %>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $("form").validate();
+        });
+    </script>
 </asp:Content>
