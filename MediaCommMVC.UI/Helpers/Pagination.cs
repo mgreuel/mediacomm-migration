@@ -32,6 +32,11 @@ namespace MediaCommMVC.UI.Helpers
         {
             int totalPages = (int)Math.Ceiling(pagingParameters.TotalCount / (decimal)pagingParameters.PageSize);
 
+            if (totalPages == 1)
+            {
+                return MvcHtmlString.Empty;
+            }
+
             StringBuilder pagerBuilder = new StringBuilder(Resources.General.GoToPage);
 
             const string FormatNormal = "<span> <a href='{0}/{1}'>{2}</a></span>";

@@ -1,4 +1,5 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage" %>
+<%@ Import Namespace="Combres.Mvc" %>
 
 
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
@@ -45,7 +46,13 @@
         tinyMCE.init(
         {
             mode: "textareas",
-            theme: "simple"
+
+            theme: "advanced",
+            theme_advanced_toolbar_location: "top",
+
+            theme_advanced_buttons1: "bold,italic,underline,strikethrough,|,forecolor,link,|,bullist,numlist",
+            theme_advanced_buttons2: "",
+            theme_advanced_buttons3: ""            
         });
     </script>
 </asp:Content>
