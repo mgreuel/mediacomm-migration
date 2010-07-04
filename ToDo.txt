@@ -11,6 +11,7 @@ Forums:
 - "birthday" threads
 - polls
 - goto first new post
+- emotions/parser
 
 Home:
 - What's new

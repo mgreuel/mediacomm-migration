@@ -71,7 +71,13 @@
         tinyMCE.init(
         {
             mode: "textareas",
-            theme: "simple"
+
+            theme: "advanced",
+            theme_advanced_toolbar_location: "top",
+
+            theme_advanced_buttons1: "bold,italic,underline,strikethrough,|,forecolor,link,|,bullist,numlist",
+            theme_advanced_buttons2: "",
+            theme_advanced_buttons3: ""
         });
     </script>
 </asp:Content>
