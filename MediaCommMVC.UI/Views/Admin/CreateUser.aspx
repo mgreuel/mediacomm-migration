@@ -5,9 +5,6 @@
     <%= Resources.Admin.CreateUser %>
 </asp:Content>
 <asp:Content runat="server" ID="Content1" ContentPlaceHolderID="MainContent">
-    <div id="validationSummary">
-        <%= Html.ValidationSummary(Resources.General.ValidationSummary) %>
-    </div>
     <% using (Html.BeginForm())
        {%>
     <table id="createUserTable" class="defaultTable">
@@ -48,9 +45,7 @@
             </td>
         </tr>
     </table>
-    <% } %>
-
-        <% } %>
+    <% } %>   
     <script type="text/javascript">
         $(document).ready(function ()
         {
