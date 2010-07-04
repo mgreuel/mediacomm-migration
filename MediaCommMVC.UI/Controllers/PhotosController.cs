@@ -15,6 +15,7 @@ using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Photos;
 using MediaCommMVC.Core.Model.Users;
 using MediaCommMVC.UI.Infrastructure;
+using MediaCommMVC.UI.ViewModel;
 
 #endregion
 
@@ -157,11 +158,9 @@ namespace MediaCommMVC.UI.Controllers
         [HttpGet]
         public ActionResult Upload()
         {
-            this.logger.Debug("Displaying photo upload page");
-
             IEnumerable<PhotoCategory> categories = this.photoRepository.GetAllCategories();
 
-            return this.View(categories);
+            return this.View(new PhotoUpload { Categories = categories });
         }
 
         /// <summary>Uploads the zip file containing the photos.</summary>
@@ -218,6 +217,7 @@ namespace MediaCommMVC.UI.Controllers
         /// <summary>Shows the uploads success full page.</summary>
         /// <returns>The upload successfull view.</returns>
         [HttpGet]
+        [Authorize]
         public ActionResult UploadSuccessFull()
         {
             return this.View();

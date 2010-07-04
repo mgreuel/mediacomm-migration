@@ -17,7 +17,7 @@
                     <%= Resources.Users.UserName %>:</label>
             </td>
             <td class="secondColumn">
-                <%= Html.TextBox("userName")%>
+                <%= Html.TextBox("userName", null, new { @class="required", minlength = "5", maxlength = "50" })%>
             </td>
         </tr>
         <tr>
@@ -27,7 +27,7 @@
                     :</label>
             </td>
             <td class="secondColumn">
-                <%= Html.TextBox("password")%>
+                <%= Html.TextBox("password", null, new { @class="required", minlength = "5", maxlength = "50" })%>
             </td>
         </tr>
         <tr>
@@ -37,7 +37,7 @@
                     :</label>
             </td>
             <td class="secondColumn">
-                <%= Html.TextBox("mailAddress")%>
+                <%= Html.TextBox("mailAddress", null, new { @class="required email"})%>
             </td>
         </tr>
         <tr>
@@ -49,4 +49,12 @@
         </tr>
     </table>
     <% } %>
+
+        <% } %>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $("form").validate();
+        });
+    </script>
 </asp:Content>

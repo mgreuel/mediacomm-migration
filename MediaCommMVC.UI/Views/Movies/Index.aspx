@@ -1,6 +1,6 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Core.Model.Movies.Movie>>" %>
-<%@ Import Namespace="Combres.Mvc" %>
 
+<%@ Import Namespace="Combres.Mvc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%= Resources.Movies.Movielist %>
 </asp:Content>
@@ -72,10 +72,8 @@
             <% } %>
         </tbody>
     </table>
-
     <div style="margin-top: 20px;">
     </div>
-
     <div id="editMoviePopup" style="display: none;">
         <div id="editMovie">
             <% using (Html.BeginForm())
@@ -86,7 +84,7 @@
                         <%= Resources.Movies.Title %>:
                     </td>
                     <td class="rightTd">
-                        <%= Html.TextBox("Movie.Title") %>
+                        <%= Html.TextBox("Movie.Title",null, new { @class = "required", minlength = "3"}) %>
                     </td>
                 </tr>
                 <tr>
@@ -94,7 +92,7 @@
                         <%= Resources.Movies.InfoLink %>:
                     </td>
                     <td class="rightTd">
-                        <%= Html.TextBox("Movie.InfoLink") %>
+                        <%= Html.TextBox("Movie.InfoLink",null, new { @class = "url" })%>
                     </td>
                 </tr>
                 <tr>
@@ -114,12 +112,17 @@
                     </td>
                 </tr>
             </table>
-            <div style="text-align: center; margin-top:4px;">
+            <div style="text-align: center; margin-top: 4px;">
                 <input type="submit" value='<%= Resources.General.Save %>' id="sumitMovie" />
             </div>
             <% } %>
         </div>
     </div>
-
     <%= Html.CombresLink("moviesJs")%>
+    <script type="text/javascript">
+        $(document).ready()
+        {
+            $("form").validate();
+        }
+    </script>
 </asp:Content>

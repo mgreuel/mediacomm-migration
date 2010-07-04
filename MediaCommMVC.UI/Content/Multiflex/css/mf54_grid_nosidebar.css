@@ -308,6 +308,13 @@ body
     z-index: auto !important;
     background-color: rgb(225,225,225);
 }
+
+.navbar ul, .navbar ol, navbar li
+{
+    margin: 0;
+    padding: 0;
+}
+
 .navbar ul li a
 {
     float: none !important;

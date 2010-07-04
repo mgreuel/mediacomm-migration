@@ -13,7 +13,7 @@
                 <%= Resources.Users.FirstName%>:
             </td>
             <td>
-                <%= Html.TextBox("user.FirstName", Model.FirstName)%>
+                <%= Html.TextBox("user.FirstName", Model.FirstName, new { minlength = "2", maxlength="75"})%>
             </td>
         </tr>
         <tr>
@@ -21,7 +21,7 @@
                 <%= Resources.Users.LastName%>:
             </td>
             <td>
-                <%= Html.TextBox("user.LastName", Model.LastName)%>
+                <%= Html.TextBox("user.LastName", Model.LastName, new { minlength = "2", maxlength="75"})%>
             </td>
         </tr>
         <tr>
@@ -29,7 +29,7 @@
                 <%= Resources.Users.Street%>:
             </td>
             <td>
-                <%= Html.TextBox("user.Street", Model.Street)%>
+                <%= Html.TextBox("user.Street", Model.Street, new { minlength = "2", maxlength="100"})%>
             </td>
         </tr>
         <tr>
@@ -37,7 +37,7 @@
                 <%= Resources.Users.ZipCode%>:
             </td>
             <td>
-                <%= Html.TextBox("user.ZipCode", Model.ZipCode)%>
+                <%= Html.TextBox("user.ZipCode", Model.ZipCode, new { maxlength="10"})%>
             </td>
         </tr>
         <tr>
@@ -45,7 +45,7 @@
                 <%= Resources.Users.City%>:
             </td>
             <td>
-                <%= Html.TextBox("user.City", Model.City)%>
+                <%= Html.TextBox("user.City", Model.City, new { minlength = "2", maxlength="75"})%>
             </td>
         </tr>
         <tr>
@@ -53,7 +53,7 @@
                 <%= Resources.Users.PhoneNumber%>:
             </td>
             <td>
-                <%= Html.TextBox("user.PhoneNumber", Model.PhoneNumber)%>
+                <%= Html.TextBox("user.PhoneNumber", Model.PhoneNumber, new { minlength = "5", maxlength="30"})%>
             </td>
         </tr>
         <tr>
@@ -61,7 +61,7 @@
                 <%= Resources.Users.MobilePhoneNumber%>:
             </td>
             <td>
-                <%= Html.TextBox("user.MobilePhoneNumber", Model.MobilePhoneNumber)%>
+                <%= Html.TextBox("user.MobilePhoneNumber", Model.PhoneNumber, new { minlength = "5", maxlength="30"})%>
             </td>
         </tr>
         <tr>
@@ -69,7 +69,7 @@
                 <%= Resources.Users.ICQUin%>:
             </td>
             <td>
-                <%= Html.TextBox("user.IcqUin", Model.IcqUin)%>
+                <%= Html.TextBox("user.IcqUin", Model.PhoneNumber, new { minlength = "5", maxlength="30"})%>
             </td>
         </tr>
         <tr>
@@ -77,7 +77,7 @@
                 <%= Resources.Users.SkypeNick%>:
             </td>
             <td>
-                <%= Html.TextBox("user.SkypeNick", Model.SkypeNick)%>
+                <%= Html.TextBox("user.SkypeNick", Model.PhoneNumber, new { minlength = "3", maxlength="75"})%>
             </td>
         </tr>
         <tr>
@@ -89,17 +89,17 @@
         </tr>
     </table>
     <% } %>
-    <p style="padding-top: 10px">
+    <p class="text">
         <%= Html.ActionLink(Resources.Users.ChangePassword, "ChangePassword", "Account") %>
     </p>
+    <script language="javascript" type="text/javascript">
 
-        <script language="javascript" type="text/javascript">
+        $(document).ready(function ()
+        {
+            $("#myProfileTable > tbody > tr > td:nth-child(odd)")._addClass("firstColumn");
+            $("#myProfileTable > tbody > tr > td:nth-child(even)")._addClass("secondColumn");
 
-            $(document).ready(function ()
-            {
-                $("#myProfileTable > tbody > tr > td:nth-child(odd)")._addClass("firstColumn");
-                $("#myProfileTable > tbody > tr > td:nth-child(even)")._addClass("secondColumn");
-            });
-        
+            $("form").validate();
+        });
     </script>
 </asp:Content>

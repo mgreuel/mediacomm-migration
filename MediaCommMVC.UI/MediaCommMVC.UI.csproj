@@ -41,6 +41,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\CodeAnalysis\Basic_complete.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.1.0.39271, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
@@ -189,6 +190,7 @@
     <Compile Include="Helpers\IconHelper.cs" />
     <Compile Include="Helpers\Pagination.cs" />
     <Compile Include="ViewModel\ForumPage.cs" />
+    <Compile Include="ViewModel\PhotoUpload.cs" />
     <Compile Include="ViewModel\TopicPage.cs" />
     <Content Include="Content\Custom\account.css" />
     <Content Include="Content\Custom\admin.css" />
@@ -637,7 +639,6 @@
     </Content>
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Views\Account\ChangePassword.aspx" />
     <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
     <Content Include="Views\Account\LogOn.aspx" />

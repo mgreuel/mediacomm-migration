@@ -23,6 +23,7 @@
       <resource path="~/Scripts/jquery-ui-1.8.custom.min.js" />
       <resource path="~/Scripts/jquery.dataTables.min.js" />      
       <resource path="~/Scripts/custom/global.js"/>
+      <resource path="~/Scripts/jquery.validate.min.js"/>
     </resourceSet>
     <resourceSet name="uploadJs" type="js">
       <resource path="~/Scripts/swfobject.js" />
