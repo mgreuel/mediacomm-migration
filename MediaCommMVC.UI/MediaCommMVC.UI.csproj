@@ -613,7 +613,9 @@
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.uploadify.v2.1.0.min.js" />
     <Content Include="Scripts\swfobject.js" />
+    <Content Include="Views\Admin\CategoryCreated.aspx" />
     <Content Include="Views\Admin\CreateForum.aspx" />
+    <Content Include="Views\Admin\CreatePhotoCategory.aspx" />
     <Content Include="Views\Admin\CreateUser.aspx" />
     <Content Include="Views\Admin\ManageForums.aspx" />
     <Content Include="Views\Admin\UserCreated.aspx" />

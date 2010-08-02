@@ -1,10 +1,12 @@
 #region Using Directives
 
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
 using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Forums;
+using MediaCommMVC.Core.Model.Photos;
 
 #endregion
 
@@ -26,17 +28,26 @@ namespace MediaCommMVC.UI.Controllers
         /// </summary>
         private readonly IUserRepository userRepository;
 
+        /// <summary>
+        /// The photo repository.
+        /// </summary>
+        private readonly IPhotoRepository photoRepository;
+
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="AdminController"/> class.</summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdminController"/> class.
+        /// </summary>
         /// <param name="forumRepository">The forum repository.</param>
         /// <param name="userRepository">The user repository.</param>
-        public AdminController(IForumRepository forumRepository, IUserRepository userRepository)
+        /// <param name="photoRepository">The photo repository.</param>
+        public AdminController(IForumRepository forumRepository, IUserRepository userRepository, IPhotoRepository photoRepository)
         {
             this.forumRepository = forumRepository;
             this.userRepository = userRepository;
+            this.photoRepository = photoRepository;
         }
 
         #endregion
@@ -100,6 +111,31 @@ namespace MediaCommMVC.UI.Controllers
             return this.RedirectToAction("ManageForums");
         }
 
+        /// <summary>
+        /// Shows the create photo category page.
+        /// </summary>
+        /// <returns>The create photo category view.</returns>
+        [HttpGet]
+        public ActionResult CreatePhotoCategory()
+        {
+            return this.View();
+        }
+
+        /// <summary>
+        /// Creates the photo category.
+        /// </summary>
+        /// <param name="photoCategory">The photo category.</param>
+        /// <returns>Redirection to the category created page.</returns>
+        [HttpPost]
+        public ActionResult CreatePhotoCategory(PhotoCategory photoCategory)
+        {
+            this.photoRepository.AddCategory(photoCategory);
+
+            this.ViewData["categoyName"] = photoCategory.Name;
+
+            return this.RedirectToAction("CategoryCreated");
+        }
+
         /// <summary>Shows the user created page.</summary>
         /// <returns>The user created view.</returns>
         [HttpGet]
@@ -109,5 +145,14 @@ namespace MediaCommMVC.UI.Controllers
         }
 
         #endregion
+
+        /// <summary>
+        /// Displays the category created page.
+        /// </summary>
+        /// <returns>The category created view.</returns>
+        public ActionResult CategoryCreated()
+        {
+            return this.View();
+        }
     }
 }

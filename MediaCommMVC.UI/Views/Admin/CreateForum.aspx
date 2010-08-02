@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%= Resources.Admin.CreateForum %>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="validationSummary">
         <%= Html.ValidationSummary(Resources.General.ValidationSummary) %>
@@ -13,7 +14,7 @@
         <tr>
             <td class="firstColumn">
                 <label for="Forum.Title">
-                    Title:</label>
+                    <%= Resources.Admin.Title %>:</label>
             </td>
             <td class="secondColumn">
                 <%= Html.TextBox("Forum.Title", null , new { @class="required", minlength = "3", maxlength = "75" }) %>
@@ -22,7 +23,7 @@
         <tr>
             <td class="firstColumn">
                 <label for="Forum.Description">
-                    Description:</label>
+                    <%= Resources.Admin.Description %>:</label>
             </td>
             <td class="secondColumn">
                 <%= Html.TextArea("Forum.Description", null , new { minlength = "6", maxlength = "250" }) %>
