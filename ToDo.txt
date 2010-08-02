@@ -21,6 +21,8 @@ Movies:
 
 General:
 - better input validation
+- config db
+- Use Ajax action where useful
 
 Install:
 - Web-Install

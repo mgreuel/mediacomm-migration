@@ -120,14 +120,29 @@
   <data name="Administration" xml:space="preserve">
     <value>Administration</value>
   </data>
+  <data name="CategoryCreatedText" xml:space="preserve">
+    <value>The category {0} was successfully created.</value>
+  </data>
+  <data name="CategoryCreatedTitle" xml:space="preserve">
+    <value>Category sucessfully created</value>
+  </data>
   <data name="CreateForum" xml:space="preserve">
     <value>Create Forum</value>
+  </data>
+  <data name="CreatePhotoCategory" xml:space="preserve">
+    <value>Create Photo Category</value>
   </data>
   <data name="CreateUser" xml:space="preserve">
     <value>Create User</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="ManageForums" xml:space="preserve">
     <value>Manage Forums</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
   </data>
   <data name="UserCreatedText" xml:space="preserve">
     <value>The User {0}  was successfully created.</value>
