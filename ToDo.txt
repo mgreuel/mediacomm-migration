@@ -12,6 +12,7 @@ Forums:
 - polls
 - goto first new post
 - emotions/parser
+- legend
 
 Home:
 - What's new

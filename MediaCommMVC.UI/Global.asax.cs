@@ -55,8 +55,6 @@ namespace MediaCommMVC.UI
         /// <summary>Configures the application during start up.</summary>
         protected void Application_Start()
         {
-            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize(); 
-
             AreaRegistration.RegisterAllAreas();
 
             try
