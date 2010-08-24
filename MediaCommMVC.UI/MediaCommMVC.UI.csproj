@@ -620,6 +620,7 @@
     <Content Include="Views\Admin\ManageForums.aspx" />
     <Content Include="Views\Admin\UserCreated.aspx" />
     <Content Include="Views\Forums\CreateTopic.aspx" />
+    <Content Include="Views\Forums\EditPost.aspx" />
     <Content Include="Views\Forums\Forum.aspx" />
     <Content Include="Views\Forums\Index.aspx" />
     <Content Include="Views\Forums\Topic.aspx" />

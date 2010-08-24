@@ -1,5 +1,6 @@
 Account:
 - Multilanguage
+- remove default code
 
 Admin:
 - Movie Qual + Language
@@ -21,8 +22,10 @@ Movies:
 - Edit
 
 General:
+- error handling
 - better input validation
 - config db
+- strongly typed config
 - Use Ajax action where useful
 
 Install:

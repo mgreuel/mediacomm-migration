@@ -162,6 +162,14 @@ namespace MediaCommMVC.UI.Controllers
             return this.RedirectToAction("Topic", new { page = lastPage });
         }
 
+        [AcceptVerbs]
+        public ActionResult EditPost(int id)
+        {
+            Post post = this.forumRepository.GetPostById(id);
+
+            return this.View(post);
+        }
+
         #endregion
 
         #region Methods
