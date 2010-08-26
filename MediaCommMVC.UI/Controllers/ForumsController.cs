@@ -75,7 +75,6 @@ namespace MediaCommMVC.UI.Controllers
         /// <returns>The create topic view.</returns>
         public ActionResult CreateTopic()
         {
-            this.logger.Debug("Displaying create topic page.");
             return this.View();
         }
 
@@ -162,12 +161,30 @@ namespace MediaCommMVC.UI.Controllers
             return this.RedirectToAction("Topic", new { page = lastPage });
         }
 
-        [AcceptVerbs]
+        [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult EditPost(int id)
         {
             Post post = this.forumRepository.GetPostById(id);
 
             return this.View(post);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateInput(false)]
+        public ActionResult EditPost(int id, Post post)
+        {
+            this.logger.Debug("Updating post '{0}' with topicId '{1}'", post, id);
+
+            Post postToUpdate = this.forumRepository.GetPostById(id);
+            postToUpdate.Text = post.Text;
+
+            this.forumRepository.UpdatePost(postToUpdate);
+
+            #warning redirect to correct page
+            int lastPage = this.forumRepository.GetLastPageNumberForTopic(postToUpdate.Topic.Id, PostPageSize);
+
+            this.logger.Debug("Redirecting to page {0} of the topic with the id '{0}'", lastPage, id);
+            return this.RedirectToAction("Topic", new { id = postToUpdate.Topic.Id, page = lastPage });
         }
 
         #endregion

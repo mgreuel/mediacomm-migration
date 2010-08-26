@@ -4,7 +4,7 @@
     <script src="/Content/tiny_mce/tiny_mce.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <%=  Html.ActionLink(Model.Topic.Title, "Topic", new { name = Model.Topic.Title, id = Model.Topic.Id }) %>
+    <%=  Html.ActionLink(Model.Topic.Title, "Topic", new { name = Model.Topic.Title, topicId = Model.Topic.Id }) %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="topicHeader">
@@ -41,6 +41,9 @@
                     </div>
                 </td>
                 <td class="postText">
+                    <div class="postOptions">
+                        <%= Html.ActionLink(Resources.Forums.Edit, "EditPost", new { id = post.Id }) %>
+                    </div>
                     <div>
                         <%= post.Text %>
                     </div>
@@ -59,7 +62,6 @@
             <%= Resources.Forums.Reply %>
         </h2>
         <%= Html.TextArea("post.Text", null, new { @class = "required", minlength = "3" }) %>
-
         <input id="submitReply" type="submit" value='<%= Resources.Forums.Reply %>' />
     </div>
     <% } %>

@@ -129,6 +129,9 @@
   <data name="CreateTopic" xml:space="preserve">
     <value>New Topic</value>
   </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="Forum" xml:space="preserve">
     <value>Forum</value>
   </data>
