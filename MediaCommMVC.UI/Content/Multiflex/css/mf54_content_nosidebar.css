@@ -497,3 +497,11 @@ p.text
 {
     background-color: White !important;
 }
+
+.validation-summary-errors
+{
+    color: Red;
+    padding-left: 20px;
+    padding-top: 6px;
+}
+

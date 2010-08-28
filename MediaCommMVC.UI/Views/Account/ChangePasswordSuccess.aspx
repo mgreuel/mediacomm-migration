@@ -5,7 +5,7 @@
 </asp:Content>
 
 <asp:Content ID="changePasswordSuccessContent" ContentPlaceHolderID="MainContent" runat="server">
-    <p>
+    <p class="text">
         <%= Resources.Users.PasswordChangedText %>
     </p>
 </asp:Content>

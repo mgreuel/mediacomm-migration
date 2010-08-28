@@ -6,8 +6,9 @@
 <asp:Content ID="changePasswordContent" ContentPlaceHolderID="MainContent" runat="server">
     <% using (Html.BeginForm())
        { %>
-    <%= Html.ValidationSummary(true, Resources.Users.PasswordChangeFailed) %>
-    <table id="changePasswordTable">
+ <%= Html.ValidationSummary(true, Resources.Users.PasswordChangeFailed) %>
+   
+    <table id="changePasswordTable" class="defaultTable">
         <tr>
             <td class="firstColumn">
                 <%= Html.LabelFor(m => m.OldPassword) %>
