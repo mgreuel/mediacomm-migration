@@ -32,3 +32,5 @@ General:
 
 Install:
 - Web-Install
+
+Videos

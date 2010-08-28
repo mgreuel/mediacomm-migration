@@ -117,7 +117,7 @@ namespace MediaCommMVC.UI.Controllers
         /// <returns>The photo categories as Json string.</returns>
         [HttpGet]
         [Authorize]
-        [OutputCache(Duration = 600, VaryByParam = "")]
+        [OutputCache(Duration = 60, VaryByParam = "")]
         public ActionResult GetCategories()
         {
             IEnumerable<PhotoCategory> categories = this.photoRepository.GetAllCategories();
