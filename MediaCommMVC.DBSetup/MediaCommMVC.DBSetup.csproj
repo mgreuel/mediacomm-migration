@@ -96,9 +96,9 @@
       <Project>{6060137F-843B-412E-95FE-B43A1421B813}</Project>
       <Name>MediaCommMVC.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MediaCommMVC.Tests\MediaCommMVC.Tests.csproj">
-      <Project>{57CBF2D0-C135-4FFC-B858-A8E2050BEF32}</Project>
-      <Name>MediaCommMVC.Tests</Name>
+    <ProjectReference Include="..\MediaCommMVC.Tests.Common\MediaCommMVC.Tests.Common.csproj">
+      <Project>{D84C4891-18F6-4295-86D7-1296764EF959}</Project>
+      <Name>MediaCommMVC.Tests.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

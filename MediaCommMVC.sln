@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.Common", "Medi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.DBSetup", "MediaCommMVC.DBSetup\MediaCommMVC.DBSetup.csproj", "{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.Tests", "MediaCommMVC.Tests\MediaCommMVC.Tests.csproj", "{57CBF2D0-C135-4FFC-B858-A8E2050BEF32}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7BD4A439-1E18-4529-BC39-F28D3D0F46B1}"
 	ProjectSection(SolutionItems) = preProject
 		createpictures.bat = createpictures.bat
@@ -27,6 +25,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.TestDataCreator", "MediaCommMVC.TestDataCreator\MediaCommMVC.TestDataCreator.csproj", "{4CC1063E-B29B-480A-A54E-E3B5E6007EA4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{D711CE14-9DF1-4CDC-A30F-A7652464C9C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.Tests.Common", "MediaCommMVC.Tests.Common\MediaCommMVC.Tests.Common.csproj", "{D84C4891-18F6-4295-86D7-1296764EF959}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,16 +88,6 @@ Global
 		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}.Release|x86.ActiveCfg = Release|Any CPU
-		{57CBF2D0-C135-4FFC-B858-A8E2050BEF32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57CBF2D0-C135-4FFC-B858-A8E2050BEF32}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57CBF2D0-C135-4FFC-B858-A8E2050BEF32}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{57CBF2D0-C135-4FFC-B858-A8E2050BEF32}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{57CBF2D0-C135-4FFC-B858-A8E2050BEF32}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{57CBF2D0-C135-4FFC-B858-A8E2050BEF32}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57CBF2D0-C135-4FFC-B858-A8E2050BEF32}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57CBF2D0-C135-4FFC-B858-A8E2050BEF32}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{57CBF2D0-C135-4FFC-B858-A8E2050BEF32}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{57CBF2D0-C135-4FFC-B858-A8E2050BEF32}.Release|x86.ActiveCfg = Release|Any CPU
 		{4CC1063E-B29B-480A-A54E-E3B5E6007EA4}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{4CC1063E-B29B-480A-A54E-E3B5E6007EA4}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{4CC1063E-B29B-480A-A54E-E3B5E6007EA4}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -108,6 +98,16 @@ Global
 		{4CC1063E-B29B-480A-A54E-E3B5E6007EA4}.Release|Mixed Platforms.Build.0 = Release|x86
 		{4CC1063E-B29B-480A-A54E-E3B5E6007EA4}.Release|x86.ActiveCfg = Release|x86
 		{4CC1063E-B29B-480A-A54E-E3B5E6007EA4}.Release|x86.Build.0 = Release|x86
+		{D84C4891-18F6-4295-86D7-1296764EF959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D84C4891-18F6-4295-86D7-1296764EF959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D84C4891-18F6-4295-86D7-1296764EF959}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D84C4891-18F6-4295-86D7-1296764EF959}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D84C4891-18F6-4295-86D7-1296764EF959}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D84C4891-18F6-4295-86D7-1296764EF959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D84C4891-18F6-4295-86D7-1296764EF959}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D84C4891-18F6-4295-86D7-1296764EF959}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D84C4891-18F6-4295-86D7-1296764EF959}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D84C4891-18F6-4295-86D7-1296764EF959}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +119,6 @@ Global
 		{D746E91F-7B79-4416-B5D5-FCE5FCA74D52} = {D711CE14-9DF1-4CDC-A30F-A7652464C9C1}
 		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA} = {FE991195-2DC3-425B-8B31-383F95E6739C}
 		{4CC1063E-B29B-480A-A54E-E3B5E6007EA4} = {FE991195-2DC3-425B-8B31-383F95E6739C}
-		{57CBF2D0-C135-4FFC-B858-A8E2050BEF32} = {812C58B6-3471-4E62-9DA5-A7E779092043}
+		{D84C4891-18F6-4295-86D7-1296764EF959} = {812C58B6-3471-4E62-9DA5-A7E779092043}
 	EndGlobalSection
 EndGlobal
