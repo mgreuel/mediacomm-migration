@@ -61,7 +61,7 @@
                 <%= Resources.Users.MobilePhoneNumber%>:
             </td>
             <td>
-                <%= Html.TextBox("user.MobilePhoneNumber", Model.PhoneNumber, new { minlength = "5", maxlength="30"})%>
+                <%= Html.TextBox("user.MobilePhoneNumber", Model.MobilePhoneNumber, new { minlength = "5", maxlength="30"})%>
             </td>
         </tr>
         <tr>
@@ -69,7 +69,7 @@
                 <%= Resources.Users.ICQUin%>:
             </td>
             <td>
-                <%= Html.TextBox("user.IcqUin", Model.PhoneNumber, new { minlength = "5", maxlength="30"})%>
+                <%= Html.TextBox("user.IcqUin", Model.IcqUin, new { minlength = "5", maxlength="30"})%>
             </td>
         </tr>
         <tr>
@@ -77,7 +77,7 @@
                 <%= Resources.Users.SkypeNick%>:
             </td>
             <td>
-                <%= Html.TextBox("user.SkypeNick", Model.PhoneNumber, new { minlength = "3", maxlength="75"})%>
+                <%= Html.TextBox("user.SkypeNick", Model.SkypeNick, new { minlength = "3", maxlength="75"})%>
             </td>
         </tr>
         <tr>

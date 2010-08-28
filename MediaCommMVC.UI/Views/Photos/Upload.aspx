@@ -44,7 +44,7 @@
                     <%= Resources.Photos.PhotosTitle %>
                 </td>
                 <td>
-                    <input id="fileInput" name="fileInput" type="file" class="required" />
+                    <input id="fileInput" name="fileInput" type="file" />
                 </td>
             </tr>
             <tr>
@@ -62,12 +62,13 @@
          
         function startUpload()
         {
-            $("form").validate().form();
+            if ($("form").validate().form() == true)
+            {
+                var auth = "<% = Request.Cookies[FormsAuthentication.FormsCookieName]==null ? string.Empty : Request.Cookies[FormsAuthentication.FormsCookieName].Value %>";
 
-            var auth = "<% = Request.Cookies[FormsAuthentication.FormsCookieName]==null ? string.Empty : Request.Cookies[FormsAuthentication.FormsCookieName].Value %>";
-
-            $('#fileInput').uploadifySettings('scriptData', { 'Category.Id': $('#Category_Name :selected').val(), 'Category.Name': $('#Category_Name :selected').text(), 'Album.Name': $('#Album_Name').val(), "token": auth });
-            $('#fileInput').uploadifyUpload();
+                $('#fileInput').uploadifySettings('scriptData', { 'Category.Id': $('#Category_Name :selected').val(), 'Category.Name': $('#Category_Name :selected').text(), 'Album.Name': $('#Album_Name').val(), "token": auth });
+                $('#fileInput').uploadifyUpload();
+            }
         }
 
         $(document).ready(function ()

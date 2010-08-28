@@ -34,8 +34,8 @@ $(document).ready(function ()
                 var aPos = oTable.fnGetPosition(this);
                 var row = aPos[0];
 
-                var movieName = oTable.fnGetData(row)[1];
-                var movieId = oTable.fnGetData(row)[0];
+                var movieName = $.trim(oTable.fnGetData(row)[1]);
+                var movieId = $.trim(oTable.fnGetData(row)[0]);
 
                 if (confirm("Do you really want to delete the movie '" + movieName + "' ?"))
                 {
@@ -47,7 +47,7 @@ $(document).ready(function ()
                             oTable.fnDeleteRow(row);
                         }
                     },
-                                                "json");
+                    "json");
                 }
             });
         }
