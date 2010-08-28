@@ -14,7 +14,9 @@ using MediaCommMVC.Common.Logging;
 
 namespace MediaCommMVC.Data
 {
-    /// <summary>Uses .NET framework for generating small images and an external tool to generate medium and large images.</summary>
+    /// <summary>
+    ///   Uses .NET framework for generating small images and an external tool to generate medium and large images.
+    /// </summary>
     public class MixedImageGenerator : IImageGenerator
     {
         #region Constants and Fields
@@ -43,9 +45,11 @@ namespace MediaCommMVC.Data
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="MixedImageGenerator"/> class.</summary>
-        /// <param name="logger">The logger.</param>
-        /// <param name="configAccessor">The config accessor.</param>
+        /// <summary>
+        ///   Initializes a new instance of the <see cref = "MixedImageGenerator" /> class.
+        /// </summary>
+        /// <param name = "logger">The logger.</param>
+        /// <param name = "configAccessor">The config accessor.</param>
         public MixedImageGenerator(ILogger logger, IConfigAccessor configAccessor)
         {
             this.logger = logger;
@@ -58,9 +62,11 @@ namespace MediaCommMVC.Data
 
         #region IImageGenerator
 
-        /// <summary>Generates differnt resolution for the images.</summary>
-        /// <param name="pathToPhotos">The path to photos.</param>
-        /// <param name="unprocessedPhotosFolder">The unprocessed photos folder.</param>
+        /// <summary>
+        ///   Generates differnt resolution for the images.
+        /// </summary>
+        /// <param name = "pathToPhotos">The path to photos.</param>
+        /// <param name = "unprocessedPhotosFolder">The unprocessed photos folder.</param>
         [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.InheritanceDemand, Name = "FullTrust")]
         [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.LinkDemand, Name = "FullTrust")]
         public void GenerateImages(string pathToPhotos, string unprocessedPhotosFolder)
@@ -69,7 +75,7 @@ namespace MediaCommMVC.Data
 
             string sourcePath = Path.Combine(pathToPhotos, unprocessedPhotosFolder);
 
-            this.GenerateSmallImages(pathToPhotos, sourcePath);
+            GenerateSmallImages(pathToPhotos, sourcePath);
             this.GenerateMediumAndLargeImages(pathToPhotos, sourcePath);
         }
 
@@ -79,27 +85,12 @@ namespace MediaCommMVC.Data
 
         #region Methods
 
-        /// <summary>Generates the medium and large images.</summary>
-        /// <param name="targetPath">The target path.</param>
-        /// <param name="sourcePath">The source path.</param>
-        private void GenerateMediumAndLargeImages(string targetPath, string sourcePath)
-        {
-            sourcePath = string.Format("{0}\\*", sourcePath.TrimEnd('\\'));
-            targetPath = string.Format("{0}\\", targetPath.TrimEnd('\\'));
-
-            string param = sourcePath + " " + targetPath;
-
-            string photoCreatorBatchPath = this.configAccessor.GetConfigValue("PathPhotoCreatorBatch");
-
-            this.logger.Debug("Executing '{0}' with parameters '{1}'", photoCreatorBatchPath, param);
-
-            Process.Start(photoCreatorBatchPath, param);
-        }
-
-        /// <summary>Generates the small images.</summary>
-        /// <param name="targetPath">The target path.</param>
-        /// <param name="sourcePath">The source path.</param>
-        private void GenerateSmallImages(string targetPath, string sourcePath)
+        /// <summary>
+        ///   Generates the small images.
+        /// </summary>
+        /// <param name = "targetPath">The target path.</param>
+        /// <param name = "sourcePath">The source path.</param>
+        private static void GenerateSmallImages(string targetPath, string sourcePath)
         {
             IEnumerable<FileInfo> originalImages = new DirectoryInfo(sourcePath).GetFiles();
 
@@ -107,7 +98,7 @@ namespace MediaCommMVC.Data
             {
                 using (Bitmap originalImage = new Bitmap(originalFile.FullName))
                 {
-                    using (Bitmap thumbnailImage = this.GetThumbnail(originalImage))
+                    using (Bitmap thumbnailImage = GetThumbnail(originalImage))
                     {
                         string thumbFilename = string.Format(
                             "{0}small{1}", originalFile.Name.Replace(originalFile.Extension, string.Empty), originalFile.Extension);
@@ -117,10 +108,12 @@ namespace MediaCommMVC.Data
             }
         }
 
-        /// <summary>Gets a thumbnail of the specified image.</summary>
-        /// <param name="bmp">The original image.</param>
+        /// <summary>
+        ///   Gets a thumbnail of the specified image.
+        /// </summary>
+        /// <param name = "bmp">The original image.</param>
         /// <returns>The thumbnail for the specified image.</returns>
-        private Bitmap GetThumbnail(Bitmap bmp)
+        private static Bitmap GetThumbnail(Bitmap bmp)
         {
             float maxH = Convert.ToSingle(MaxThumbnailHeight);
             float maxW = Convert.ToSingle(MaxThumbnailWidth);
@@ -134,6 +127,25 @@ namespace MediaCommMVC.Data
             Bitmap temp = new Bitmap(bmp.GetThumbnailImage(w, h, null, IntPtr.Zero));
 
             return temp;
+        }
+
+        /// <summary>
+        ///   Generates the medium and large images.
+        /// </summary>
+        /// <param name = "targetPath">The target path.</param>
+        /// <param name = "sourcePath">The source path.</param>
+        private void GenerateMediumAndLargeImages(string targetPath, string sourcePath)
+        {
+            sourcePath = string.Format("{0}\\*", sourcePath.TrimEnd('\\'));
+            targetPath = string.Format("{0}\\", targetPath.TrimEnd('\\'));
+
+            string param = sourcePath + " " + targetPath;
+
+            string photoCreatorBatchPath = this.configAccessor.GetConfigValue("PathPhotoCreatorBatch");
+
+            this.logger.Debug("Executing '{0}' with parameters '{1}'", photoCreatorBatchPath, param);
+
+            Process.Start(photoCreatorBatchPath, param);
         }
 
         #endregion
