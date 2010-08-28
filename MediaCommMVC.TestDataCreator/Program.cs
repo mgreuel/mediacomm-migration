@@ -12,6 +12,7 @@ using MediaCommMVC.Core.Parameters;
 using MediaCommMVC.Data.NHInfrastructure.Config;
 using MediaCommMVC.Data.NHInfrastructure.Mapping;
 using MediaCommMVC.Data.Repositories;
+using MediaCommMVC.Tests.Common.TestImplementations;
 using MediaCommMVC.Tests.TestImplementations;
 
 using NHibernate.Cfg;

@@ -12,6 +12,7 @@ using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Movies;
 using MediaCommMVC.Data.NHInfrastructure.Mapping;
 using MediaCommMVC.Data.Repositories;
+using MediaCommMVC.Tests.Common.TestImplementations;
 using MediaCommMVC.Tests.TestImplementations;
 
 using NHibernate;

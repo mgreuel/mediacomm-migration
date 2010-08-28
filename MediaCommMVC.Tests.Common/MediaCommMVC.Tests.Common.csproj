@@ -2,21 +2,18 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4CC1063E-B29B-480A-A54E-E3B5E6007EA4}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{D84C4891-18F6-4295-86D7-1296764EF959}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MediaCommMVC.TestDataCreator</RootNamespace>
-    <AssemblyName>MediaCommMVC.TestDataCreator</AssemblyName>
+    <RootNamespace>MediaCommMVC.Tests.Common</RootNamespace>
+    <AssemblyName>MediaCommMVC.Tests.Common</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,8 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -74,34 +70,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestImplementations\ConsoleLogger.cs" />
+    <Compile Include="TestImplementations\SessionManager.cs" />
+    <Compile Include="TestImplementations\TestConfigurationGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MediaCommMVC.Common\MediaCommMVC.Common.csproj">
       <Project>{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}</Project>
       <Name>MediaCommMVC.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MediaCommMVC.Core\MediaCommMVC.Core.csproj">
-      <Project>{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5}</Project>
-      <Name>MediaCommMVC.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MediaCommMVC.Data\MediaCommMVC.Data.csproj">
       <Project>{6060137F-843B-412E-95FE-B43A1421B813}</Project>
       <Name>MediaCommMVC.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MediaCommMVC.Tests.Common\MediaCommMVC.Tests.Common.csproj">
-      <Project>{D84C4891-18F6-4295-86D7-1296764EF959}</Project>
-      <Name>MediaCommMVC.Tests.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="hibernate.cfg.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
