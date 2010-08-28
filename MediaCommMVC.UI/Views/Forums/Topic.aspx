@@ -31,7 +31,7 @@
         <tbody>
             <% foreach (var post in Model.Posts)
                { %>
-            <tr>
+            <tr id='<%= post.Id %>'>
                 <td class="postInfo">
                     <div class="author">
                         <%= Html.ActionLink(post.Author.UserName, "Profile", "Users", new { username = post.Author.UserName}, null) %>

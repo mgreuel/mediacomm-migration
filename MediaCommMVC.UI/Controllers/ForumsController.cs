@@ -161,6 +161,11 @@ namespace MediaCommMVC.UI.Controllers
             return this.RedirectToAction("Topic", new { page = lastPage });
         }
 
+        /// <summary>
+        /// Shows the edit post page.
+        /// </summary>
+        /// <param name="id">The post id.</param>
+        /// <returns>The edit post view.</returns>
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult EditPost(int id)
         {
@@ -169,6 +174,12 @@ namespace MediaCommMVC.UI.Controllers
             return this.View(post);
         }
 
+        /// <summary>
+        /// Saves the changed made to the post.
+        /// </summary>
+        /// <param name="id">The post id.</param>
+        /// <param name="post">The edited post.</param>
+        /// <returns>Redirect to the topic the post belongs to.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
         [ValidateInput(false)]
         public ActionResult EditPost(int id, Post post)
@@ -180,11 +191,13 @@ namespace MediaCommMVC.UI.Controllers
 
             this.forumRepository.UpdatePost(postToUpdate);
 
-            #warning redirect to correct page
-            int lastPage = this.forumRepository.GetLastPageNumberForTopic(postToUpdate.Topic.Id, PostPageSize);
+            int page = this.forumRepository.GetPageNumberForPost(id, postToUpdate.Topic.Id, PostPageSize);
+            string postAnker = string.Format("#{0}", postToUpdate.Id);
 
-            this.logger.Debug("Redirecting to page {0} of the topic with the id '{0}'", lastPage, id);
-            return this.RedirectToAction("Topic", new { id = postToUpdate.Topic.Id, page = lastPage });
+            this.logger.Debug("Redirecting to page {0} of the topic with the id '{0}'", page, id);
+
+            string url = this.Url.RouteUrl("ViewTopic", new { id = postToUpdate.Topic.Id, page = page, name = Url.ToFriendlyUrl(postToUpdate.Topic.Title) }) + postAnker;
+            return this.Redirect(url);
         }
 
         #endregion

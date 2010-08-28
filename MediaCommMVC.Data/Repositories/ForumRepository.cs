@@ -230,6 +230,25 @@ namespace MediaCommMVC.Data.Repositories
 		}
 
         /// <summary>
+        ///   Gets the page number for the post.
+        /// </summary>
+        /// <param name = "postId">The post id.</param>
+        /// <param name = "topicId">The topic id.</param>
+        /// <param name = "pageSize">The page size.</param>
+        /// <returns>The page number.</returns>
+        public int GetPageNumberForPost(int postId, int topicId, int pageSize)
+        {
+            List<Post> posts = this.Session.Linq<Post>().Where(p => p.Topic.Id == topicId).OrderBy(p => p.Created).ToList();
+            Post post = posts.Single(p => p.Id == postId);
+
+            int index = posts.IndexOf(post);
+
+            int page = (index / pageSize) + 1;
+
+            return page;
+        }
+
+        /// <summary>
         ///   Gets a post by id.
         /// </summary>
         /// <param name = "id">The post id.</param>
@@ -261,7 +280,6 @@ namespace MediaCommMVC.Data.Repositories
 			IEnumerable<Post> posts =
 				this.Session.Linq<Post>().Where(p => p.Topic.Id.Equals(topicId))
 					.OrderBy(p => p.Created)
-					.ThenBy(p => p.Id)
 					.Skip(postsToSkip)
 					.Take(pagingParameters.PageSize).ToList();
 
