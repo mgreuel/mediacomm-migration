@@ -46,3 +46,31 @@
     width: 296px;
 }
 /* Create Forum End */
+
+/* Create Photo Category Start */
+
+#createPhotoCategoryTable
+{
+    width: 400px;
+}
+
+#createPhotoCategoryTable .firstColumn
+{
+    width: 100px !important;
+    font-weight: bold !important;
+    text-align: right !important;
+    vertical-align: top;
+}
+
+#createPhotoCategoryTable .secondColumn
+{
+    width: 300px;
+}
+
+#createPhotoCategoryTable .secondColumn input, #createPhotoCategoryTable .secondColumn textarea
+{
+    width: 296px;
+}
+
+
+/* Create Photo Category End */

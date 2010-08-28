@@ -7,7 +7,6 @@ Admin:
 - Forums Administration
 
 Forums:
-- edit
 - delete
 - "birthday" threads
 - polls
@@ -23,11 +22,13 @@ Movies:
 - Edit
 
 General:
+- get rid of multiflex!
 - error handling
 - better input validation
 - config db
 - strongly typed config
 - Use Ajax action where useful
+- Logging
 
 Install:
 - Web-Install
