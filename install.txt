@@ -1,12 +1,13 @@
 1. Build and publish the MediaCommMVC.UI Project (or just run it in the ASP.NET Dev Server)
-2. Create a database in your sql server
-3. Create a login for the database , unless you use integrated security
-4. Make the user db_owner
-5. Run aspnet_regsql.exe (C:\Windows\Microsoft.NET\Framework64\v4.0.30319) for the database 
-5. Adept the connectionstrings in hibernate.cfg.xml, Web.config (UI)
-6. Adept the connectionstrings in hibernate.cfg.xml and MediaCommMVC.DBSetup.exe.config (DBSetup)
-7. Run MediaCommMVC.DBSetup.exe
-8. Copy createpictures.bat from the solution folder to C:\MediaComm\ (you can change the path in the web.config appsettings) and make sure the runtime user has execute rights to it
-9. Make sure the folder specified in the appsettings with the key "PhotoRootDir" (default: C:\mediaComm\photos) exists and the runtime user has read/write access to it.
-10. Go to the site and login with the credentials specified in the DBSetup (default: admin//changeME!)
-11. Have fun!
+2. Build the MediaCommMVC.DBSetup project
+3. Create a database in your sql server
+4. Create a login for the database , unless you use integrated security
+5. Make the user db_owner
+6. Run aspnet_regsql.exe (C:\Windows\Microsoft.NET\Framework64\v4.0.30319) for the database 
+7. Adept the connectionstrings in hibernate.cfg.xml, Web.config (UI)
+8. Adept the connectionstrings in hibernate.cfg.xml and MediaCommMVC.DBSetup.exe.config (DBSetup)
+9. Run MediaCommMVC.DBSetup.exe
+10. Copy createpictures.bat from the solution folder to C:\MediaComm\ (you can change the path in the web.config appsettings) and make sure the runtime user has execute rights to it
+11. Make sure the folder specified in the appsettings with the key "PhotoRootDir" (default: C:\mediaComm\photos) exists and the runtime user has read/write access to it.
+12. Go to the site and login with the credentials specified in the DBSetup (default: admin//changeME!)
+13. Have fun!
