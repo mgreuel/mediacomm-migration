@@ -8,12 +8,12 @@ Admin:
 
 Forums:
 - delete
-- "birthday" threads
-- polls
+- * "birthday" threads
+- * polls
 - goto first new post
 - emotions/parser
 - legend
-- post as anker
+- paging in forum view
 
 Home:
 - What's new
@@ -23,12 +23,12 @@ Movies:
 
 General:
 - get rid of multiflex!
-- error handling
+- * error handling
 - better input validation
-- config db
+-*  config db
 - strongly typed config
 - Use Ajax action where useful
-- Logging
+- * Logging
 
 Install:
 - Web-Install
