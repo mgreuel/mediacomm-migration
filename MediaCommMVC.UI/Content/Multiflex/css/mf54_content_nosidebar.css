@@ -505,3 +505,7 @@ p.text
     padding-top: 6px;
 }
 
+.Success
+{
+    color: Green !important;
+}

@@ -123,6 +123,9 @@
   <data name="And" xml:space="preserve">
     <value>and</value>
   </data>
+  <data name="ChangesSaved" xml:space="preserve">
+    <value>The changes were successfully saved.</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
   </data>

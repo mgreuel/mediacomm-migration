@@ -49,9 +49,7 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
                 .Where(t => t.Namespace.StartsWith(NamespaceToAdd, StringComparison.Ordinal))
                 .UseOverridesFromAssemblyOf<AutoMapGenerator>()
                 .Conventions.AddFromAssemblyOf<AutoMapGenerator>();
-
-            this.logger.Debug("Finished generating fluent NHibernate automap");
-
+            
             return autoPersistenceModel;
         }
 

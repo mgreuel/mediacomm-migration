@@ -92,8 +92,6 @@ namespace MediaCommMVC.UI.Infrastructure
                 this.logger.Debug("Closing session");
                 session.Close();
             }
-
-            this.logger.Debug("Finished cleaning up session");
         }
 
         #endregion

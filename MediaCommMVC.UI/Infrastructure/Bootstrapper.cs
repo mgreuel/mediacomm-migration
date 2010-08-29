@@ -56,13 +56,9 @@ namespace MediaCommMVC.UI.Infrastructure
         /// <summary>Runs the bootstrapper.</summary>
         public void Run()
         {
-            this.logger.Debug("Running bootstrapper");
-
             this.ConfigureContainer();
             this.RegisterRoutes();
             this.RegisterControllerFactory();
-
-            this.logger.Debug("Finished running bootstrapper");
         }
 
         #endregion
@@ -72,30 +68,23 @@ namespace MediaCommMVC.UI.Infrastructure
         /// <summary>Configures the unity container.</summary>
         private void ConfigureContainer()
         {
-            this.logger.Debug("Configuring unity container");
-
             this.container.RegisterInstance(typeof(ILogger), this.logger);
             this.container.RegisterType(typeof(IConfigAccessor), typeof(FileConfigAccessor));
             this.container.RegisterType(typeof(IImageGenerator), typeof(MixedImageGenerator));
 
             this.RegisterNHibernateComponents();
             this.RegisterRepositories();
-
-            this.logger.Debug("Finished configuring unity container");
         }
 
         /// <summary>Registers the controller factory.</summary>
         private void RegisterControllerFactory()
         {
-            this.logger.Debug("Registering unity controller factory");
-
             ControllerBuilder.Current.SetControllerFactory(typeof(UnityControllerFactory));
         }
 
         /// <summary>Registers the NNibernate components.</summary>
         private void RegisterNHibernateComponents()
         {
-            this.logger.Debug("Registering nHibernate components");
             this.container.RegisterType(typeof(IAutoMapGenerator), typeof(AutoMapGenerator));
             this.container.RegisterType(typeof(IConfigurationGenerator), typeof(ConfigurationGenerator));
 
@@ -104,15 +93,11 @@ namespace MediaCommMVC.UI.Infrastructure
                     (IConfigurationGenerator)this.container.Resolve(typeof(IConfigurationGenerator)), 
                     (ILogger)this.container.Resolve(typeof(ILogger)));
             this.container.RegisterInstance(typeof(ISessionManager), webSessionManager);
-
-            this.logger.Debug("Finished registering nHibernate components");
         }
 
         /// <summary>Registers the repositories.</summary>
         private void RegisterRepositories()
         {
-            this.logger.Debug("Registering repositories");
-
             this.container.RegisterType(
                 typeof(IForumRepository), 
                 typeof(ForumRepository), 
@@ -129,15 +114,11 @@ namespace MediaCommMVC.UI.Infrastructure
                 typeof(IUserRepository), 
                 typeof(UserRepository), 
                 new HttpContextLifetimeManager<UserRepository>());
-
-            this.logger.Debug("Finished registering repositories");
         }
 
         /// <summary>Registers the routes.</summary>
         private void RegisterRoutes()
         {
-            this.logger.Debug("Registering routes");
-
             RouteCollection routes = RouteTable.Routes;
 
             WebExtensions.AddCombresRoute(routes, "Combres Route");
@@ -190,8 +171,6 @@ namespace MediaCommMVC.UI.Infrastructure
                 "Default", 
                 "{controller}/{action}", 
                 new { controller = "Home", action = "Index" });
-
-            this.logger.Debug("Finished registering routes");
         }
 
         #endregion

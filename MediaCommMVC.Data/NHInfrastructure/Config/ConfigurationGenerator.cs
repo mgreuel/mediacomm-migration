@@ -20,9 +20,6 @@ namespace MediaCommMVC.Data.NHInfrastructure.Config
         /// <summary>Generator used for creating the auto map model.</summary>
         private readonly IAutoMapGenerator autoMapGenerator;
 
-        /// <summary>The logger.</summary>
-        private readonly ILogger logger;
-
         #endregion
 
         #region Constructors and Destructors
@@ -33,7 +30,6 @@ namespace MediaCommMVC.Data.NHInfrastructure.Config
         public ConfigurationGenerator(IAutoMapGenerator autoMapGenerator, ILogger logger)
         {
             this.autoMapGenerator = autoMapGenerator;
-            this.logger = logger;
         }
 
         #endregion
@@ -46,15 +42,9 @@ namespace MediaCommMVC.Data.NHInfrastructure.Config
         /// <returns>The FluentConfiguration.</returns>
         public FluentConfiguration Generate()
         {
-            this.logger.Debug("Generating fluentNHibernate configuration");
-
-            Configuration config = this.CreateNHibernateConfiguration();
-
+            Configuration config = CreateNHibernateConfiguration();
             AutoPersistenceModel autoMapModel = this.autoMapGenerator.Generate();
-
             FluentConfiguration fluentConfiguration = Fluently.Configure(config).Mappings(m => m.AutoMappings.Add(autoMapModel));
-
-            this.logger.Debug("Finished generating fluentNHibernate configuration");
 
             return fluentConfiguration;
         }
@@ -67,16 +57,12 @@ namespace MediaCommMVC.Data.NHInfrastructure.Config
 
         /// <summary>Creates the NHibernate configuration.</summary>
         /// <returns>THe NHibernate configuration.</returns>
-        private Configuration CreateNHibernateConfiguration()
+        private static Configuration CreateNHibernateConfiguration()
         {
-            this.logger.Debug("Creating NHiberante configuration from standard xml file.");
-
             Configuration config = new Configuration();
 
             // Reads the configuration from hibernate.cfg.xml
             config.Configure();
-
-            this.logger.Debug("Finished creating NHibernate configuration.");
             
             return config;
         }

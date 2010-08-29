@@ -88,6 +88,12 @@
             </td>
         </tr>
     </table>
+    <p class="Success text">
+        <% if (this.ViewData["ChangesSaved"] != null)
+           {
+               this.Writer.Write(this.ViewData["ChangesSaved"]);
+           }%>
+    </p>
     <% } %>
     <p class="text">
         <%= Html.ActionLink(Resources.Users.ChangePassword, "ChangePassword", "Account") %>
