@@ -48,8 +48,6 @@ namespace MediaCommMVC.UI.Controllers
         /// <returns>The users list view.</returns>
         public ActionResult Index()
         {
-            this.logger.Debug("Displaying user list.");
-
             IEnumerable<MediaCommUser> users = this.userRepository.GetAllUsers();
             return this.View(users);
         }
@@ -58,8 +56,6 @@ namespace MediaCommMVC.UI.Controllers
         /// <returns>The my profile view.</returns>
         public ActionResult MyProfile()
         {
-            this.logger.Debug("Displaying edit profile view for user '{0}'", this.User.Identity.Name);
-
             MediaCommUser currentUser = this.userRepository.GetUserByName(this.User.Identity.Name);
             return this.View(currentUser);
         }
@@ -76,6 +72,8 @@ namespace MediaCommMVC.UI.Controllers
 
             this.UpdateModel(user, "user", null, new[] { "Id", "DateOfBirth", "LastVisit", "EMailAddress", "UserName" });
 
+            this.ViewData["ChangesSaved"] = Resources.General.ChangesSaved;
+
             this.userRepository.UpdateUser(user);
             return this.View(user);
         }
@@ -85,8 +83,6 @@ namespace MediaCommMVC.UI.Controllers
         /// <returns>The user profile view.</returns>
         public ActionResult Profile(string username)
         {
-            this.logger.Debug("Displaying profile for user '{0}'", username);
-
             MediaCommUser user = this.userRepository.GetUserByName(username);
             return this.View(user);
         }

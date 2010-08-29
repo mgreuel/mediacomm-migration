@@ -77,8 +77,6 @@ namespace MediaCommMVC.UI.Controllers
         /// <returns>The movies list view.</returns>
         public ActionResult Index()
         {
-            this.logger.Debug("Displaying movie index page.");
-
             IEnumerable<Movie> movies = this.movieRepository.GetAllMovies();
             this.ViewData["movieLanguages"] = new SelectList(this.movieRepository.GetAllLanguages(), "Id", "Name");
             this.ViewData["movieQualities"] = new SelectList(this.movieRepository.GetAllQualities(), "Id", "Name");

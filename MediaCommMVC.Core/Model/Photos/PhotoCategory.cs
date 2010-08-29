@@ -14,7 +14,7 @@ namespace MediaCommMVC.Core.Model.Photos
         #region Constants and Fields
 
         /// <summary>
-        /// THe albums in this category.
+        /// The albums in this category.
         /// </summary>
         private IEnumerable<PhotoAlbum> albums = new List<PhotoAlbum>();
 

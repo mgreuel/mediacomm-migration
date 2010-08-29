@@ -601,9 +601,9 @@
     <Content Include="Content\UploadIfy\uploadify.css" />
     <Content Include="Content\UploadIfy\uploadify.swf" />
     <Content Include="Global.asax" />
-    <Content Include="hibernate.cfg.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="hibernate.cfg.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Scripts\custom\global.js" />
     <Content Include="Scripts\highslide-with-gallery.packed.js" />
     <Content Include="Scripts\img.onDemand.js" />

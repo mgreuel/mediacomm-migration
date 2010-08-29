@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The changes were successfully saved..
+        /// </summary>
+        internal static string ChangesSaved {
+            get {
+                return ResourceManager.GetString("ChangesSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create.
         /// </summary>
         internal static string Create {

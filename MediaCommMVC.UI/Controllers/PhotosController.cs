@@ -133,7 +133,6 @@ namespace MediaCommMVC.UI.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            this.logger.Debug("Displaying photos index");
             return this.View();
         }
 

@@ -67,6 +67,7 @@
 
 #uploadTable .firstColumn
 {
+    font-weight: bold;
     width: 75px !important;
     text-align: right !important;
     vertical-align: top !important;

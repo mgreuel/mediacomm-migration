@@ -10,13 +10,14 @@ Forums:
 - delete
 - * "birthday" threads
 - * polls
-- goto first new post
+- ! goto first new post
 - emotions/parser
 - legend
-- paging in forum view
+- ! paging in forum view
+- edit rights
 
 Home:
-- What's new
+- ! What's new
 
 Movies:
 - Edit
@@ -29,8 +30,12 @@ General:
 - strongly typed config
 - Use Ajax action where useful
 - * Logging
+- ! breadcrumb
 
 Install:
 - Web-Install
+
+Users:
+- ! my profile: Saved successfully
 
 Videos
