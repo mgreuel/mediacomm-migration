@@ -169,6 +169,7 @@ namespace MediaCommMVC.UI.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult EditPost(int id)
         {
+#warning check if allowed
             Post post = this.forumRepository.GetPostById(id);
 
             return this.View(post);
@@ -184,6 +185,7 @@ namespace MediaCommMVC.UI.Controllers
         [ValidateInput(false)]
         public ActionResult EditPost(int id, Post post)
         {
+#warning check if allowed
             this.logger.Debug("Updating post '{0}' with topicId '{1}'", post, id);
 
             Post postToUpdate = this.forumRepository.GetPostById(id);
