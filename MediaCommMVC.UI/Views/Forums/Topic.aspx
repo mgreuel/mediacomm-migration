@@ -42,7 +42,10 @@
                 </td>
                 <td class="postText">
                     <div class="postOptions">
-                        <%= Html.ActionLink(Resources.Forums.Edit, "EditPost", new { id = post.Id }) %>
+                        <% if (post.Author.UserName.Equals(this.User.Identity.Name, StringComparison.OrdinalIgnoreCase) || this.User.IsInRole("Administrators"))
+                           {
+                               Writer.Write(Html.ActionLink(Resources.Forums.Edit, "EditPost", new { id = post.Id }));
+                           } %>
                     </div>
                     <div>
                         <%= post.Text %>

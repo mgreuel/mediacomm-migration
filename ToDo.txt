@@ -31,6 +31,7 @@ General:
 - Use Ajax action where useful
 - * Logging
 - ! breadcrumb
+- Permission Manager
 
 Install:
 - Web-Install
