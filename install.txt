@@ -8,6 +8,7 @@
 8. Adept the connectionstrings in hibernate.cfg.xml and MediaCommMVC.DBSetup.exe.config (DBSetup)
 9. Run MediaCommMVC.DBSetup.exe
 10. Copy createpictures.bat from the solution folder to C:\MediaComm\ (you can change the path in the web.config appsettings) and make sure the runtime user has execute rights to it
-11. Make sure the folder specified in the appsettings with the key "PhotoRootDir" (default: C:\mediaComm\photos) exists and the runtime user has read/write access to it.
-12. Go to the site and login with the credentials specified in the DBSetup (default: admin//changeME!)
-13. Have fun!
+11. Install http://www.irfanview.com/ (or just copy the exe) and make sure createpictures.bat points to the installation path.
+12. Make sure the folder specified in the appsettings with the key "PhotoRootDir" (default: C:\mediaComm\photos) exists and the runtime user has read/write access to it.
+13. Go to the site and login with the credentials specified in the DBSetup (default: admin//changeME!)
+14. Have fun!
