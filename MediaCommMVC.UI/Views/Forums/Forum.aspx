@@ -1,5 +1,6 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.ForumPage>" %>
 
+<%@ Import Namespace="MediaCommMVC.Core.Parameters" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%= Model.Forum.Title %>
 </asp:Content>
@@ -36,8 +37,15 @@
                 <td>
                     <img src='<%= "/Content/Forum/" + Url.TopicIcon(topic) %>' />
                 </td>
-                <td class="topicTitle" width="100%">
-                    <%= Html.ActionLink(topic.Title, "Topic", new { id = topic.Id, name= Url.ToFriendlyUrl(topic.Title) }) %>
+                <td width="100%">
+                    <span class="topicTitle">
+                        <%= Html.ActionLink(topic.Title, "Topic", new { id = topic.Id, name= Url.ToFriendlyUrl(topic.Title) }) %>
+                    </span>
+                    <span class="smallpager">
+                    <br />
+                       <%= Html.NumbersOnlyPager(new PagingParameters { PageSize = this.Model.PostsPerTopicPage, TotalCount = topic.PostCount}, 
+                                string.Format("/Forums/Topic/{0}/{1}", topic.Id, Url.ToFriendlyUrl(topic.Title)))%>
+                    </span>
                 </td>
                 <td style="white-space: nowrap; text-align: center;">
                     <%= Html.ActionLink(topic.CreatedBy, "Profile", "Users", new { username = topic.CreatedBy}, null) %>

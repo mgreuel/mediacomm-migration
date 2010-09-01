@@ -1,5 +1,7 @@
 ﻿namespace MediaCommMVC.Core.Parameters
 {
+    using System;
+
     /// <summary>Contains information needed for paging.</summary>
     public class PagingParameters
     {
@@ -18,6 +20,23 @@
         /// </summary>
         /// <value>The total item count.</value>
         public int TotalCount { get; set; }
+
+        /// <summary>
+        /// Gets the number of pages.
+        /// </summary>
+        /// <value>The number of pages.</value>
+        public int NumberOfPages
+        {
+            get
+            {
+                if (this.PageSize <= 0)
+                {
+                    return 0;
+                }
+
+                return (int)Math.Ceiling(this.TotalCount / (decimal)this.PageSize);
+            }
+        }
 
         #endregion
 

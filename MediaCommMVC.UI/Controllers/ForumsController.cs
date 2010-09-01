@@ -25,12 +25,12 @@ namespace MediaCommMVC.UI.Controllers
         /// <summary>
         ///   The number of posts displayed per page.
         /// </summary>
-        private const int PostPageSize = 10;
+        private const int PostsPerTopicPage = 10;
 
         /// <summary>
         ///   The number of topics displayed per page.
         /// </summary>
-        private const int TopicPageSize = 25;
+        private const int TopicsPerForumPage = 25;
 
         /// <summary>
         ///   The forum repository.
@@ -104,14 +104,14 @@ namespace MediaCommMVC.UI.Controllers
         {
             this.logger.Debug("Displaying page {0} of the forum with id '{1}'", page, id);
 
-            PagingParameters pagingParameters = new PagingParameters { CurrentPage = page, PageSize = TopicPageSize };
+            PagingParameters pagingParameters = new PagingParameters { CurrentPage = page, PageSize = TopicsPerForumPage };
 
             Forum forum = this.forumRepository.GetForumById(id);
             pagingParameters.TotalCount = forum.TopicCount;
 
             IEnumerable<Topic> topics = this.forumRepository.GetTopicsForForum(id, pagingParameters, this.GetCurrentUser());
 
-            return this.View(new ForumPage { Forum = forum, Topics = topics, PagingParameters = pagingParameters });
+            return this.View(new ForumPage { Forum = forum, Topics = topics, PagingParameters = pagingParameters, PostsPerTopicPage = PostsPerTopicPage });
         }
 
         /// <summary>The forums index.</summary>
@@ -129,7 +129,7 @@ namespace MediaCommMVC.UI.Controllers
         {
             this.logger.Debug("Displaying page {0} of the topic with id '{1}'", page, id);
 
-            PagingParameters pagingParameters = new PagingParameters { CurrentPage = page, PageSize = PostPageSize };
+            PagingParameters pagingParameters = new PagingParameters { CurrentPage = page, PageSize = PostsPerTopicPage };
 
             Topic topic = this.forumRepository.GetTopicById(id);
             pagingParameters.TotalCount = topic.PostCount;
@@ -155,7 +155,7 @@ namespace MediaCommMVC.UI.Controllers
 
             this.forumRepository.AddPost(post);
 
-            int lastPage = this.forumRepository.GetLastPageNumberForTopic(id, PostPageSize);
+            int lastPage = this.forumRepository.GetLastPageNumberForTopic(id, PostsPerTopicPage);
 
             this.logger.Debug("Redirecting to page {0} of the topic with the id '{0}'", lastPage, id);
             return this.RedirectToAction("Topic", new { page = lastPage });
@@ -193,7 +193,7 @@ namespace MediaCommMVC.UI.Controllers
 
             this.forumRepository.UpdatePost(postToUpdate);
 
-            int page = this.forumRepository.GetPageNumberForPost(id, postToUpdate.Topic.Id, PostPageSize);
+            int page = this.forumRepository.GetPageNumberForPost(id, postToUpdate.Topic.Id, PostsPerTopicPage);
             string postAnker = string.Format("#{0}", postToUpdate.Id);
 
             this.logger.Debug("Redirecting to page {0} of the topic with the id '{0}'", page, id);

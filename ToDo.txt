@@ -13,7 +13,6 @@ Forums:
 - ! goto first new post
 - emotions/parser
 - legend
-- ! paging in forum view
 - edit rights
 
 Home:
@@ -35,8 +34,5 @@ General:
 
 Install:
 - Web-Install
-
-Users:
-- ! my profile: Saved successfully
 
 Videos
