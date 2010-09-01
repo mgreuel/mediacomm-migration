@@ -102,15 +102,6 @@ namespace MediaCommMVC.UI.Controllers
             return this.View();
         }
 
-        /// <summary>Saves changes made to the forums.</summary>
-        /// <param name="forums">The forums to save.</param>
-        /// <returns>The Manage forums view.</returns>
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult ManageForums([Bind(Include = "Id")] IList<Forum> forums)
-        {
-            return this.RedirectToAction("ManageForums");
-        }
-
         /// <summary>
         /// Shows the create photo category page.
         /// </summary>

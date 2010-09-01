@@ -27,6 +27,12 @@ namespace MediaCommMVC.UI.ViewModel
         public PagingParameters PagingParameters { get; set; }
 
         /// <summary>
+        /// Gets or sets the number of posts per topic.
+        /// </summary>
+        /// <value>The number of posts per topic.</value>
+        public int PostsPerTopicPage { get; set; }
+
+        /// <summary>
         ///   Gets or sets the topics of the page.
         /// </summary>
         /// <value>The topics on the page.</value>

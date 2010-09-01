@@ -24,10 +24,11 @@ namespace MediaCommMVC.Data.NHInfrastructure.Config
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="ConfigurationGenerator"/> class.</summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigurationGenerator"/> class.
+        /// </summary>
         /// <param name="autoMapGenerator">The auto map generator.</param>
-        /// <param name="logger">The logger.</param>
-        public ConfigurationGenerator(IAutoMapGenerator autoMapGenerator, ILogger logger)
+        public ConfigurationGenerator(IAutoMapGenerator autoMapGenerator)
         {
             this.autoMapGenerator = autoMapGenerator;
         }

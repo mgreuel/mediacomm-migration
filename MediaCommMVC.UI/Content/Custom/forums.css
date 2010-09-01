@@ -45,6 +45,12 @@
 {
     font-weight: bold;
 }
+
+.smallpager
+{
+    font-size: 10px !important;
+}
+
 /* View Forum End */
 
 /* Create Topic Start */
