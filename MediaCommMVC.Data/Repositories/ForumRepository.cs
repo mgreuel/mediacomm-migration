@@ -167,6 +167,20 @@ namespace MediaCommMVC.Data.Repositories
 		}
 
         /// <summary>
+        /// Get the 10 topics with the newest posts.
+        /// </summary>
+        /// <param name="currentUser">The current user.</param>
+        /// <returns>The 10 topics with the newest posts.</returns>
+        public IEnumerable<Topic> Get10TopicsWithNewestPosts(MediaCommUser currentUser)
+        {
+            List<Topic> topics = this.Session.Linq<Topic>().OrderByDescending(t => t.LastPostTime).Take(10).ToList();
+
+            this.UpdateTopicReadStatus(topics.Where(t => t.LastPostTime > DateTime.Now - this.topicUnreadValidity), currentUser);
+
+            return topics;
+        }
+
+        /// <summary>
         ///   Gets all forums.
         /// </summary>
         /// <param name = "currentUser">The current user.</param>
@@ -237,16 +251,16 @@ namespace MediaCommMVC.Data.Repositories
         /// <param name = "pageSize">The page size.</param>
         /// <returns>The page number.</returns>
         public int GetPageNumberForPost(int postId, int topicId, int pageSize)
-        {
-            List<Post> posts = this.Session.Linq<Post>().Where(p => p.Topic.Id == topicId).OrderBy(p => p.Created).ToList();
-            Post post = posts.Single(p => p.Id == postId);
+		{
+			List<Post> posts = this.Session.Linq<Post>().Where(p => p.Topic.Id == topicId).OrderBy(p => p.Created).ToList();
+			Post post = posts.Single(p => p.Id == postId);
 
-            int index = posts.IndexOf(post);
+			int index = posts.IndexOf(post);
 
-            int page = (index / pageSize) + 1;
+			int page = (index / pageSize) + 1;
 
-            return page;
-        }
+			return page;
+		}
 
         /// <summary>
         ///   Gets a post by id.
@@ -277,7 +291,7 @@ namespace MediaCommMVC.Data.Repositories
 
 			int postsToSkip = (pagingParameters.CurrentPage - 1) * pagingParameters.PageSize;
 
-			IEnumerable<Post> posts =
+            List<Post> posts =
 				this.Session.Linq<Post>().Where(p => p.Topic.Id.Equals(topicId))
 					.OrderBy(p => p.Created)
 					.Skip(postsToSkip)
@@ -451,7 +465,7 @@ namespace MediaCommMVC.Data.Repositories
         /// <param name = "currentUser">The current user.</param>
         private void UpdateTopicReadStatus(IEnumerable<Topic> topics, MediaCommUser currentUser)
 		{
-			IEnumerable<TopicRead> readTopics = this.Session.Linq<TopicRead>().Where(r => r.LastVisit > DateTime.Now - this.topicUnreadValidity).ToList();
+            List<TopicRead> readTopics = this.Session.Linq<TopicRead>().Where(r => r.LastVisit > DateTime.Now - this.topicUnreadValidity).ToList();
 
 			foreach (Topic topic in topics)
 			{

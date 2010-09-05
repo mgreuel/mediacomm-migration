@@ -22,11 +22,13 @@ namespace MediaCommMVC.UI.Controllers
     {
         #region Constants and Fields
 
+#warning get from config
         /// <summary>
         ///   The number of posts displayed per page.
         /// </summary>
         private const int PostsPerTopicPage = 10;
 
+#warning get from config
         /// <summary>
         ///   The number of topics displayed per page.
         /// </summary>

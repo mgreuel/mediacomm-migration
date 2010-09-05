@@ -50,6 +50,13 @@ namespace MediaCommMVC.Core.DataInterfaces
         void DeletePost(Post post);
 
         /// <summary>
+        /// Get the 10 topics with the newest posts.
+        /// </summary>
+        /// <param name="currentUser">The current user.</param>
+        /// <returns>The 10 topics with the newest posts.</returns>
+        IEnumerable<Topic> Get10TopicsWithNewestPosts(MediaCommUser currentUser);
+
+        /// <summary>
         ///   Gets all forums.
         /// </summary>
         /// <param name = "currentUser">The current user.</param>
@@ -72,11 +79,11 @@ namespace MediaCommMVC.Core.DataInterfaces
         int GetLastPageNumberForTopic(int topicId, int pageSize);
 
         /// <summary>
-        /// Gets the page number for the post.
+        ///   Gets the page number for the post.
         /// </summary>
-        /// <param name="postId">The post id.</param>
-        /// <param name="topicId">The topic id.</param>
-        /// <param name="pageSize">Size of the page.</param>
+        /// <param name = "postId">The post id.</param>
+        /// <param name = "topicId">The topic id.</param>
+        /// <param name = "pageSize">Size of the page.</param>
         /// <returns>The page number.</returns>
         int GetPageNumberForPost(int postId, int topicId, int pageSize);
 

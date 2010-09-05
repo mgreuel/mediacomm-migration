@@ -1,7 +1,7 @@
 ﻿/* Forums Index Start */
 .forumTitle, .topicTitle
 {
-    font-size: 13px !important;
+    font-size: 12px !important;
     font-weight: bold !important;
 }
 
@@ -26,7 +26,7 @@
 .forumPager
 {
     float: right;
-    font-size: 13px;
+    font-size: 12px;
     margin-right: 20px;    
     margin-left: 20px;
 }
@@ -48,7 +48,7 @@
 
 .smallpager
 {
-    font-size: 10px !important;
+    font-size: 9px !important;
 }
 
 /* View Forum End */
@@ -78,7 +78,7 @@
 /* Show Topic Start */
 .author
 {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
     margin-bottom: 20px;
 }
