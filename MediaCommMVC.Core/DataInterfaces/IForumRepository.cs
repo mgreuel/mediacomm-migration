@@ -50,9 +50,9 @@ namespace MediaCommMVC.Core.DataInterfaces
         void DeletePost(Post post);
 
         /// <summary>
-        /// Get the 10 topics with the newest posts.
+        ///   Get the 10 topics with the newest posts.
         /// </summary>
-        /// <param name="currentUser">The current user.</param>
+        /// <param name = "currentUser">The current user.</param>
         /// <returns>The 10 topics with the newest posts.</returns>
         IEnumerable<Topic> Get10TopicsWithNewestPosts(MediaCommUser currentUser);
 
@@ -62,6 +62,14 @@ namespace MediaCommMVC.Core.DataInterfaces
         /// <param name = "currentUser">The current user.</param>
         /// <returns>The list of forums.</returns>
         IEnumerable<Forum> GetAllForums(MediaCommUser currentUser);
+
+        /// <summary>
+        /// Gets the first unread post for the topic.
+        /// </summary>
+        /// <param name="id">The topic id.</param>
+        /// <param name="user">The current user.</param>
+        /// <returns>The first unread post.</returns>
+        Post GetFirstUnreadPostForTopic(int id, MediaCommUser user);
 
         /// <summary>
         ///   Gets a single forum by id.
