@@ -138,11 +138,17 @@
   <data name="ForumIndex" xml:space="preserve">
     <value>Forum Index</value>
   </data>
+  <data name="GotoFirstNewPost" xml:space="preserve">
+    <value>Go to the first new post</value>
+  </data>
   <data name="LastPost" xml:space="preserve">
     <value>Last Post</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>Message</value>
+  </data>
+  <data name="NewPost" xml:space="preserve">
+    <value>New Post</value>
   </data>
   <data name="Posts" xml:space="preserve">
     <value>Posts</value>

@@ -40,10 +40,14 @@
                 <td width="100%">
                     <span class="topicTitle">
                         <%= Html.ActionLink(topic.Title, "Topic", new { id = topic.Id, name= Url.ToFriendlyUrl(topic.Title) }) %>
-                    </span>
-                    <span class="smallpager">
-                    <br />
-                       <%= Html.NumbersOnlyPager(new PagingParameters { PageSize = this.Model.PostsPerTopicPage, TotalCount = topic.PostCount}, 
+                    </span><span class="smallpager">
+                        <br />
+                        <% if (!topic.ReadByCurrentUser)
+                           {
+                               this.Writer.Write(Html.ActionLink(Resources.Forums.NewPost, "FirstNewPostInTopic", new { id = topic.Id }, new { title = Resources.Forums.GotoFirstNewPost }));
+                               this.Writer.Write("&nbsp;");
+                           }%>
+                        <%= Html.NumbersOnlyPager(new PagingParameters { PageSize = this.Model.PostsPerTopicPage, TotalCount = topic.PostCount}, 
                                 string.Format("/Forums/Topic/{0}/{1}", topic.Id, Url.ToFriendlyUrl(topic.Title)))%>
                     </span>
                 </td>

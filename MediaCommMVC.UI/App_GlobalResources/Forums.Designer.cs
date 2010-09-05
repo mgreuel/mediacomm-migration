@@ -124,6 +124,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go to the first new post.
+        /// </summary>
+        internal static string GotoFirstNewPost {
+            get {
+                return ResourceManager.GetString("GotoFirstNewPost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Post.
         /// </summary>
         internal static string LastPost {
@@ -138,6 +147,15 @@ namespace Resources {
         internal static string Message {
             get {
                 return ResourceManager.GetString("Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Post.
+        /// </summary>
+        internal static string NewPost {
+            get {
+                return ResourceManager.GetString("NewPost", resourceCulture);
             }
         }
         

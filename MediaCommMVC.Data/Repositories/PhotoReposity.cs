@@ -183,7 +183,7 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Getting image from '{0}'", imagePath);
             Image image = Image.FromFile(imagePath);
 
-            // Increase viewcount if the image was not laoded as thumbnail
+            // Increase viewcount if the image was not loaded as thumbnail
             if (!size.Equals("small", StringComparison.OrdinalIgnoreCase))
             {
                 this.InvokeTransaction(
@@ -194,7 +194,6 @@ namespace MediaCommMVC.Data.Repositories
                     });
             }
 
-            this.Logger.Debug("Finished getting image");
             return image;
         }
 

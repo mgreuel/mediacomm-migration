@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Web.Mvc;
 
 using MediaCommMVC.Common.Logging;
@@ -98,6 +99,21 @@ namespace MediaCommMVC.UI.Controllers
             return this.RedirectToAction("Topic", new { id = createdTopic.Id, name = this.Url.ToFriendlyUrl(createdTopic.Title) });
         }
 
+        /// <summary>
+        /// Firsts the new post in topic.
+        /// </summary>
+        /// <param name="id">The topic id.</param>
+        /// <returns>Reirect to the first unread post of the topic.</returns>
+        public ActionResult FirstNewPostInTopic(int id)
+        {
+            Contract.Requires(id > 0);
+
+            Post post = this.forumRepository.GetFirstUnreadPostForTopic(id, this.GetCurrentUser());
+
+            string url = this.GetPostUrl(id, post);
+            return this.Redirect(url);
+        }
+
         /// <summary>Displays the forum with the provided Id.</summary>
         /// <param name="id">The forum id.</param>
         /// <param name="page">The current page.</param>
@@ -152,7 +168,7 @@ namespace MediaCommMVC.UI.Controllers
             this.logger.Debug("Adding post '{0}' to the topic with id '{1}'", post, id);
 
             post.Topic = this.forumRepository.GetTopicById(id);
-            post.Author = this.userRepository.GetUserByName(this.User.Identity.Name);
+            post.Author = this.GetCurrentUser();
             post.Created = DateTime.Now;
 
             this.forumRepository.AddPost(post);
@@ -195,13 +211,24 @@ namespace MediaCommMVC.UI.Controllers
 
             this.forumRepository.UpdatePost(postToUpdate);
 
-            int page = this.forumRepository.GetPageNumberForPost(id, postToUpdate.Topic.Id, PostsPerTopicPage);
-            string postAnker = string.Format("#{0}", postToUpdate.Id);
-
-            this.logger.Debug("Redirecting to page {0} of the topic with the id '{0}'", page, id);
-
-            string url = this.Url.RouteUrl("ViewTopic", new { id = postToUpdate.Topic.Id, page = page, name = Url.ToFriendlyUrl(postToUpdate.Topic.Title) }) + postAnker;
+            string url = this.GetPostUrl(id, postToUpdate);
             return this.Redirect(url);
+        }
+
+        /// <summary>
+        /// Gets the post URL.
+        /// </summary>
+        /// <param name="topicId">The topic id.</param>
+        /// <param name="post">The  post.</param>
+        /// <returns>The url to the post.</returns>
+        private string GetPostUrl(int topicId, Post post)
+        {
+            int page = this.forumRepository.GetPageNumberForPost(postId: post.Id, topicId: topicId, pageSize: PostsPerTopicPage);
+            string postAnker = string.Format("#{0}", post.Id);
+
+            this.logger.Debug("Redirecting to page {0} of the topic with the id '{0}'", page, topicId);
+
+            return this.Url.RouteUrl("ViewTopic", new { id = post.Topic.Id, page = page, name = this.Url.ToFriendlyUrl(post.Topic.Title) }) + postAnker;
         }
 
         #endregion

@@ -10,7 +10,6 @@ Forums:
 - delete
 - * "birthday" threads
 - * polls
-- ! goto first new post
 - emotions/parser
 - legend
 - edit rights
@@ -23,11 +22,11 @@ General:
 - * error handling
 - better input validation
 -*  config db
-- strongly typed config
+-* strongly typed config
 - Use Ajax action where useful
 - * Logging
 - ! breadcrumb
-- Permission Manager
+- *Permission Manager
 
 Install:
 - Web-Install
@@ -37,3 +36,5 @@ Install:
 * Newsletter
 
 E-Mails
+
+shared calender
