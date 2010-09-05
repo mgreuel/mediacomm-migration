@@ -47,7 +47,7 @@ namespace MediaCommMVC.TestDataCreator
             {
                 Console.WriteLine("filling forums");
 
-                sessionManager = new SessionManager(new ConfigurationGenerator(new AutoMapGenerator(logger), logger));
+                sessionManager = new SessionManager(new ConfigurationGenerator(new AutoMapGenerator(logger)));
                 sessionManager.CreateNewSession();
 
                 forumRepository = new ForumRepository(sessionManager, new FileConfigAccessor(logger), logger);

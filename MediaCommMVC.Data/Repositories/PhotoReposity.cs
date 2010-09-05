@@ -96,6 +96,18 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Finished extracting and adding photos");
         }
 
+        /// <summary>
+        /// Gets the 4 newest albums.
+        /// </summary>
+        /// <returns>The 4 newest albums.</returns>
+        public IEnumerable<PhotoAlbum> Get4NewestAlbums()
+        {
+            List<PhotoAlbum> albums =
+                this.Session.Linq<PhotoAlbum>().OrderByDescending(a => a.LastPicturesAdded).Take(4).ToList();
+
+            return albums;
+        }
+
         /// <summary>Gets the album by id.</summary>
         /// <param name="albumId">The album id.</param>
         /// <returns>The album.</returns>

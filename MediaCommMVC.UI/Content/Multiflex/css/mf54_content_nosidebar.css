@@ -22,8 +22,7 @@
     border-bottom: solid 1px rgb(215,215,215);
     background: url(../img/icon_celltitle_level1.gif) no-repeat;
     background-position: 914px 5px;
-    color: rgb(75,75,75);
-    /* font-weight: bold;*/
+    color: rgb(75,75,75); /* font-weight: bold;*/
     font-size: 220% !important /*Non-IE6*/;
     font-size: 200% /*IE6*/;
 }
@@ -34,14 +33,9 @@
     position: relative;
     z-index: 1;
     top: -1px /* End IE Hack to remove vertical -1px margin bug otherwise produced by margin*/;
-    margin-bottom: 6px;
-    /*margin: 0 20px 0 20px;*/
-    /*padding: 15px 35px 5px 0;*/
-    /*border-top: solid 1px rgb(215,215,215);*/
-    /*background: url(../img/icon_celltitle_level2.gif) no-repeat;*/
+    margin-bottom: 6px; /*margin: 0 20px 0 20px;*/ /*padding: 15px 35px 5px 0;*/ /*border-top: solid 1px rgb(215,215,215);*/ /*background: url(../img/icon_celltitle_level2.gif) no-repeat;*/
     background-position: right 15px;
-    color: rgb(75,75,75);
-    /* font-weight: bold;*/
+    color: rgb(75,75,75); /* font-weight: bold;*/
     font-size: 180% !important /*Non-IE6*/;
     font-size: 160% /*IE6*/;
 }
@@ -49,8 +43,7 @@
 {
     margin: 1.0em 0 -0.3em 0;
     padding: 0 20px 0 20px;
-    color: rgb(75,75,75);
-    /* font-weight: bold;*/
+    color: rgb(75,75,75); /* font-weight: bold;*/
     font-size: 180% !important /*Non-IE6*/;
     font-size: 160% /*IE6*/;
 }
@@ -68,8 +61,7 @@
 {
     margin: 1.0em 0 -0.3em 0;
     padding: 0 20px 0 20px;
-    color: rgb(75,75,75);
-    /* font-weight: bold;*/
+    color: rgb(75,75,75); /* font-weight: bold;*/
     font-size: 160% !important /*Non-IE6*/;
     font-size: 140% /*IE6*/;
 }
@@ -77,8 +69,7 @@
 {
     margin: 1.0em 0 -0.5em 0;
     padding: 0 20px 0 20px;
-    color: rgb(75,75,75);
-    /* font-weight: bold;*/
+    color: rgb(75,75,75); /* font-weight: bold;*/
     font-size: 140% !important /*Non-IE6*/;
     font-size: 125% /*IE6*/;
 }
@@ -91,6 +82,8 @@
     font-size: 130% !important /*Non-IE6*/;
     font-size: 115% /*IE6*/;
 }
+
+
 
 /* HEADING -- No icon */
 .main h1.pagetitle-noicon
@@ -128,50 +121,49 @@ p.text
 {
     clear: both;
     width: 920px;
-    margin: 1.5em 0 1.2em 20px;
-    /*table-layout: fixed;*/
+    margin: 1.5em 0 1.2em 20px; /*table-layout: fixed;*/
     border-collapse: collapse;
     empty-cells: show;
     background-color: rgb(233,232,244);
+}
+
+.content-2col-nobox-leftcolumn table, .content-2col-nobox-rightcolumn table, .content-2col-box-leftcolumn table, .content-2col-box-rightcolumn table
+{
+    width: 440px !important;
 }
 
 .content .defaultTable th.top
 {
     height: 3.5em;
     padding: 0 7px 0 7px;
-    empty-cells: show;
-    /*background-color: rgb(175,175,175);*/
+    empty-cells: show; /*background-color: rgb(175,175,175);*/
     background-color: #5c9ccc;
     text-align: left;
-    color: rgb(255,255,255);
-    /* font-weight: bold;*/
+    color: rgb(255,255,255); /* font-weight: bold;*/
     font-size: 120% !important /*Non-IE6*/;
     font-size: 110% /*IE6*/;
 }
 .content .defaultTable th
 {
-    height: 3.0em;
-    /*padding: 2px 20px 2px 7px;*/
+    height: 3.0em; /*padding: 2px 20px 2px 7px;*/
     padding: 2px 6px 2px 6px;
-    border: solid 2px rgb(245,245,245);
-    /*background-color: rgb(225,225,225);*/
+    border: solid 2px rgb(245,245,245); /*background-color: rgb(225,225,225);*/
     background-color: #5c9ccc;
     text-align: center;
     color: rgb(80,80,80);
     font-weight: bold;
     font-size: 120% !important /*Non-IE6*/;
-    font-size: 120% /*IE6*/;    
+    font-size: 120% /*IE6*/;
 }
 .content .defaultTable td
 {
     height: 3.0em;
-    padding: 2px 7px 2px 7px;
+    padding: 1px 5px 1px 5px;
     border: solid 2px rgb(245,245,245);
     background-color: rgb(225,225,225);
     text-align: left;
     font-weight: normal;
-    color: rgb(80,80,80);
-    /*font-size: 120% !important Non-IE6;*/
+    color: rgb(80,80,80); /*font-size: 120% !important Non-IE6;*/
     font-size: 120%;
 }
 
@@ -192,12 +184,10 @@ p.text
 {
     height: 3.5em;
     padding: 0 7px 0 7px;
-    empty-cells: show;
-    /*background-color: rgb(175,175,175);*/
+    empty-cells: show; /*background-color: rgb(175,175,175);*/
     background-color: #5c9ccc;
     text-align: left;
-    color: rgb(255,255,255);
-    /* font-weight: bold;*/
+    color: rgb(255,255,255); /* font-weight: bold;*/
     font-size: 120% !important /*Non-IE6*/;
     font-size: 110% /*IE6*/;
 }
@@ -205,17 +195,14 @@ p.text
 {
     height: 3.0em;
     padding: 2px 20px 2px 7px;
-    border: solid 2px rgb(245,245,245);
-    /*background-color: rgb(225,225,225);*/
+    border: solid 2px rgb(245,245,245); /*background-color: rgb(225,225,225);*/
     background-color: #5c9ccc;
     text-align: left;
-    color: rgb(80,80,80);
-    /* font-weight: bold;*/
+    color: rgb(80,80,80); /* font-weight: bold;*/
     font-size: 120% !important /*Non-IE6*/;
-    font-size: 110% /*IE6*/;
 }
 
-.content .mceWrapper > tbody > tr> td
+.content .mceWrapper > tbody > tr > td
 {
     height: 3.0em;
     padding: 2px 7px 2px 7px;
@@ -225,7 +212,6 @@ p.text
     font-weight: normal;
     color: rgb(80,80,80);
     font-size: 120% !important /*Non-IE6*/;
-    font-size: 110% /*IE6*/;
 }
 
 .content p.caption
@@ -235,14 +221,12 @@ p.text
     text-align: left;
     color: rgb(80,80,80);
     font-size: 120% !important /*Non-IE6*/;
-    font-size: 110% /*IE6*/;
 }
 
 /* Text links */
 .main a
 {
-    color: rgb(70,122,167);
-    /* font-weight: bold;*/
+    color: rgb(70,122,167); /* font-weight: bold;*/
     text-decoration: none;
 }
 .main a:hover
@@ -509,3 +493,5 @@ p.text
 {
     color: Green !important;
 }
+
+

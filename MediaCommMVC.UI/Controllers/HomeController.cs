@@ -1,6 +1,13 @@
 ﻿#region Using Directives
 
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Web.Mvc;
+using MediaCommMVC.Core.DataInterfaces;
+using MediaCommMVC.Core.Model.Forums;
+using MediaCommMVC.Core.Model.Photos;
+using MediaCommMVC.UI.ViewModel;
 
 #endregion
 
@@ -11,6 +18,41 @@ namespace MediaCommMVC.UI.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        /// <summary>
+        /// The forum repository.
+        /// </summary>
+        private readonly IForumRepository forumRepository;
+
+        /// <summary>
+        /// The photo repository.
+        /// </summary>
+        private readonly IPhotoRepository photoRepository;
+
+        private readonly IUserRepository userRepository;
+
+#warning get from config
+        /// <summary>
+        ///   The number of posts displayed per page.
+        /// </summary>
+        private const int PostsPerTopicPage = 10;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HomeController"/> class.
+        /// </summary>
+        /// <param name="forumRepository">The forum repository.</param>
+        /// <param name="photoRepository">The photo repository.</param>
+        /// <param name="userRepository">The user repository.</param>
+        public HomeController(IForumRepository forumRepository, IPhotoRepository photoRepository, IUserRepository userRepository)
+        {
+            Contract.Requires(forumRepository != null);
+            Contract.Requires(photoRepository != null);
+            Contract.Requires(userRepository != null);
+
+            this.forumRepository = forumRepository;
+            this.photoRepository = photoRepository;
+            this.userRepository = userRepository;
+        }
+
         #region Public Methods
 
         /// <summary>Handles Errors.</summary>
@@ -20,11 +62,15 @@ namespace MediaCommMVC.UI.Controllers
             return this.View();
         }
 
-        /// <summary>The welcome page.</summary>
-        /// <returns>The welcome view.</returns>
+        /// <summary>Displays the welcome page containing new content.</summary>
+        /// <returns>The welcome/what's new view.</returns>
         public ActionResult Index()
         {
-            return this.View();
+            IEnumerable<Topic> topicsWithNewestPosts = this.forumRepository.Get10TopicsWithNewestPosts(this.userRepository.GetUserByName(this.User.Identity.Name));
+
+            IEnumerable<PhotoAlbum> newestPhotoAlbums = this.photoRepository.Get4NewestAlbums();
+
+            return this.View(new WhatsNewInfo { Topics = topicsWithNewestPosts, PostsPerTopicPage = PostsPerTopicPage, Albums = newestPhotoAlbums });
         }
 
         #endregion

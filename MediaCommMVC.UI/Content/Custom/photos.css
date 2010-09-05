@@ -59,6 +59,45 @@
 }
 /* Category Gallery End */
 
+/* What's new Gallery Start */
+.newPhotos-gallery, .newPhotos-gallery a:hover
+{
+    text-decoration: none;
+}
+
+.newPhotos-gallery li
+{
+    /*height: 248px !important;*/
+    line-height: normal !important;
+    padding-top: 0px;
+    padding-bottom: 6px;
+}
+
+.newPhotos-gallery .albumCover
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 175px;
+}
+
+.newPhotos-gallery .albumTitle
+{
+    margin-top: 2px;
+    height: 32px;
+    text-align: left;
+    margin-left: 4px;
+    font-size: 12px;
+}
+
+.newPhotos-gallery a
+{
+    padding-top: 0px;
+    left: -50% !important;
+    top: -50% !important;
+    background-color: White !important;
+}
+/* What's new Gallery End */
+
 /* Upload Start */
 #uploadTable
 {

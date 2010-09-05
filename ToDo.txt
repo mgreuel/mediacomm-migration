@@ -1,6 +1,6 @@
 Account:
 - Multilanguage
-- remove default code
+- * remove default code
 
 Admin:
 - Movie Qual + Language
@@ -14,9 +14,6 @@ Forums:
 - emotions/parser
 - legend
 - edit rights
-
-Home:
-- ! What's new
 
 Movies:
 - Edit
@@ -35,4 +32,8 @@ General:
 Install:
 - Web-Install
 
-Videos
+* Videos
+
+* Newsletter
+
+E-Mails
