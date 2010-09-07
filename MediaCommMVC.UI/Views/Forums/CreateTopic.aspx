@@ -4,8 +4,11 @@
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
     <script src="/Content/tiny_mce/tiny_mce.js" type="text/javascript"></script>
 </asp:Content>
-<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <%= Resources.Forums.CreateTopic %>
+<asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
+    <%= Html.ActionLink( Resources.Navigation.Forums, "Index" ) %>    
+    » <strong>
+        <%= Html.ActionLink(Resources.Forums.CreateTopic, "CreateTopic") %>
+    </strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="validationSummary">

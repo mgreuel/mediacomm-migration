@@ -3,16 +3,15 @@
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
     <script src="/Content/tiny_mce/tiny_mce.js" type="text/javascript"></script>
 </asp:Content>
-<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <%=  Html.ActionLink(Model.Topic.Title, "Topic", new { name = Model.Topic.Title, topicId = Model.Topic.Id }) %>
+<asp:Content ID="Content3" ContentPlaceHolderID="BreadcrumbContent" runat="server">
+    <%= Html.ActionLink( Resources.Navigation.Forums, "Index" ) %>
+    »
+    <%= Html.ActionLink(Model.Topic.Forum.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Topic.Forum.Title), id = Model.Topic.Forum.Id })   %>
+    » <strong>
+        <%=  Html.ActionLink(Model.Topic.Title, "Topic", new { name = Model.Topic.Title, topicId = Model.Topic.Id }) %></strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="topicHeader">
-        <div>
-            <h5>
-                <%= Html.ActionLink(Resources.Forums.BackTo + Model.Topic.Forum.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Topic.Forum.Title), id = Model.Topic.Forum.Id })   %>
-            </h5>
-        </div>
         <div class="forumPager forumPagerTop">
             <%= Html.Pager(Model.PagingParameters, string.Format("/Forums/Topic/{0}/{1}", Model.Topic.Id, Url.ToFriendlyUrl(Model.Topic.Title)))%>
         </div>

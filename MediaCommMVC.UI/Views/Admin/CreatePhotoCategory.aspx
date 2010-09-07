@@ -1,10 +1,11 @@
 <%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Photos.PhotoCategory>"
     MasterPageFile="~/Views/Shared/Site.Master" %>
 
-<asp:Content runat="server" ID="Content" ContentPlaceHolderID="Header">
-</asp:Content>
-<asp:Content runat="server" ID="Content1" ContentPlaceHolderID="TitleContent">
-    <%= Resources.Admin.CreatePhotoCategory %>
+<asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
+    <%= Resources.Navigation.Admin %>
+    » <strong>
+        <%= Html.ActionLink(Resources.Admin.CreatePhotoCategory, "CreatePhotoCategory")%>
+    </strong>
 </asp:Content>
 <asp:Content runat="server" ID="Content2" ContentPlaceHolderID="MainContent">
     <div id="validationSummary">

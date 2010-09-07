@@ -4,16 +4,13 @@
 <%@ Import Namespace="Combres.Mvc" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
 </asp:Content>
-<asp:Content runat="server" ID="Content" ContentPlaceHolderID="TitleContent">
-    <%= Model.Name %>
-    (<%= Model.AlbumCount %>
-    <%= Resources.Photos.Albums %>
-    <%= Resources.General.With %>
-    <%= Model.PhotoCount %>
-    <%= Resources.Photos.PhotosTitle %>)
+<asp:Content ID="Content2" ContentPlaceHolderID="BreadCrumbContent" runat="server">
+  <%= Resources.Navigation.Photos %>
+    » <strong>
+        <%= Html.ActionLink(Model.Name, "Category", new { id = Model.Id } ) %>
+    </strong>
 </asp:Content>
 <asp:Content runat="server" ID="Content1" ContentPlaceHolderID="MainContent">
-    
     <div class="highslide-gallery category-gallery">
         <ul>
             <% foreach (var album in Model.Albums)

@@ -1,9 +1,20 @@
-<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Forums.Post>" MasterPageFile="~/Views/Shared/Site.Master" %>
+<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Forums.Post>"
+    MasterPageFile="~/Views/Shared/Site.Master" %>
 
 <asp:Content runat="server" ID="Header" ContentPlaceHolderID="Header">
     <script src="/Content/tiny_mce/tiny_mce.js" type="text/javascript"></script>
 </asp:Content>
-<asp:Content runat="server" ID="Title" ContentPlaceHolderID="TitleContent"></asp:Content>
+<asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
+    <%= Html.ActionLink( Resources.Navigation.Forums, "Index" ) %>
+    »
+    <%= Html.ActionLink(Model.Topic.Forum.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Topic.Forum.Title), id = Model.Topic.Forum.Id })   %>
+    »
+    <%=  Html.ActionLink(Model.Topic.Title, "Topic", new { name = Model.Topic.Title, topicId = Model.Topic.Id }) %>
+
+    <strong>
+        <%= Resources.Forums.Edit %>
+    </strong>
+</asp:Content>
 <asp:Content runat="server" ID="Main" ContentPlaceHolderID="MainContent">
     <% using (Html.BeginForm())
        {%>
@@ -12,26 +23,24 @@
             <%= Resources.Forums.Reply %>
         </h2>
         <%= Html.TextArea("post.Text", this.Model.Text, new { @class = "required", minlength = "3" }) %>
-
         <input id="save" type="submit" value='<%= Resources.General.Save %>' />
     </div>
     <% } %>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $("tbody > tr:odd > td").css("background-color", "#dfeffc");
 
-        <script type="text/javascript">
-            $(document).ready(function ()
+            $('#save').click(function ()
             {
-                $("tbody > tr:odd > td").css("background-color", "#dfeffc");
-
-                $('#save').click(function ()
-                {
-                    var content = tinyMCE.activeEditor.getContent();
-                    $('#post_Text').val(content);
-                });
-
-                $("form").validate();
+                var content = tinyMCE.activeEditor.getContent();
+                $('#post_Text').val(content);
             });
 
-            tinyMCE.init(
+            $("form").validate();
+        });
+
+        tinyMCE.init(
         {
             mode: "textareas",
 

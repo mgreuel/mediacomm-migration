@@ -1,8 +1,10 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Users.MediaCommUser>" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <%= Model.UserName %>'s
-    <%= Resources.Users.Profile %>
+<asp:Content ID="changePasswordTitle" ContentPlaceHolderID="BreadCrumbContent" runat="server">
+    <%= Html.ActionLink(Resources.Navigation.Users, "Index") %>
+    » <strong>
+        <%= Html.ActionLink(Model.UserName + Resources.Users.Profile, "Profile", new { username = Model.UserName })%>
+    </strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <table id="userProfileTable" class="defaultTable">
@@ -10,10 +12,10 @@
         </thead>
         <tbody>
             <tr>
-                <td style="font-weight:bold">
+                <td style="font-weight: bold">
                     <%= Resources.Users.UserName %>:
                 </td>
-                <td style="font-weight:bold">
+                <td style="font-weight: bold">
                     <%= Html.Encode(Model.UserName) %>
                 </td>
             </tr>
@@ -122,15 +124,13 @@
     <p class="text">
         <%=Html.ActionLink(Resources.Users.BackToUserList, "Index") %>
     </p>
-
     <script language="javascript" type="text/javascript">
 
         $(document).ready(function ()
         {
             $("#userProfileTable > tbody > tr > td:nth-child(odd)")._addClass("firstColumn");
-            $("#userProfileTable > tbody > tr > td:nth-child(even)")._addClass("secondColumn");           
+            $("#userProfileTable > tbody > tr > td:nth-child(even)")._addClass("secondColumn");
         });
         
     </script>
-
 </asp:Content>

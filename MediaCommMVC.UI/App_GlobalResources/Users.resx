@@ -166,7 +166,7 @@
     <value>Last Visit</value>
   </data>
   <data name="Profile" xml:space="preserve">
-    <value>Profile</value>
+    <value>'s Profile</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>

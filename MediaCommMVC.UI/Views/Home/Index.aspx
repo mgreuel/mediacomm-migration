@@ -2,8 +2,10 @@
 
 <%@ Import Namespace="MediaCommMVC.Core.Parameters" %>
 <%@ Import Namespace="Combres.Mvc" %>
-<asp:Content ID="indexTitle" ContentPlaceHolderID="TitleContent" runat="server">
-    <%= Resources.General.Home %>
+<asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
+    <strong>
+        <%= Html.ActionLink(Resources.Navigation.Home, "Index" ) %>
+    </strong>
 </asp:Content>
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="content-2col-box-leftcolumn">
