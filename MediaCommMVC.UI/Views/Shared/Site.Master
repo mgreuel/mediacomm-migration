@@ -112,9 +112,6 @@
                         <li>
                             <%= Html.ActionLink(Resources.Admin.CreatePhotoCategory, "CreatePhotoCategory", "Admin") %>
                         </li>
-                        <%--                        <li>
-                            <%= Html.ActionLink(Resources.Admin.ManageForums, "ManageForums", "Admin") %>
-                        </li>--%>
                     </ul>
                 </li>
             </ul>
@@ -129,9 +126,10 @@
                 <div class="corner-content-1col-top">
                 </div>
                 <div class="content-1col-nobox">
-                    <h1 class="noicon">
-                        <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
-                    </h1>
+                    <div id="breadcrumb">
+                        <asp:ContentPlaceHolder ID="BreadCrumbContent" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
                     <asp:ContentPlaceHolder ID="MainContent" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>

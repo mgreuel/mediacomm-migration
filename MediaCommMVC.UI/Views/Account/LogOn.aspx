@@ -1,7 +1,8 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.AccountModels.LogOnModel>" %>
 
-<asp:Content ID="loginTitle" ContentPlaceHolderID="TitleContent" runat="server">
-    <%= Resources.Users.Login %>
+<asp:Content ID="changePasswordTitle" ContentPlaceHolderID="BreadCrumbContent" runat="server">
+    <strong>
+        <%= Resources.Navigation.LogOn  %></strong>
 </asp:Content>
 <asp:Content ID="loginContent" ContentPlaceHolderID="MainContent" runat="server">
     <%= Html.ValidationSummary(true, Resources.Users.LoginFailed) %>

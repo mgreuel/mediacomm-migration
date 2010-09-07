@@ -659,41 +659,6 @@ p:after
     visibility: hidden;
 }
 
-/**************/
-/*  PRINTING  */
-/**************/
-/* To avoid that some layouts may break during printing */
-/* we remove one vertical border-line for the columns  */
-@media print
-{
-    .content-2col-nobox-rightcolumn
-    {
-        display: inline;
-        float: right;
-        width: 313px;
-        border-left: none;
-        background-color: rgb(255,255,255);
-    }
-}
-@media print
-{
-    .content-3col-nobox-rightcolumn
-    {
-        display: inline;
-        float: right;
-        width: 313px;
-        border-left: none;
-        background-color: rgb(255,255,255);
-    }
-}
-
-/******************************************/
-/*  YOUR OWN USER STYLES                  */
-/*  If you want to add your own styles,   */
-/*  then add them here below in order to  */
-/*  avoid a mixup with default styles.    */
-/******************************************/
-
 #loginInfo
 {
     font-size: 130%;
@@ -707,4 +672,11 @@ p:after
 #loginInfo a
 {
     color: #467AA7;
+}
+
+#breadcrumb
+{
+    padding-left: 20px;
+    padding-top: 8px;
+    font-size: 13px;
 }

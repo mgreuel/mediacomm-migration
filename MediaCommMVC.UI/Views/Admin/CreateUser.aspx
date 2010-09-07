@@ -1,8 +1,11 @@
 <%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.CreateUserInfo>"
     MasterPageFile="~/Views/Shared/Site.Master" %>
 
-<asp:Content runat="server" ID="Content" ContentPlaceHolderID="TitleContent">
-    <%= Resources.Admin.CreateUser %>
+<asp:Content ID="Content2" ContentPlaceHolderID="BreadCrumbContent" runat="server">
+    <%= Resources.Navigation.Admin %>
+    » <strong>
+        <%= Html.ActionLink(Resources.Admin.CreateUser, "CreateUser") %>
+    </strong>
 </asp:Content>
 <asp:Content runat="server" ID="Content1" ContentPlaceHolderID="MainContent">
     <% using (Html.BeginForm())

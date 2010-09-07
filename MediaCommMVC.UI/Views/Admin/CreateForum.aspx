@@ -1,9 +1,11 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Forums.Forum>" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <%= Resources.Admin.CreateForum %>
+<asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
+    <%= Resources.Navigation.Admin %>
+    » <strong>
+        <%= Html.ActionLink(Resources.Admin.CreateForum, "CreateForum") %>
+    </strong>
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="validationSummary">
         <%= Html.ValidationSummary(Resources.General.ValidationSummary) %>

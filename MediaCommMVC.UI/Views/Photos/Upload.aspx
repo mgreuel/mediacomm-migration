@@ -1,21 +1,21 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.PhotoUpload>" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <%= Resources.Photos.Upload %>
+<asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
+    <%=  Resources.Navigation.Photos %>
+    » <strong>
+        <%= Html.ActionLink(Resources.Photos.Upload, "Upload" ) %> </strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-<%
-    if (false)
-    {
+    <%
+        if (false)
+        {
     %>
     <script src="../../Scripts/jquery-1.4.2.min.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.validate.min.js" type="text/javascript"></script>
-<%
-    }
-%>
-
+    <%
+        }
+    %>
     <%= Html.CombresLink("uploadJs")%>
     <% using (Html.BeginForm())
        {%>
@@ -59,7 +59,7 @@
     <%
         }%>
     <script type="text/javascript">
-         
+
         function startUpload()
         {
             if ($("form").validate().form() == true)

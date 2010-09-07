@@ -3,9 +3,13 @@
 <%@ Import Namespace="Combres.Mvc" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
 </asp:Content>
-<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <%= Model.Name %>
-    (<%= Model.PhotoCount %> <%= Resources.Photos.PhotosTitle %>)
+<asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
+    <%= Resources.Navigation.Photos %>
+    »
+    <%= Html.ActionLink(Model.PhotoCategory.Name, "Category", new { id = Model.PhotoCategory.Id } ) %>
+    » <strong>
+        <%= Html.ActionLink(Model.Name, "Album", new { id = Model.Id }) %>
+    </strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <%= Html.CombresLink("photosJs")%>

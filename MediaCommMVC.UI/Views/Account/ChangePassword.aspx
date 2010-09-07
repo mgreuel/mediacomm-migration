@@ -1,13 +1,16 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.AccountModels.ChangePasswordModel>" %>
 
-<asp:Content ID="changePasswordTitle" ContentPlaceHolderID="TitleContent" runat="server">
-    <%= Resources.Users.ChangePassword  %>
+<asp:Content ID="changePasswordTitle" ContentPlaceHolderID="BreadCrumbContent" runat="server">
+    <%= Html.ActionLink(Resources.Navigation.Users, "Index", "Users") %>
+    »
+    <%= Html.ActionLink(Resources.Users.MyProfile, "MyProfile", "Users") %>
+    »
+    <strong> <%= Html.ActionLink(Resources.Users.ChangePassword, "ChangePassword", "Account")  %> </strong>
 </asp:Content>
 <asp:Content ID="changePasswordContent" ContentPlaceHolderID="MainContent" runat="server">
     <% using (Html.BeginForm())
        { %>
- <%= Html.ValidationSummary(true, Resources.Users.PasswordChangeFailed) %>
-   
+    <%= Html.ValidationSummary(true, Resources.Users.PasswordChangeFailed) %>
     <table id="changePasswordTable" class="defaultTable">
         <tr>
             <td class="firstColumn">
