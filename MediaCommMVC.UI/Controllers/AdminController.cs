@@ -95,13 +95,6 @@ namespace MediaCommMVC.UI.Controllers
             return this.RedirectToAction("UserCreated");
         }
 
-        /// <summary>Displays the manage forums page.</summary>
-        /// <returns>The manage forums view.</returns>
-        public ActionResult ManageForums()
-        {
-            return this.View();
-        }
-
         /// <summary>
         /// Shows the create photo category page.
         /// </summary>
