@@ -21,6 +21,8 @@ using MediaCommMVC.UI.ViewModel;
 
 namespace MediaCommMVC.UI.Controllers
 {
+    using MediaCommMVC.UI.Helpers;
+
     /// <summary>The photos controller.</summary>
     public class PhotosController : Controller
     {
@@ -122,7 +124,7 @@ namespace MediaCommMVC.UI.Controllers
         {
             IEnumerable<PhotoCategory> categories = this.photoRepository.GetAllCategories();
 
-            var categoryViewModels = categories.Select(c => new { c.Name, c.Id, c.AlbumCount });
+            var categoryViewModels = categories.Select(c => new { c.Name, c.Id, c.AlbumCount, EncodedName = Url.ToFriendlyUrl(c.Name) });
 
             return this.Json(categoryViewModels, JsonRequestBehavior.AllowGet);
         }

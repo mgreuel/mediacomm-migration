@@ -8,7 +8,7 @@
     »
     <%= Html.ActionLink(Model.Topic.Forum.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Topic.Forum.Title), id = Model.Topic.Forum.Id })   %>
     » <strong>
-        <%=  Html.ActionLink(Model.Topic.Title, "Topic", new { name = Model.Topic.Title, topicId = Model.Topic.Id }) %></strong>
+        <%=  Html.ActionLink(Model.Topic.Title, "Topic", new { name = Model.Topic.Title, id = Model.Topic.Id }) %></strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="topicHeader">

@@ -6,9 +6,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
     <%= Resources.Navigation.Photos %>
     »
-    <%= Html.ActionLink(Model.PhotoCategory.Name, "Category", new { id = Model.PhotoCategory.Id } ) %>
+    <%= Html.ActionLink(Model.PhotoCategory.Name, "Category", new { id = Model.PhotoCategory.Id, name = Url.ToFriendlyUrl(Model.PhotoCategory.Name) } ) %>
     » <strong>
-        <%= Html.ActionLink(Model.Name, "Album", new { id = Model.Id }) %>
+        <%= Html.ActionLink(Model.Name, "Album", new { id = Model.Id, name = Url.ToFriendlyUrl(Model.Name) })%>
     </strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
