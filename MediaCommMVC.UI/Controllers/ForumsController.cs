@@ -74,11 +74,31 @@ namespace MediaCommMVC.UI.Controllers
 
         #region Public Methods
 
-        /// <summary>Displays the create topic page.</summary>
+        /// <summary>
+        /// Displays the create topic page.
+        /// </summary>
+        /// <param name="id">The forum id.</param>
         /// <returns>The create topic view.</returns>
-        public ActionResult CreateTopic()
+        public ActionResult CreateTopic(int id)
         {
-            return this.View();
+            Forum forum = this.forumRepository.GetForumById(id);
+
+            return this.View(forum);
+        }
+
+        /// <summary>
+        /// Redirects to the topic page containing the post.
+        /// </summary>
+        /// <param name="id">The post id.</param>
+        /// <returns>RedirectAction to the topic page containing the post.</returns>
+        [HttpGet]
+        public ActionResult Post(int id)
+        {
+            Post post = this.forumRepository.GetPostById(id);
+
+            string url = this.GetPostUrl(post.Topic.Id, post);
+
+            return this.Redirect(url);
         }
 
         /// <summary>Creates the topic.</summary>
@@ -104,6 +124,7 @@ namespace MediaCommMVC.UI.Controllers
         /// </summary>
         /// <param name="id">The topic id.</param>
         /// <returns>Reirect to the first unread post of the topic.</returns>
+        [HttpGet]
         public ActionResult FirstNewPostInTopic(int id)
         {
             Contract.Requires(id > 0);
@@ -118,6 +139,7 @@ namespace MediaCommMVC.UI.Controllers
         /// <param name="id">The forum id.</param>
         /// <param name="page">The current page.</param>
         /// <returns>The forum view, displaying topics.</returns>
+        [HttpGet]
         public ActionResult Forum(int id, int page)
         {
             this.logger.Debug("Displaying page {0} of the forum with id '{1}'", page, id);
@@ -134,6 +156,7 @@ namespace MediaCommMVC.UI.Controllers
 
         /// <summary>The forums index.</summary>
         /// <returns>The forums index view.</returns>
+        [HttpGet]
         public ActionResult Index()
         {
             return this.View(this.forumRepository.GetAllForums(this.GetCurrentUser()));
@@ -143,6 +166,7 @@ namespace MediaCommMVC.UI.Controllers
         /// <param name="id">The topic id.</param>
         /// <param name="page">The current page.</param>
         /// <returns>The topic view, displaying posts.</returns>
+        [HttpGet]
         public ActionResult Topic(int id, int page)
         {
             this.logger.Debug("Displaying page {0} of the topic with id '{1}'", page, id);
@@ -161,7 +185,7 @@ namespace MediaCommMVC.UI.Controllers
         /// <param name="id">The topic id.</param>
         /// <param name="post">The post to add.</param>
         /// <returns>The last page of the topic.</returns>
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
         [ValidateInput(false)]
         public ActionResult Topic(int id, Post post)
         {
@@ -184,7 +208,7 @@ namespace MediaCommMVC.UI.Controllers
         /// </summary>
         /// <param name="id">The post id.</param>
         /// <returns>The edit post view.</returns>
-        [AcceptVerbs(HttpVerbs.Get)]
+        [HttpGet]
         public ActionResult EditPost(int id)
         {
 #warning check if allowed
@@ -199,7 +223,7 @@ namespace MediaCommMVC.UI.Controllers
         /// <param name="id">The post id.</param>
         /// <param name="post">The edited post.</param>
         /// <returns>Redirect to the topic the post belongs to.</returns>
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
         [ValidateInput(false)]
         public ActionResult EditPost(int id, Post post)
         {

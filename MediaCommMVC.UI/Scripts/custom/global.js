@@ -6,7 +6,7 @@
     {
         $.each(categories, function ()
         {
-            $("#photonavi").append("<li><a href='/Photos/Category/" + this.Id + "/" + this.Name + "'>" + this.Name + " (" + this.AlbumCount + ")</a></li>");
+            $("#photonavi").append("<li><a href='/Photos/Category/" + this.Id + "/" + this.EncodedName + "'>" + this.Name + " (" + this.AlbumCount + ")</a></li>");
         })
     })
 });

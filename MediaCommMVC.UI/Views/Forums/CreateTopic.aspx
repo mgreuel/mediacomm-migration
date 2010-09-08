@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Forums.Forum>" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
@@ -6,6 +6,9 @@
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
     <%= Html.ActionLink( Resources.Navigation.Forums, "Index" ) %>    
+
+     »
+     <%= Html.ActionLink(Model.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Title), id = Model.Id })   %>
     » <strong>
         <%= Html.ActionLink(Resources.Forums.CreateTopic, "CreateTopic") %>
     </strong>

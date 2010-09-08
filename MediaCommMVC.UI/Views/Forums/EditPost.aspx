@@ -9,10 +9,9 @@
     »
     <%= Html.ActionLink(Model.Topic.Forum.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Topic.Forum.Title), id = Model.Topic.Forum.Id })   %>
     »
-    <%=  Html.ActionLink(Model.Topic.Title, "Topic", new { name = Model.Topic.Title, topicId = Model.Topic.Id }) %>
-
-    <strong>
-        <%= Resources.Forums.Edit %>
+    <%=  Html.ActionLink(Model.Topic.Title, "Topic", new { name = Model.Topic.Title, Id = Model.Topic.Id }) %>
+    » <strong>
+        <%= Resources.Forums.EditPost %>
     </strong>
 </asp:Content>
 <asp:Content runat="server" ID="Main" ContentPlaceHolderID="MainContent">

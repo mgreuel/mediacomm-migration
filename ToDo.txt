@@ -25,9 +25,9 @@ General:
 -* strongly typed config
 - Use Ajax action where useful
 - * Logging
-- ! add links/context to breadcrumbs
 - *Permission Manager
 - cleanup css
+- cleanup and check routes
 
 Install:
 - Web-Install
