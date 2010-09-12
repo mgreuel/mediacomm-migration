@@ -11,7 +11,6 @@ Forums:
 - * "birthday" threads
 - * polls
 - emotions/parser
-- legend
 - edit rights
 
 Movies:
@@ -30,7 +29,7 @@ General:
 - cleanup and check routes
 
 Install:
-- Web-Install
+- Web-Install?
 
 * Videos
 
