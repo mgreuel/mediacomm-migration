@@ -4,7 +4,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
     <%= Html.ActionLink(Resources.Navigation.Forums, "Index" ) %>
     » <strong>
-        <%= Html.ActionLink(Model.Forum.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Forum.Title), id = Model.Forum.Id })   %> </strong>
+        <%= Html.ActionLink(Model.Forum.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Forum.Title), id = Model.Forum.Id })   %>
+    </strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="forumHeader">
@@ -72,5 +73,35 @@
     </table>
     <div class="forumPager forumPagerBottom">
         <%= Html.Pager(Model.PagingParameters, string.Format("/Forums/Forum/{0}/{1}", Model.Forum.Id, Url.ToFriendlyUrl(Model.Forum.Title))) %>
+    </div>
+    <div id="forumIndexFooter">
+        <table id="legend">
+            <tr>
+                <td>
+                    <img src="/Content/Forum/folder_new.gif" alt="New Posts" />
+                </td>
+                <td class="caption">
+                    <%= Resources.Forums.NewPosts %>
+                </td>
+                <td>
+                    <img src="/Content/Forum/folder.gif" alt="No New Posts" />
+                </td>
+                <td class="caption">
+                    <%= Resources.Forums.NoNewPosts %>
+                </td>
+                <td>
+                    <img src="/Content/Forum/folder_sticky_new.gif" alt="New Posts" />
+                </td>
+                <td class="caption">
+                    <%= Resources.Forums.StickyNewPosts %>
+                </td>
+                <td>
+                    <img src="/Content/Forum/folder_sticky.gif" alt="No New Posts" />
+                </td>
+                <td class="caption">
+                    <%= Resources.Forums.StickyNoNewPosts %>
+                </td>
+            </tr>
+        </table>
     </div>
 </asp:Content>

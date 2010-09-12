@@ -5,10 +5,9 @@
     <script src="/Content/tiny_mce/tiny_mce.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
-    <%= Html.ActionLink( Resources.Navigation.Forums, "Index" ) %>    
-
-     »
-     <%= Html.ActionLink(Model.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Title), id = Model.Id })   %>
+    <%= Html.ActionLink( Resources.Navigation.Forums, "Index" ) %>
+    »
+    <%= Html.ActionLink(Model.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Title), id = Model.Id })   %>
     » <strong>
         <%= Html.ActionLink(Resources.Forums.CreateTopic, "CreateTopic") %>
     </strong>
@@ -36,6 +35,15 @@
             </td>
             <td class="secondColumn reset">
                 <%= Html.TextArea("Post.Text", null, new { @class = "required", minlength = "3" }) %>
+            </td>
+        </tr>
+        <tr>
+            <td class="firstColumn">
+                <%= Resources.Forums.TopicOptions %>
+            </td>
+            <td class="secondColumn">
+                <%= Html.CheckBox("Sticky", new { @class = "checkBox"}) %>
+                <%= Resources.Forums.MarkAsSticky  %>
             </td>
         </tr>
         <tr>

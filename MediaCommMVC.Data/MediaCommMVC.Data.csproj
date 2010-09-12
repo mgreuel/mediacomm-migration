@@ -114,6 +114,7 @@
     <Compile Include="MixedImageGenerator.cs" />
     <Compile Include="NHInfrastructure\Config\ConfigurationGenerator.cs" />
     <Compile Include="NHInfrastructure\Config\IConfigurationGenerator.cs" />
+    <Compile Include="NHInfrastructure\Conventions\EnumConvention.cs" />
     <Compile Include="NHInfrastructure\Conventions\FkConvention.cs" />
     <Compile Include="NHInfrastructure\ISessionManager.cs" />
     <Compile Include="NHInfrastructure\Mapping\AutoMapGenerator.cs" />

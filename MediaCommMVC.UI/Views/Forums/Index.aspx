@@ -53,7 +53,22 @@
         </tr>
         <% } %>
     </table>
-    <style type="text/css">
-        
-    </style>
+    <div id="forumIndexFooter">
+        <table id="legend">
+            <tr>
+                <td>
+                    <img src="/Content/Forum/folder_new.gif" alt="New Posts" />
+                </td>
+                <td class="caption">
+                    <%= Resources.Forums.NewPosts %>
+                </td>
+                <td>
+                    <img src="/Content/Forum/folder.gif" alt="No New Posts" />
+                </td>
+                <td class="caption">
+                    <%= Resources.Forums.NoNewPosts %>
+                </td>
+            </tr>
+        </table>
+    </div>
 </asp:Content>

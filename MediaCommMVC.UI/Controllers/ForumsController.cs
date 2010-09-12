@@ -101,19 +101,28 @@ namespace MediaCommMVC.UI.Controllers
             return this.Redirect(url);
         }
 
-        /// <summary>Creates the topic.</summary>
+        /// <summary>
+        /// Creates the topic.
+        /// </summary>
         /// <param name="topic">The topic.</param>
         /// <param name="post">The first post.</param>
         /// <param name="id">The forum id.</param>
+        /// <param name="sticky">if set to <c>true</c> the topic should be marked as [sticky].</param>
         /// <returns>The added topic view.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
         [ValidateInput(false)]
-        public ActionResult CreateTopic(Topic topic, Post post, int id)
+        public ActionResult CreateTopic(Topic topic, Post post, int id, bool sticky)
         {
             this.logger.Debug("Creating topic '{0}' with post '{1}' and forumId '{2}'", topic, post, id);
 
             post.Author = this.userRepository.GetUserByName(this.User.Identity.Name);
             topic.Forum = this.forumRepository.GetForumById(id);
+
+            if (sticky)
+            {
+                topic.DisplayPriority = TopicDisplayPriority.Sticky;
+            }
+
             Topic createdTopic = this.forumRepository.AddTopic(topic, post);
 
             return this.RedirectToAction("Topic", new { id = createdTopic.Id, name = this.Url.ToFriendlyUrl(createdTopic.Title) });
