@@ -9,7 +9,27 @@
 {
     font-size: 11px !important;
 }
-/* Forums Index Start */
+
+#forumIndexFooter
+{
+   text-align: center;      
+   margin-left:auto;
+   margin-right: auto;
+}
+
+#forumIndexFooter #legend
+{
+   text-align: center;      
+   margin-left:auto;
+   margin-right: auto;
+}
+
+#forumIndexFooter #legend .caption
+{
+    padding: 1px 20px 1px 4px;
+}
+
+/* Forums Index End */
 
 /* View Forum Start */
 #newTopicButton
@@ -27,7 +47,7 @@
 {
     float: right;
     font-size: 12px;
-    margin-right: 20px;    
+    margin-right: 20px;
     margin-left: 20px;
 }
 

@@ -11,7 +11,7 @@ namespace MediaCommMVC.Data
     public interface IImageGenerator
     {
         /// <summary>
-        /// Generates differnt resolution for the images.
+        /// Generates different resolutions for the images.
         /// </summary>
         /// <param name="pathToPhotos">The path to photos.</param>
         /// <param name="unprocessedPhotosFolder">The unprocessed photos folder.</param>

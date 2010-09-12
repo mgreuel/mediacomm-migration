@@ -494,4 +494,7 @@ p.text
     color: Green !important;
 }
 
-
+.checkBox
+{
+    vertical-align: sub;
+}

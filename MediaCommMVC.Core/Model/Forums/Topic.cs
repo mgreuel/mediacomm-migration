@@ -40,7 +40,7 @@ namespace MediaCommMVC.Core.Model.Forums
         ///   Gets or sets the topic's display priority within it's forum.
         /// </summary>
         /// <value>The topic's display priority within it's forum.</value>
-        public virtual int DisplayPriority { get; set; }
+        public virtual TopicDisplayPriority DisplayPriority { get; set; }
 
         /// <summary>
         ///   Gets or sets the forum the post belongs to.

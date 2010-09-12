@@ -147,11 +147,20 @@
   <data name="LastPost" xml:space="preserve">
     <value>Last Post</value>
   </data>
+  <data name="MarkAsSticky" xml:space="preserve">
+    <value>Create as sticky</value>
+  </data>
   <data name="Message" xml:space="preserve">
     <value>Message</value>
   </data>
   <data name="NewPost" xml:space="preserve">
     <value>New Post</value>
+  </data>
+  <data name="NewPosts" xml:space="preserve">
+    <value>New posts</value>
+  </data>
+  <data name="NoNewPosts" xml:space="preserve">
+    <value>No new posts</value>
   </data>
   <data name="Posts" xml:space="preserve">
     <value>Posts</value>
@@ -159,11 +168,20 @@
   <data name="Reply" xml:space="preserve">
     <value>Reply</value>
   </data>
+  <data name="StickyNewPosts" xml:space="preserve">
+    <value>Sticky with new posts</value>
+  </data>
+  <data name="StickyNoNewPosts" xml:space="preserve">
+    <value>Sticky without new posts</value>
+  </data>
   <data name="Subject" xml:space="preserve">
     <value>Subject</value>
   </data>
   <data name="Topic" xml:space="preserve">
     <value>Topic</value>
+  </data>
+  <data name="TopicOptions" xml:space="preserve">
+    <value>Options:</value>
   </data>
   <data name="Topics" xml:space="preserve">
     <value>Topics</value>

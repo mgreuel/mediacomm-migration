@@ -38,4 +38,4 @@ Install:
 
 E-Mails
 
-shared calender
+* shared calender

@@ -53,6 +53,7 @@
     <Compile Include="Model\Forums\Forum.cs" />
     <Compile Include="Model\Forums\Post.cs" />
     <Compile Include="Model\Forums\Topic.cs" />
+    <Compile Include="Model\Forums\TopicDisplayPriority.cs" />
     <Compile Include="Model\Forums\TopicRead.cs" />
     <Compile Include="Model\Movies\Movie.cs" />
     <Compile Include="Model\Movies\MovieLanguage.cs" />

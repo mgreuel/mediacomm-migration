@@ -151,6 +151,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create as sticky.
+        /// </summary>
+        internal static string MarkAsSticky {
+            get {
+                return ResourceManager.GetString("MarkAsSticky", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Message.
         /// </summary>
         internal static string Message {
@@ -165,6 +174,24 @@ namespace Resources {
         internal static string NewPost {
             get {
                 return ResourceManager.GetString("NewPost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New posts.
+        /// </summary>
+        internal static string NewPosts {
+            get {
+                return ResourceManager.GetString("NewPosts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No new posts.
+        /// </summary>
+        internal static string NoNewPosts {
+            get {
+                return ResourceManager.GetString("NoNewPosts", resourceCulture);
             }
         }
         
@@ -187,6 +214,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sticky with new posts.
+        /// </summary>
+        internal static string StickyNewPosts {
+            get {
+                return ResourceManager.GetString("StickyNewPosts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sticky without new posts.
+        /// </summary>
+        internal static string StickyNoNewPosts {
+            get {
+                return ResourceManager.GetString("StickyNoNewPosts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subject.
         /// </summary>
         internal static string Subject {
@@ -201,6 +246,15 @@ namespace Resources {
         internal static string Topic {
             get {
                 return ResourceManager.GetString("Topic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options:.
+        /// </summary>
+        internal static string TopicOptions {
+            get {
+                return ResourceManager.GetString("TopicOptions", resourceCulture);
             }
         }
         

@@ -23,7 +23,7 @@ namespace MediaCommMVC.UI.Helpers
         {
             string filename = "folder";
 
-            if (topic.DisplayPriority != 0)
+            if (topic.DisplayPriority == TopicDisplayPriority.Sticky)
             {
                 filename = filename + "_sticky";
             }
