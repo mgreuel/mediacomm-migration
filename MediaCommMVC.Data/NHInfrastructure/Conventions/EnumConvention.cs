@@ -33,5 +33,4 @@ namespace MediaCommMVC.Data.NHInfrastructure.Conventions
             target.CustomType(target.Property.PropertyType);
         }
     }
-
 }

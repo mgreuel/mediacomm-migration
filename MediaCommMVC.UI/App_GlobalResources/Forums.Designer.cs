@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide from users.
+        /// </summary>
+        internal static string ExcludeUsers {
+            get {
+                return ResourceManager.GetString("ExcludeUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forum.
         /// </summary>
         internal static string Forum {

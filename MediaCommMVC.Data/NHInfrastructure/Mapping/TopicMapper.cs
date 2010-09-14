@@ -26,10 +26,11 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
             mapping.Map(t => t.CreatedBy).Not.Nullable();
             mapping.Map(t => t.Title).Not.Nullable();
             mapping.IgnoreProperty(t => t.ReadByCurrentUser);
+            mapping.HasManyToMany(t => t.ExcludedUsers).Table("ForumTopicsExcludedUsers").Cascade.SaveUpdate();
         }
 
         #endregion
 
-        #endregion
-    }
+            #endregion
+        }
 }
