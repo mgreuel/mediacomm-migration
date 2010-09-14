@@ -28,6 +28,9 @@ namespace MediaCommMVC.UI.Controllers
         /// </summary>
         private readonly IPhotoRepository photoRepository;
 
+        /// <summary>
+        /// The user repository.
+        /// </summary>
         private readonly IUserRepository userRepository;
 
 #warning get from config

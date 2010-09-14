@@ -46,6 +46,14 @@
                 <%= Resources.Forums.MarkAsSticky  %>
             </td>
         </tr>
+                <tr>
+            <td class="firstColumn">
+                <%= Resources.Forums.ExcludeUsers %>:
+            </td>
+            <td class="secondColumn">
+                <%= Html.TextBox("excludedUsers") %>                
+            </td>
+        </tr>
         <tr>
             <td>
             </td>

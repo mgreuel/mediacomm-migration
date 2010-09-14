@@ -1,57 +1,61 @@
-#region Using Directives
-
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Web.Mvc;
-
-using MediaCommMVC.Common.Logging;
-using MediaCommMVC.Core.DataInterfaces;
-using MediaCommMVC.Core.Model.Forums;
-using MediaCommMVC.Core.Model.Users;
-using MediaCommMVC.Core.Parameters;
-using MediaCommMVC.UI.Helpers;
-using MediaCommMVC.UI.ViewModel;
-
-#endregion
-
 namespace MediaCommMVC.UI.Controllers
 {
-    /// <summary>The forums controller.</summary>
+    #region Using Directives
+
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Web.Mvc;
+
+    using MediaCommMVC.Common.Logging;
+    using MediaCommMVC.Core.DataInterfaces;
+    using MediaCommMVC.Core.Model.Forums;
+    using MediaCommMVC.Core.Model.Users;
+    using MediaCommMVC.Core.Parameters;
+    using MediaCommMVC.UI.Helpers;
+    using MediaCommMVC.UI.ViewModel;
+
+    #endregion
+
+    /// <summary>
+    /// The forums controller.
+    /// </summary>
     [Authorize]
     public class ForumsController : Controller
     {
         #region Constants and Fields
 
 #warning get from config
+
         /// <summary>
-        ///   The number of posts displayed per page.
+        /// The number of posts displayed per page.
         /// </summary>
         private const int PostsPerTopicPage = 10;
 
 #warning get from config
+
         /// <summary>
-        ///   The number of topics displayed per page.
+        /// The number of topics displayed per page.
         /// </summary>
         private const int TopicsPerForumPage = 25;
 
         /// <summary>
-        ///   The forum repository.
+        /// The forum repository.
         /// </summary>
         private readonly IForumRepository forumRepository;
 
         /// <summary>
-        ///   The logger.
+        /// The logger.
         /// </summary>
         private readonly ILogger logger;
 
         /// <summary>
-        ///   The user repository.
+        /// The user repository.
         /// </summary>
         private readonly IUserRepository userRepository;
 
         /// <summary>
-        ///   The current user.
+        /// The current user.
         /// </summary>
         private MediaCommUser currentUser;
 
@@ -59,10 +63,18 @@ namespace MediaCommMVC.UI.Controllers
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="ForumsController"/> class.</summary>
-        /// <param name="forumRepository">The forum repository.</param>
-        /// <param name="userRepository">The user repository.</param>
-        /// <param name="logger">The logger.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ForumsController"/> class.
+        /// </summary>
+        /// <param name="forumRepository">
+        /// The forum repository.
+        /// </param>
+        /// <param name="userRepository">
+        /// The user repository.
+        /// </param>
+        /// <param name="logger">
+        /// The logger.
+        /// </param>
         public ForumsController(IForumRepository forumRepository, IUserRepository userRepository, ILogger logger)
         {
             this.forumRepository = forumRepository;
@@ -77,8 +89,12 @@ namespace MediaCommMVC.UI.Controllers
         /// <summary>
         /// Displays the create topic page.
         /// </summary>
-        /// <param name="id">The forum id.</param>
-        /// <returns>The create topic view.</returns>
+        /// <param name="id">
+        /// The forum id.
+        /// </param>
+        /// <returns>
+        /// The create topic view.
+        /// </returns>
         public ActionResult CreateTopic(int id)
         {
             Forum forum = this.forumRepository.GetForumById(id);
@@ -89,8 +105,12 @@ namespace MediaCommMVC.UI.Controllers
         /// <summary>
         /// Redirects to the topic page containing the post.
         /// </summary>
-        /// <param name="id">The post id.</param>
-        /// <returns>RedirectAction to the topic page containing the post.</returns>
+        /// <param name="id">
+        /// The post id.
+        /// </param>
+        /// <returns>
+        /// RedirectAction to the topic page containing the post.
+        /// </returns>
         [HttpGet]
         public ActionResult Post(int id)
         {
@@ -104,24 +124,48 @@ namespace MediaCommMVC.UI.Controllers
         /// <summary>
         /// Creates the topic.
         /// </summary>
-        /// <param name="topic">The topic.</param>
-        /// <param name="post">The first post.</param>
-        /// <param name="id">The forum id.</param>
-        /// <param name="sticky">if set to <c>true</c> the topic should be marked as [sticky].</param>
-        /// <returns>The added topic view.</returns>
+        /// <param name="topic">
+        /// The topic.
+        /// </param>
+        /// <param name="post">
+        /// The first post.
+        /// </param>
+        /// <param name="id">
+        /// The forum id.
+        /// </param>
+        /// <param name="sticky">
+        /// if set to <c>true</c> the topic should be marked as [sticky].
+        /// </param>
+        /// <param name="excludedUsers">
+        /// The excluded users. SemiColon separated.
+        /// </param>
+        /// <returns>
+        /// The added topic view.
+        /// </returns>
         [AcceptVerbs(HttpVerbs.Post)]
         [ValidateInput(false)]
-        public ActionResult CreateTopic(Topic topic, Post post, int id, bool sticky)
+        public ActionResult CreateTopic(Topic topic, Post post, int id, bool sticky, string excludedUsers)
         {
             this.logger.Debug("Creating topic '{0}' with post '{1}' and forumId '{2}'", topic, post, id);
 
             post.Author = this.userRepository.GetUserByName(this.User.Identity.Name);
             topic.Forum = this.forumRepository.GetForumById(id);
+            List<MediaCommUser> usersToExclude = new List<MediaCommUser>();
 
             if (sticky)
             {
                 topic.DisplayPriority = TopicDisplayPriority.Sticky;
             }
+
+            string[] userNamesToExclude = excludedUsers.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string userName in userNamesToExclude)
+            {
+                MediaCommUser user = this.userRepository.GetUserByName(userName);
+                usersToExclude.Add(user);
+            }
+
+            topic.ExcludedUsers = usersToExclude;
 
             Topic createdTopic = this.forumRepository.AddTopic(topic, post);
 
@@ -131,8 +175,12 @@ namespace MediaCommMVC.UI.Controllers
         /// <summary>
         /// Firsts the new post in topic.
         /// </summary>
-        /// <param name="id">The topic id.</param>
-        /// <returns>Reirect to the first unread post of the topic.</returns>
+        /// <param name="id">
+        /// The topic id.
+        /// </param>
+        /// <returns>
+        /// Reirect to the first unread post of the topic.
+        /// </returns>
         [HttpGet]
         public ActionResult FirstNewPostInTopic(int id)
         {
@@ -144,10 +192,18 @@ namespace MediaCommMVC.UI.Controllers
             return this.Redirect(url);
         }
 
-        /// <summary>Displays the forum with the provided Id.</summary>
-        /// <param name="id">The forum id.</param>
-        /// <param name="page">The current page.</param>
-        /// <returns>The forum view, displaying topics.</returns>
+        /// <summary>
+        /// Displays the forum with the provided Id.
+        /// </summary>
+        /// <param name="id">
+        /// The forum id.
+        /// </param>
+        /// <param name="page">
+        /// The current page.
+        /// </param>
+        /// <returns>
+        /// The forum view, displaying topics.
+        /// </returns>
         [HttpGet]
         public ActionResult Forum(int id, int page)
         {
@@ -163,18 +219,30 @@ namespace MediaCommMVC.UI.Controllers
             return this.View(new ForumPage { Forum = forum, Topics = topics, PagingParameters = pagingParameters, PostsPerTopicPage = PostsPerTopicPage });
         }
 
-        /// <summary>The forums index.</summary>
-        /// <returns>The forums index view.</returns>
+        /// <summary>
+        /// The forums index.
+        /// </summary>
+        /// <returns>
+        /// The forums index view.
+        /// </returns>
         [HttpGet]
         public ActionResult Index()
         {
             return this.View(this.forumRepository.GetAllForums(this.GetCurrentUser()));
         }
 
-        /// <summary>Displays the topic with the specified id.</summary>
-        /// <param name="id">The topic id.</param>
-        /// <param name="page">The current page.</param>
-        /// <returns>The topic view, displaying posts.</returns>
+        /// <summary>
+        /// Displays the topic with the specified id.
+        /// </summary>
+        /// <param name="id">
+        /// The topic id.
+        /// </param>
+        /// <param name="page">
+        /// The current page.
+        /// </param>
+        /// <returns>
+        /// The topic view, displaying posts.
+        /// </returns>
         [HttpGet]
         public ActionResult Topic(int id, int page)
         {
@@ -190,10 +258,18 @@ namespace MediaCommMVC.UI.Controllers
             return this.View(new TopicPage { Topic = topic, Posts = posts, PagingParameters = pagingParameters });
         }
 
-        /// <summary>Adds a new reply to the topic.</summary>
-        /// <param name="id">The topic id.</param>
-        /// <param name="post">The post to add.</param>
-        /// <returns>The last page of the topic.</returns>
+        /// <summary>
+        /// Adds a new reply to the topic.
+        /// </summary>
+        /// <param name="id">
+        /// The topic id.
+        /// </param>
+        /// <param name="post">
+        /// The post to add.
+        /// </param>
+        /// <returns>
+        /// The last page of the topic.
+        /// </returns>
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Topic(int id, Post post)
@@ -215,8 +291,12 @@ namespace MediaCommMVC.UI.Controllers
         /// <summary>
         /// Shows the edit post page.
         /// </summary>
-        /// <param name="id">The post id.</param>
-        /// <returns>The edit post view.</returns>
+        /// <param name="id">
+        /// The post id.
+        /// </param>
+        /// <returns>
+        /// The edit post view.
+        /// </returns>
         [HttpGet]
         public ActionResult EditPost(int id)
         {
@@ -229,9 +309,15 @@ namespace MediaCommMVC.UI.Controllers
         /// <summary>
         /// Saves the changed made to the post.
         /// </summary>
-        /// <param name="id">The post id.</param>
-        /// <param name="post">The edited post.</param>
-        /// <returns>Redirect to the topic the post belongs to.</returns>
+        /// <param name="id">
+        /// The post id.
+        /// </param>
+        /// <param name="post">
+        /// The edited post.
+        /// </param>
+        /// <returns>
+        /// Redirect to the topic the post belongs to.
+        /// </returns>
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult EditPost(int id, Post post)
@@ -251,9 +337,15 @@ namespace MediaCommMVC.UI.Controllers
         /// <summary>
         /// Gets the post URL.
         /// </summary>
-        /// <param name="topicId">The topic id.</param>
-        /// <param name="post">The  post.</param>
-        /// <returns>The url to the post.</returns>
+        /// <param name="topicId">
+        /// The topic id.
+        /// </param>
+        /// <param name="post">
+        /// The  post.
+        /// </param>
+        /// <returns>
+        /// The url to the post.
+        /// </returns>
         private string GetPostUrl(int topicId, Post post)
         {
             int page = this.forumRepository.GetPageNumberForPost(postId: post.Id, topicId: topicId, pageSize: PostsPerTopicPage);
@@ -261,15 +353,19 @@ namespace MediaCommMVC.UI.Controllers
 
             this.logger.Debug("Redirecting to page {0} of the topic with the id '{0}'", page, topicId);
 
-            return this.Url.RouteUrl("ViewTopic", new { id = post.Topic.Id, page = page, name = this.Url.ToFriendlyUrl(post.Topic.Title) }) + postAnker;
+            return this.Url.RouteUrl("ViewTopic", new { id = post.Topic.Id, page, name = this.Url.ToFriendlyUrl(post.Topic.Title) }) + postAnker;
         }
 
         #endregion
 
         #region Methods
 
-        /// <summary>Gets the current user.</summary>
-        /// <returns>The current user.</returns>
+        /// <summary>
+        /// Gets the current user.
+        /// </summary>
+        /// <returns>
+        /// The current user.
+        /// </returns>
         private MediaCommUser GetCurrentUser()
         {
             return this.currentUser ?? (this.currentUser = this.userRepository.GetUserByName(this.User.Identity.Name));

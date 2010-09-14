@@ -173,7 +173,7 @@ namespace MediaCommMVC.Data.Repositories
         /// <returns>The 10 topics with the newest posts.</returns>
         public IEnumerable<Topic> Get10TopicsWithNewestPosts(MediaCommUser currentUser)
         {
-            List<Topic> topics = this.Session.Linq<Topic>().OrderByDescending(t => t.LastPostTime).Take(10).ToList();
+            List<Topic> topics = this.Session.Linq<Topic>().Where(t => !t.ExcludedUsers.Contains(currentUser)).OrderByDescending(t => t.LastPostTime).Take(10).ToList();
 
             this.UpdateTopicReadStatus(topics.Where(t => t.LastPostTime > DateTime.Now - this.topicUnreadValidity), currentUser);
 
@@ -359,6 +359,8 @@ namespace MediaCommMVC.Data.Repositories
 
             Topic topic = this.Session.Get<Topic>(id);
 
+#warning check excluded users
+
             this.Logger.Debug("Got the topic: " + topic);
 
             return topic;
@@ -376,10 +378,11 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Getting topics for forum with id '{0}' and paging parameters: {1}", forumId, pagingParameters);
 
             List<Topic> topics =
-                this.Session.Linq<Topic>().Where(t => t.Forum.Id.Equals(forumId)).OrderByDescending(
-                    t => t.DisplayPriority).ThenByDescending(t => t.LastPostTime).ThenByDescending(t => t.Id).Skip(
-                        (pagingParameters.CurrentPage - 1) * pagingParameters.PageSize).Take(pagingParameters.PageSize).
-                    ToList();
+                this.Session.Linq<Topic>().Where(
+                    t => t.Forum.Id.Equals(forumId) && !t.ExcludedUsers.Contains(currentUser)).OrderByDescending(
+                        t => t.DisplayPriority).ThenByDescending(t => t.LastPostTime).ThenByDescending(t => t.Id).Skip(
+                            (pagingParameters.CurrentPage - 1) * pagingParameters.PageSize).Take(
+                                pagingParameters.PageSize).ToList();
 
             this.UpdateTopicReadStatus(topics.Where(t => t.LastPostTime > DateTime.Now - this.topicUnreadValidity), currentUser);
 

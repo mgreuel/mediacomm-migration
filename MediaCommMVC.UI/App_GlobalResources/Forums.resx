@@ -135,6 +135,9 @@
   <data name="EditPost" xml:space="preserve">
     <value>Edit Post</value>
   </data>
+  <data name="ExcludeUsers" xml:space="preserve">
+    <value>Hide from users</value>
+  </data>
   <data name="Forum" xml:space="preserve">
     <value>Forum</value>
   </data>

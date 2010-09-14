@@ -7,6 +7,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MediaCommMVC.Core.Model.Forums
 {
+    using System.Collections.Generic;
+
+    using MediaCommMVC.Core.Model.Users;
+
     /// <summary>Represents a topic in a forum.</summary>
     public class Topic
     {
@@ -79,6 +83,12 @@ namespace MediaCommMVC.Core.Model.Forums
         public virtual bool ReadByCurrentUser { get; set; }
 
         /// <summary>
+        /// Gets or sets the list of users beeing excluded from this topic.
+        /// </summary>
+        /// <value>The users exluded from this topic.</value>
+        public virtual IEnumerable<MediaCommUser> ExcludedUsers { get; set; }
+
+            /// <summary>
         ///   Gets or sets the topic's title.
         /// </summary>
         /// <value>The topic's title.</value>
