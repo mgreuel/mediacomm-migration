@@ -115,11 +115,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide topic from user.
+        /// </summary>
+        internal static string ExcludeUser {
+            get {
+                return ResourceManager.GetString("ExcludeUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hide from users.
         /// </summary>
         internal static string ExcludeUsers {
             get {
                 return ResourceManager.GetString("ExcludeUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide the topic from this user.
+        /// </summary>
+        internal static string ExcludeUserText {
+            get {
+                return ResourceManager.GetString("ExcludeUserText", resourceCulture);
             }
         }
         

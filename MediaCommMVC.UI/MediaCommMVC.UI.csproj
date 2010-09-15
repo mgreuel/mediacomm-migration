@@ -192,6 +192,7 @@
     </Compile>
     <Compile Include="Helpers\IconHelper.cs" />
     <Compile Include="Helpers\Pagination.cs" />
+    <Compile Include="ViewModel\CreateTopicInfo.cs" />
     <Compile Include="ViewModel\ForumPage.cs" />
     <Compile Include="ViewModel\PhotoUpload.cs" />
     <Compile Include="ViewModel\TopicPage.cs" />
