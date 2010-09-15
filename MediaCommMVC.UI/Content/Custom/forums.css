@@ -93,6 +93,12 @@
     width: 99%;
     height: 300px;
 }
+
+#excludedUsers
+{
+    width: 200px !important;
+}
+
 /* Create Topic End */
 
 /* Show Topic Start */

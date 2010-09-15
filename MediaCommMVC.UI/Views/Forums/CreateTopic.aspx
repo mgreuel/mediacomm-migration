@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Forums.Forum>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.CreateTopicInfo>" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
@@ -7,7 +7,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
     <%= Html.ActionLink( Resources.Navigation.Forums, "Index" ) %>
     »
-    <%= Html.ActionLink(Model.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Title), id = Model.Id })   %>
+    <%= Html.ActionLink(Model.Forum.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Forum.Title), id = Model.Forum.Id })   %>
     » <strong>
         <%= Html.ActionLink(Resources.Forums.CreateTopic, "CreateTopic") %>
     </strong>
@@ -46,12 +46,18 @@
                 <%= Resources.Forums.MarkAsSticky  %>
             </td>
         </tr>
-                <tr>
+        <tr>
             <td class="firstColumn">
                 <%= Resources.Forums.ExcludeUsers %>:
             </td>
             <td class="secondColumn">
-                <%= Html.TextBox("excludedUsers") %>                
+                <%= Html.TextBox("excludedUsers", null, new { @readonly = "readonly" }) %>
+
+                <%= Html.DropDownList("userNameToExclude", new SelectList(Model.UserNames)) %>
+
+                <strong><a href="javascript:AddExcludedUser();" id="showAddPopup">
+                    <%= Resources.General.Add %>
+                </a></strong>
             </td>
         </tr>
         <tr>
@@ -63,6 +69,7 @@
         </tr>
     </table>
     <% } %>
+
     <script type="text/javascript" language="javascript">
         tinyMCE.init(
         {
@@ -88,5 +95,15 @@
             $("form").validate();
         });
 
+        function AddExcludedUser()
+        {
+            var username = $("#userNameToExclude").val();
+            var excludedUserNames = $("#excludedUsers").val();
+
+            if (excludedUserNames.indexOf(" " + username + ";") == -1)
+            {
+                $("#excludedUsers").val(excludedUserNames + " " + username + ";");
+            }
+        }
     </script>
 </asp:Content>
