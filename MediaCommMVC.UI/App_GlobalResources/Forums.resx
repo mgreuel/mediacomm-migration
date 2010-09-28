@@ -190,9 +190,27 @@
     <value>Topic</value>
   </data>
   <data name="TopicOptions" xml:space="preserve">
-    <value>Options:</value>
+    <value>Options</value>
   </data>
   <data name="Topics" xml:space="preserve">
     <value>Topics</value>
+  </data>
+  <data name="AddAnswer" xml:space="preserve">
+    <value>Add Answer</value>
+  </data>
+  <data name="Answer" xml:space="preserve">
+    <value>Answer</value>
+  </data>
+  <data name="CreatePoll" xml:space="preserve">
+    <value>Create Poll</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Question</value>
+  </data>
+  <data name="HideOptions" xml:space="preserve">
+    <value>Hide Options</value>
+  </data>
+  <data name="ShowOptions" xml:space="preserve">
+    <value>Show Options</value>
   </data>
 </root>

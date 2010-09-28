@@ -4,6 +4,7 @@ using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
 
 using MediaCommMVC.Core.Model.Forums;
+using MediaCommMVC.Common.Logging;
 
 #endregion
 

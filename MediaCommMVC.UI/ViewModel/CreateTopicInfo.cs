@@ -23,5 +23,7 @@ namespace MediaCommMVC.UI.ViewModel
         /// </summary>
         /// <value>The list of all user names.</value>
         public IEnumerable<string> UserNames { get; set; }
+
+
     }
 }

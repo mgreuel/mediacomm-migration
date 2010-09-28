@@ -470,7 +470,6 @@ p.text
     float: left;
 }
 
-
 .content .defaultTable th, .content .defaultTable td
 {
     height: 2em !important;
@@ -497,4 +496,9 @@ p.text
 .checkBox
 {
     vertical-align: sub;
+}
+
+.ui-button
+{
+    font-size: 11px !important;
 }

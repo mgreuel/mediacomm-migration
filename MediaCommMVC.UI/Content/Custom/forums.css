@@ -83,7 +83,7 @@
     padding-top: 8px;
 }
 
-#createTopicTable input[type=text]
+#createTopicTable .fullWidth
 {
     width: 99%;
 }
@@ -97,6 +97,40 @@
 #excludedUsers
 {
     width: 200px !important;
+}
+
+#poll
+{
+    margin-left: 4px;
+    margin-top: 2px;
+}
+
+#poll input
+{
+    width: 200px;
+    margin-left: 6px;
+}
+
+#poll td
+{
+    padding-top:2px;
+}
+
+#addAnswer
+{
+    margin-left: 4px;
+    margin-top: 6px;
+    margin-bottom: 6px;    
+}
+
+.hide
+{
+    display: none;
+}
+
+#optionsButton
+{
+    /*font-size: 50%;*/
 }
 
 /* Create Topic End */

@@ -51,6 +51,10 @@
     <Compile Include="DataInterfaces\IUserRepository.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\Forums\Forum.cs" />
+    <Compile Include="Model\Forums\Poll.cs" />
+    <Compile Include="Model\Forums\PollAnswer.cs" />
+    <Compile Include="Model\Forums\PollType.cs" />
+    <Compile Include="Model\Forums\PollUserAnswer.cs" />
     <Compile Include="Model\Forums\Post.cs" />
     <Compile Include="Model\Forums\Topic.cs" />
     <Compile Include="Model\Forums\TopicDisplayPriority.cs" />

@@ -96,6 +96,12 @@ namespace MediaCommMVC.Core.Model.Forums
         [StringLength(255)]
         public virtual string Title { get; set; }
 
+        /// <summary>
+        /// Gets or sets the poll.
+        /// </summary>
+        /// <value>The poll belonging to this topic.</value>
+        public virtual Poll Poll { get; set; }
+
         #endregion
 
         #region Public Methods
