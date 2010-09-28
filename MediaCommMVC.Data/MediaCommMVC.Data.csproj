@@ -125,6 +125,7 @@
     <Compile Include="NHInfrastructure\Mapping\PhotoAlbumMapper.cs" />
     <Compile Include="NHInfrastructure\Mapping\PhotoCategoryMapper.cs" />
     <Compile Include="NHInfrastructure\Mapping\PhotoMapper.cs" />
+    <Compile Include="NHInfrastructure\Mapping\PollMapper.cs" />
     <Compile Include="NHInfrastructure\Mapping\PostMapper.cs" />
     <Compile Include="NHInfrastructure\Mapping\TopicMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

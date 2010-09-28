@@ -98,7 +98,7 @@ namespace MediaCommMVC.UI.Controllers
         /// <returns>The added topic view.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
         [ValidateInput(false)]
-        public ActionResult CreateTopic(Topic topic, Post post, int id, bool sticky, string excludedUsers)
+        public ActionResult CreateTopic(Topic topic, Post post, int id, bool sticky, string excludedUsers, Poll poll)
         {
             this.logger.Debug("Creating topic '{0}' with post '{1}' and forumId '{2}'", topic, post, id);
 
@@ -122,6 +122,12 @@ namespace MediaCommMVC.UI.Controllers
 
             topic.ExcludedUsers = usersToExclude;
 
+            if (poll != null && !string.IsNullOrEmpty(poll.Question))
+            {
+                poll.Topic = topic;
+                topic.Poll = poll;
+            }
+
             Topic createdTopic = this.forumRepository.AddTopic(topic, post);
 
             return this.RedirectToAction("Topic", new { id = createdTopic.Id, name = this.Url.ToFriendlyUrl(createdTopic.Title) });
@@ -133,8 +139,6 @@ namespace MediaCommMVC.UI.Controllers
         [HttpGet]
         public ActionResult FirstNewPostInTopic(int id)
         {
-            Contract.Requires(id > 0);
-
             Post post = this.forumRepository.GetFirstUnreadPostForTopic(id, this.GetCurrentUser());
 
             string url = this.GetPostUrl(id, post);

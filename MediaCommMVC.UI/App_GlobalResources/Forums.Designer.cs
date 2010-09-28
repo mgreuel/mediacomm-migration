@@ -61,6 +61,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Answer.
+        /// </summary>
+        internal static string AddAnswer {
+            get {
+                return ResourceManager.GetString("AddAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Answer.
+        /// </summary>
+        internal static string Answer {
+            get {
+                return ResourceManager.GetString("Answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Author.
         /// </summary>
         internal static string Author {
@@ -84,6 +102,15 @@ namespace Resources {
         internal static string By {
             get {
                 return ResourceManager.GetString("By", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Poll.
+        /// </summary>
+        internal static string CreatePoll {
+            get {
+                return ResourceManager.GetString("CreatePoll", resourceCulture);
             }
         }
         
@@ -169,6 +196,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide Options.
+        /// </summary>
+        internal static string HideOptions {
+            get {
+                return ResourceManager.GetString("HideOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Post.
         /// </summary>
         internal static string LastPost {
@@ -232,11 +268,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Question.
+        /// </summary>
+        internal static string Question {
+            get {
+                return ResourceManager.GetString("Question", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reply.
         /// </summary>
         internal static string Reply {
             get {
                 return ResourceManager.GetString("Reply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Options.
+        /// </summary>
+        internal static string ShowOptions {
+            get {
+                return ResourceManager.GetString("ShowOptions", resourceCulture);
             }
         }
         
@@ -277,7 +331,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Options:.
+        ///   Looks up a localized string similar to Options.
         /// </summary>
         internal static string TopicOptions {
             get {

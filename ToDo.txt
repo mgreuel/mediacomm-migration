@@ -8,7 +8,6 @@ Admin:
 
 Forums:
 - delete
-- * "birthday" threads
 - * polls
 - emotions/parser
 - edit rights

@@ -25,6 +25,7 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
             mapping.Map(t => t.PostCount).Formula("(SELECT COUNT(*) FROM forumPosts p where p.TopicID = Id)");
             mapping.Map(t => t.CreatedBy).Not.Nullable();
             mapping.Map(t => t.Title).Not.Nullable();
+            mapping.HasOne(t => t.Poll).ForeignKey("none").Cascade.All();
             mapping.IgnoreProperty(t => t.ReadByCurrentUser);
             mapping.HasManyToMany(t => t.ExcludedUsers).Table("ForumTopicsExcludedUsers").Cascade.SaveUpdate();
         }
