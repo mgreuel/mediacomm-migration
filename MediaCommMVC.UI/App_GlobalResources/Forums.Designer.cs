@@ -259,6 +259,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PollType.
+        /// </summary>
+        internal static string PollType {
+            get {
+                return ResourceManager.GetString("PollType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Posts.
         /// </summary>
         internal static string Posts {
@@ -318,6 +327,15 @@ namespace Resources {
         internal static string Subject {
             get {
                 return ResourceManager.GetString("Subject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit Vote.
+        /// </summary>
+        internal static string SubmitVote {
+            get {
+                return ResourceManager.GetString("SubmitVote", resourceCulture);
             }
         }
         

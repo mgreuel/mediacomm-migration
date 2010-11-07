@@ -44,13 +44,12 @@
                 <td class="secondColumn">
                     <strong><a id="optionsButton" href="javascript:void(null);">
                         <%= Resources.Forums.ShowOptions %></a> </strong>
-                        </td>
+                </td>
             </tr>
         </tbody>
         <tbody class="hide">
             <tr>
                 <td class="firstColumn">
-                    <%= Resources.Forums.TopicOptions %>:
                 </td>
                 <td class="secondColumn">
                     <%= Html.CheckBox("Sticky", new { @class = "checkBox"}) %>
@@ -75,6 +74,15 @@
                 </td>
                 <td class="secondColumn">
                     <table id="poll">
+                        <tr>
+                            <td>
+                                <strong>
+                                    <%= Resources.Forums.PollType %></strong>
+                            </td>
+                            <td>
+                                <%= Html.DropDownList("poll.Type", this.ViewData["PollTypes"] as SelectList) %>
+                            </td>
+                        </tr>
                         <tr>
                             <td>
                                 <strong>

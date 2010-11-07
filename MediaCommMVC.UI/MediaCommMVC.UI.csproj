@@ -190,6 +190,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Users.resx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\IconHelper.cs" />
     <Compile Include="Helpers\Pagination.cs" />
     <Compile Include="ViewModel\CreateTopicInfo.cs" />

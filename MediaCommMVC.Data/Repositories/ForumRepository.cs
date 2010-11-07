@@ -198,7 +198,7 @@ namespace MediaCommMVC.Data.Repositories
 						where ForumID = :forumId
 							and LastPostTime > DATEADD(day, -30, GETDATE())
 							and Id not in 
-								(select ReadTopicID from TopicRead where ReadByUserID = :userId and LastVisit > DATEADD(day, -30, GETDATE()) and LastVisit > LastPostTime)")
+								(select ReadTopicID from ForumTopicsRead where ReadByUserID = :userId and LastVisit > DATEADD(day, -30, GETDATE()) and LastVisit > LastPostTime)")
                     .SetParameter("forumId", forum.Id)
                     .SetParameter("userId", currentUser.Id)
                     .UniqueResult<string>());

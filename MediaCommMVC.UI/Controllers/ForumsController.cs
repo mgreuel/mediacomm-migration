@@ -68,10 +68,12 @@ namespace MediaCommMVC.UI.Controllers
         /// <summary>Displays the create topic page.</summary>
         /// <param name="id">The forum id.</param>
         /// <returns>The create topic view.</returns>
+        [HttpGet]
         public ActionResult CreateTopic(int id)
         {
             Forum forum = this.forumRepository.GetForumById(id);
             IEnumerable<string> userNames = this.userRepository.GetAllUsers().Select(u => u.UserName);
+            this.ViewData["PollTypes"] = PollType.SingleAnswer.ToSelectList();
 
             return this.View(new CreateTopicInfo { Forum = forum, UserNames = userNames });
         }
@@ -89,12 +91,15 @@ namespace MediaCommMVC.UI.Controllers
             return this.Redirect(url);
         }
 
-        /// <summary>Creates the topic.</summary>
+        /// <summary>
+        /// Creates the topic.
+        /// </summary>
         /// <param name="topic">The topic.</param>
         /// <param name="post">The first post.</param>
         /// <param name="id">The forum id.</param>
         /// <param name="sticky">if set to <c>true</c> the topic should be marked as [sticky].</param>
         /// <param name="excludedUsers">The excluded users. SemiColon separated.</param>
+        /// <param name="poll">The poll associated with the topic.</param>
         /// <returns>The added topic view.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
         [ValidateInput(false)]
@@ -199,6 +204,13 @@ namespace MediaCommMVC.UI.Controllers
                 id, pagingParameters, this.userRepository.GetUserByName(this.User.Identity.Name));
 
             return this.View(new TopicPage { Topic = topic, Posts = posts, PagingParameters = pagingParameters });
+        }
+
+        [HttpPost]
+        public RedirectResult AnswerPoll(int pollId, int answerId)
+        {
+            
+            return new RedirectResult("Topic");
         }
 
         /// <summary>Adds a new reply to the topic.</summary>
