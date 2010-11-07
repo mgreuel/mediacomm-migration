@@ -10,19 +10,16 @@ using MediaCommMVC.Core.Model.Forums;
 
 namespace MediaCommMVC.Data.NHInfrastructure.Mapping
 {
-    /// <summary>Makes customizations to the auto mapping of the Poll type.</summary>
-    public class PollMapper : IAutoMappingOverride<Poll>
+    /// <summary>Makes customizations to the auto mapping of the TopicRead type.</summary>
+    public class TopicReadMapper : IAutoMappingOverride<TopicRead>
     {
         /// <summary>
         /// Overrides the specified mapping.
         /// </summary>
         /// <param name="mapping">The mapping.</param>
-        public void Override(AutoMapping<Poll> mapping)
+        public void Override(AutoMapping<TopicRead> mapping)
         {
-            mapping.Table("Polls");
-            mapping.HasMany(p => p.PossibleAnswers).Cascade.All();
-            mapping.HasMany(p => p.UserAnswers).Cascade.All();
-            mapping.IgnoreProperty(p => p.UserAnswersWithCount);
+            mapping.Table("ForumTopicsRead");
         }
     }
 }

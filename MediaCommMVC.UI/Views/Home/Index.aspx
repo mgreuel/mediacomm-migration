@@ -32,7 +32,7 @@
                         </td>
                         <td width="100%">
                             <span class="topicTitle">
-                                <%= Html.ActionLink(topic.Title, "Topic", "Forums", new { id = topic.Id, name= Url.ToFriendlyUrl(topic.Title) }) %>
+                                <%= Html.ActionLink(topic.Title, "Topic", "Forums", new { id = topic.Id, name = Url.ToFriendlyUrl(topic.Title) }, null) %>
                             </span><span class="smallpager">
                                 <br />
                                 <%= Html.NumbersOnlyPager(new PagingParameters { PageSize = this.Model.PostsPerTopicPage, TotalCount = topic.PostCount}, 
@@ -54,9 +54,9 @@
     </div>
     <div class="content-2col-box-rightcolumn">
         <div id="newPhotoAlbums" class="content-2col-box">
-        <h3>
-        <%= Resources.Home.NewPhotoAlbums %>
-        </h3>
+            <h3>
+                <%= Resources.Home.NewPhotoAlbums %>
+            </h3>
             <div class="highslide-gallery newPhotos-gallery">
                 <ul>
                     <% foreach (var album in Model.Albums)

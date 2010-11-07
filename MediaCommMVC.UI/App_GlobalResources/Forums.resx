@@ -213,4 +213,10 @@
   <data name="ShowOptions" xml:space="preserve">
     <value>Show Options</value>
   </data>
+  <data name="PollType" xml:space="preserve">
+    <value>PollType</value>
+  </data>
+  <data name="SubmitVote" xml:space="preserve">
+    <value>Submit Vote</value>
+  </data>
 </root>
