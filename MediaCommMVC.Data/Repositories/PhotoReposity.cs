@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -24,14 +23,11 @@ using NHibernate.Linq;
 
 namespace MediaCommMVC.Data.Repositories
 {
-    /// <summary>Implements the IPhotoRepository using NHibernate.</summary>
+    /// <summary>
+    ///   Implements the IPhotoRepository using NHibernate.
+    /// </summary>
     public class PhotoRepository : RepositoryBase, IPhotoRepository
     {
-        /// <summary>
-        /// The image generator.
-        /// </summary>
-        private readonly IImageGenerator imageGenerator;
-
         #region Constants and Fields
 
         /// <summary>
@@ -39,17 +35,22 @@ namespace MediaCommMVC.Data.Repositories
         /// </summary>
         private const string UnprocessedPhotosFolder = "unprocessed";
 
+        /// <summary>
+        ///   The image generator.
+        /// </summary>
+        private readonly IImageGenerator imageGenerator;
+
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PhotoRepository"/> class.
+        ///   Initializes a new instance of the <see cref = "PhotoRepository" /> class.
         /// </summary>
-        /// <param name="sessionManager">The session manager.</param>
-        /// <param name="configAccessor">The config Accessor.</param>
-        /// <param name="logger">The logger.</param>
-        /// <param name="imageGenerator">The image generator.</param>
+        /// <param name = "sessionManager">The session manager.</param>
+        /// <param name = "configAccessor">The config Accessor.</param>
+        /// <param name = "logger">The logger.</param>
+        /// <param name = "imageGenerator">The image generator.</param>
         public PhotoRepository(ISessionManager sessionManager, IConfigAccessor configAccessor, ILogger logger, IImageGenerator imageGenerator)
             : base(sessionManager, configAccessor, logger)
         {
@@ -62,8 +63,10 @@ namespace MediaCommMVC.Data.Repositories
 
         #region IPhotoRepository
 
-        /// <summary>Adds the category to the persistence layer.</summary>
-        /// <param name="category">The category.</param>
+        /// <summary>
+        ///   Adds the category to the persistence layer.
+        /// </summary>
+        /// <param name = "category">The category.</param>
         public void AddCategory(PhotoCategory category)
         {
             this.Logger.Debug("Adding photo category: " + category);
@@ -73,10 +76,12 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Finished adding photo category");
         }
 
-        /// <summary>Extracts and deletes the zip file.</summary>
-        /// <param name="zipFilename">The zip filename.</param>
-        /// <param name="album">The album.</param>
-        /// <param name="uploader">The uploader.</param>
+        /// <summary>
+        ///   Extracts and deletes the zip file.
+        /// </summary>
+        /// <param name = "zipFilename">The zip filename.</param>
+        /// <param name = "album">The album.</param>
+        /// <param name = "uploader">The uploader.</param>
         public void ExtractAndAddPhotos(string zipFilename, PhotoAlbum album, MediaCommUser uploader)
         {
             this.Logger.Debug("Extracting and adding photos. ZipFilename: '{0}', Album: '{1}, Uploader: '{2}'", zipFilename, album, uploader);
@@ -97,7 +102,7 @@ namespace MediaCommMVC.Data.Repositories
         }
 
         /// <summary>
-        /// Gets the 4 newest albums.
+        ///   Gets the 4 newest albums.
         /// </summary>
         /// <returns>The 4 newest albums.</returns>
         public IEnumerable<PhotoAlbum> Get4NewestAlbums()
@@ -108,8 +113,10 @@ namespace MediaCommMVC.Data.Repositories
             return albums;
         }
 
-        /// <summary>Gets the album by id.</summary>
-        /// <param name="albumId">The album id.</param>
+        /// <summary>
+        ///   Gets the album by id.
+        /// </summary>
+        /// <param name = "albumId">The album id.</param>
         /// <returns>The album.</returns>
         public PhotoAlbum GetAlbumById(int albumId)
         {
@@ -123,10 +130,10 @@ namespace MediaCommMVC.Data.Repositories
         }
 
         /// <summary>
-        /// Gets the albums with the specified category id.
+        ///   Gets the albums with the specified category id.
         /// </summary>
-        /// <param name="catId">The category id.</param>
-        /// <param name="term">The term the results should start with.</param>
+        /// <param name = "catId">The category id.</param>
+        /// <param name = "term">The term the results should start with.</param>
         /// <returns>The albums.</returns>
         public IEnumerable<PhotoAlbum> GetAlbumsForCategoryIdStartingWith(int catId, string term)
         {
@@ -140,7 +147,9 @@ namespace MediaCommMVC.Data.Repositories
             return albums;
         }
 
-        /// <summary>Gets all categories.</summary>
+        /// <summary>
+        ///   Gets all categories.
+        /// </summary>
         /// <returns>All photo categories.</returns>
         public IEnumerable<PhotoCategory> GetAllCategories()
         {
@@ -152,8 +161,10 @@ namespace MediaCommMVC.Data.Repositories
             return categories;
         }
 
-        /// <summary>Gets the category by id.</summary>
-        /// <param name="id">The category id.</param>
+        /// <summary>
+        ///   Gets the category by id.
+        /// </summary>
+        /// <param name = "id">The category id.</param>
         /// <returns>THe photo category.</returns>
         public PhotoCategory GetCategoryById(int id)
         {
@@ -164,9 +175,11 @@ namespace MediaCommMVC.Data.Repositories
             return category;
         }
 
-        /// <summary>Gets the image path.</summary>
-        /// <param name="photoId">The photo id.</param>
-        /// <param name="size">The photo size.</param>
+        /// <summary>
+        ///   Gets the image path.
+        /// </summary>
+        /// <param name = "photoId">The photo id.</param>
+        /// <param name = "size">The photo size.</param>
         /// <returns>The path to the image file.</returns>
         public Image GetImage(int photoId, string size)
         {
@@ -177,7 +190,7 @@ namespace MediaCommMVC.Data.Repositories
 
             string imagePath =
                 Path.Combine(
-                    this.ConfigAccessor.GetConfigValue("PhotoRootDir"),
+                    this.ConfigAccessor.GetConfigValue("PhotoRootDir"), 
                     Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.PhotoCategory.Name), Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.Name), fileName)));
 
             this.Logger.Debug("Getting image from '{0}'", imagePath);
@@ -197,8 +210,10 @@ namespace MediaCommMVC.Data.Repositories
             return image;
         }
 
-        /// <summary>Gets the photo by ID.</summary>
-        /// <param name="id">The photo id.</param>
+        /// <summary>
+        ///   Gets the photo by ID.
+        /// </summary>
+        /// <param name = "id">The photo id.</param>
         /// <returns>The photo.</returns>
         public Photo GetPhotoById(int id)
         {
@@ -215,8 +230,10 @@ namespace MediaCommMVC.Data.Repositories
 
         #region Methods
 
-        /// <summary>Gets all files in the directory recursively.</summary>
-        /// <param name="dirInfo">The dirrecory info.</param>
+        /// <summary>
+        ///   Gets all files in the directory recursively.
+        /// </summary>
+        /// <param name = "dirInfo">The dirrecory info.</param>
         /// <returns>All files.</returns>
         private static IEnumerable<FileInfo> GetFilesRecursive(DirectoryInfo dirInfo)
         {
@@ -235,11 +252,11 @@ namespace MediaCommMVC.Data.Repositories
         }
 
         /// <summary>
-        /// Adds the pictures to DB.
+        ///   Adds the pictures to DB.
         /// </summary>
-        /// <param name="filesToAdd">The files to add.</param>
-        /// <param name="album">The album.</param>
-        /// <param name="uploader">The uploader.</param>
+        /// <param name = "filesToAdd">The files to add.</param>
+        /// <param name = "album">The album.</param>
+        /// <param name = "uploader">The uploader.</param>
         private void AddPicturesToDB(IEnumerable<FileInfo> filesToAdd, PhotoAlbum album, MediaCommUser uploader)
         {
             this.Logger.Debug("Adding {0} photos from the folder to the database. Album: '{1}', Uploader: '{2}'", filesToAdd.Count(), album, uploader);
@@ -261,11 +278,11 @@ namespace MediaCommMVC.Data.Repositories
 
                         Photo photo = new Photo
                             {
-                                PhotoAlbum = photoAlbum,
-                                FileName = file.Name,
-                                FileSize = file.Length,
-                                Height = height,
-                                Uploader = uploader,
+                                PhotoAlbum = photoAlbum, 
+                                FileName = file.Name, 
+                                FileSize = file.Length, 
+                                Height = height, 
+                                Uploader = uploader, 
                                 Width = width
                             };
 
@@ -286,10 +303,12 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Finished adding photos to the database.");
         }
 
-        /// <summary>Extracts deletes the zip file.</summary>
-        /// <param name="filename">The filename.</param>
-        /// <param name="targetPath">The target path.</param>
-        /// <param example=".jpg|.jpeg" name="extensionsToExtract">The extensions to extract.</param>
+        /// <summary>
+        ///   Extracts deletes the zip file.
+        /// </summary>
+        /// <param name = "filename">The filename.</param>
+        /// <param name = "targetPath">The target path.</param>
+        /// <param example = ".jpg|.jpeg" name = "extensionsToExtract">The extensions to extract.</param>
         private void ExtractAndDeleteZip(string filename, string targetPath, string extensionsToExtract)
         {
             this.Logger.Debug("Extracting files with the extensions '{0}' from '{1}' to '{2}'", extensionsToExtract, filename, targetPath);
@@ -304,15 +323,17 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Finished extracting and deleting zip file");
         }
 
-        /// <summary>Gets the path where the photos will be stored.</summary>
-        /// <param name="album">The album.</param>
+        /// <summary>
+        ///   Gets the path where the photos will be stored.
+        /// </summary>
+        /// <param name = "album">The album.</param>
         /// <returns>The target path.</returns>
         private string GetTargetPath(PhotoAlbum album)
         {
             this.Logger.Debug("Getting file system path for album: " + album);
 
             string targetPath = Path.Combine(
-                this.ConfigAccessor.GetConfigValue("PhotoRootDir"),
+                this.ConfigAccessor.GetConfigValue("PhotoRootDir"), 
                 Path.Combine(this.GetValidDirectoryName(album.PhotoCategory.Name), this.GetValidDirectoryName(album.Name)));
 
             this.Logger.Debug("Photos will be stored in the directory '{0}'", targetPath);
@@ -326,8 +347,10 @@ namespace MediaCommMVC.Data.Repositories
             return targetPath;
         }
 
-        /// <summary>Gets a valid directory and file path.</summary>
-        /// <param name="directoryName">Name of the directory.</param>
+        /// <summary>
+        ///   Gets a valid directory and file path.
+        /// </summary>
+        /// <param name = "directoryName">Name of the directory.</param>
         /// <returns>The valid path.</returns>
         private string GetValidDirectoryName(string directoryName)
         {
@@ -344,10 +367,10 @@ namespace MediaCommMVC.Data.Repositories
         }
 
         /// <summary>
-        /// Moves the photos to the final folder and renames duplicates.
+        ///   Moves the photos to the final folder and renames duplicates.
         /// </summary>
-        /// <param name="targetPath">The target path.</param>
-        /// <param name="unprocessedPath">The path containing the unprocessed photos.</param>
+        /// <param name = "targetPath">The target path.</param>
+        /// <param name = "unprocessedPath">The path containing the unprocessed photos.</param>
         /// <returns>A list of all file path.</returns>
         private IEnumerable<FileInfo> MovePhotos(string targetPath, string unprocessedPath)
         {

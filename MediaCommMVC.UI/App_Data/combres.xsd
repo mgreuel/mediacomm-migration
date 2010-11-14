@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="combres" elementFormDefault="qualified" 
-           targetNamespace='urn:combres' xmlns='urn:combres'
-           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:schema id="combres" elementFormDefault="qualified" targetNamespace='urn:combres' xmlns='urn:combres' xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <!-- combres -->
   <xs:element name="combres">
     <xs:complexType>
@@ -66,7 +65,7 @@
     <xs:attribute name="url" use="required">
       <xs:simpleType>
         <xs:restriction base="xs:string">
-          <xs:pattern value="~/.+"/>
+          <xs:pattern value="~/.+" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
@@ -131,7 +130,7 @@
     <xs:attribute name="mode">
       <xs:simpleType>
         <xs:restriction base="xs:string">
-          <xs:pattern value="[s|S]tatic|[d|D]ynamic"/>
+          <xs:pattern value="[s|S]tatic|[d|D]ynamic" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>

@@ -7,7 +7,9 @@ using System.Web.Security;
 
 namespace MediaCommMVC.UI.AccountModels
 {
-    /// <summary>The account membership service.</summary>
+    /// <summary>
+    ///   The account membership service.
+    /// </summary>
     public class AccountMembershipService : IMembershipService
     {
         #region Constants and Fields
@@ -29,8 +31,10 @@ namespace MediaCommMVC.UI.AccountModels
         {
         }
 
-        /// <summary>Initializes a new instance of the <see cref="AccountMembershipService"/> class.</summary>
-        /// <param name="provider">The provider.</param>
+        /// <summary>
+        ///   Initializes a new instance of the <see cref = "AccountMembershipService" /> class.
+        /// </summary>
+        /// <param name = "provider">The provider.</param>
         public AccountMembershipService(MembershipProvider provider)
         {
             this.provider = provider ?? Membership.Provider;
@@ -58,10 +62,12 @@ namespace MediaCommMVC.UI.AccountModels
 
         #region IMembershipService
 
-        /// <summary>The change password.</summary>
-        /// <param name="userName">The user name.</param>
-        /// <param name="oldPassword">The old password.</param>
-        /// <param name="newPassword">The new password.</param>
+        /// <summary>
+        ///   The change password.
+        /// </summary>
+        /// <param name = "userName">The user name.</param>
+        /// <param name = "oldPassword">The old password.</param>
+        /// <param name = "newPassword">The new password.</param>
         /// <returns>The changed password.</returns>
         public bool ChangePassword(string userName, string oldPassword, string newPassword)
         {
@@ -86,10 +92,12 @@ namespace MediaCommMVC.UI.AccountModels
             }
         }
 
-        /// <summary>The create user.</summary>
-        /// <param name="userName">The user name.</param>
-        /// <param name="password">The password.</param>
-        /// <param name="email">The email.</param>
+        /// <summary>
+        ///   The create user.
+        /// </summary>
+        /// <param name = "userName">The user name.</param>
+        /// <param name = "password">The password.</param>
+        /// <param name = "email">The email.</param>
         /// <returns>Generated Code.</returns>
         public MembershipCreateStatus CreateUser(string userName, string password, string email)
         {
@@ -102,9 +110,11 @@ namespace MediaCommMVC.UI.AccountModels
             return status;
         }
 
-        /// <summary>The validate user.</summary>
-        /// <param name="userName">The user name.</param>
-        /// <param name="password">The password.</param>
+        /// <summary>
+        ///   The validate user.
+        /// </summary>
+        /// <param name = "userName">The user name.</param>
+        /// <param name = "password">The password.</param>
         /// <returns>The validated user.</returns>
         public bool ValidateUser(string userName, string password)
         {

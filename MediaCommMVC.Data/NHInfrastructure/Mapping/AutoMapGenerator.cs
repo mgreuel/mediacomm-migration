@@ -11,20 +11,26 @@ using MediaCommMVC.Core.Model.Forums;
 
 namespace MediaCommMVC.Data.NHInfrastructure.Mapping
 {
-    /// <summary>A Generator for the fluentNHibernate auto map.</summary>
+    /// <summary>
+    ///   A Generator for the fluentNHibernate auto map.
+    /// </summary>
     public class AutoMapGenerator : IAutoMapGenerator
     {
         #region Constants and Fields
 
-        /// <summary>The logger.</summary>
+        /// <summary>
+        ///   The logger.
+        /// </summary>
         private readonly ILogger logger;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="AutoMapGenerator"/> class.</summary>
-        /// <param name="logger">The logger.</param>
+        /// <summary>
+        ///   Initializes a new instance of the <see cref = "AutoMapGenerator" /> class.
+        /// </summary>
+        /// <param name = "logger">The logger.</param>
         public AutoMapGenerator(ILogger logger)
         {
             this.logger = logger;    
@@ -36,7 +42,9 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
 
         #region IAutoMapGenerator
 
-        /// <summary>Generates the FluentNHibernate automap.</summary>
+        /// <summary>
+        ///   Generates the FluentNHibernate automap.
+        /// </summary>
         /// <returns>The auto persistence model.</returns>
         public AutoPersistenceModel Generate()
         {

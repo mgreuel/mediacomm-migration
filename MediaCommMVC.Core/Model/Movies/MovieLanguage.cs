@@ -7,16 +7,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MediaCommMVC.Core.Model.Movies
 {
-    /// <summary>Represents a movie language.</summary>
+    /// <summary>
+    ///   Represents a movie language.
+    /// </summary>
     public class MovieLanguage
     {
         #region Properties
 
-        /// <summary>Gets or sets the ID.</summary>
+        /// <summary>
+        ///   Gets or sets the ID.
+        /// </summary>
         /// <value>The language ID.</value>
         public virtual int Id { get; protected set; }
 
-        /// <summary>Gets or sets the name.</summary>
+        /// <summary>
+        ///   Gets or sets the name.
+        /// </summary>
         /// <value>The language name.</value>
         [StringLength(50)]
         public virtual string Name { get; set; }
@@ -25,19 +31,12 @@ namespace MediaCommMVC.Core.Model.Movies
 
         #region Public Methods
 
-        /// <summary>Returns a <see cref="System.String"/> that represents this instance.</summary>
-        /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
-        public override string ToString()
-        {
-            return this.Name ?? string.Empty;
-        }
-
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
+        ///   Determines whether the specified <see cref = "System.Object" /> is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
+        /// <param name = "obj">The <see cref = "System.Object" /> to compare with this instance.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref = "System.Object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
@@ -47,14 +46,12 @@ namespace MediaCommMVC.Core.Model.Movies
         }
 
         /// <summary>
-        /// Returns a hash code for this instance.
+        ///   Returns a <see cref = "System.String" /> that represents this instance.
         /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
-        /// </returns>
-        public override int GetHashCode()
+        /// <returns>A <see cref = "System.String" /> that represents this instance.</returns>
+        public override string ToString()
         {
-            return this.Name == null ? base.GetHashCode() : this.Name.GetHashCode();
+            return this.Name ?? string.Empty;
         }
 
         #endregion

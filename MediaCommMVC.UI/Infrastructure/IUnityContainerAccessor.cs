@@ -6,7 +6,9 @@ using Microsoft.Practices.Unity;
 
 namespace MediaCommMVC.UI.Infrastructure
 {
-    /// <summary>Provides access to the unity container.</summary>
+    /// <summary>
+    ///   Provides access to the unity container.
+    /// </summary>
     public interface IUnityContainerAccessor
     {
         #region Properties

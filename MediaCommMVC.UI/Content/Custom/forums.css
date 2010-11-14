@@ -12,16 +12,16 @@
 
 #forumIndexFooter
 {
-   text-align: center;      
-   margin-left:auto;
-   margin-right: auto;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #forumIndexFooter #legend
 {
-   text-align: center;      
-   margin-left:auto;
-   margin-right: auto;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #forumIndexFooter #legend .caption
@@ -99,28 +99,28 @@
     width: 200px !important;
 }
 
-#poll
+#createPoll
 {
     margin-left: 4px;
     margin-top: 2px;
 }
 
-#poll input
+#createPoll input
 {
     width: 200px;
     margin-left: 6px;
 }
 
-#poll td
+#createPoll td
 {
-    padding-top:2px;
+    padding-top: 2px;
 }
 
 #addAnswer
 {
     margin-left: 4px;
     margin-top: 6px;
-    margin-bottom: 6px;    
+    margin-bottom: 6px;
 }
 
 .hide
@@ -180,6 +180,56 @@
 .postOptions
 {
     float: right;
+}
+
+.pollAnswer
+{
+    width: 100%;
+}
+
+.pollAnswerInput
+{
+    vertical-align: middle;
+}
+
+.pollTable
+{
+    clear: both;
+    width: 460px;
+    margin: 1.5em 0 1.2em 0px; 
+    border-collapse: collapse;
+    empty-cells: show;
+    background-color: rgb(233,232,244);
+}
+
+.pollTable th
+{
+    height: 1.5em;
+    padding: 2px 6px 2px 6px;
+    border: solid 2px rgb(245,245,245);
+    background-color: #5c9ccc;
+    text-align: center;
+    color: rgb(80,80,80);
+    font-size: 120% !important;
+}
+
+.pollTable td
+{
+    height: 1.5em;
+    padding: 1px 5px 1px 5px;
+    border: solid 2px rgb(245,245,245);
+    background-color: rgb(225,225,225);
+    text-align: left;
+    font-weight: normal;
+    color: rgb(80,80,80); 
+    font-size: 120%;
+}
+
+#poll
+{
+    width: 460px;
+    margin-left: auto;
+    margin-right: auto;
 }
 /* Show Topic End */
 

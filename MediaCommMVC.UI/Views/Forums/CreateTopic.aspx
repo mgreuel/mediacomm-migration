@@ -73,7 +73,7 @@
                     <%= Resources.Forums.CreatePoll %>:
                 </td>
                 <td class="secondColumn">
-                    <table id="poll">
+                    <table id="createPoll">
                         <tr>
                             <td>
                                 <strong>
@@ -174,9 +174,9 @@
 
         function AddPollAnswer()
         {
-            var answerCount = $("#poll .answer").length;
+            var answerCount = $("#createPoll .answer").length;
 
-            $("#poll").append('<tr class="answer"><td><strong>' + '<%= Resources.Forums.Answer %> '
+            $("#createPoll").append('<tr class="answer"><td><strong>' + '<%= Resources.Forums.Answer %> '
                 + (answerCount + 1) + ':</strong></td><td><input type="text" name="poll.PossibleAnswers[' + answerCount + '].Text" /> </td></tr>');
         }
     </script>

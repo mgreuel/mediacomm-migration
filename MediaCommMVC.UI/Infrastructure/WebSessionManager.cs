@@ -14,7 +14,9 @@ using NHibernate.Context;
 
 namespace MediaCommMVC.UI.Infrastructure
 {
-    /// <summary>Handles the NHibernate session management in an web application.</summary>
+    /// <summary>
+    ///   Handles the NHibernate session management in an web application.
+    /// </summary>
     public sealed class WebSessionManager : ISessionManager, IDisposable
     {
         #region Constants and Fields
@@ -28,9 +30,11 @@ namespace MediaCommMVC.UI.Infrastructure
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="WebSessionManager"/> class.</summary>
-        /// <param name="configurationGenerator">The configuration generator.</param>
-        /// <param name="logger">The logger.</param>
+        /// <summary>
+        ///   Initializes a new instance of the <see cref = "WebSessionManager" /> class.
+        /// </summary>
+        /// <param name = "configurationGenerator">The configuration generator.</param>
+        /// <param name = "logger">The logger.</param>
         public WebSessionManager(IConfigurationGenerator configurationGenerator, ILogger logger)
         {
             this.SessionFactory = configurationGenerator.Generate().BuildSessionFactory();
@@ -70,7 +74,9 @@ namespace MediaCommMVC.UI.Infrastructure
 
         #region Public Methods
 
-        /// <summary>Cleans the session up.</summary>
+        /// <summary>
+        ///   Cleans the session up.
+        /// </summary>
         public void CleanUp()
         {
             this.logger.Debug("Cleaning up the session");
@@ -100,7 +106,9 @@ namespace MediaCommMVC.UI.Infrastructure
 
         #region IDisposable
 
-        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+        /// <summary>
+        ///   Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             if (HttpContext.Current != null)

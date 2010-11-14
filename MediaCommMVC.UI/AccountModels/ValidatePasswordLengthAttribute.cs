@@ -10,7 +10,9 @@ using System.Web.Security;
 
 namespace MediaCommMVC.UI.AccountModels
 {
-    /// <summary>The validate password length attribute.</summary>
+    /// <summary>
+    ///   The validate password length attribute.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public sealed class ValidatePasswordLengthAttribute : ValidationAttribute
     {
@@ -44,16 +46,20 @@ namespace MediaCommMVC.UI.AccountModels
 
         #region Public Methods
 
-        /// <summary>The format error message.</summary>
-        /// <param name="name">The      name.</param>
+        /// <summary>
+        ///   The format error message.
+        /// </summary>
+        /// <param name = "name">The      name.</param>
         /// <returns>The format error  message.</returns>
         public override string FormatErrorMessage(string name)
         {
             return String.Format(CultureInfo.CurrentUICulture, this.ErrorMessageString, name, this.minCharacters);
         }
 
-        /// <summary>The is valid.</summary>
-        /// <param name="value">The    value.</param>
+        /// <summary>
+        ///   The is valid.
+        /// </summary>
+        /// <param name = "value">The    value.</param>
         /// <returns>The is    valid.</returns>
         public override bool IsValid(object value)
         {

@@ -289,6 +289,18 @@ namespace MediaCommMVC.Data.Repositories
         }
 
         /// <summary>
+        ///   Gets the poll answer by id.
+        /// </summary>
+        /// <param name = "answerId">The answer id.</param>
+        /// <returns>The poll answer.</returns>
+        public PollAnswer GetPollAnswerById(int answerId)
+        {
+            this.Logger.Debug("Getting poll answer id with id '{0}'", answerId);
+
+            return this.Session.Get<PollAnswer>(answerId);
+        }
+
+        /// <summary>
         ///   Gets a post by id.
         /// </summary>
         /// <param name = "id">The post id.</param>
@@ -389,6 +401,17 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Got '{0}' topics", topics.Count());
 
             return topics;
+        }
+
+        /// <summary>
+        ///   Saves the poll user answer.
+        /// </summary>
+        /// <param name = "userAnswer">The user answer.</param>
+        public void SavePollUserAnswer(PollUserAnswer userAnswer)
+        {
+            this.Logger.Debug("Saving poll user answer: {0}", userAnswer);
+
+            this.Session.Save(userAnswer);
         }
 
         /// <summary>

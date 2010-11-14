@@ -17,10 +17,10 @@ namespace MediaCommMVC.Data.NHInfrastructure.Conventions
         #region Methods
 
         /// <summary>
-        /// Gets the name of the key.
+        ///   Gets the name of the key.
         /// </summary>
-        /// <param name="property">The property.</param>
-        /// <param name="type">The  type.</param>
+        /// <param name = "property">The property.</param>
+        /// <param name = "type">The  type.</param>
         /// <returns>The FK Name.</returns>
         protected override string GetKeyName(Member property, Type type)
         {

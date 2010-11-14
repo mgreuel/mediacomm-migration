@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Security.Principal;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.Web.Security;
 
 using MediaCommMVC.UI.AccountModels;
 
@@ -13,7 +12,9 @@ using MediaCommMVC.UI.AccountModels;
 
 namespace MediaCommMVC.UI.Controllers
 {
-    /// <summary>The account controller.</summary>
+    /// <summary>
+    ///   The account controller.
+    /// </summary>
     [HandleError]
     public class AccountController : Controller
     {
@@ -58,7 +59,9 @@ namespace MediaCommMVC.UI.Controllers
 
         #region Public Methods
 
-        /// <summary>The change password.</summary>
+        /// <summary>
+        ///   The change password.
+        /// </summary>
         /// <returns>The changed passsword.</returns>
         [Authorize]
         public ActionResult ChangePassword()
@@ -66,8 +69,10 @@ namespace MediaCommMVC.UI.Controllers
             return this.View();
         }
 
-        /// <summary>The change password.</summary>
-        /// <param name="model">The model.</param>
+        /// <summary>
+        ///   The change password.
+        /// </summary>
+        /// <param name = "model">The model.</param>
         /// <returns>Generated Code.</returns>
         [Authorize]
         [HttpPost]
@@ -89,14 +94,18 @@ namespace MediaCommMVC.UI.Controllers
             return View(model);
         }
 
-        /// <summary>The change password success.</summary>
+        /// <summary>
+        ///   The change password success.
+        /// </summary>
         /// <returns>Generated Code.</returns>
         public ActionResult ChangePasswordSuccess()
         {
             return this.View();
         }
 
-        /// <summary>The log off.</summary>
+        /// <summary>
+        ///   The log off.
+        /// </summary>
         /// <returns>Generated Code.</returns>
         public ActionResult LogOff()
         {
@@ -105,16 +114,20 @@ namespace MediaCommMVC.UI.Controllers
             return this.RedirectToAction("Index", "Home");
         }
 
-        /// <summary>The log on.</summary>
+        /// <summary>
+        ///   The log on.
+        /// </summary>
         /// <returns>Generated Code.</returns>
         public ActionResult LogOn()
         {
             return this.View();
         }
 
-        /// <summary>The log on.</summary>
-        /// <param name="model">The model.</param>
-        /// <param name="returnUrl">The return url.</param>
+        /// <summary>
+        ///   The log on.
+        /// </summary>
+        /// <param name = "model">The model.</param>
+        /// <param name = "returnUrl">The return url.</param>
         /// <returns>Generated Code.</returns>
         [HttpPost]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", 
@@ -149,9 +162,11 @@ namespace MediaCommMVC.UI.Controllers
 
         #region Methods
 
-        /// <summary>The initialize.</summary>
-        /// <param name="requestContext">The request context.</param>
-        /// <exception cref="InvalidOperationException"></exception>
+        /// <summary>
+        ///   The initialize.
+        /// </summary>
+        /// <param name = "requestContext">The request context.</param>
+        /// <exception cref = "InvalidOperationException"></exception>
         protected override void Initialize(RequestContext requestContext)
         {
             if (requestContext.HttpContext.User.Identity is WindowsIdentity)
@@ -164,8 +179,10 @@ namespace MediaCommMVC.UI.Controllers
             }
         }
 
-        /// <summary>The on action executing.</summary>
-        /// <param name="filterContext">The filter context.</param>
+        /// <summary>
+        ///   The on action executing.
+        /// </summary>
+        /// <param name = "filterContext">The filter context.</param>
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             this.ViewData["PasswordLength"] = this.MembershipService.MinPasswordLength;

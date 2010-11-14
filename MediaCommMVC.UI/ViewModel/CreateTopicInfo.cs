@@ -1,29 +1,32 @@
-﻿using System;
+﻿#region Using Directives
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+
+using MediaCommMVC.Core.Model.Forums;
+
+#endregion
 
 namespace MediaCommMVC.UI.ViewModel
 {
-    using MediaCommMVC.Core.Model.Forums;
-
     /// <summary>
-    /// The View Data for creating a new topic.
+    ///   The View Data for creating a new topic.
     /// </summary>
     public class CreateTopicInfo
     {
+        #region Properties
+
         /// <summary>
-        /// Gets or sets the forum.
+        ///   Gets or sets the forum.
         /// </summary>
         /// <value>The forum.</value>
         public Forum Forum { get; set; }
 
         /// <summary>
-        /// Gets or sets the names of all users.
+        ///   Gets or sets the names of all users.
         /// </summary>
         /// <value>The list of all user names.</value>
         public IEnumerable<string> UserNames { get; set; }
 
-
+        #endregion
     }
 }

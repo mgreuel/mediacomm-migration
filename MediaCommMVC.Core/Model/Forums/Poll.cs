@@ -17,37 +17,11 @@ namespace MediaCommMVC.Core.Model.Forums
         /// <summary>
         ///   The users answers with their count.
         /// </summary>
-        private Dictionary<PollAnswer, int> answerCount = null;
+        private Dictionary<PollAnswer, int> answerCount;
 
         #endregion
 
         #region Properties
-
-        /// <summary>
-        ///   Gets the user ansers and their count.
-        /// </summary>
-        /// <value>The count of the user answers..</value>
-        public virtual IDictionary<PollAnswer, int> UserAnswersWithCount
-        {
-            get
-            {
-                if (this.answerCount == null)
-                {
-                    this.answerCount = this.UserAnswers.GroupBy(ua => ua.Answer).ToDictionary(
-                        g => g.Key, g => g.Count());
-
-                    foreach (PollAnswer possibleAnswer in this.PossibleAnswers)
-                    {
-                        if (!this.answerCount.ContainsKey(possibleAnswer))
-                        {
-                            this.answerCount.Add(possibleAnswer, 0);
-                        }
-                    }
-                }
-
-                return this.answerCount;
-            }
-        }
 
         /// <summary>
         ///   Gets or sets the id.
@@ -87,6 +61,47 @@ namespace MediaCommMVC.Core.Model.Forums
         /// </summary>
         /// <value>The user answers.</value>
         public virtual IEnumerable<PollUserAnswer> UserAnswers { get; set; }
+
+        /// <summary>
+        ///   Gets the user ansers and their count.
+        /// </summary>
+        /// <value>The count of the user answers.</value>
+        public virtual IDictionary<PollAnswer, int> UserAnswersWithCount
+        {
+            get
+            {
+                if (this.answerCount == null)
+                {
+                    this.answerCount = this.UserAnswers.GroupBy(ua => ua.Answer).ToDictionary(
+                        g => g.Key, g => g.Count());
+
+                    foreach (PollAnswer possibleAnswer in this.PossibleAnswers)
+                    {
+                        if (!this.answerCount.ContainsKey(possibleAnswer))
+                        {
+                            this.answerCount.Add(possibleAnswer, 0);
+                        }
+                    }
+                }
+
+                return this.answerCount;
+            }
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        ///   Returns a <see cref = "System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        ///   A <see cref = "System.String" /> that contains the Id and the Question.
+        /// </returns>
+        public override string ToString()
+        {
+            return string.Format("Id: '{0}', Question: '{1}'", this.Id, this.Question);
+        }
 
         #endregion
     }

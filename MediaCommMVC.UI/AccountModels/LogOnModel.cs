@@ -7,7 +7,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MediaCommMVC.UI.AccountModels
 {
-    /// <summary>The log on model.</summary>
+    /// <summary>
+    ///   The log on model.
+    /// </summary>
     public class LogOnModel
     {
         #region Properties

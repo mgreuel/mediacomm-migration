@@ -4,21 +4,24 @@ using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
 
 using MediaCommMVC.Core.Model.Forums;
-using MediaCommMVC.Common.Logging;
 
 #endregion
 
 namespace MediaCommMVC.Data.NHInfrastructure.Mapping
 {
-    /// <summary>Makes customizations to the auto mapping of the Forum type.</summary>
+    /// <summary>
+    ///   Makes customizations to the auto mapping of the Forum type.
+    /// </summary>
     public class ForumMapper : IAutoMappingOverride<Forum>
     {
         #region Implemented Interfaces
 
         #region IAutoMappingOverride<Forum>
 
-        /// <summary>Overrides the specified mapping.</summary>
-        /// <param name="mapping">The Forum auto mapping.</param>
+        /// <summary>
+        ///   Overrides the specified mapping.
+        /// </summary>
+        /// <param name = "mapping">The Forum auto mapping.</param>
         public void Override(AutoMapping<Forum> mapping)
         {
             mapping.Table("Forums");

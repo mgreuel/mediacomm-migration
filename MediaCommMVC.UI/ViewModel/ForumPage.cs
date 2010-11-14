@@ -9,7 +9,9 @@ using MediaCommMVC.Core.Parameters;
 
 namespace MediaCommMVC.UI.ViewModel
 {
-    /// <summary>Display information for a forum page.</summary>
+    /// <summary>
+    ///   Display information for a forum page.
+    /// </summary>
     public class ForumPage
     {
         #region Properties
@@ -27,7 +29,7 @@ namespace MediaCommMVC.UI.ViewModel
         public PagingParameters PagingParameters { get; set; }
 
         /// <summary>
-        /// Gets or sets the number of posts per topic.
+        ///   Gets or sets the number of posts per topic.
         /// </summary>
         /// <value>The number of posts per topic.</value>
         public int PostsPerTopicPage { get; set; }

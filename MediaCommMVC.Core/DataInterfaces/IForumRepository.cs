@@ -64,10 +64,10 @@ namespace MediaCommMVC.Core.DataInterfaces
         IEnumerable<Forum> GetAllForums(MediaCommUser currentUser);
 
         /// <summary>
-        /// Gets the first unread post for the topic.
+        ///   Gets the first unread post for the topic.
         /// </summary>
-        /// <param name="id">The topic id.</param>
-        /// <param name="user">The current user.</param>
+        /// <param name = "id">The topic id.</param>
+        /// <param name = "user">The current user.</param>
         /// <returns>The first unread post.</returns>
         Post GetFirstUnreadPostForTopic(int id, MediaCommUser user);
 
@@ -94,6 +94,13 @@ namespace MediaCommMVC.Core.DataInterfaces
         /// <param name = "pageSize">Size of the page.</param>
         /// <returns>The page number.</returns>
         int GetPageNumberForPost(int postId, int topicId, int pageSize);
+
+        /// <summary>
+        ///   Gets the poll answer by id.
+        /// </summary>
+        /// <param name = "answerId">The answer id.</param>
+        /// <returns>The poll answer.</returns>
+        PollAnswer GetPollAnswerById(int answerId);
 
         /// <summary>
         ///   Gets a post by id.
@@ -126,6 +133,12 @@ namespace MediaCommMVC.Core.DataInterfaces
         /// <param name = "currentUser">The current user.</param>
         /// <returns>The topics.</returns>
         IEnumerable<Topic> GetTopicsForForum(int forumId, PagingParameters pagingParameters, MediaCommUser currentUser);
+
+        /// <summary>
+        ///   Saves the poll user answer.
+        /// </summary>
+        /// <param name = "userAnswer">The user answer.</param>
+        void SavePollUserAnswer(PollUserAnswer userAnswer);
 
         /// <summary>
         ///   Updates the forum in the persistence layer.

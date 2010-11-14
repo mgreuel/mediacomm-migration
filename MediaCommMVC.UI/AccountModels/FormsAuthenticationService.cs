@@ -13,16 +13,20 @@ namespace MediaCommMVC.UI.AccountModels
     // how to create an abstract wrapper around such a type in order to make the AccountController
     // code unit testable.
 
-    /// <summary>The forms authentication service.</summary>
+    /// <summary>
+    ///   The forms authentication service.
+    /// </summary>
     public class FormsAuthenticationService : IFormsAuthenticationService
     {
         #region Implemented Interfaces
 
         #region IFormsAuthenticationService
 
-        /// <summary>The sign in.</summary>
-        /// <param name="userName">The user name.</param>
-        /// <param name="createPersistentCookie">The create persistent cookie.</param>
+        /// <summary>
+        ///   The sign in.
+        /// </summary>
+        /// <param name = "userName">The user name.</param>
+        /// <param name = "createPersistentCookie">The create persistent cookie.</param>
         public void SignIn(string userName, bool createPersistentCookie)
         {
             ValidationUtil.ValidateRequiredStringValue(userName, "userName");
@@ -30,7 +34,9 @@ namespace MediaCommMVC.UI.AccountModels
             FormsAuthentication.SetAuthCookie(userName, createPersistentCookie);
         }
 
-        /// <summary>The sign out.</summary>
+        /// <summary>
+        ///   The sign out.
+        /// </summary>
         public void SignOut()
         {
             FormsAuthentication.SignOut();
@@ -40,10 +46,6 @@ namespace MediaCommMVC.UI.AccountModels
 
         #endregion
     }
-
-    #endregion
-
-    #region Validation
 
     #endregion
 }
