@@ -8,7 +8,7 @@ Admin:
 
 Forums:
 - delete
-- * polls
+- * doodle like surveys
 - emotions/parser
 - edit rights
 
@@ -26,6 +26,9 @@ General:
 - * Permission Manager
 - cleanup css
 - cleanup and check routes
+- mvc 3
+- nuget
+- introduce view models
 
 Install:
 - Web-Install?

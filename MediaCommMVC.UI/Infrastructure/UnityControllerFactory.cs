@@ -10,14 +10,18 @@ using Microsoft.Practices.Unity;
 
 namespace MediaCommMVC.UI.Infrastructure
 {
-    /// <summary>A controller factory using Unity for the creation of controller.</summary>
+    /// <summary>
+    ///   A controller factory using Unity for the creation of controller.
+    /// </summary>
     public class UnityControllerFactory : DefaultControllerFactory
     {
         #region Public Methods
 
-        /// <summary>Creates the controller.</summary>
-        /// <param name="requestContext">The request context.</param>
-        /// <param name="controllerName">Name of the controller.</param>
+        /// <summary>
+        ///   Creates the controller.
+        /// </summary>
+        /// <param name = "requestContext">The request context.</param>
+        /// <param name = "controllerName">Name of the controller.</param>
         /// <returns>A reference to the controller.</returns>
         public override IController CreateController(RequestContext requestContext, string controllerName)
         {
@@ -40,8 +44,10 @@ namespace MediaCommMVC.UI.Infrastructure
 
         #region Methods
 
-        /// <summary>Gets the unity container.</summary>
-        /// <param name="requestContext">The request context.</param>
+        /// <summary>
+        ///   Gets the unity container.
+        /// </summary>
+        /// <param name = "requestContext">The request context.</param>
         /// <returns>The unity container.</returns>
         protected virtual IUnityContainer GetContainer(RequestContext requestContext)
         {

@@ -9,15 +9,19 @@ using MediaCommMVC.Core.Model.Users;
 
 namespace MediaCommMVC.Data.NHInfrastructure.Mapping
 {
-    /// <summary>Makes customizations to the auto mapping of the MediaCommUser type.</summary>
+    /// <summary>
+    ///   Makes customizations to the auto mapping of the MediaCommUser type.
+    /// </summary>
     public class MediaCommUserMapper : IAutoMappingOverride<MediaCommUser>
     {
         #region Implemented Interfaces
 
         #region IAutoMappingOverride<MediaCommUser>
 
-        /// <summary>Overrides the specified mapping.</summary>
-        /// <param name="mapping">The mapping.</param>
+        /// <summary>
+        ///   Overrides the specified mapping.
+        /// </summary>
+        /// <param name = "mapping">The mapping.</param>
         public void Override(AutoMapping<MediaCommUser> mapping)
         {
             mapping.Table("MediaCommUsers");

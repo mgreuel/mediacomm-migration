@@ -3,14 +3,15 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 #endregion
 
 namespace MediaCommMVC.UI.AccountModels
 {
-    /// <summary>The properties must match attribute.</summary>
+    /// <summary>
+    ///   The properties must match attribute.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public sealed class PropertiesMustMatchAttribute : ValidationAttribute
     {
@@ -30,9 +31,11 @@ namespace MediaCommMVC.UI.AccountModels
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="PropertiesMustMatchAttribute"/> class.</summary>
-        /// <param name="originalProperty">The original property.</param>
-        /// <param name="confirmProperty">The confirm property.</param>
+        /// <summary>
+        ///   Initializes a new instance of the <see cref = "PropertiesMustMatchAttribute" /> class.
+        /// </summary>
+        /// <param name = "originalProperty">The original property.</param>
+        /// <param name = "confirmProperty">The confirm property.</param>
         public PropertiesMustMatchAttribute(string originalProperty, string confirmProperty)
             : base(DefaultErrorMessage)
         {
@@ -72,8 +75,10 @@ namespace MediaCommMVC.UI.AccountModels
 
         #region Public Methods
 
-        /// <summary>The format error message.</summary>
-        /// <param name="name">The user name.</param>
+        /// <summary>
+        ///   The format error message.
+        /// </summary>
+        /// <param name = "name">The user name.</param>
         /// <returns>The format error  message.</returns>
         public override string FormatErrorMessage(string name)
         {
@@ -81,8 +86,10 @@ namespace MediaCommMVC.UI.AccountModels
                 CultureInfo.CurrentUICulture, this.ErrorMessageString, this.OriginalProperty, this.ConfirmProperty);
         }
 
-        /// <summary>The is valid.</summary>
-        /// <param name="value">The value.</param>
+        /// <summary>
+        ///   The is valid.
+        /// </summary>
+        /// <param name = "value">The value.</param>
         /// <returns>The is  valid.</returns>
         public override bool IsValid(object value)
         {

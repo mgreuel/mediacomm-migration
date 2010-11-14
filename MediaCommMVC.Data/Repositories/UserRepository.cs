@@ -18,15 +18,19 @@ using NHibernate.Linq;
 
 namespace MediaCommMVC.Data.Repositories
 {
-    /// <summary>Implements the IUserRepository using nHibernate.</summary>
+    /// <summary>
+    ///   Implements the IUserRepository using nHibernate.
+    /// </summary>
     public class UserRepository : RepositoryBase, IUserRepository
     {
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="UserRepository"/> class.</summary>
-        /// <param name="sessionManager">The NHibernate session manager.</param>
-        /// <param name="configAccessor">The config Accessor.</param>
-        /// <param name="logger">The logger.</param>
+        /// <summary>
+        ///   Initializes a new instance of the <see cref = "UserRepository" /> class.
+        /// </summary>
+        /// <param name = "sessionManager">The NHibernate session manager.</param>
+        /// <param name = "configAccessor">The config Accessor.</param>
+        /// <param name = "logger">The logger.</param>
         public UserRepository(ISessionManager sessionManager, IConfigAccessor configAccessor, ILogger logger)
             : base(sessionManager, configAccessor, logger)
         {
@@ -38,10 +42,12 @@ namespace MediaCommMVC.Data.Repositories
 
         #region IUserRepository
 
-        /// <summary>Creates a new user.</summary>
-        /// <param name="username">The username.</param>
-        /// <param name="password">The password.</param>
-        /// <param name="mailAddress">The mail address.</param>
+        /// <summary>
+        ///   Creates a new user.
+        /// </summary>
+        /// <param name = "username">The username.</param>
+        /// <param name = "password">The password.</param>
+        /// <param name = "mailAddress">The mail address.</param>
         public void CreateUser(string username, string password, string mailAddress)
         {
             this.Logger.Debug("Creating user with username '{0}', password '{1}', mailAddress: '{2}'", username, password, mailAddress);
@@ -61,7 +67,9 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Finished creating user");
         }
 
-        /// <summary>Gets all users.</summary>
+        /// <summary>
+        ///   Gets all users.
+        /// </summary>
         /// <returns>The users.</returns>
         public IEnumerable<MediaCommUser> GetAllUsers()
         {
@@ -72,8 +80,10 @@ namespace MediaCommMVC.Data.Repositories
             return users;
         }
 
-        /// <summary>Gets user by name.</summary>
-        /// <param name="userName">Name of the user.</param>
+        /// <summary>
+        ///   Gets user by name.
+        /// </summary>
+        /// <param name = "userName">Name of the user.</param>
         /// <returns>The user with the provided name..</returns>
         public MediaCommUser GetUserByName(string userName)
         {
@@ -85,8 +95,10 @@ namespace MediaCommMVC.Data.Repositories
             return user;
         }
 
-        /// <summary>Updates the user.</summary>
-        /// <param name="user">The user to update.</param>
+        /// <summary>
+        ///   Updates the user.
+        /// </summary>
+        /// <param name = "user">The user to update.</param>
         public void UpdateUser(MediaCommUser user)
         {
             this.Logger.Debug("Updating user: " + user);

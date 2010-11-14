@@ -1,40 +1,40 @@
-﻿namespace MediaCommMVC.UI.Infrastructure
+﻿#region Using Directives
+
+using System.Web.Mvc;
+using System.Web.Routing;
+
+using Combres;
+
+using MediaCommMVC.Common.Config;
+using MediaCommMVC.Core.DataInterfaces;
+using MediaCommMVC.Data;
+using MediaCommMVC.Data.NHInfrastructure;
+using MediaCommMVC.Data.NHInfrastructure.Config;
+using MediaCommMVC.Data.NHInfrastructure.Mapping;
+using MediaCommMVC.Data.Repositories;
+
+using Microsoft.Practices.Unity;
+
+using ILogger = MediaCommMVC.Common.Logging.ILogger;
+
+#endregion
+
+namespace MediaCommMVC.UI.Infrastructure
 {
-    #region Using Directives
-
-    using System.Web.Mvc;
-    using System.Web.Routing;
-
-    using Combres;
-
-    using MediaCommMVC.Common.Config;
-    using MediaCommMVC.Core.DataInterfaces;
-    using MediaCommMVC.Data;
-    using MediaCommMVC.Data.NHInfrastructure;
-    using MediaCommMVC.Data.NHInfrastructure.Config;
-    using MediaCommMVC.Data.NHInfrastructure.Mapping;
-    using MediaCommMVC.Data.Repositories;
-
-    using Microsoft.Practices.Unity;
-
-    using ILogger = MediaCommMVC.Common.Logging.ILogger;
-
-    #endregion
-
     /// <summary>
-    /// Boostrapper initializing the web application.
+    ///   Boostrapper initializing the web application.
     /// </summary>
     public class Bootstrapper
     {
         #region Constants and Fields
 
         /// <summary>
-        /// The unity container.
+        ///   The unity container.
         /// </summary>
         private readonly IUnityContainer container;
 
         /// <summary>
-        /// The logger.
+        ///   The logger.
         ///   It is created in the Global.asax file.
         /// </summary>
         private readonly ILogger logger;
@@ -44,13 +44,13 @@
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Bootstrapper"/> class.
+        ///   Initializes a new instance of the <see cref = "Bootstrapper" /> class.
         /// </summary>
-        /// <param name="container">
-        /// The container.
+        /// <param name = "container">
+        ///   The container.
         /// </param>
-        /// <param name="logger">
-        /// The logger.
+        /// <param name = "logger">
+        ///   The logger.
         /// </param>
         public Bootstrapper(IUnityContainer container, ILogger logger)
         {
@@ -63,7 +63,7 @@
         #region Public Methods
 
         /// <summary>
-        /// Runs the bootstrapper.
+        ///   Runs the bootstrapper.
         /// </summary>
         public void Run()
         {
@@ -77,7 +77,7 @@
         #region Methods
 
         /// <summary>
-        /// Registers the controller factory.
+        ///   Registers the controller factory.
         /// </summary>
         private static void RegisterControllerFactory()
         {
@@ -85,7 +85,7 @@
         }
 
         /// <summary>
-        /// Registers the routes.
+        ///   Registers the routes.
         /// </summary>
         private static void RegisterRoutes()
         {
@@ -144,7 +144,7 @@
         }
 
         /// <summary>
-        /// Configures the unity container.
+        ///   Configures the unity container.
         /// </summary>
         private void ConfigureContainer()
         {
@@ -157,7 +157,7 @@
         }
 
         /// <summary>
-        /// Registers the NNibernate components.
+        ///   Registers the NNibernate components.
         /// </summary>
         private void RegisterNHibernateComponents()
         {
@@ -172,7 +172,7 @@
         }
 
         /// <summary>
-        /// Registers the repositories.
+        ///   Registers the repositories.
         /// </summary>
         private void RegisterRepositories()
         {

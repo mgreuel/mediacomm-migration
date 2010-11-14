@@ -219,4 +219,10 @@
   <data name="SubmitVote" xml:space="preserve">
     <value>Submit Vote</value>
   </data>
+  <data name="Poll" xml:space="preserve">
+    <value>Poll</value>
+  </data>
+  <data name="PollResults" xml:space="preserve">
+    <value>Results</value>
+  </data>
 </root>

@@ -3,7 +3,6 @@
 using System;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 
 using MediaCommMVC.Common.Logging;
 using MediaCommMVC.UI.Infrastructure;
@@ -17,7 +16,9 @@ namespace MediaCommMVC.UI
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 
-    /// <summary>The web application.</summary>
+    /// <summary>
+    ///   The web application.
+    /// </summary>
     public class MvcApplication : HttpApplication, IUnityContainerAccessor
     {
         #region Constants and Fields
@@ -52,7 +53,9 @@ namespace MediaCommMVC.UI
 
         #region Methods
 
-        /// <summary>Configures the application during start up.</summary>
+        /// <summary>
+        ///   Configures the application during start up.
+        /// </summary>
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -63,7 +66,7 @@ namespace MediaCommMVC.UI
                 {
                     container = new UnityContainer();
                 }
-                
+
                 new Bootstrapper(container, this.logger).Run();
 
                 // RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);

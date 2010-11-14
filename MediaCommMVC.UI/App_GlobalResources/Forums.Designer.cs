@@ -259,6 +259,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Poll.
+        /// </summary>
+        internal static string Poll {
+            get {
+                return ResourceManager.GetString("Poll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Results.
+        /// </summary>
+        internal static string PollResults {
+            get {
+                return ResourceManager.GetString("PollResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PollType.
         /// </summary>
         internal static string PollType {

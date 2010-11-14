@@ -6,7 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace MediaCommMVC.UI.Serialization
 {
-    /// <summary>The parameters posted to the server by DataTables.</summary>
+    /// <summary>
+    ///   The parameters posted to the server by DataTables.
+    /// </summary>
     public class DataTableParameters
     {
         #region Properties

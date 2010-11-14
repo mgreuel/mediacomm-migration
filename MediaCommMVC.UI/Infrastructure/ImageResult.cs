@@ -1,6 +1,5 @@
 ﻿#region Using Directives
 
-using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Web;
@@ -13,7 +12,9 @@ using MediaCommMVC.Common.Exceptions;
 
 namespace MediaCommMVC.UI.Infrastructure
 {
-    /// <summary>Writes an image to the response stream.</summary>
+    /// <summary>
+    ///   Writes an image to the response stream.
+    /// </summary>
     public class ImageResult : ActionResult
     {
         #region Properties
@@ -28,8 +29,10 @@ namespace MediaCommMVC.UI.Infrastructure
 
         #region Public Methods
 
-        /// <summary>Enables processing of the result of an action method by a custom type that inherits from <see cref="T:System.Web.Mvc.ActionResult"/>.</summary>
-        /// <param name="context">The context within which the result is executed.</param>
+        /// <summary>
+        ///   Enables processing of the result of an action method by a custom type that inherits from <see cref = "T:System.Web.Mvc.ActionResult" />.
+        /// </summary>
+        /// <param name = "context">The context within which the result is executed.</param>
         public override void ExecuteResult(ControllerContext context)
         {
             if (this.Image == null)

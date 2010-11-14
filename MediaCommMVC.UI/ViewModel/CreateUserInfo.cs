@@ -1,6 +1,8 @@
 ﻿namespace MediaCommMVC.UI.ViewModel
 {
-    /// <summary>Contains information needed for creating an user.</summary>
+    /// <summary>
+    ///   Contains information needed for creating an user.
+    /// </summary>
     public class CreateUserInfo
     {
         #region Properties

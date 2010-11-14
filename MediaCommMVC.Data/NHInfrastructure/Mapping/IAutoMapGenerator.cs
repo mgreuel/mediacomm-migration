@@ -6,12 +6,16 @@ using FluentNHibernate.Automapping;
 
 namespace MediaCommMVC.Data.NHInfrastructure.Mapping
 {
-    /// <summary>A common interface for FluentNHibernate AutoMaps.</summary>
+    /// <summary>
+    ///   A common interface for FluentNHibernate AutoMaps.
+    /// </summary>
     public interface IAutoMapGenerator
     {
         #region Public Methods
 
-        /// <summary>Generates the FluentHibernate automap.</summary>
+        /// <summary>
+        ///   Generates the FluentHibernate automap.
+        /// </summary>
         /// <returns>The auto persistence model.</returns>
         AutoPersistenceModel Generate();
 

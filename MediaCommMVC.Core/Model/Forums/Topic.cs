@@ -1,17 +1,18 @@
 ﻿#region Using Directives
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+
+using MediaCommMVC.Core.Model.Users;
 
 #endregion
 
 namespace MediaCommMVC.Core.Model.Forums
 {
-    using System.Collections.Generic;
-
-    using MediaCommMVC.Core.Model.Users;
-
-    /// <summary>Represents a topic in a forum.</summary>
+    /// <summary>
+    ///   Represents a topic in a forum.
+    /// </summary>
     public class Topic
     {
         #region Constructors and Destructors
@@ -47,6 +48,12 @@ namespace MediaCommMVC.Core.Model.Forums
         public virtual TopicDisplayPriority DisplayPriority { get; set; }
 
         /// <summary>
+        ///   Gets or sets the list of users beeing excluded from this topic.
+        /// </summary>
+        /// <value>The users exluded from this topic.</value>
+        public virtual IEnumerable<MediaCommUser> ExcludedUsers { get; set; }
+
+        /// <summary>
         ///   Gets or sets the forum the post belongs to.
         /// </summary>
         /// <value>The forum the post belongs to.</value>
@@ -71,6 +78,12 @@ namespace MediaCommMVC.Core.Model.Forums
         public virtual DateTime LastPostTime { get; set; }
 
         /// <summary>
+        ///   Gets or sets the poll.
+        /// </summary>
+        /// <value>The poll belonging to this topic.</value>
+        public virtual Poll Poll { get; set; }
+
+        /// <summary>
         ///   Gets or sets the post count.
         /// </summary>
         /// <value>The post count.</value>
@@ -83,12 +96,6 @@ namespace MediaCommMVC.Core.Model.Forums
         public virtual bool ReadByCurrentUser { get; set; }
 
         /// <summary>
-        /// Gets or sets the list of users beeing excluded from this topic.
-        /// </summary>
-        /// <value>The users exluded from this topic.</value>
-        public virtual IEnumerable<MediaCommUser> ExcludedUsers { get; set; }
-
-            /// <summary>
         ///   Gets or sets the topic's title.
         /// </summary>
         /// <value>The topic's title.</value>
@@ -96,19 +103,15 @@ namespace MediaCommMVC.Core.Model.Forums
         [StringLength(255)]
         public virtual string Title { get; set; }
 
-        /// <summary>
-        /// Gets or sets the poll.
-        /// </summary>
-        /// <value>The poll belonging to this topic.</value>
-        public virtual Poll Poll { get; set; }
-
         #endregion
 
         #region Public Methods
 
-        /// <summary>Determines whether the specified <see cref="System.Object"/> is equal to this instance.</summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns><c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.</returns>
+        /// <summary>
+        ///   Determines whether the specified <see cref = "System.Object" /> is equal to this instance.
+        /// </summary>
+        /// <param name = "obj">The <see cref = "System.Object" /> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref = "System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             Topic topic = obj as Topic;
@@ -116,15 +119,10 @@ namespace MediaCommMVC.Core.Model.Forums
             return topic != null && topic.Id == this.Id;
         }
 
-        /// <summary>Returns a hash code for this instance.</summary>
-        /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. </returns>
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-
-        /// <summary>Returns a <see cref="System.String"/> that represents this instance.</summary>
-        /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
+        /// <summary>
+        ///   Returns a <see cref = "System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref = "System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
             return string.Format("Id: '{0}', Title: '{1}", this.Id, this.Title);

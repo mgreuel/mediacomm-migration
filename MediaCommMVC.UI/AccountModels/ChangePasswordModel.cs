@@ -7,7 +7,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MediaCommMVC.UI.AccountModels
 {
-    /// <summary>The change password model.</summary>
+    /// <summary>
+    ///   The change password model.
+    /// </summary>
     [PropertiesMustMatch(
         "NewPassword", 
         "ConfirmPassword", 

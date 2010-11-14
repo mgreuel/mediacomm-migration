@@ -7,7 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace MediaCommMVC.UI.AccountModels
 {
-    /// <summary>The validation util.</summary>
+    /// <summary>
+    ///   The validation util.
+    /// </summary>
     internal static class ValidationUtil
     {
         #region Constants and Fields
@@ -23,10 +25,12 @@ namespace MediaCommMVC.UI.AccountModels
 
         #region Public Methods
 
-        /// <summary>The validate required string value.</summary>
-        /// <param name="value">The value.</param>
-        /// <param name="parameterName">The parameter name.</param>
-        /// <exception cref="ArgumentException"></exception>
+        /// <summary>
+        ///   The validate required string value.
+        /// </summary>
+        /// <param name = "value">The value.</param>
+        /// <param name = "parameterName">The parameter name.</param>
+        /// <exception cref = "ArgumentException"></exception>
         public static void ValidateRequiredStringValue(string value, string parameterName)
         {
             if (String.IsNullOrEmpty(value))

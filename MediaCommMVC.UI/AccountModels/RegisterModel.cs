@@ -7,7 +7,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MediaCommMVC.UI.AccountModels
 {
-    /// <summary>The register model.</summary>
+    /// <summary>
+    ///   The register model.
+    /// </summary>
     [PropertiesMustMatch("Password", "ConfirmPassword", 
         ErrorMessage = "The password and confirmation password do not match.")]
     public class RegisterModel

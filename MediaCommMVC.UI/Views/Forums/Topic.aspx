@@ -17,13 +17,13 @@
            int totalAnswers = this.Model.Topic.Poll.UserAnswers.Count();
     %>
     <div id="poll">
-        <table id="pollResults">
+        <table id="pollResults" class="pollTable">
             <thead>
                 <tr>
                     <th colspan="3">
                         <strong>
-                            <%=this.Model.Topic.Poll.Question%>
-                        </strong>
+                            <%= Resources.Forums.PollResults %>: </strong>
+                        <%=this.Model.Topic.Poll.Question%>
                     </th>
                 </tr>
             </thead>
@@ -35,18 +35,17 @@
                     <td>
                         <%:answerWithCount.Key.Text%>
                     </td>
-                    <td>
+                    <td style="width: 15px; text-align: right">
                         <strong>
                             <%=answerWithCount.Value%></strong>
                     </td>
-                    <td>
+                    <td style="width: 50px; text-align: right">
                         <%
                             this.Writer.Write(
-                                totalAnswers != 0
-                                    ? Math.Round(Convert.ToDouble(answerWithCount.Value / totalAnswers), 2)
-                                    : Math.Round(0f, 2));
-                        %>
-                        "%"
+                                (totalAnswers != 0
+                                    ? Math.Round(Convert.ToDouble((Convert.ToDouble(answerWithCount.Value) / Convert.ToDouble(totalAnswers)) * 100), 2)
+                                    : Math.Round(0f, 2)) + "%");
+                        %>                        
                     </td>
                 </tr>
                 <%
@@ -54,16 +53,18 @@
             </tbody>
         </table>
         <%
-            using (Html.BeginForm("AnswerPoll", "Forums"))
-            {%>
+            if (!this.Model.Topic.Poll.UserAnswers.Any(ua => ua.User.UserName.Equals(this.User.Identity.Name, StringComparison.OrdinalIgnoreCase)))
+            {
+                using (Html.BeginForm("AnswerPoll", "Forums"))
+                {%>
         <%=Html.Hidden("pollId", this.Model.Topic.Poll.Id)%>
-        <table id="pollQuestions">
+        <table id="pollQuestions" class="pollTable">
             <thead>
                 <tr>
                     <th>
                         <strong>
-                            <%:this.Model.Topic.Poll.Question%>
-                        </strong>
+                            <%=Resources.Forums.Poll%>: </strong>
+                        <%:this.Model.Topic.Poll.Question%>
                     </th>
                 </tr>
             </thead>
@@ -71,26 +72,33 @@
                 <%
                     foreach (PollAnswer possibleAnswer in this.Model.Topic.Poll.PossibleAnswers)
                     {
-                        if (this.Model.Topic.Poll.Type == PollType.SingleAnswer)
-                        {
                 %>
                 <tr>
                     <td>
-                        <input type="radio" id="answerId" name="answerId" value="<%=possibleAnswer.Id%>" />
-                        <label for="answer">
-                            <%: possibleAnswer.Text %></label>
+                        <%     if (this.Model.Topic.Poll.Type == PollType.SingleAnswer)
+                               { %>
+                        <input type="radio" class="pollAnswerInput" name="answerIds" value="<%=possibleAnswer.Id%>" />
+                        <%}
+                               else if (this.Model.Topic.Poll.Type == PollType.MultiAnswer)
+                               {%>
+                        <input type="checkbox" name="answerIds" value="<%=possibleAnswer.Id%>" />
+                        <%
+                            }%>
+                        <label>
+                            <%:possibleAnswer.Text%></label>
                     </td>
                 </tr>
                 <%
-                    }
+
                     }
                 %>
             </tbody>
         </table>
+        <input type="submit" class="button" value="<%=Resources.Forums.SubmitVote%>" />
+        <%
+            }
+            }%>
     </div>
-    <input type="submit" class="button" value="<%=Resources.Forums.SubmitVote%>" />
-    <%
-        }%>
     <div id="topicHeader">
         <div class="forumPager forumPagerTop">
             <%=
