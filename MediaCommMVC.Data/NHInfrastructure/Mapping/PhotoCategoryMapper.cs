@@ -9,19 +9,15 @@ using MediaCommMVC.Core.Model.Photos;
 
 namespace MediaCommMVC.Data.NHInfrastructure.Mapping
 {
-    /// <summary>
-    ///   Makes customizations to the auto mapping of the PhotoCategory type.
-    /// </summary>
+    /// <summary>Makes customizations to the auto mapping of the PhotoCategory type.</summary>
     public class PhotoCategoryMapper : IAutoMappingOverride<PhotoCategory>
     {
         #region Implemented Interfaces
 
         #region IAutoMappingOverride<PhotoCategory>
 
-        /// <summary>
-        ///   Overrides the specified mapping.
-        /// </summary>
-        /// <param name = "mapping">The photo category auto mapping.</param>
+        /// <summary>Overrides the specified mapping.</summary>
+        /// <param name="mapping">The photo category auto mapping.</param>
         public void Override(AutoMapping<PhotoCategory> mapping)
         {
             mapping.Table("PhotoCategories");

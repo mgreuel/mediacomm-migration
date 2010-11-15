@@ -9,19 +9,15 @@ using MediaCommMVC.Core.Model.Movies;
 
 namespace MediaCommMVC.Data.NHInfrastructure.Mapping
 {
-    /// <summary>
-    ///   Makes customizations to the auto mapping of the Movie type.
-    /// </summary>
+    /// <summary>Makes customizations to the auto mapping of the Movie type.</summary>
     public class MovieMapper : IAutoMappingOverride<Movie>
     {
         #region Implemented Interfaces
 
         #region IAutoMappingOverride<Movie>
 
-        /// <summary>
-        ///   Overrides the specified mapping.
-        /// </summary>
-        /// <param name = "mapping">The Forum auto mapping.</param>
+        /// <summary>Overrides the specified mapping.</summary>
+        /// <param name="mapping">The Forum auto mapping.</param>
         public void Override(AutoMapping<Movie> mapping)
         {
             mapping.Table("Movies");

@@ -16,19 +16,15 @@ using NHibernate.Linq;
 
 namespace MediaCommMVC.Data.Repositories
 {
-    /// <summary>
-    ///   Implements the IMovieRepository using NHibernate.
-    /// </summary>
+    /// <summary>Implements the IMovieRepository using NHibernate.</summary>
     public class MovieRepository : RepositoryBase, IMovieRepository
     {
         #region Constructors and Destructors
 
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "MovieRepository" /> class.
-        /// </summary>
-        /// <param name = "sessionManager">The NHibernate session manager.</param>
-        /// <param name = "configAccessor">The config Accessor.</param>
-        /// <param name = "logger">The logger.</param>
+        /// <summary>Initializes a new instance of the <see cref="MovieRepository"/> class.</summary>
+        /// <param name="sessionManager">The NHibernate session manager.</param>
+        /// <param name="configAccessor">The config Accessor.</param>
+        /// <param name="logger">The logger.</param>
         public MovieRepository(ISessionManager sessionManager, IConfigAccessor configAccessor, ILogger logger)
             : base(sessionManager, configAccessor, logger)
         {
@@ -40,10 +36,8 @@ namespace MediaCommMVC.Data.Repositories
 
         #region IMovieRepository
 
-        /// <summary>
-        ///   Deletes the movie with the id.
-        /// </summary>
-        /// <param name = "movieId">The movie id.</param>
+        /// <summary>Deletes the movie with the id.</summary>
+        /// <param name="movieId">The movie id.</param>
         public void DeleteMovieWithId(int movieId)
         {
             this.Logger.Debug("Deleting movie with id: " + movieId);
@@ -59,9 +53,7 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Finished deleting movie");
         }
 
-        /// <summary>
-        ///   Gets the movie languages.
-        /// </summary>
+        /// <summary>Gets the movie languages.</summary>
         /// <returns>The movie languages.</returns>
         public IEnumerable<MovieLanguage> GetAllLanguages()
         {
@@ -74,9 +66,7 @@ namespace MediaCommMVC.Data.Repositories
             return languages;
         }
 
-        /// <summary>
-        ///   Gets all movies from the persistence store.
-        /// </summary>
+        /// <summary>Gets all movies from the persistence store.</summary>
         /// <returns>The movies.</returns>
         public IEnumerable<Movie> GetAllMovies()
         {
@@ -89,9 +79,7 @@ namespace MediaCommMVC.Data.Repositories
             return movies;
         }
 
-        /// <summary>
-        ///   Gets the movie qualities.
-        /// </summary>
+        /// <summary>Gets the movie qualities.</summary>
         /// <returns>The movie qualities.</returns>
         public IEnumerable<MovieQuality> GetAllQualities()
         {
@@ -104,10 +92,8 @@ namespace MediaCommMVC.Data.Repositories
             return qualities;
         }
 
-        /// <summary>
-        ///   Gets the language by id.
-        /// </summary>
-        /// <param name = "id">The language id.</param>
+        /// <summary>Gets the language by id.</summary>
+        /// <param name="id">The language id.</param>
         /// <returns>The movie language.</returns>
         public MovieLanguage GetLanguageById(int id)
         {
@@ -120,10 +106,8 @@ namespace MediaCommMVC.Data.Repositories
             return language;
         }
 
-        /// <summary>
-        ///   Gets the quality by id.
-        /// </summary>
-        /// <param name = "id">The quality id.</param>
+        /// <summary>Gets the quality by id.</summary>
+        /// <param name="id">The quality id.</param>
         /// <returns>The movie quality.</returns>
         public MovieQuality GetQualityById(int id)
         {
@@ -136,10 +120,8 @@ namespace MediaCommMVC.Data.Repositories
             return quality;
         }
 
-        /// <summary>
-        ///   Adds the movie to the persistence store.
-        /// </summary>
-        /// <param name = "movie">The movie.</param>
+        /// <summary>Adds the movie to the persistence store.</summary>
+        /// <param name="movie">The movie.</param>
         public void Save(Movie movie)
         {
             this.Logger.Debug("Saving movie: " + movie);

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Security.Permissions;
 
 using MediaCommMVC.Common.Config;
 using MediaCommMVC.Common.Logging;
@@ -14,42 +15,30 @@ using MediaCommMVC.Common.Logging;
 
 namespace MediaCommMVC.Data
 {
-    /// <summary>
-    ///   Uses .NET framework for generating small images and an external tool to generate medium and large images.
-    /// </summary>
+    /// <summary>Uses .NET framework for generating small images and an external tool to generate medium and large images.</summary>
     public class MixedImageGenerator : IImageGenerator
     {
         #region Constants and Fields
 
-        /// <summary>
-        ///   The maximum height for thumbnail images.
-        /// </summary>
+        /// <summary>The maximum height for thumbnail images.</summary>
         private const int MaxThumbnailHeight = 175;
 
-        /// <summary>
-        ///   The maximum width for thumbnail images.
-        /// </summary>
+        /// <summary>The maximum width for thumbnail images.</summary>
         private const int MaxThumbnailWidth = 175;
 
-        /// <summary>
-        ///   The config accessor.
-        /// </summary>
+        /// <summary>The config accessor.</summary>
         private readonly IConfigAccessor configAccessor;
 
-        /// <summary>
-        ///   The logger.
-        /// </summary>
+        /// <summary>The logger.</summary>
         private readonly ILogger logger;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "MixedImageGenerator" /> class.
-        /// </summary>
-        /// <param name = "logger">The logger.</param>
-        /// <param name = "configAccessor">The config accessor.</param>
+        /// <summary>Initializes a new instance of the <see cref="MixedImageGenerator"/> class.</summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="configAccessor">The config accessor.</param>
         public MixedImageGenerator(ILogger logger, IConfigAccessor configAccessor)
         {
             this.logger = logger;
@@ -62,13 +51,11 @@ namespace MediaCommMVC.Data
 
         #region IImageGenerator
 
-        /// <summary>
-        ///   Generates differnt resolution for the images.
-        /// </summary>
-        /// <param name = "pathToPhotos">The path to photos.</param>
-        /// <param name = "unprocessedPhotosFolder">The unprocessed photos folder.</param>
-        [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.InheritanceDemand, Name = "FullTrust")]
-        [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.LinkDemand, Name = "FullTrust")]
+        /// <summary>Generates differnt resolution for the images.</summary>
+        /// <param name="pathToPhotos">The path to photos.</param>
+        /// <param name="unprocessedPhotosFolder">The unprocessed photos folder.</param>
+        [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
+        [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
         public void GenerateImages(string pathToPhotos, string unprocessedPhotosFolder)
         {
             this.logger.Debug("Generating smaller resolutions for photos in '{0}'", pathToPhotos);
@@ -85,11 +72,9 @@ namespace MediaCommMVC.Data
 
         #region Methods
 
-        /// <summary>
-        ///   Generates the small images.
-        /// </summary>
-        /// <param name = "targetPath">The target path.</param>
-        /// <param name = "sourcePath">The source path.</param>
+        /// <summary>Generates the small images.</summary>
+        /// <param name="targetPath">The target path.</param>
+        /// <param name="sourcePath">The source path.</param>
         private static void GenerateSmallImages(string targetPath, string sourcePath)
         {
             IEnumerable<FileInfo> originalImages = new DirectoryInfo(sourcePath).GetFiles();
@@ -108,10 +93,8 @@ namespace MediaCommMVC.Data
             }
         }
 
-        /// <summary>
-        ///   Gets a thumbnail of the specified image.
-        /// </summary>
-        /// <param name = "bmp">The original image.</param>
+        /// <summary>Gets a thumbnail of the specified image.</summary>
+        /// <param name="bmp">The original image.</param>
         /// <returns>The thumbnail for the specified image.</returns>
         private static Bitmap GetThumbnail(Bitmap bmp)
         {
@@ -129,11 +112,9 @@ namespace MediaCommMVC.Data
             return temp;
         }
 
-        /// <summary>
-        ///   Generates the medium and large images.
-        /// </summary>
-        /// <param name = "targetPath">The target path.</param>
-        /// <param name = "sourcePath">The source path.</param>
+        /// <summary>Generates the medium and large images.</summary>
+        /// <param name="targetPath">The target path.</param>
+        /// <param name="sourcePath">The source path.</param>
         private void GenerateMediumAndLargeImages(string targetPath, string sourcePath)
         {
             sourcePath = string.Format("{0}\\*", sourcePath.TrimEnd('\\'));

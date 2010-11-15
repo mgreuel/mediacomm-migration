@@ -9,19 +9,15 @@ using MediaCommMVC.Core.Model.Photos;
 
 namespace MediaCommMVC.Data.NHInfrastructure.Mapping
 {
-    /// <summary>
-    ///   Makes customizations to the auto mapping of the Photo type.
-    /// </summary>
+    /// <summary>Makes customizations to the auto mapping of the Photo type.</summary>
     public class PhotoMapper : IAutoMappingOverride<Photo>
     {
         #region Implemented Interfaces
 
         #region IAutoMappingOverride<Photo>
 
-        /// <summary>
-        ///   Overrides the specified mapping.
-        /// </summary>
-        /// <param name = "mapping">The Photo auto mapping.</param>
+        /// <summary>Overrides the specified mapping.</summary>
+        /// <param name="mapping">The Photo auto mapping.</param>
         public void Override(AutoMapping<Photo> mapping)
         {
             mapping.Table("Photos");
