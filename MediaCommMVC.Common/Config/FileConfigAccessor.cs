@@ -12,26 +12,20 @@ using MediaCommMVC.Common.Logging;
 
 namespace MediaCommMVC.Common.Config
 {
-    /// <summary>
-    ///   Implements the IConfigAccessor using app/web.config files.
-    /// </summary>
+    /// <summary>Implements the IConfigAccessor using app/web.config files.</summary>
     public class FileConfigAccessor : IConfigAccessor
     {
         #region Constants and Fields
 
-        /// <summary>
-        ///   The logger.
-        /// </summary>
+        /// <summary>The logger.</summary>
         private readonly ILogger logger;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "FileConfigAccessor" /> class.
-        /// </summary>
-        /// <param name = "logger">The logger.</param>
+        /// <summary>Initializes a new instance of the <see cref="FileConfigAccessor"/> class.</summary>
+        /// <param name="logger">The logger.</param>
         public FileConfigAccessor(ILogger logger)
         {
             this.logger = logger;
@@ -43,10 +37,8 @@ namespace MediaCommMVC.Common.Config
 
         #region IConfigAccessor
 
-        /// <summary>
-        ///   Gets the config value from the configuration store.
-        /// </summary>
-        /// <param name = "key">The config key.</param>
+        /// <summary>Gets the config value from the configuration store.</summary>
+        /// <param name="key">The config key.</param>
         /// <returns>The configuration value.</returns>
         public string GetConfigValue(string key)
         {
@@ -65,10 +57,8 @@ namespace MediaCommMVC.Common.Config
             return value;
         }
 
-        /// <summary>
-        ///   Gets multiple config values.
-        /// </summary>
-        /// <param name = "key">The config key.</param>
+        /// <summary>Gets multiple config values.</summary>
+        /// <param name="key">The config key.</param>
         /// <returns>The configuration values.</returns>
         public IEnumerable<string> GetConfigValues(string key)
         {
@@ -87,11 +77,9 @@ namespace MediaCommMVC.Common.Config
             return values;
         }
 
-        /// <summary>
-        ///   Adds the config value to the configuration store.
-        /// </summary>
-        /// <param name = "key">The config key.</param>
-        /// <param name = "value">The config value.</param>
+        /// <summary>Adds the config value to the configuration store.</summary>
+        /// <param name="key">The config key.</param>
+        /// <param name="value">The config value.</param>
         public void SaveConfigValue(string key, string value)
         {
             this.logger.Debug("Saving configuration value. key: '{0} value: '{1}", key, value);
@@ -99,11 +87,9 @@ namespace MediaCommMVC.Common.Config
             ConfigurationManager.AppSettings[key] = value;
         }
 
-        /// <summary>
-        ///   Adds multiple config values.
-        /// </summary>
-        /// <param name = "key">The config key.</param>
-        /// <param name = "values">The config values.</param>
+        /// <summary>Adds multiple config values.</summary>
+        /// <param name="key">The config key.</param>
+        /// <param name="values">The config values.</param>
         public void SaveConfigValues(string key, IEnumerable<string> values)
         {
             if (values.Any(v => v.Contains("#;")))
