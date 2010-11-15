@@ -7,52 +7,36 @@ using System.Collections.Generic;
 
 namespace MediaCommMVC.Core.Model.Photos
 {
-    /// <summary>
-    ///   Represents a photo album containing related photos.
-    /// </summary>
+    /// <summary>Represents a photo album containing related photos.</summary>
     public class PhotoAlbum
     {
         #region Properties
 
-        /// <summary>
-        ///   Gets or sets the cover photo.
-        /// </summary>
+        /// <summary>Gets or sets the cover photo.</summary>
         /// <value>The cover photo.</value>
         public virtual int CoverPhotoId { get; protected set; }
 
-        /// <summary>
-        ///   Gets or sets the id.
-        /// </summary>
+        /// <summary>Gets or sets the id.</summary>
         /// <value>The album id.</value>
         public virtual int Id { get; protected set; }
 
-        /// <summary>
-        ///   Gets or sets the date when the album was modifed.
-        /// </summary>
+        /// <summary>Gets or sets the date when the album was modifed.</summary>
         /// <value>The last modified date.</value>
         public virtual DateTime LastPicturesAdded { get; set; }
 
-        /// <summary>
-        ///   Gets or sets the name.
-        /// </summary>
+        /// <summary>Gets or sets the name.</summary>
         /// <value>The album name.</value>
         public virtual string Name { get; set; }
 
-        /// <summary>
-        ///   Gets or sets the category.
-        /// </summary>
+        /// <summary>Gets or sets the category.</summary>
         /// <value>The category.</value>
         public virtual PhotoCategory PhotoCategory { get; set; }
 
-        /// <summary>
-        ///   Gets or sets the number of photos in the album.
-        /// </summary>
+        /// <summary>Gets or sets the number of photos in the album.</summary>
         /// <value>The number of photos in the albu.</value>
         public virtual int PhotoCount { get; protected set; }
 
-        /// <summary>
-        ///   Gets or sets the photos.
-        /// </summary>
+        /// <summary>Gets or sets the photos.</summary>
         /// <value>The photos.</value>
         public virtual IEnumerable<Photo> Photos { get; protected set; }
 
@@ -60,13 +44,9 @@ namespace MediaCommMVC.Core.Model.Photos
 
         #region Public Methods
 
-        /// <summary>
-        ///   Determines whether the specified <see cref = "System.Object" /> is equal to this instance.
-        /// </summary>
-        /// <param name = "obj">The <see cref = "System.Object" /> to compare with this instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified <see cref = "System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
+        /// <summary>Determines whether the specified <see cref="System.Object"/> is equal to this instance.</summary>
+        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             PhotoAlbum photoAlbum = obj as PhotoAlbum;
@@ -74,10 +54,8 @@ namespace MediaCommMVC.Core.Model.Photos
             return photoAlbum != null && photoAlbum.Id == this.Id;
         }
 
-        /// <summary>
-        ///   Returns a <see cref = "System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref = "System.String" /> that represents this instance.</returns>
+        /// <summary>Returns a <see cref="System.String"/> that represents this instance.</summary>
+        /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
         public override string ToString()
         {
             string categoryName = this.PhotoCategory == null ? string.Empty : this.PhotoCategory.Name;

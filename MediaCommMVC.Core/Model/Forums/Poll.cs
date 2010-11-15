@@ -7,64 +7,46 @@ using System.Linq;
 
 namespace MediaCommMVC.Core.Model.Forums
 {
-    /// <summary>
-    ///   Represents a poll/survey.
-    /// </summary>
+    /// <summary>Represents a poll/survey.</summary>
     public class Poll
     {
         #region Constants and Fields
 
-        /// <summary>
-        ///   The users answers with their count.
-        /// </summary>
+        /// <summary>The users answers with their count.</summary>
         private Dictionary<PollAnswer, int> answerCount;
 
         #endregion
 
         #region Properties
 
-        /// <summary>
-        ///   Gets or sets the id.
-        /// </summary>
+        /// <summary>Gets or sets the id.</summary>
         /// <value>The poll id.</value>
         public virtual int Id { get; set; }
 
-        /// <summary>
-        ///   Gets or sets the possible answers.
-        /// </summary>
+        /// <summary>Gets or sets the possible answers.</summary>
         /// <value>The possible answers.</value>
         public virtual IEnumerable<PollAnswer> PossibleAnswers { get; set; }
 
-        /// <summary>
-        ///   Gets or sets the title of the poll.
-        /// </summary>
+        /// <summary>Gets or sets the title of the poll.</summary>
         /// <value>The title of the poll.</value>
         public virtual string Question { get; set; }
 
-        /// <summary>
-        ///   Gets or sets the topic the poll belongs to.
-        /// </summary>
+        /// <summary>Gets or sets the topic the poll belongs to.</summary>
         /// <value>The forum topic.</value>
         public virtual Topic Topic { get; set; }
 
-        /// <summary>
-        ///   Gets or sets the type of the poll.
-        ///   <example>
-        ///     Single Answer or multiple answers.
-        ///   </example>
+        /// <summary>Gets or sets the type of the poll.
+        /// <example>
+        ///     Single Answer or multiple answers.</example>
         /// </summary>
         /// <value>The poll type.</value>
         public virtual PollType Type { get; set; }
 
-        /// <summary>
-        ///   Gets or sets the user answers.
-        /// </summary>
+        /// <summary>Gets or sets the user answers.</summary>
         /// <value>The user answers.</value>
         public virtual IEnumerable<PollUserAnswer> UserAnswers { get; set; }
 
-        /// <summary>
-        ///   Gets the user ansers and their count.
-        /// </summary>
+        /// <summary>Gets the user ansers and their count.</summary>
         /// <value>The count of the user answers.</value>
         public virtual IDictionary<PollAnswer, int> UserAnswersWithCount
         {
@@ -92,12 +74,8 @@ namespace MediaCommMVC.Core.Model.Forums
 
         #region Public Methods
 
-        /// <summary>
-        ///   Returns a <see cref = "System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        ///   A <see cref = "System.String" /> that contains the Id and the Question.
-        /// </returns>
+        /// <summary>Returns a <see cref="System.String"/> that represents this instance.</summary>
+        /// <returns>A <see cref="System.String"/> that contains the Id and the Question.</returns>
         public override string ToString()
         {
             return string.Format("Id: '{0}', Question: '{1}'", this.Id, this.Question);
