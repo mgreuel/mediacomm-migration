@@ -11,16 +11,12 @@ using Microsoft.Practices.EnterpriseLibrary.Logging;
 
 namespace MediaCommMVC.Common.Logging
 {
-    /// <summary>
-    ///   Provides simple logging using the enterprise library.
-    /// </summary>
+    /// <summary>Provides simple logging using the enterprise library.</summary>
     public class EntLibLogger : ILogger
     {
         #region Properties
 
-        /// <summary>
-        ///   Gets the last log entry.
-        /// </summary>
+        /// <summary>Gets the last log entry.</summary>
         /// <value>The last log entry.</value>
         public LogEntry LastLogEntry
         {
@@ -34,10 +30,8 @@ namespace MediaCommMVC.Common.Logging
 
         #region ILogger
 
-        /// <summary>
-        ///   Logs the specified message with Debug level.
-        /// </summary>
-        /// <param name = "message">The message to log.</param>
+        /// <summary>Logs the specified message with Debug level.</summary>
+        /// <param name="message">The message to log.</param>
         public void Debug(string message)
         {
             try
@@ -54,11 +48,9 @@ namespace MediaCommMVC.Common.Logging
             }
         }
 
-        /// <summary>
-        ///   Logs the specified message with Debug level.
-        /// </summary>
-        /// <param name = "message">The message to log.</param>
-        /// <param name = "data">The parameters for the message string.</param>
+        /// <summary>Logs the specified message with Debug level.</summary>
+        /// <param name="message">The message to log.</param>
+        /// <param name="data">The parameters for the message string.</param>
         public void Debug(string message, params object[] data)
         {
             try
@@ -77,10 +69,8 @@ namespace MediaCommMVC.Common.Logging
             }
         }
 
-        /// <summary>
-        ///   Logs the specified message with Error level.
-        /// </summary>
-        /// <param name = "message">The message to log.</param>
+        /// <summary>Logs the specified message with Error level.</summary>
+        /// <param name="message">The message to log.</param>
         public void Error(string message)
         {
             try
@@ -97,11 +87,9 @@ namespace MediaCommMVC.Common.Logging
             }
         }
 
-        /// <summary>
-        ///   Logs the specified message with Error level.
-        /// </summary>
-        /// <param name = "message">The message to log.</param>
-        /// <param name = "data">The parameters for the message string.</param>
+        /// <summary>Logs the specified message with Error level.</summary>
+        /// <param name="message">The message to log.</param>
+        /// <param name="data">The parameters for the message string.</param>
         public void Error(string message, params object[] data)
         {
             try
@@ -120,11 +108,9 @@ namespace MediaCommMVC.Common.Logging
             }
         }
 
-        /// <summary>
-        ///   Logs the specified message with Error level.
-        /// </summary>
-        /// <param name = "message">The message to log.</param>
-        /// <param name = "innerException">The inner exception.</param>
+        /// <summary>Logs the specified message with Error level.</summary>
+        /// <param name="message">The message to log.</param>
+        /// <param name="innerException">The inner exception.</param>
         public void Error(string message, Exception innerException)
         {
             try
@@ -150,10 +136,8 @@ namespace MediaCommMVC.Common.Logging
             }
         }
 
-        /// <summary>
-        ///   Logs the specified message with Info level.
-        /// </summary>
-        /// <param name = "message">The message to log.</param>
+        /// <summary>Logs the specified message with Info level.</summary>
+        /// <param name="message">The message to log.</param>
         public void Info(string message)
         {
             try
@@ -170,11 +154,9 @@ namespace MediaCommMVC.Common.Logging
             }
         }
 
-        /// <summary>
-        ///   Logs the specified message with Info level.
-        /// </summary>
-        /// <param name = "message">The message to log.</param>
-        /// <param name = "data">The parameters for the message string.</param>
+        /// <summary>Logs the specified message with Info level.</summary>
+        /// <param name="message">The message to log.</param>
+        /// <param name="data">The parameters for the message string.</param>
         public void Info(string message, params object[] data)
         {
             try
@@ -193,10 +175,8 @@ namespace MediaCommMVC.Common.Logging
             }
         }
 
-        /// <summary>
-        ///   Logs the specified message with Warn level.
-        /// </summary>
-        /// <param name = "message">The message to log.</param>
+        /// <summary>Logs the specified message with Warn level.</summary>
+        /// <param name="message">The message to log.</param>
         public void Warn(string message)
         {
             try
@@ -213,11 +193,9 @@ namespace MediaCommMVC.Common.Logging
             }
         }
 
-        /// <summary>
-        ///   Logs the specified message with Warn level.
-        /// </summary>
-        /// <param name = "message">The message to log.</param>
-        /// <param name = "data">The parameters for the message string.</param>
+        /// <summary>Logs the specified message with Warn level.</summary>
+        /// <param name="message">The message to log.</param>
+        /// <param name="data">The parameters for the message string.</param>
         public void Warn(string message, params object[] data)
         {
             try
@@ -242,10 +220,8 @@ namespace MediaCommMVC.Common.Logging
 
         #region Methods
 
-        /// <summary>
-        ///   Checks the data parameter.
-        /// </summary>
-        /// <param name = "data">The data to check for null.</param>
+        /// <summary>Checks the data parameter.</summary>
+        /// <param name="data">The data to check for null.</param>
         private static void CheckDataParameterForNull(IEnumerable data)
         {
             if (data == null)
@@ -255,10 +231,8 @@ namespace MediaCommMVC.Common.Logging
             }
         }
 
-        /// <summary>
-        ///   Checks the message parameter.
-        /// </summary>
-        /// <param name = "message">The message.</param>
+        /// <summary>Checks the message parameter.</summary>
+        /// <param name="message">The message.</param>
         private static void CheckMessageParameterForNull(string message)
         {
             if (message == null)
@@ -267,10 +241,8 @@ namespace MediaCommMVC.Common.Logging
             }
         }
 
-        /// <summary>
-        ///   Handles the fatal error.
-        /// </summary>
-        /// <param name = "message">The message.</param>
+        /// <summary>Handles the fatal error.</summary>
+        /// <param name="message">The message.</param>
         private static void HandleFatalError(string message)
         {
             try
@@ -283,10 +255,8 @@ namespace MediaCommMVC.Common.Logging
             }
         }
 
-        /// <summary>
-        ///   Writes the log entry.
-        /// </summary>
-        /// <param name = "entry">The log entry.</param>
+        /// <summary>Writes the log entry.</summary>
+        /// <param name="entry">The log entry.</param>
         private static void WriteLogEntry(LogEntry entry)
         {
             try
@@ -299,11 +269,9 @@ namespace MediaCommMVC.Common.Logging
             }
         }
 
-        /// <summary>
-        ///   Creates a formatted log entry.
-        /// </summary>
-        /// <param name = "message">The message to format.</param>
-        /// <param name = "data">The parameters to add to the message.</param>
+        /// <summary>Creates a formatted log entry.</summary>
+        /// <param name="message">The message to format.</param>
+        /// <param name="data">The parameters to add to the message.</param>
         /// <returns>The formatted log entry.</returns>
         private LogEntry CreateFormattedLogEntry(string message, object[] data)
         {
@@ -327,11 +295,9 @@ namespace MediaCommMVC.Common.Logging
             return entry;
         }
 
-        /// <summary>
-        ///   Handles logging errors.
-        /// </summary>
-        /// <param name = "ex">The exeption to handle.</param>
-        /// <param name = "originalMessage">The original message.</param>
+        /// <summary>Handles logging errors.</summary>
+        /// <param name="ex">The exeption to handle.</param>
+        /// <param name="originalMessage">The original message.</param>
         private void HandleError(Exception ex, string originalMessage)
         {
             try
