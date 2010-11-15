@@ -92,20 +92,10 @@ namespace MediaCommMVC.DBSetup
                     SessionManager sessionManager = new SessionManager(new TestConfigurationGenerator());
                     sessionManager.CreateNewSession();
 
-                    if (!Roles.RoleExists(AdministratorRoleName))
-                    {
-                        Roles.CreateRole(AdministratorRoleName);
-                    }
-
                     IUserRepository userRepository = new UserRepository(
                         sessionManager, new FileConfigAccessor(new ConsoleLogger()), new ConsoleLogger());
 
-                    if (Membership.GetUser(AdministratorUsername) != null)
-                    {
-                        Membership.DeleteUser(AdministratorUsername);
-                    }
-
-                    userRepository.CreateUser(AdministratorUsername, DefaultAdminPassword, "admin@localhost");
+                    userRepository.CreateAdmin(AdministratorUsername, DefaultAdminPassword, "admin@localhost");
 
                     ISession session = sessionManager.Session;
 
@@ -127,11 +117,7 @@ namespace MediaCommMVC.DBSetup
                     session.Flush();
                     session.Close();
 
-                    if (!Roles.IsUserInRole(AdministratorUsername, AdministratorRoleName))
-                    {
-                        Roles.AddUserToRole(AdministratorUsername, AdministratorRoleName);
-                    }
-
+ 
                     Console.WriteLine("Successfully created DB Schema.");
                 }
                 else
