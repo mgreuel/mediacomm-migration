@@ -11,26 +11,20 @@ using NHibernate.Cfg;
 
 namespace MediaCommMVC.Data.NHInfrastructure.Config
 {
-    /// <summary>
-    ///   Genrates the default FluentConfiguration.
-    /// </summary>
+    /// <summary>Genrates the default FluentConfiguration.</summary>
     public class ConfigurationGenerator : IConfigurationGenerator
     {
         #region Constants and Fields
 
-        /// <summary>
-        ///   Generator used for creating the auto map model.
-        /// </summary>
+        /// <summary>Generator used for creating the auto map model.</summary>
         private readonly IAutoMapGenerator autoMapGenerator;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "ConfigurationGenerator" /> class.
-        /// </summary>
-        /// <param name = "autoMapGenerator">The auto map generator.</param>
+        /// <summary>Initializes a new instance of the <see cref="ConfigurationGenerator"/> class.</summary>
+        /// <param name="autoMapGenerator">The auto map generator.</param>
         public ConfigurationGenerator(IAutoMapGenerator autoMapGenerator)
         {
             this.autoMapGenerator = autoMapGenerator;
@@ -42,9 +36,7 @@ namespace MediaCommMVC.Data.NHInfrastructure.Config
 
         #region IConfigurationGenerator
 
-        /// <summary>
-        ///   Generates a FluentConfiguration.
-        /// </summary>
+        /// <summary>Generates a FluentConfiguration.</summary>
         /// <returns>The FluentConfiguration.</returns>
         public FluentConfiguration Generate()
         {
@@ -61,9 +53,7 @@ namespace MediaCommMVC.Data.NHInfrastructure.Config
 
         #region Methods
 
-        /// <summary>
-        ///   Creates the NHibernate configuration.
-        /// </summary>
+        /// <summary>Creates the NHibernate configuration.</summary>
         /// <returns>THe NHibernate configuration.</returns>
         private static Configuration CreateNHibernateConfiguration()
         {

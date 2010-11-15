@@ -19,28 +19,22 @@ using NHibernate.Linq;
 
 namespace MediaCommMVC.Data.Repositories
 {
-    /// <summary>
-    ///   Implements the IForumRepository using NHibernate.
-    /// </summary>
+    /// <summary>Implements the IForumRepository using NHibernate.</summary>
     public class ForumRepository : RepositoryBase, IForumRepository
     {
         #region Constants and Fields
 
-        /// <summary>
-        ///   The timespan a topic can be marked as unread.
-        /// </summary>
+        /// <summary>The timespan a topic can be marked as unread.</summary>
         private readonly TimeSpan topicUnreadValidity = new TimeSpan(days: 30, hours: 0, minutes: 0, seconds: 0);
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "ForumRepository" /> class.
-        /// </summary>
-        /// <param name = "sessionManager">The NHibernate session manager.</param>
-        /// <param name = "configAccessor">The config Accessor.</param>
-        /// <param name = "logger">The logger.</param>
+        /// <summary>Initializes a new instance of the <see cref="ForumRepository"/> class.</summary>
+        /// <param name="sessionManager">The NHibernate session manager.</param>
+        /// <param name="configAccessor">The config Accessor.</param>
+        /// <param name="logger">The logger.</param>
         public ForumRepository(ISessionManager sessionManager, IConfigAccessor configAccessor, ILogger logger)
             : base(sessionManager, configAccessor, logger)
         {
@@ -52,10 +46,8 @@ namespace MediaCommMVC.Data.Repositories
 
         #region IForumRepository
 
-        /// <summary>
-        ///   Adds the the forum to the persistence layer.
-        /// </summary>
-        /// <param name = "forum">The forum to add.</param>
+        /// <summary>Adds the the forum to the persistence layer.</summary>
+        /// <param name="forum">The forum to add.</param>
         public void AddForum(Forum forum)
         {
             this.Logger.Debug("Adding forum to the DB: " + forum);
@@ -63,10 +55,8 @@ namespace MediaCommMVC.Data.Repositories
             this.InvokeTransaction(s => s.Save(forum));
         }
 
-        /// <summary>
-        ///   Adds the post.
-        /// </summary>
-        /// <param name = "post">The post to add.</param>
+        /// <summary>Adds the post.</summary>
+        /// <param name="post">The post to add.</param>
         public void AddPost(Post post)
         {
             this.Logger.Debug("Adding Post: " + post);
@@ -79,11 +69,9 @@ namespace MediaCommMVC.Data.Repositories
                 });
         }
 
-        /// <summary>
-        ///   Adds the topic.
-        /// </summary>
-        /// <param name = "topic">The topic.</param>
-        /// <param name = "post">The topic's first post.</param>
+        /// <summary>Adds the topic.</summary>
+        /// <param name="topic">The topic.</param>
+        /// <param name="post">The topic's first post.</param>
         /// <returns>The added topic.</returns>
         public Topic AddTopic(Topic topic, Post post)
         {
@@ -110,10 +98,8 @@ namespace MediaCommMVC.Data.Repositories
             return topic;
         }
 
-        /// <summary>
-        ///   Deletes the forum.
-        /// </summary>
-        /// <param name = "forum">The forum.</param>
+        /// <summary>Deletes the forum.</summary>
+        /// <param name="forum">The forum.</param>
         public void DeleteForum(Forum forum)
         {
             this.Logger.Debug("Deleting forum: " + forum);
@@ -129,10 +115,8 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Finished deleting forum");
         }
 
-        /// <summary>
-        ///   Deletes the post.
-        /// </summary>
-        /// <param name = "post">The post to delete.</param>
+        /// <summary>Deletes the post.</summary>
+        /// <param name="post">The post to delete.</param>
         public void DeletePost(Post post)
         {
             this.Logger.Debug("Deleting post:" + post);
@@ -166,10 +150,8 @@ namespace MediaCommMVC.Data.Repositories
                 });
         }
 
-        /// <summary>
-        ///   Get the 10 topics with the newest posts.
-        /// </summary>
-        /// <param name = "currentUser">The current user.</param>
+        /// <summary>Get the 10 topics with the newest posts.</summary>
+        /// <param name="currentUser">The current user.</param>
         /// <returns>The 10 topics with the newest posts.</returns>
         public IEnumerable<Topic> Get10TopicsWithNewestPosts(MediaCommUser currentUser)
         {
@@ -180,10 +162,8 @@ namespace MediaCommMVC.Data.Repositories
             return topics;
         }
 
-        /// <summary>
-        ///   Gets all forums.
-        /// </summary>
-        /// <param name = "currentUser">The current user.</param>
+        /// <summary>Gets all forums.</summary>
+        /// <param name="currentUser">The current user.</param>
         /// <returns>The list of forums.</returns>
         public IEnumerable<Forum> GetAllForums(MediaCommUser currentUser)
         {
@@ -209,11 +189,9 @@ namespace MediaCommMVC.Data.Repositories
             return allForums;
         }
 
-        /// <summary>
-        ///   Gets the first unread post for the topic.
-        /// </summary>
-        /// <param name = "id">The topic id.</param>
-        /// <param name = "user">The current user.</param>
+        /// <summary>Gets the first unread post for the topic.</summary>
+        /// <param name="id">The topic id.</param>
+        /// <param name="user">The current user.</param>
         /// <returns>The first unread post.</returns>
         public Post GetFirstUnreadPostForTopic(int id, MediaCommUser user)
         {
@@ -235,10 +213,8 @@ namespace MediaCommMVC.Data.Repositories
             return post;
         }
 
-        /// <summary>
-        ///   Gets a single forum by id.
-        /// </summary>
-        /// <param name = "id">The forum's id.</param>
+        /// <summary>Gets a single forum by id.</summary>
+        /// <param name="id">The forum's id.</param>
         /// <returns>The forum with the provided id.</returns>
         public Forum GetForumById(int id)
         {
@@ -251,11 +227,9 @@ namespace MediaCommMVC.Data.Repositories
             return forum;
         }
 
-        /// <summary>
-        ///   Gets the last page number for a topic.
-        /// </summary>
-        /// <param name = "topicId">The topic id.</param>
-        /// <param name = "pageSize">Size of each page.</param>
+        /// <summary>Gets the last page number for a topic.</summary>
+        /// <param name="topicId">The topic id.</param>
+        /// <param name="pageSize">Size of each page.</param>
         /// <returns>The last page.</returns>
         public int GetLastPageNumberForTopic(int topicId, int pageSize)
         {
@@ -269,12 +243,10 @@ namespace MediaCommMVC.Data.Repositories
             return lastPage;
         }
 
-        /// <summary>
-        ///   Gets the page number for the post.
-        /// </summary>
-        /// <param name = "postId">The post id.</param>
-        /// <param name = "topicId">The topic id.</param>
-        /// <param name = "pageSize">The page size.</param>
+        /// <summary>Gets the page number for the post.</summary>
+        /// <param name="postId">The post id.</param>
+        /// <param name="topicId">The topic id.</param>
+        /// <param name="pageSize">The page size.</param>
         /// <returns>The page number.</returns>
         public int GetPageNumberForPost(int postId, int topicId, int pageSize)
         {
@@ -288,10 +260,8 @@ namespace MediaCommMVC.Data.Repositories
             return page;
         }
 
-        /// <summary>
-        ///   Gets the poll answer by id.
-        /// </summary>
-        /// <param name = "answerId">The answer id.</param>
+        /// <summary>Gets the poll answer by id.</summary>
+        /// <param name="answerId">The answer id.</param>
         /// <returns>The poll answer.</returns>
         public PollAnswer GetPollAnswerById(int answerId)
         {
@@ -300,10 +270,8 @@ namespace MediaCommMVC.Data.Repositories
             return this.Session.Get<PollAnswer>(answerId);
         }
 
-        /// <summary>
-        ///   Gets a post by id.
-        /// </summary>
-        /// <param name = "id">The post id.</param>
+        /// <summary>Gets a post by id.</summary>
+        /// <param name="id">The post id.</param>
         /// <returns>The post with the id.</returns>
         public Post GetPostById(int id)
         {
@@ -316,12 +284,10 @@ namespace MediaCommMVC.Data.Repositories
             return post;
         }
 
-        /// <summary>
-        ///   Gets the posts for the specified page of the topic.
-        /// </summary>
-        /// <param name = "topicId">The topic ID.</param>
-        /// <param name = "pagingParameters">The paging parameters.</param>
-        /// <param name = "currentUser">The current user.</param>
+        /// <summary>Gets the posts for the specified page of the topic.</summary>
+        /// <param name="topicId">The topic ID.</param>
+        /// <param name="pagingParameters">The paging parameters.</param>
+        /// <param name="currentUser">The current user.</param>
         /// <returns>The posts.</returns>
         public IEnumerable<Post> GetPostsForTopic(int topicId, PagingParameters pagingParameters, MediaCommUser currentUser)
         {
@@ -360,10 +326,8 @@ namespace MediaCommMVC.Data.Repositories
             return posts;
         }
 
-        /// <summary>
-        ///   Gets the topic by id.
-        /// </summary>
-        /// <param name = "id">The forum id.</param>
+        /// <summary>Gets the topic by id.</summary>
+        /// <param name="id">The forum id.</param>
         /// <returns>The forum.</returns>
         public Topic GetTopicById(int id)
         {
@@ -378,12 +342,10 @@ namespace MediaCommMVC.Data.Repositories
             return topic;
         }
 
-        /// <summary>
-        ///   Gets the topics for the forum.
-        /// </summary>
-        /// <param name = "forumId">The forum id.</param>
-        /// <param name = "pagingParameters">The paging parameters.</param>
-        /// <param name = "currentUser">The current user.</param>
+        /// <summary>Gets the topics for the forum.</summary>
+        /// <param name="forumId">The forum id.</param>
+        /// <param name="pagingParameters">The paging parameters.</param>
+        /// <param name="currentUser">The current user.</param>
         /// <returns>The topics.</returns>
         public IEnumerable<Topic> GetTopicsForForum(int forumId, PagingParameters pagingParameters, MediaCommUser currentUser)
         {
@@ -403,10 +365,8 @@ namespace MediaCommMVC.Data.Repositories
             return topics;
         }
 
-        /// <summary>
-        ///   Saves the poll user answer.
-        /// </summary>
-        /// <param name = "userAnswer">The user answer.</param>
+        /// <summary>Saves the poll user answer.</summary>
+        /// <param name="userAnswer">The user answer.</param>
         public void SavePollUserAnswer(PollUserAnswer userAnswer)
         {
             this.Logger.Debug("Saving poll user answer: {0}", userAnswer);
@@ -414,10 +374,8 @@ namespace MediaCommMVC.Data.Repositories
             this.Session.Save(userAnswer);
         }
 
-        /// <summary>
-        ///   Updates the forum in the persistence layer.
-        /// </summary>
-        /// <param name = "forum">The forum to update.</param>
+        /// <summary>Updates the forum in the persistence layer.</summary>
+        /// <param name="forum">The forum to update.</param>
         public void UpdateForum(Forum forum)
         {
             this.Logger.Debug("Updating forum: " + forum);
@@ -427,10 +385,8 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Finished updating forum");
         }
 
-        /// <summary>
-        ///   Updates the post.
-        /// </summary>
-        /// <param name = "post">The post to update.</param>
+        /// <summary>Updates the post.</summary>
+        /// <param name="post">The post to update.</param>
         public void UpdatePost(Post post)
         {
             this.Logger.Debug("Updating post: " + post);
@@ -440,10 +396,8 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Finished updating post");
         }
 
-        /// <summary>
-        ///   Updates the topic.
-        /// </summary>
-        /// <param name = "topic">The topic.</param>
+        /// <summary>Updates the topic.</summary>
+        /// <param name="topic">The topic.</param>
         public void UpdateTopic(Topic topic)
         {
             this.Logger.Debug("Updating topic: " + topic);
@@ -459,11 +413,9 @@ namespace MediaCommMVC.Data.Repositories
 
         #region Methods
 
-        /// <summary>
-        ///   Updates the last post info.
-        /// </summary>
-        /// <param name = "session">The session.</param>
-        /// <param name = "post">The forum post.</param>
+        /// <summary>Updates the last post info.</summary>
+        /// <param name="session">The session.</param>
+        /// <param name="post">The forum post.</param>
         private static void UpdateLastPostInfo(ISession session, Post post)
         {
             post.Topic.LastPostTime = post.Created;
@@ -475,11 +427,9 @@ namespace MediaCommMVC.Data.Repositories
             session.Update(post);
         }
 
-        /// <summary>
-        ///   Deletes the topic.
-        /// </summary>
-        /// <param name = "topic">The topic.</param>
-        /// <param name = "session">The session.</param>
+        /// <summary>Deletes the topic.</summary>
+        /// <param name="topic">The topic.</param>
+        /// <param name="session">The session.</param>
         private void DeleteTopic(Topic topic, ISession session)
         {
             this.Logger.Debug("Deleting all posts in the topic: " + topic);
@@ -492,11 +442,9 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Finished deleting topic and all its posts");
         }
 
-        /// <summary>
-        ///   Posts the is the first in topic.
-        /// </summary>
-        /// <param name = "session">The session.</param>
-        /// <param name = "post">The post to check..</param>
+        /// <summary>Posts the is the first in topic.</summary>
+        /// <param name="session">The session.</param>
+        /// <param name="post">The post to check..</param>
         /// <returns>Whether the post ist hte first in its topic.</returns>
         private bool PostWasTheFirstInTopic(ISession session, Post post)
         {
@@ -510,11 +458,9 @@ namespace MediaCommMVC.Data.Repositories
             return !topicHasOlderPosts;
         }
 
-        /// <summary>
-        ///   Updates the topic read status.
-        /// </summary>
-        /// <param name = "topics">The topics.</param>
-        /// <param name = "currentUser">The current user.</param>
+        /// <summary>Updates the topic read status.</summary>
+        /// <param name="topics">The topics.</param>
+        /// <param name="currentUser">The current user.</param>
         private void UpdateTopicReadStatus(IEnumerable<Topic> topics, MediaCommUser currentUser)
         {
             List<TopicRead> readTopics = this.Session.Linq<TopicRead>().Where(r => r.LastVisit > DateTime.Now - this.topicUnreadValidity).ToList();

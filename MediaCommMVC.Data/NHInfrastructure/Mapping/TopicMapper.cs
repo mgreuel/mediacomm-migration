@@ -9,19 +9,15 @@ using MediaCommMVC.Core.Model.Forums;
 
 namespace MediaCommMVC.Data.NHInfrastructure.Mapping
 {
-    /// <summary>
-    ///   Makes customizations to the auto mapping of the Topic type.
-    /// </summary>
+    /// <summary>Makes customizations to the auto mapping of the Topic type.</summary>
     public class TopicMapper : IAutoMappingOverride<Topic>
     {
         #region Implemented Interfaces
 
         #region IAutoMappingOverride<Topic>
 
-        /// <summary>
-        ///   Overrides the specified mapping.
-        /// </summary>
-        /// <param name = "mapping">The Topic auto mapping.</param>
+        /// <summary>Overrides the specified mapping.</summary>
+        /// <param name="mapping">The Topic auto mapping.</param>
         public void Override(AutoMapping<Topic> mapping)
         {
             mapping.Table("ForumTopics");
