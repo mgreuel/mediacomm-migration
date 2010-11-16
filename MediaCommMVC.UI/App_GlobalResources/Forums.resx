@@ -214,7 +214,7 @@
     <value>Show Options</value>
   </data>
   <data name="PollType" xml:space="preserve">
-    <value>PollType</value>
+    <value>Type</value>
   </data>
   <data name="SubmitVote" xml:space="preserve">
     <value>Submit Vote</value>
