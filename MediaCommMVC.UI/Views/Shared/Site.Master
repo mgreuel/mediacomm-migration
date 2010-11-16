@@ -1,6 +1,12 @@
 <%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
+
+<%@ Import Namespace="MediaCommMVC.UI" %>
+
+<%@ Import Namespace="MediaCommMVC.Core.Model.Users" %>
+
+<%@ Import Namespace="MediaCommMVC.UI.Infrastructure" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -97,7 +103,8 @@
                     </ul>
                 </li>
             </ul>
-            <% if (Page.User.IsInRole("Administrators"))
+            <% if (WebContext.CurrentUser.IsAdmin)
+                
                { %>
             <ul>
                 <li><a>

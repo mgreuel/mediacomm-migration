@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.CreateUserInfo>"
+<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.Account.CreateUser>"
     MasterPageFile="~/Views/Shared/Site.Master" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="BreadCrumbContent" runat="server">

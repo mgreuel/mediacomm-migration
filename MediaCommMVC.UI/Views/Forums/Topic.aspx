@@ -1,6 +1,8 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.TopicPage>" %>
 
 <%@ Import Namespace="MediaCommMVC.Core.Model.Forums" %>
+
+<%@ Import Namespace="MediaCommMVC.UI.Infrastructure" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
     <script src="/Content/tiny_mce/tiny_mce.js" type="text/javascript"></script>
 </asp:Content>
@@ -137,7 +139,7 @@
                     <div class="postOptions">
                         <%
                             if (post.Author.UserName.Equals(this.User.Identity.Name, StringComparison.OrdinalIgnoreCase) ||
-                                this.User.IsInRole("Administrators"))
+                                WebContext.CurrentUser.IsAdmin)
                             {
                                 Writer.Write(Html.ActionLink(Resources.Forums.Edit, "EditPost", new { id = post.Id }));
                             }%>
