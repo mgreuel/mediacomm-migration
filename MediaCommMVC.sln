@@ -29,9 +29,39 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.Tests.Common", "MediaCommMVC.Tests.Common\MediaCommMVC.Tests.Common.csproj", "{D84C4891-18F6-4295-86D7-1296764EF959}"
 EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MediaCommMVC.UI\\MediaCommMVC.UI.csproj
+		SccProjectTopLevelParentUniqueName1 = MediaCommMVC.sln
+		SccProjectName1 = MediaCommMVC.UI
+		SccLocalPath1 = MediaCommMVC.UI
+		SccProjectUniqueName2 = MediaCommMVC.Data\\MediaCommMVC.Data.csproj
+		SccProjectTopLevelParentUniqueName2 = MediaCommMVC.sln
+		SccProjectName2 = MediaCommMVC.Data
+		SccLocalPath2 = MediaCommMVC.Data
+		SccProjectUniqueName3 = MediaCommMVC.Core\\MediaCommMVC.Core.csproj
+		SccProjectTopLevelParentUniqueName3 = MediaCommMVC.sln
+		SccProjectName3 = MediaCommMVC.Core
+		SccLocalPath3 = MediaCommMVC.Core
+		SccProjectUniqueName4 = MediaCommMVC.Common\\MediaCommMVC.Common.csproj
+		SccProjectTopLevelParentUniqueName4 = MediaCommMVC.sln
+		SccProjectName4 = MediaCommMVC.Common
+		SccLocalPath4 = MediaCommMVC.Common
+		SccProjectUniqueName5 = MediaCommMVC.DBSetup\\MediaCommMVC.DBSetup.csproj
+		SccProjectTopLevelParentUniqueName5 = MediaCommMVC.sln
+		SccProjectName5 = MediaCommMVC.DBSetup
+		SccLocalPath5 = MediaCommMVC.DBSetup
+		SccProjectUniqueName6 = MediaCommMVC.TestDataCreator\\MediaCommMVC.TestDataCreator.csproj
+		SccProjectTopLevelParentUniqueName6 = MediaCommMVC.sln
+		SccProjectName6 = MediaCommMVC.TestDataCreator
+		SccLocalPath6 = MediaCommMVC.TestDataCreator
+		SccProjectUniqueName7 = MediaCommMVC.Tests.Common\\MediaCommMVC.Tests.Common.csproj
+		SccProjectTopLevelParentUniqueName7 = MediaCommMVC.sln
+		SccProjectName7 = MediaCommMVC.Tests.Common
+		SccLocalPath7 = MediaCommMVC.Tests.Common
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -124,5 +154,9 @@ Global
 		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA} = {FE991195-2DC3-425B-8B31-383F95E6739C}
 		{4CC1063E-B29B-480A-A54E-E3B5E6007EA4} = {FE991195-2DC3-425B-8B31-383F95E6739C}
 		{D84C4891-18F6-4295-86D7-1296764EF959} = {812C58B6-3471-4E62-9DA5-A7E779092043}
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

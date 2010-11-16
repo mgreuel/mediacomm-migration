@@ -1,4 +1,5 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Users.MediaCommUser>" %>
+<%@ Import Namespace="MediaCommMVC.UI.Infrastructure" %>
 
 <asp:Content ID="changePasswordTitle" ContentPlaceHolderID="BreadCrumbContent" runat="server">
     <%= Html.ActionLink(Resources.Navigation.Users, "Index") %>
@@ -107,7 +108,7 @@
                     <%= Html.Encode(Model.City) %>
                 </td>
             </tr>
-            <% if (User.IsInRole(("Administrators")))
+            <% if (WebContext.CurrentUser.IsAdmin)
                {%>
             <tr>
                 <td>

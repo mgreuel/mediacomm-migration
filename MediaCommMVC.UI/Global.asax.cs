@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 
 using MediaCommMVC.Common.Logging;
+using MediaCommMVC.Core.DataInterfaces;
+using MediaCommMVC.Core.Model.Users;
 using MediaCommMVC.UI.Infrastructure;
 
 using Microsoft.Practices.Unity;
@@ -52,6 +54,24 @@ namespace MediaCommMVC.UI
         #endregion
 
         #region Methods
+
+        /// <summary>Handles the AuthenticateRequest event of the Application control.</summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        protected void Application_AuthenticateRequest(object sender, EventArgs e)
+        {
+            if (this.User != null)
+            {
+                IUserRepository userRepository = this.Container.Resolve<IUserRepository>();
+                MediaCommUser user = userRepository.GetUserByName(this.User.Identity.Name);
+
+                WebContext.CurrentUser = user;
+            }
+            else
+            {
+                WebContext.CurrentUser = new MediaCommUser(string.Empty, string.Empty, string.Empty);
+            }
+        }
 
         /// <summary>
         ///   Configures the application during start up.

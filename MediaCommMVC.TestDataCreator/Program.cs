@@ -38,7 +38,7 @@ namespace MediaCommMVC.TestDataCreator
 
         private static IUserRepository userRepository;
 
-        private static MediaCommUser currentUser = new MediaCommUser("admim", "weg@seg.dw");
+        private static MediaCommUser currentUser = new MediaCommUser("admim", "weg@seg.dw", "geheim");
 
 
         static void Main()
