@@ -5,23 +5,21 @@ using System.Web.Mvc;
 
 using MediaCommMVC.Core.Parameters;
 
+using Resources;
+
 #endregion
 
 namespace MediaCommMVC.UI.Helpers
 {
-    /// <summary>
-    ///   Html Helpers for pagination.
-    /// </summary>
+    /// <summary>Html Helpers for pagination.</summary>
     public static class Pagination
     {
         #region Public Methods
 
-        /// <summary>
-        ///   Creates a pager displaying only the page numbers.
-        /// </summary>
-        /// <param name = "helper">The helper.</param>
-        /// <param name = "pagingParameters">The paging parameters.</param>
-        /// <param name = "baseUrl">The base URL.</param>
+        /// <summary>Creates a pager displaying only the page numbers.</summary>
+        /// <param name="helper">The helper.</param>
+        /// <param name="pagingParameters">The paging parameters.</param>
+        /// <param name="baseUrl">The base URL.</param>
         /// <returns>The paging html code.</returns>
         public static MvcHtmlString NumbersOnlyPager(
             this HtmlHelper helper, 
@@ -31,12 +29,10 @@ namespace MediaCommMVC.UI.Helpers
             return BuildPager(pagingParameters, baseUrl, true);
         }
 
-        /// <summary>
-        ///   Creates a pager with text and page numbers.
-        /// </summary>
-        /// <param name = "helper">The helper.</param>
-        /// <param name = "pagingParameters">The paging parameters.</param>
-        /// <param name = "baseUrl">The base URL.</param>
+        /// <summary>Creates a pager with text and page numbers.</summary>
+        /// <param name="helper">The helper.</param>
+        /// <param name="pagingParameters">The paging parameters.</param>
+        /// <param name="baseUrl">The base URL.</param>
         /// <returns>The paging html code.</returns>
         public static MvcHtmlString Pager(
             this HtmlHelper helper, 
@@ -50,12 +46,10 @@ namespace MediaCommMVC.UI.Helpers
 
         #region Methods
 
-        /// <summary>
-        ///   Builds the pager html.
-        /// </summary>
-        /// <param name = "pagingParameters">The paging parameters.</param>
-        /// <param name = "baseUrl">The base URL.</param>
-        /// <param name = "numbersOnly">if set to <c>true</c> [only the numbers are created].</param>
+        /// <summary>Builds the pager html.</summary>
+        /// <param name="pagingParameters">The paging parameters.</param>
+        /// <param name="baseUrl">The base URL.</param>
+        /// <param name="numbersOnly">if set to <c>true</c> [only the numbers are created].</param>
         /// <returns>The pager html code.</returns>
         private static MvcHtmlString BuildPager(PagingParameters pagingParameters, string baseUrl, bool numbersOnly)
         {
@@ -66,7 +60,7 @@ namespace MediaCommMVC.UI.Helpers
                 return MvcHtmlString.Empty;
             }
 
-            StringBuilder pagerBuilder = new StringBuilder("[ "  + Resources.General.GoToPage);
+            StringBuilder pagerBuilder = new StringBuilder("[ "  + General.GoToPage);
 
             const string FormatNormal = "<span> <a href='{0}/{1}'>{2}</a></span>";
             const string FormatSelected = "<span class='selected'> {0}</span>";
@@ -74,7 +68,7 @@ namespace MediaCommMVC.UI.Helpers
             if (!numbersOnly && pagingParameters.CurrentPage > 1)
             {
                 pagerBuilder.AppendFormat(
-                    FormatNormal, baseUrl, pagingParameters.CurrentPage - 1, Resources.General.Previous);
+                    FormatNormal, baseUrl, pagingParameters.CurrentPage - 1, General.Previous);
             }
 
             for (int i = 1; i <= totalPages; i++)
@@ -92,7 +86,7 @@ namespace MediaCommMVC.UI.Helpers
             if (!numbersOnly && pagingParameters.CurrentPage < totalPages)
             {
                 pagerBuilder.AppendFormat(
-                    FormatNormal, baseUrl, pagingParameters.CurrentPage + 1, Resources.General.Next);
+                    FormatNormal, baseUrl, pagingParameters.CurrentPage + 1, General.Next);
             }
 
             return MvcHtmlString.Create(pagerBuilder + " ]");
