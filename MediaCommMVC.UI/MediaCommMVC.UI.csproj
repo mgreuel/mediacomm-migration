@@ -14,14 +14,10 @@
     <AssemblyName>MediaCommMVC.UI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>true</MvcBuildViews>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -193,6 +189,9 @@
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\IconHelper.cs" />
     <Compile Include="Helpers\Pagination.cs" />
+    <Compile Include="Infrastructure\WebContext.cs" />
+    <Compile Include="ViewModel\Account\CreateUser.cs" />
+    <Compile Include="ViewModel\Account\UserLogin.cs" />
     <Compile Include="ViewModel\CreateTopicInfo.cs" />
     <Compile Include="ViewModel\ForumPage.cs" />
     <Compile Include="ViewModel\PhotoUpload.cs" />
@@ -218,16 +217,6 @@
     <Compile Include="Infrastructure\IUnityContainerAccessor.cs" />
     <Compile Include="Infrastructure\UnityControllerFactory.cs" />
     <Compile Include="Infrastructure\WebSessionManager.cs" />
-    <Compile Include="AccountModels\AccountMembershipService.cs" />
-    <Compile Include="AccountModels\FormsAuthenticationService.cs" />
-    <Compile Include="AccountModels\ChangePasswordModel.cs" />
-    <Compile Include="AccountModels\IFormsAuthenticationService.cs" />
-    <Compile Include="AccountModels\IMembershipService.cs" />
-    <Compile Include="AccountModels\LogOnModel.cs" />
-    <Compile Include="AccountModels\PropertiesMustMatchAttribute.cs" />
-    <Compile Include="AccountModels\RegisterModel.cs" />
-    <Compile Include="AccountModels\ValidatePasswordLengthAttribute.cs" />
-    <Compile Include="AccountModels\ValidationUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Content\Custom\forums.css" />
     <Content Include="Content\Custom\movies.css" />
@@ -500,7 +489,6 @@
     <Content Include="Scripts\custom\movies.js" />
     <Compile Include="Serialization\DataTableParameters.cs" />
     <Compile Include="Serialization\DataTableResponse.cs" />
-    <Compile Include="ViewModel\CreateUserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\combres.xml" />

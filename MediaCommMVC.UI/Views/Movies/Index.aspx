@@ -1,6 +1,8 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Core.Model.Movies.Movie>>" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
+
+<%@ Import Namespace="MediaCommMVC.UI.Infrastructure" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
     <strong>
         <%= Html.ActionLink(Resources.Navigation.Movies, "Index" ) %>
@@ -63,7 +65,7 @@
                     <%= Html.ActionLink(movie.Owner.UserName, "Profile", "Users", new { username = movie.Owner.UserName}, null) %>
                 </td>
                 <td class="deleteMovie">
-                    <% if (Page.User.IsInRole("Administrators") || Page.User.Identity.Name.Equals(movie.Owner.UserName, StringComparison.OrdinalIgnoreCase))
+                    <% if (WebContext.CurrentUser.IsAdmin || Page.User.Identity.Name.Equals(movie.Owner.UserName, StringComparison.OrdinalIgnoreCase))
                        { %>
                     <a id='<%= string.Concat("del_", movie.Id) %>'>
                         <%= Resources.General.Delete %></a>

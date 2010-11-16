@@ -1,7 +1,6 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.TopicPage>" %>
 
 <%@ Import Namespace="MediaCommMVC.Core.Model.Forums" %>
-
 <%@ Import Namespace="MediaCommMVC.UI.Infrastructure" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
     <script src="/Content/tiny_mce/tiny_mce.js" type="text/javascript"></script>
@@ -24,7 +23,7 @@
                 <tr>
                     <th colspan="3">
                         <strong>
-                            <%= Resources.Forums.PollResults %>: </strong>
+                            <%=Resources.Forums.PollResults%>: </strong>
                         <%=this.Model.Topic.Poll.Question%>
                     </th>
                 </tr>
@@ -45,9 +44,12 @@
                         <%
                             this.Writer.Write(
                                 (totalAnswers != 0
-                                    ? Math.Round(Convert.ToDouble((Convert.ToDouble(answerWithCount.Value) / Convert.ToDouble(totalAnswers)) * 100), 2)
-                                    : Math.Round(0f, 2)) + "%");
-                        %>                        
+                                     ? Math.Round(
+                                         Convert.ToDouble(
+                                             (Convert.ToDouble(answerWithCount.Value) / Convert.ToDouble(totalAnswers)) * 100),
+                                         2)
+                                     : Math.Round(0f, 2)) + "%");
+                        %>
                     </td>
                 </tr>
                 <%
@@ -55,7 +57,9 @@
             </tbody>
         </table>
         <%
-            if (!this.Model.Topic.Poll.UserAnswers.Any(ua => ua.User.UserName.Equals(this.User.Identity.Name, StringComparison.OrdinalIgnoreCase)))
+            if (
+                !this.Model.Topic.Poll.UserAnswers.Any(
+                    ua => ua.User.UserName.Equals(this.User.Identity.Name, StringComparison.OrdinalIgnoreCase)))
             {
                 using (Html.BeginForm("AnswerPoll", "Forums"))
                 {%>
@@ -77,12 +81,14 @@
                 %>
                 <tr>
                     <td>
-                        <%     if (this.Model.Topic.Poll.Type == PollType.SingleAnswer)
-                               { %>
+                        <%
+                            if (this.Model.Topic.Poll.Type == PollType.SingleAnswer)
+                            {%>
                         <input type="radio" class="pollAnswerInput" name="answerIds" value="<%=possibleAnswer.Id%>" />
-                        <%}
-                               else if (this.Model.Topic.Poll.Type == PollType.MultiAnswer)
-                               {%>
+                        <%
+                            }
+                       else if (this.Model.Topic.Poll.Type == PollType.MultiAnswer)
+                       {%>
                         <input type="checkbox" name="answerIds" value="<%=possibleAnswer.Id%>" />
                         <%
                             }%>
@@ -99,8 +105,11 @@
         <input type="submit" class="button" value="<%=Resources.Forums.SubmitVote%>" />
         <%
             }
-            }%>
+           }
+        %>
     </div>
+    <%
+        }%>
     <div id="topicHeader">
         <div class="forumPager forumPagerTop">
             <%=
@@ -171,7 +180,7 @@
     </div>
     <%
         }
-       }%>
+    %>
     <script type="text/javascript">
         $(document).ready(function ()
         {
