@@ -12,39 +12,29 @@ using MediaCommMVC.Core.Model.Movies;
 
 namespace MediaCommMVC.UI.Controllers
 {
-    /// <summary>
-    ///   The movies controller.
-    /// </summary>
+    /// <summary>The movies controller.</summary>
     [Authorize]
     public class MoviesController : Controller
     {
         #region Constants and Fields
 
-        /// <summary>
-        ///   The logger.
-        /// </summary>
+        /// <summary>The logger.</summary>
         private readonly ILogger logger;
 
-        /// <summary>
-        ///   The movie repository.
-        /// </summary>
+        /// <summary>The movie repository.</summary>
         private readonly IMovieRepository movieRepository;
 
-        /// <summary>
-        ///   The user repository.
-        /// </summary>
+        /// <summary>The user repository.</summary>
         private readonly IUserRepository userRepository;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "MoviesController" /> class.
-        /// </summary>
-        /// <param name = "movieRepository">The movie repository.</param>
-        /// <param name = "userRepository">The user repository.</param>
-        /// <param name = "logger">The logger.</param>
+        /// <summary>Initializes a new instance of the <see cref="MoviesController"/> class.</summary>
+        /// <param name="movieRepository">The movie repository.</param>
+        /// <param name="userRepository">The user repository.</param>
+        /// <param name="logger">The logger.</param>
         public MoviesController(IMovieRepository movieRepository, IUserRepository userRepository, ILogger logger)
         {
             this.movieRepository = movieRepository;
@@ -56,10 +46,8 @@ namespace MediaCommMVC.UI.Controllers
 
         #region Public Methods
 
-        /// <summary>
-        ///   Deletes the movie.
-        /// </summary>
-        /// <param name = "id">The movie id.</param>
+        /// <summary>Deletes the movie.</summary>
+        /// <param name="id">The movie id.</param>
         /// <returns>Whether the deletion was successfull.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult DeleteMovie(int id)
@@ -79,9 +67,7 @@ namespace MediaCommMVC.UI.Controllers
             }
         }
 
-        /// <summary>
-        ///   Shows the movies index.
-        /// </summary>
+        /// <summary>Shows the movies index.</summary>
         /// <returns>The movies list view.</returns>
         public ActionResult Index()
         {
@@ -92,12 +78,10 @@ namespace MediaCommMVC.UI.Controllers
             return View(movies);
         }
 
-        /// <summary>
-        ///   Adds a new movie.
-        /// </summary>
-        /// <param name = "movie">The movie.</param>
-        /// <param name = "languageId">The language id.</param>
-        /// <param name = "qualityId">The quality id.</param>
+        /// <summary>Adds a new movie.</summary>
+        /// <param name="movie">The movie.</param>
+        /// <param name="languageId">The language id.</param>
+        /// <param name="qualityId">The quality id.</param>
         /// <returns>The movie index view.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Index(Movie movie, int languageId, int qualityId)

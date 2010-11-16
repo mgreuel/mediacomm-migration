@@ -17,54 +17,38 @@ using MediaCommMVC.UI.ViewModel;
 
 namespace MediaCommMVC.UI.Controllers
 {
-    /// <summary>
-    ///   The forums controller.
-    /// </summary>
+    /// <summary>The forums controller.</summary>
     [Authorize]
     public class ForumsController : Controller
     {
         #region Constants and Fields
 
-        /// <summary>
-        ///   The number of posts displayed per page.
-        /// </summary>
+        /// <summary>The number of posts displayed per page.</summary>
         private const int PostsPerTopicPage = 10;
 
-        /// <summary>
-        ///   The number of topics displayed per page.
-        /// </summary>
+        /// <summary>The number of topics displayed per page.</summary>
         private const int TopicsPerForumPage = 25;
 
-        /// <summary>
-        ///   The forum repository.
-        /// </summary>
+        /// <summary>The forum repository.</summary>
         private readonly IForumRepository forumRepository;
 
-        /// <summary>
-        ///   The logger.
-        /// </summary>
+        /// <summary>The logger.</summary>
         private readonly ILogger logger;
 
-        /// <summary>
-        ///   The user repository.
-        /// </summary>
+        /// <summary>The user repository.</summary>
         private readonly IUserRepository userRepository;
 
-        /// <summary>
-        ///   The current user.
-        /// </summary>
+        /// <summary>The current user.</summary>
         private MediaCommUser currentUser;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "ForumsController" /> class.
-        /// </summary>
-        /// <param name = "forumRepository">The forum repository.</param>
-        /// <param name = "userRepository">The user repository.</param>
-        /// <param name = "logger">The logger.</param>
+        /// <summary>Initializes a new instance of the <see cref="ForumsController"/> class.</summary>
+        /// <param name="forumRepository">The forum repository.</param>
+        /// <param name="userRepository">The user repository.</param>
+        /// <param name="logger">The logger.</param>
         public ForumsController(IForumRepository forumRepository, IUserRepository userRepository, ILogger logger)
         {
             this.forumRepository = forumRepository;
@@ -76,11 +60,9 @@ namespace MediaCommMVC.UI.Controllers
 
         #region Public Methods
 
-        /// <summary>
-        ///   Answers the poll.
-        /// </summary>
-        /// <param name = "pollId">The poll id.</param>
-        /// <param name = "answerIds">The selected answer ids.</param>
+        /// <summary>Answers the poll.</summary>
+        /// <param name="pollId">The poll id.</param>
+        /// <param name="answerIds">The selected answer ids.</param>
         /// <returns>Redirect to the topic the poll belongs to.</returns>
         [HttpPost]
         public RedirectResult AnswerPoll(int pollId, int[] answerIds)
@@ -99,11 +81,8 @@ namespace MediaCommMVC.UI.Controllers
             return this.Redirect(this.Request.UrlReferrer.ToString());
         }
 
-
-        /// <summary>
-        ///   Displays the create topic page.
-        /// </summary>
-        /// <param name = "id">The forum id.</param>
+        /// <summary>Displays the create topic page.</summary>
+        /// <param name="id">The forum id.</param>
         /// <returns>The create topic view.</returns>
         [HttpGet]
         public ActionResult CreateTopic(int id)
@@ -115,15 +94,13 @@ namespace MediaCommMVC.UI.Controllers
             return this.View(new CreateTopicInfo { Forum = forum, UserNames = userNames });
         }
 
-        /// <summary>
-        ///   Creates the topic.
-        /// </summary>
-        /// <param name = "topic">The topic.</param>
-        /// <param name = "post">The first post.</param>
-        /// <param name = "id">The forum id.</param>
-        /// <param name = "sticky">if set to <c>true</c> the topic should be marked as [sticky].</param>
-        /// <param name = "excludedUsers">The excluded users. SemiColon separated.</param>
-        /// <param name = "poll">The poll associated with the topic.</param>
+        /// <summary>Creates the topic.</summary>
+        /// <param name="topic">The topic.</param>
+        /// <param name="post">The first post.</param>
+        /// <param name="id">The forum id.</param>
+        /// <param name="sticky">if set to <c>true</c> the topic should be marked as [sticky].</param>
+        /// <param name="excludedUsers">The excluded users. SemiColon separated.</param>
+        /// <param name="poll">The poll associated with the topic.</param>
         /// <returns>The added topic view.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
         [ValidateInput(false)]
@@ -162,10 +139,8 @@ namespace MediaCommMVC.UI.Controllers
             return this.RedirectToAction("Topic", new { id = createdTopic.Id, name = this.Url.ToFriendlyUrl(createdTopic.Title) });
         }
 
-        /// <summary>
-        ///   Shows the edit post page.
-        /// </summary>
-        /// <param name = "id">The post id.</param>
+        /// <summary>Shows the edit post page.</summary>
+        /// <param name="id">The post id.</param>
         /// <returns>The edit post view.</returns>
         [HttpGet]
         public ActionResult EditPost(int id)
@@ -176,11 +151,9 @@ namespace MediaCommMVC.UI.Controllers
             return this.View(post);
         }
 
-        /// <summary>
-        ///   Saves the changed made to the post.
-        /// </summary>
-        /// <param name = "id">The post id.</param>
-        /// <param name = "post">The edited post.</param>
+        /// <summary>Saves the changed made to the post.</summary>
+        /// <param name="id">The post id.</param>
+        /// <param name="post">The edited post.</param>
         /// <returns>Redirect to the topic the post belongs to.</returns>
         [HttpPost]
         [ValidateInput(false)]
@@ -198,10 +171,8 @@ namespace MediaCommMVC.UI.Controllers
             return this.Redirect(url);
         }
 
-        /// <summary>
-        ///   Firsts the new post in topic.
-        /// </summary>
-        /// <param name = "id">The topic id.</param>
+        /// <summary>Firsts the new post in topic.</summary>
+        /// <param name="id">The topic id.</param>
         /// <returns>Reirect to the first unread post of the topic.</returns>
         [HttpGet]
         public ActionResult FirstNewPostInTopic(int id)
@@ -212,11 +183,9 @@ namespace MediaCommMVC.UI.Controllers
             return this.Redirect(url);
         }
 
-        /// <summary>
-        ///   Displays the forum with the provided Id.
-        /// </summary>
-        /// <param name = "id">The forum id.</param>
-        /// <param name = "page">The current page.</param>
+        /// <summary>Displays the forum with the provided Id.</summary>
+        /// <param name="id">The forum id.</param>
+        /// <param name="page">The current page.</param>
         /// <returns>The forum view, displaying topics.</returns>
         [HttpGet]
         public ActionResult Forum(int id, int page)
@@ -238,9 +207,7 @@ namespace MediaCommMVC.UI.Controllers
             return this.View(new ForumPage { Forum = forum, Topics = topics, PagingParameters = pagingParameters, PostsPerTopicPage = PostsPerTopicPage });
         }
 
-        /// <summary>
-        ///   The forums index.
-        /// </summary>
+        /// <summary>The forums index.</summary>
         /// <returns>The forums index view.</returns>
         [HttpGet]
         public ActionResult Index()
@@ -248,10 +215,8 @@ namespace MediaCommMVC.UI.Controllers
             return this.View(this.forumRepository.GetAllForums(this.GetCurrentUser()));
         }
 
-        /// <summary>
-        ///   Redirects to the topic page containing the post.
-        /// </summary>
-        /// <param name = "id">The post id.</param>
+        /// <summary>Redirects to the topic page containing the post.</summary>
+        /// <param name="id">The post id.</param>
         /// <returns>RedirectAction to the topic page containing the post.</returns>
         [HttpGet]
         public ActionResult Post(int id)
@@ -263,11 +228,9 @@ namespace MediaCommMVC.UI.Controllers
             return this.Redirect(url);
         }
 
-        /// <summary>
-        ///   Displays the topic with the specified id.
-        /// </summary>
-        /// <param name = "id">The topic id.</param>
-        /// <param name = "page">The current page.</param>
+        /// <summary>Displays the topic with the specified id.</summary>
+        /// <param name="id">The topic id.</param>
+        /// <param name="page">The current page.</param>
         /// <returns>The topic view, displaying posts.</returns>
         [HttpGet]
         public ActionResult Topic(int id, int page)
@@ -289,11 +252,9 @@ namespace MediaCommMVC.UI.Controllers
             return this.View(new TopicPage { Topic = topic, Posts = posts, PagingParameters = pagingParameters });
         }
 
-        /// <summary>
-        ///   Adds a new reply to the topic.
-        /// </summary>
-        /// <param name = "id">The topic id.</param>
-        /// <param name = "post">The post to add.</param>
+        /// <summary>Adds a new reply to the topic.</summary>
+        /// <param name="id">The topic id.</param>
+        /// <param name="post">The post to add.</param>
         /// <returns>The last page of the topic.</returns>
         [HttpPost]
         [ValidateInput(false)]
@@ -319,20 +280,16 @@ namespace MediaCommMVC.UI.Controllers
 
         #region Methods
 
-        /// <summary>
-        ///   Gets the current user.
-        /// </summary>
+        /// <summary>Gets the current user.</summary>
         /// <returns>The current user.</returns>
         private MediaCommUser GetCurrentUser()
         {
             return this.currentUser ?? (this.currentUser = this.userRepository.GetUserByName(this.User.Identity.Name));
         }
 
-        /// <summary>
-        ///   Gets the post URL.
-        /// </summary>
-        /// <param name = "topicId">The topic id.</param>
-        /// <param name = "post">The  post.</param>
+        /// <summary>Gets the post URL.</summary>
+        /// <param name="topicId">The topic id.</param>
+        /// <param name="post">The  post.</param>
         /// <returns>The url to the post.</returns>
         private string GetPostUrl(int topicId, Post post)
         {

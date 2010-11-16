@@ -1,152 +1,79 @@
 ﻿#region Using Directives
 
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Security.Principal;
 using System.Web.Mvc;
-using System.Web.Routing;
+using System.Web.Security;
 
-using MediaCommMVC.UI.AccountModels;
+using MediaCommMVC.Common.Logging;
+using MediaCommMVC.Core.DataInterfaces;
+using MediaCommMVC.UI.ViewModel.Account;
 
 #endregion
 
 namespace MediaCommMVC.UI.Controllers
 {
-    /// <summary>
-    ///   The account controller.
-    /// </summary>
+    /// <summary>The account controller.</summary>
     [HandleError]
     public class AccountController : Controller
     {
-        // This constructor is used by the MVC framework to instantiate the controller using
-        // the default forms authentication and membership providers.
+        /// <summary>
+        /// The logger.
+        /// </summary>
+        private readonly ILogger logger;
+
+        /// <summary>
+        /// The user repository.
+        /// </summary>
+        private readonly IUserRepository userRepository;
+
         #region Constructors and Destructors
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref = "AccountController" /> class.
+        /// Initializes a new instance of the <see cref="AccountController"/> class.
         /// </summary>
-        public AccountController()
+        /// <param name="logger">The logger.</param>
+        /// <param name="userRepository">The user Repository.</param>
+        public AccountController(ILogger logger, IUserRepository userRepository)
         {
-            this.FormsService = new FormsAuthenticationService();
-            this.MembershipService = new AccountMembershipService();
-        }
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        ///   Gets FormsService.
-        /// </summary>
-        /// <value>The forms service.</value>
-        public IFormsAuthenticationService FormsService
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        ///   Gets MembershipService.
-        /// </summary>
-        /// <value>The membership service.</value>
-        public IMembershipService MembershipService
-        {
-            get;
-            private set;
+            this.logger = logger;
+            this.userRepository = userRepository;
         }
 
         #endregion
 
         #region Public Methods
 
-        /// <summary>
-        ///   The change password.
-        /// </summary>
-        /// <returns>The changed passsword.</returns>
-        [Authorize]
-        public ActionResult ChangePassword()
-        {
-            return this.View();
-        }
-
-        /// <summary>
-        ///   The change password.
-        /// </summary>
-        /// <param name = "model">The model.</param>
-        /// <returns>Generated Code.</returns>
-        [Authorize]
-        [HttpPost]
-        public ActionResult ChangePassword(ChangePasswordModel model)
-        {
-            if (this.ModelState.IsValid)
-            {
-                if (this.MembershipService.ChangePassword(this.User.Identity.Name, model.OldPassword, model.NewPassword))
-                {
-                    return this.RedirectToAction("ChangePasswordSuccess");
-                }
-                else
-                {
-                    this.ModelState.AddModelError(string.Empty, "The current password is incorrect or the new password is invalid.");
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        /// <summary>
-        ///   The change password success.
-        /// </summary>
-        /// <returns>Generated Code.</returns>
-        public ActionResult ChangePasswordSuccess()
-        {
-            return this.View();
-        }
-
-        /// <summary>
-        ///   The log off.
-        /// </summary>
+        /// <summary>The log off.</summary>
         /// <returns>Generated Code.</returns>
         public ActionResult LogOff()
         {
-            this.FormsService.SignOut();
+            FormsAuthentication.SignOut();
 
             return this.RedirectToAction("Index", "Home");
         }
 
-        /// <summary>
-        ///   The log on.
-        /// </summary>
+        /// <summary>The log on.</summary>
         /// <returns>Generated Code.</returns>
         public ActionResult LogOn()
         {
             return this.View();
         }
 
-        /// <summary>
-        ///   The log on.
-        /// </summary>
-        /// <param name = "model">The model.</param>
-        /// <param name = "returnUrl">The return url.</param>
+        /// <summary>The log on.</summary>
+        /// <param name="userLogin">The model.</param>
+        /// <param name="returnUrl">The return url.</param>
         /// <returns>Generated Code.</returns>
         [HttpPost]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", 
-            Justification = "Needs to take same parameter type as Controller.Redirect()")]
-        public ActionResult LogOn(LogOnModel model, string returnUrl)
+        public ActionResult LogOn(UserLogin userLogin, string returnUrl)
         {
             if (this.ModelState.IsValid)
             {
-                if (this.MembershipService.ValidateUser(model.UserName, model.Password))
+                if (this.userRepository.ValidateUser(userLogin.UserName, userLogin.Password))
                 {
-                    this.FormsService.SignIn(model.UserName, model.RememberMe);
-                    if (!String.IsNullOrEmpty(returnUrl))
-                    {
-                        return this.Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        return this.RedirectToAction("Index", "Home");
-                    }
+                    FormsAuthentication.SetAuthCookie(userLogin.UserName, userLogin.RememberMe);
+
+                    return !string.IsNullOrEmpty(returnUrl)
+                               ? (ActionResult)this.Redirect(returnUrl)
+                               : this.RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -155,39 +82,7 @@ namespace MediaCommMVC.UI.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        ///   The initialize.
-        /// </summary>
-        /// <param name = "requestContext">The request context.</param>
-        /// <exception cref = "InvalidOperationException"></exception>
-        protected override void Initialize(RequestContext requestContext)
-        {
-            if (requestContext.HttpContext.User.Identity is WindowsIdentity)
-            {
-                throw new InvalidOperationException("Windows authentication is not supported.");
-            }
-            else
-            {
-                base.Initialize(requestContext);
-            }
-        }
-
-        /// <summary>
-        ///   The on action executing.
-        /// </summary>
-        /// <param name = "filterContext">The filter context.</param>
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            this.ViewData["PasswordLength"] = this.MembershipService.MinPasswordLength;
-
-            base.OnActionExecuting(filterContext);
+            return View(userLogin);
         }
 
         #endregion

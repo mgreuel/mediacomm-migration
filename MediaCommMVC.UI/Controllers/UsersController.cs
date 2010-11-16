@@ -7,37 +7,31 @@ using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Users;
 
+using Resources;
+
 #endregion
 
 namespace MediaCommMVC.UI.Controllers
 {
-    /// <summary>
-    ///   The users controller.
-    /// </summary>
+    /// <summary>The users controller.</summary>
     [Authorize]
     public class UsersController : Controller
     {
         #region Constants and Fields
 
-        /// <summary>
-        ///   The logger.
-        /// </summary>
+        /// <summary>The logger.</summary>
         private readonly ILogger logger;
 
-        /// <summary>
-        ///   The user repository.
-        /// </summary>
+        /// <summary>The user repository.</summary>
         private readonly IUserRepository userRepository;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "UsersController" /> class.
-        /// </summary>
-        /// <param name = "userRepository">The user repository.</param>
-        /// <param name = "logger">The logger.</param>
+        /// <summary>Initializes a new instance of the <see cref="UsersController"/> class.</summary>
+        /// <param name="userRepository">The user repository.</param>
+        /// <param name="logger">The logger.</param>
         public UsersController(IUserRepository userRepository, ILogger logger)
         {
             this.userRepository = userRepository;
@@ -48,9 +42,7 @@ namespace MediaCommMVC.UI.Controllers
 
         #region Public Methods
 
-        /// <summary>
-        ///   Shows the users index.
-        /// </summary>
+        /// <summary>Shows the users index.</summary>
         /// <returns>The users list view.</returns>
         public ActionResult Index()
         {
@@ -58,9 +50,7 @@ namespace MediaCommMVC.UI.Controllers
             return this.View(users);
         }
 
-        /// <summary>
-        ///   Shows the current user's profile.
-        /// </summary>
+        /// <summary>Shows the current user's profile.</summary>
         /// <returns>The my profile view.</returns>
         public ActionResult MyProfile()
         {
@@ -68,10 +58,8 @@ namespace MediaCommMVC.UI.Controllers
             return this.View(currentUser);
         }
 
-        /// <summary>
-        ///   Saves the updated profile.
-        /// </summary>
-        /// <param name = "username">The username.</param>
+        /// <summary>Saves the updated profile.</summary>
+        /// <param name="username">The username.</param>
         /// <returns>The profile updated view.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult MyProfile(string username)
@@ -82,16 +70,14 @@ namespace MediaCommMVC.UI.Controllers
 
             this.UpdateModel(user, "user", null, new[] { "Id", "DateOfBirth", "LastVisit", "EMailAddress", "UserName" });
 
-            this.ViewData["ChangesSaved"] = Resources.General.ChangesSaved;
+            this.ViewData["ChangesSaved"] = General.ChangesSaved;
 
             this.userRepository.UpdateUser(user);
             return this.View(user);
         }
 
-        /// <summary>
-        ///   Shows an user profile.
-        /// </summary>
-        /// <param name = "username">The username.</param>
+        /// <summary>Shows an user profile.</summary>
+        /// <param name="username">The username.</param>
         /// <returns>The user profile view.</returns>
         public ActionResult Profile(string username)
         {

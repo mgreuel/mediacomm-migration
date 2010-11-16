@@ -13,36 +13,29 @@ namespace MediaCommMVC.UI.Controllers
     /// <summary>
     ///   The Admin controller.
     /// </summary>
-    [Authorize(Roles = "Administrators")]
+#warning reimplement roles
+    [Authorize]
     public class AdminController : Controller
     {
         #region Constants and Fields
 
-        /// <summary>
-        ///   The forum repository.
-        /// </summary>
+        /// <summary>The forum repository.</summary>
         private readonly IForumRepository forumRepository;
 
-        /// <summary>
-        ///   The photo repository.
-        /// </summary>
+        /// <summary>The photo repository.</summary>
         private readonly IPhotoRepository photoRepository;
 
-        /// <summary>
-        ///   The user repository.
-        /// </summary>
+        /// <summary>The user repository.</summary>
         private readonly IUserRepository userRepository;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "AdminController" /> class.
-        /// </summary>
-        /// <param name = "forumRepository">The forum repository.</param>
-        /// <param name = "userRepository">The user repository.</param>
-        /// <param name = "photoRepository">The photo repository.</param>
+        /// <summary>Initializes a new instance of the <see cref="AdminController"/> class.</summary>
+        /// <param name="forumRepository">The forum repository.</param>
+        /// <param name="userRepository">The user repository.</param>
+        /// <param name="photoRepository">The photo repository.</param>
         public AdminController(IForumRepository forumRepository, IUserRepository userRepository, IPhotoRepository photoRepository)
         {
             this.forumRepository = forumRepository;
@@ -54,18 +47,14 @@ namespace MediaCommMVC.UI.Controllers
 
         #region Public Methods
 
-        /// <summary>
-        ///   Displays the category created page.
-        /// </summary>
+        /// <summary>Displays the category created page.</summary>
         /// <returns>The category created view.</returns>
         public ActionResult CategoryCreated()
         {
             return this.View();
         }
 
-        /// <summary>
-        ///   Displays the create forum page.
-        /// </summary>
+        /// <summary>Displays the create forum page.</summary>
         /// <returns>The create forum view.</returns>
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult CreateForum()
@@ -73,10 +62,8 @@ namespace MediaCommMVC.UI.Controllers
             return this.View();
         }
 
-        /// <summary>
-        ///   Creates the forum.
-        /// </summary>
-        /// <param name = "forum">The forum.</param>
+        /// <summary>Creates the forum.</summary>
+        /// <param name="forum">The forum.</param>
         /// <returns>The admin index view.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CreateForum(Forum forum)
@@ -86,9 +73,7 @@ namespace MediaCommMVC.UI.Controllers
             return this.RedirectToAction("Index", "Forums");
         }
 
-        /// <summary>
-        ///   Shows the create photo category page.
-        /// </summary>
+        /// <summary>Shows the create photo category page.</summary>
         /// <returns>The create photo category view.</returns>
         [HttpGet]
         public ActionResult CreatePhotoCategory()
@@ -96,10 +81,8 @@ namespace MediaCommMVC.UI.Controllers
             return this.View();
         }
 
-        /// <summary>
-        ///   Creates the photo category.
-        /// </summary>
-        /// <param name = "photoCategory">The photo category.</param>
+        /// <summary>Creates the photo category.</summary>
+        /// <param name="photoCategory">The photo category.</param>
         /// <returns>Redirection to the category created page.</returns>
         [HttpPost]
         public ActionResult CreatePhotoCategory(PhotoCategory photoCategory)
@@ -111,9 +94,7 @@ namespace MediaCommMVC.UI.Controllers
             return this.RedirectToAction("CategoryCreated");
         }
 
-        /// <summary>
-        ///   Displays the create user page.
-        /// </summary>
+        /// <summary>Displays the create user page.</summary>
         /// <returns>The create forum view.</returns>
         [HttpGet]
         public ActionResult CreateUser()
@@ -121,12 +102,10 @@ namespace MediaCommMVC.UI.Controllers
             return this.View();
         }
 
-        /// <summary>
-        ///   Creates a new user.
-        /// </summary>
-        /// <param name = "username">The username.</param>
-        /// <param name = "password">The password.</param>
-        /// <param name = "mailAddress">The mail address.</param>
+        /// <summary>Creates a new user.</summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <param name="mailAddress">The mail address.</param>
         /// <returns>The user created view.</returns>
         [HttpPost]
         public ActionResult CreateUser(string username, string password, string mailAddress)
@@ -137,9 +116,7 @@ namespace MediaCommMVC.UI.Controllers
             return this.RedirectToAction("UserCreated");
         }
 
-        /// <summary>
-        ///   Shows the user created page.
-        /// </summary>
+        /// <summary>Shows the user created page.</summary>
         /// <returns>The user created view.</returns>
         [HttpGet]
         public ActionResult UserCreated()
