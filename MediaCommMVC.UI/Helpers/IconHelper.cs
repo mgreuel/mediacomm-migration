@@ -8,18 +8,14 @@ using MediaCommMVC.Core.Model.Forums;
 
 namespace MediaCommMVC.UI.Helpers
 {
-    /// <summary>
-    ///   Determines icon filenames.
-    /// </summary>
+    /// <summary>Determines icon filenames.</summary>
     public static class IconHelper
     {
         #region Public Methods
 
-        /// <summary>
-        ///   Gets the filename for a topic icon.
-        /// </summary>
-        /// <param name = "helper">The url helper.</param>
-        /// <param name = "forum">The topic.</param>
+        /// <summary>Gets the filename for a topic icon.</summary>
+        /// <param name="helper">The url helper.</param>
+        /// <param name="forum">The topic.</param>
         /// <returns>The filename of the topic icon.</returns>
         public static string ForumIcon(this UrlHelper helper, Forum forum)
         {
@@ -33,11 +29,9 @@ namespace MediaCommMVC.UI.Helpers
             return filename + ".gif";
         }
 
-        /// <summary>
-        ///   Gets the filename for a topic icon.
-        /// </summary>
-        /// <param name = "helper">The url helper.</param>
-        /// <param name = "topic">The topic.</param>
+        /// <summary>Gets the filename for a topic icon.</summary>
+        /// <param name="helper">The url helper.</param>
+        /// <param name="topic">The topic.</param>
         /// <returns>The filename of the topic icon.</returns>
         public static string TopicIcon(this UrlHelper helper, Topic topic)
         {
