@@ -1,6 +1,6 @@
 Account:
 - Multilanguage
-- * remove default code
+- Use ROles instead of custom identiy/principal
 
 Admin:
 - Movie Qual + Language
