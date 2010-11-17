@@ -53,8 +53,9 @@
     <Reference Include="log4net">
       <HintPath>..\libs\NHibernate\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate">
-      <HintPath>..\libs\NHibernate\NHibernate.dll</HintPath>
+    <Reference Include="NHibernate, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.Core.3.0.0.2001\lib\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate.ByteCode.Castle">
       <HintPath>..\libs\NHibernate\NHibernate.ByteCode.Castle.dll</HintPath>

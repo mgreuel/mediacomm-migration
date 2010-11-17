@@ -59,7 +59,7 @@ namespace MediaCommMVC.Data.Repositories
         {
             this.Logger.Debug("Getting all movie languages");
 
-            IEnumerable<MovieLanguage> languages = this.Session.Linq<MovieLanguage>().ToList();
+            IEnumerable<MovieLanguage> languages = this.Session.Query<MovieLanguage>().ToList();
 
             this.Logger.Debug("Got {0} movie languages", languages.Count());
 
@@ -72,7 +72,7 @@ namespace MediaCommMVC.Data.Repositories
         {
             this.Logger.Debug("Getting all movies");
 
-            IEnumerable<Movie> movies = this.Session.Linq<Movie>().ToList();
+            IEnumerable<Movie> movies = this.Session.Query<Movie>().ToList();
 
             this.Logger.Debug("Got {0} movies", movies.Count());
 
@@ -85,7 +85,7 @@ namespace MediaCommMVC.Data.Repositories
         {
             this.Logger.Debug("Getting all movie qualities");
 
-            IEnumerable<MovieQuality> qualities = this.Session.Linq<MovieQuality>().ToList();
+            IEnumerable<MovieQuality> qualities = this.Session.Query<MovieQuality>().ToList();
 
             this.Logger.Debug("Got {0} movie qualities", qualities.Count());
 

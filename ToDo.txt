@@ -1,6 +1,5 @@
 Account:
-- Multilanguage
-- Use ROles instead of custom identiy/principal
+- Use Roles instead of custom identiy/principal
 
 Admin:
 - Movie Qual + Language
