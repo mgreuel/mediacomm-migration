@@ -3,9 +3,8 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 
-using Combres;
-
 using MediaCommMVC.Common.Config;
+using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Data;
 using MediaCommMVC.Data.NHInfrastructure;
@@ -15,7 +14,7 @@ using MediaCommMVC.Data.Repositories;
 
 using Microsoft.Practices.Unity;
 
-using ILogger = MediaCommMVC.Common.Logging.ILogger;
+using WebExtensions = Combres.WebExtensions;
 
 #endregion
 

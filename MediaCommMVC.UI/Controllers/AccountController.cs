@@ -15,6 +15,8 @@ namespace MediaCommMVC.UI.Controllers
     [HandleError]
     public class AccountController : Controller
     {
+        #region Constants and Fields
+
         /// <summary>
         /// The logger.
         /// </summary>
@@ -24,6 +26,8 @@ namespace MediaCommMVC.UI.Controllers
         /// The user repository.
         /// </summary>
         private readonly IUserRepository userRepository;
+
+        #endregion
 
         #region Constructors and Destructors
 
