@@ -10,7 +10,7 @@ using MediaCommMVC.Core.Model.Photos;
 
 namespace MediaCommMVC.UI.Controllers
 {
-    /// <summary>
+    // <summary>
     ///   The Admin controller.
     /// </summary>
 #warning reimplement roles
@@ -36,7 +36,8 @@ namespace MediaCommMVC.UI.Controllers
         /// <param name="forumRepository">The forum repository.</param>
         /// <param name="userRepository">The user repository.</param>
         /// <param name="photoRepository">The photo repository.</param>
-        public AdminController(IForumRepository forumRepository, IUserRepository userRepository, IPhotoRepository photoRepository)
+        public AdminController(
+            IForumRepository forumRepository, IUserRepository userRepository, IPhotoRepository photoRepository)
         {
             this.forumRepository = forumRepository;
             this.userRepository = userRepository;
@@ -111,7 +112,7 @@ namespace MediaCommMVC.UI.Controllers
         public ActionResult CreateUser(string username, string password, string mailAddress)
         {
             this.userRepository.CreateUser(username, password, mailAddress);
-            
+
             this.TempData["UserName"] = username;
             return this.RedirectToAction("UserCreated");
         }
