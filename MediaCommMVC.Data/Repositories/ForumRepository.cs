@@ -107,7 +107,7 @@ namespace MediaCommMVC.Data.Repositories
             this.InvokeTransaction(
                 delegate(ISession session)
                 {
-                    session.Query<Topic>().Where(t => t.Forum.Equals(forum)).ToList().ForEach(t => this.DeleteTopic(t, session));
+                    session.Linq<Topic>().Where(t => t.Forum.Equals(forum)).ToList().ForEach(t => this.DeleteTopic(t, session));
 
                     session.Delete(forum);
                 });
@@ -134,7 +134,7 @@ namespace MediaCommMVC.Data.Repositories
                         this.DeleteTopic(post.Topic, session);
 
                         Post lastPost =
-                            session.Query<Post>().Where(p => p.Topic.Forum.Id == post.Topic.Forum.Id).OrderByDescending(
+                            session.Linq<Post>().Where(p => p.Topic.Forum.Id == post.Topic.Forum.Id).OrderByDescending(
                                 p => p.Created).ThenByDescending(p => p.Id).First();
 
                         UpdateLastPostInfo(session, lastPost);
@@ -142,7 +142,7 @@ namespace MediaCommMVC.Data.Repositories
                     else
                     {
                         Post lastPost =
-                            session.Query<Post>().Where(p => p.Topic.Id == post.Topic.Id).OrderByDescending(
+                            session.Linq<Post>().Where(p => p.Topic.Id == post.Topic.Id).OrderByDescending(
                                 p => p.Created).ThenByDescending(p => p.Id).First();
 
                         UpdateLastPostInfo(session, lastPost);
@@ -155,7 +155,7 @@ namespace MediaCommMVC.Data.Repositories
         /// <returns>The 10 topics with the newest posts.</returns>
         public IEnumerable<Topic> Get10TopicsWithNewestPosts(MediaCommUser currentUser)
         {
-            List<Topic> topics = this.Session.Query<Topic>().Where(t => !t.ExcludedUsers.Contains(currentUser)).OrderByDescending(t => t.LastPostTime).Take(10).ToList();
+            List<Topic> topics = this.Session.Linq<Topic>().Where(t => !t.ExcludedUsers.Contains(currentUser)).OrderByDescending(t => t.LastPostTime).Take(10).ToList();
 
             this.UpdateTopicReadStatus(topics.Where(t => t.LastPostTime > DateTime.Now - this.topicUnreadValidity), currentUser);
 
@@ -167,7 +167,7 @@ namespace MediaCommMVC.Data.Repositories
         /// <returns>The list of forums.</returns>
         public IEnumerable<Forum> GetAllForums(MediaCommUser currentUser)
         {
-            List<Forum> allForums = this.Session.Query<Forum>().ToList();
+            List<Forum> allForums = this.Session.Linq<Forum>().ToList();
 
             foreach (Forum forum in allForums)
             {
@@ -196,18 +196,18 @@ namespace MediaCommMVC.Data.Repositories
         public Post GetFirstUnreadPostForTopic(int id, MediaCommUser user)
         {
             /* joins are not supported by linq to nhibernate
-             * Post post = (from p in this.Session.Query<Post>()
-                       join tr in this.Session.Query<TopicRead>() on p.Topic.Id equals tr.ReadTopic.Id
+             * Post post = (from p in this.Session.Linq<Post>()
+                       join tr in this.Session.Linq<TopicRead>() on p.Topic.Id equals tr.ReadTopic.Id
                        where p.Topic.Id == id && tr.ReadByUser.UserName == user.UserName && p.Created > tr.LastVisit
                        orderby p.Created descending
                        select p).FirstOrDefault();*/
             DateTime date =
-                (this.Session.Query<TopicRead>().SingleOrDefault(
+                (this.Session.Linq<TopicRead>().SingleOrDefault(
                     tr => tr.ReadByUser.UserName == user.UserName && tr.ReadTopic.Id == id) ??
                  new TopicRead { LastVisit = DateTime.Now.AddMonths(-1) }).LastVisit;
 
             Post post =
-                this.Session.Query<Post>().Where(p => p.Topic.Id == id && p.Created > date).OrderByDescending(p => p.Created).
+                this.Session.Linq<Post>().Where(p => p.Topic.Id == id && p.Created > date).OrderByDescending(p => p.Created).
                     FirstOrDefault();
 
             return post;
@@ -235,7 +235,7 @@ namespace MediaCommMVC.Data.Repositories
         {
             this.Logger.Debug("Getting the last page number for topicId '{0}' with page size '{1}'", topicId, pageSize);
 
-            int totalPostCount = this.Session.Query<Post>().Where(p => p.Topic.Id == topicId).Count();
+            int totalPostCount = this.Session.Linq<Post>().Where(p => p.Topic.Id == topicId).Count();
             int lastPage = ((totalPostCount - 1) / pageSize) + 1;
 
             this.Logger.Debug("Got '{0}' as last page number", lastPage);
@@ -250,7 +250,7 @@ namespace MediaCommMVC.Data.Repositories
         /// <returns>The page number.</returns>
         public int GetPageNumberForPost(int postId, int topicId, int pageSize)
         {
-            List<Post> posts = this.Session.Query<Post>().Where(p => p.Topic.Id == topicId).OrderBy(p => p.Created).ToList();
+            List<Post> posts = this.Session.Linq<Post>().Where(p => p.Topic.Id == topicId).OrderBy(p => p.Created).ToList();
             Post post = posts.Single(p => p.Id == postId);
 
             int index = posts.IndexOf(post);
@@ -296,7 +296,7 @@ namespace MediaCommMVC.Data.Repositories
             int postsToSkip = (pagingParameters.CurrentPage - 1) * pagingParameters.PageSize;
 
             List<Post> posts =
-                this.Session.Query<Post>().Where(p => p.Topic.Id == topicId)
+                this.Session.Linq<Post>().Where(p => p.Topic.Id == topicId)
                     .OrderBy(p => p.Created)
                     .Skip(postsToSkip)
                     .Take(pagingParameters.PageSize).ToList();
@@ -310,7 +310,7 @@ namespace MediaCommMVC.Data.Repositories
                     s =>
                     {
                         TopicRead topicRead =
-                            s.Query<TopicRead>().SingleOrDefault(
+                            s.Linq<TopicRead>().SingleOrDefault(
                                 r =>
                                 r.ReadByUser.Id == currentUser.Id && r.ReadTopic.Id == topicId) ??
                             new TopicRead { ReadByUser = currentUser, ReadTopic = s.Get<Topic>(topicId) };
@@ -352,7 +352,7 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Getting topics for forum with id '{0}' and paging parameters: {1}", forumId, pagingParameters);
 
             List<Topic> topics =
-                this.Session.Query<Topic>().Where(
+                this.Session.Linq<Topic>().Where(
                     t => t.Forum.Id == forumId && !t.ExcludedUsers.Contains(currentUser)).OrderByDescending(
                         t => t.DisplayPriority).ThenByDescending(t => t.LastPostTime).ThenByDescending(t => t.Id).Skip(
                             (pagingParameters.CurrentPage - 1) * pagingParameters.PageSize).Take(
@@ -433,7 +433,7 @@ namespace MediaCommMVC.Data.Repositories
         private void DeleteTopic(Topic topic, ISession session)
         {
             this.Logger.Debug("Deleting all posts in the topic: " + topic);
-            session.Query<Post>().Where(p => p.Topic.Equals(topic)).ToList()
+            session.Linq<Post>().Where(p => p.Topic.Equals(topic)).ToList()
                 .ForEach(session.Delete);
 
             this.Logger.Debug("Deleting topic: " + topic);
@@ -451,7 +451,7 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Checking if the post '{0}' is the first of its topic", post);
 
             bool topicHasOlderPosts =
-                session.Query<Post>().Where(p => p.Topic.Id == post.Topic.Id && p.Id < post.Id).Any();
+                session.Linq<Post>().Where(p => p.Topic.Id == post.Topic.Id && p.Id < post.Id).Any();
 
             this.Logger.Debug("Post is the first in its topic: " + !topicHasOlderPosts);
 
@@ -463,7 +463,7 @@ namespace MediaCommMVC.Data.Repositories
         /// <param name="currentUser">The current user.</param>
         private void UpdateTopicReadStatus(IEnumerable<Topic> topics, MediaCommUser currentUser)
         {
-            List<TopicRead> readTopics = this.Session.Query<TopicRead>().Where(r => r.LastVisit > DateTime.Now - this.topicUnreadValidity).ToList();
+            List<TopicRead> readTopics = this.Session.Linq<TopicRead>().Where(r => r.LastVisit > DateTime.Now - this.topicUnreadValidity).ToList();
 
             foreach (Topic topic in topics)
             {
