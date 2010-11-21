@@ -46,6 +46,9 @@
     <Reference Include="Combres.Mvc">
       <HintPath>..\packages\Combres.2.1\lib\Combres.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\packages\elmah.1.1\lib\Elmah.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate, Version=1.1.0.685, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentNHibernate.1.1.0.694\lib\FluentNHibernate.dll</HintPath>
     </Reference>
@@ -145,6 +148,8 @@
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\IconHelper.cs" />
     <Compile Include="Helpers\Pagination.cs" />
+    <Compile Include="Infrastructure\ErrorHandlingActionInvoker.cs" />
+    <Compile Include="Infrastructure\HandleErrorWithELMAHAttribute.cs" />
     <Compile Include="Infrastructure\WebContext.cs" />
     <Compile Include="ViewModel\Account\CreateUser.cs" />
     <Compile Include="ViewModel\Account\UserLogin.cs" />

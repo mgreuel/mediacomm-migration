@@ -1,5 +1,6 @@
 ﻿#region Using Directives
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Web.Mvc;
@@ -26,8 +27,6 @@ namespace MediaCommMVC.UI.Controllers
 
         /// <summary>The user repository.</summary>
         private readonly IUserRepository userRepository;
-
-#warning get from config
 
         /// <summary>The number of posts displayed per page.</summary>
         private const int PostsPerTopicPage = 10;
@@ -60,6 +59,8 @@ namespace MediaCommMVC.UI.Controllers
         /// <returns>The welcome/what's new view.</returns>
         public ActionResult Index()
         {
+            throw new Exception("Test");
+
             IEnumerable<Topic> topicsWithNewestPosts = this.forumRepository.Get10TopicsWithNewestPosts(this.userRepository.GetUserByName(this.User.Identity.Name));
 
             IEnumerable<PhotoAlbum> newestPhotoAlbums = this.photoRepository.Get4NewestAlbums();

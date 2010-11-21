@@ -37,7 +37,14 @@ namespace MediaCommMVC.UI.Infrastructure
             }
 
             IUnityContainer container = this.GetContainer(requestContext);
-            return (IController)container.Resolve(type);
+            Controller controller = container.Resolve(type) as Controller;
+            
+            if (controller != null)
+            {
+                controller.ActionInvoker = new ErrorHandlingActionInvoker(new HandleErrorWithELMAHAttribute());
+            }
+
+            return controller;
         }
 
         #endregion
