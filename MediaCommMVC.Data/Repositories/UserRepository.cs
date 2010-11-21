@@ -69,7 +69,7 @@ namespace MediaCommMVC.Data.Repositories
         /// <returns>The users.</returns>
         public IEnumerable<MediaCommUser> GetAllUsers()
         {
-            IEnumerable<MediaCommUser> users = this.Session.Query<MediaCommUser>().ToList();
+            IEnumerable<MediaCommUser> users = this.Session.Linq<MediaCommUser>().ToList();
 
             return users;
         }
@@ -80,7 +80,7 @@ namespace MediaCommMVC.Data.Repositories
         public MediaCommUser GetUserByName(string userName)
         {
             this.Logger.Debug("Getting user for username '{0}'", userName);
-            MediaCommUser user = this.Session.Query<MediaCommUser>().Single(
+            MediaCommUser user = this.Session.Linq<MediaCommUser>().Single(
                 u => u.UserName.Equals(userName));
 
             this.Logger.Debug("Got user: " + user);
@@ -102,7 +102,7 @@ namespace MediaCommMVC.Data.Repositories
         public bool ValidateUser(string userName, string password)
         {
             return
-                this.Session.Query<MediaCommUser>().Any(
+                this.Session.Linq<MediaCommUser>().Any(
                     u => u.UserName.Equals(userName) && u.Password.Equals(password));
         }
 

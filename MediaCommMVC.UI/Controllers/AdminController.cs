@@ -10,7 +10,7 @@ using MediaCommMVC.Core.Model.Photos;
 
 namespace MediaCommMVC.UI.Controllers
 {
-    // <summary>
+    /// <summary>
     ///   The Admin controller.
     /// </summary>
 #warning reimplement roles
