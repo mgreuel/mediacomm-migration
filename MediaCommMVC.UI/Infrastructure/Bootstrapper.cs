@@ -1,7 +1,10 @@
 ﻿#region Using Directives
 
+using System;
 using System.Web.Mvc;
 using System.Web.Routing;
+
+using log4net.Config;
 
 using MediaCommMVC.Common.Config;
 using MediaCommMVC.Common.Logging;
@@ -69,6 +72,15 @@ namespace MediaCommMVC.UI.Infrastructure
             this.ConfigureContainer();
             RegisterRoutes();
             RegisterControllerFactory();
+            ConfigureLog4Net();
+        }
+
+        /// <summary>
+        /// Configures the log4net logger using the web.config.
+        /// </summary>
+        private static void ConfigureLog4Net()
+        {
+            XmlConfigurator.Configure();
         }
 
         #endregion
