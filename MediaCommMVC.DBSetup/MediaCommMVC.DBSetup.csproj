@@ -95,6 +95,8 @@
     <Content Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SQLScripts\SetupElmah.sql" />
+    <Content Include="SQLScripts\SetupLog4Net.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MediaCommMVC.Common\MediaCommMVC.Common.csproj">
@@ -120,6 +122,7 @@
     </None>
     <None Include="Settings.StyleCop" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

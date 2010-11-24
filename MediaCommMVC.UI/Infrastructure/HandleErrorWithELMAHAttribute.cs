@@ -14,7 +14,7 @@ namespace MediaCommMVC.UI.Infrastructure
     /// Attribute used to track errors with ELMAH
     /// <see cref="http://stackoverflow.com/questions/766610/"/>.
     /// </summary>
-    public class HandleErrorWithELMAHAttribute : HandleErrorAttribute
+    public sealed class HandleErrorWithELMAHAttribute : HandleErrorAttribute
     {
         #region Public Methods
 

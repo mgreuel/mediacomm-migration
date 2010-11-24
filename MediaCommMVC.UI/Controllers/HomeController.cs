@@ -37,10 +37,6 @@ namespace MediaCommMVC.UI.Controllers
         /// <param name="userRepository">The user repository.</param>
         public HomeController(IForumRepository forumRepository, IPhotoRepository photoRepository, IUserRepository userRepository)
         {
-            Contract.Requires(forumRepository != null);
-            Contract.Requires(photoRepository != null);
-            Contract.Requires(userRepository != null);
-
             this.forumRepository = forumRepository;
             this.photoRepository = photoRepository;
             this.userRepository = userRepository;

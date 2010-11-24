@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Diagnostics;
+using log4net;
 
 
 
@@ -24,7 +25,8 @@ namespace MediaCommMVC.Common.Logging
         /// <param name="message">The message to log.</param>
         public void Debug(string message)
         {
-
+            var x = LogManager.GetLogger("test: " + message);
+            x.Debug(message);
         }
 
         /// <summary>Logs the specified message with Debug level.</summary>
@@ -32,7 +34,8 @@ namespace MediaCommMVC.Common.Logging
         /// <param name="data">The parameters for the message string.</param>
         public void Debug(string message, params object[] data)
         {
-
+            var x = LogManager.GetLogger("test: " + message);
+            x.Debug(message);
         }
 
         /// <summary>Logs the specified message with Error level.</summary>
@@ -47,7 +50,7 @@ namespace MediaCommMVC.Common.Logging
         /// <param name="data">The parameters for the message string.</param>
         public void Error(string message, params object[] data)
         {
-            
+
         }
 
         /// <summary>Logs the specified message with Error level.</summary>
@@ -95,6 +98,6 @@ namespace MediaCommMVC.Common.Logging
 
 
 
- 
+
     }
 }
