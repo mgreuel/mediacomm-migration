@@ -30,7 +30,7 @@ namespace MediaCommMVC.TestDataCreator
 
         private const int ForumCount = 3;
 
-        private static ILogger logger = new EntLibLogger();
+        private static ILogger logger = new Log4NetLogger();
 
         private static SessionManager sessionManager;
 
