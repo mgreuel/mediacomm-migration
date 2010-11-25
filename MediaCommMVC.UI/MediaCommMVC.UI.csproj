@@ -40,7 +40,8 @@
     <CodeAnalysisRuleSet>..\CodeAnalysis\Basic_complete.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Combres">
+    <Reference Include="Combres, Version=2.1.0.0, Culture=neutral, PublicKeyToken=1ca6b37997dd7536, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Combres.2.1\lib\Combres.dll</HintPath>
     </Reference>
     <Reference Include="Combres.Mvc">
@@ -51,6 +52,10 @@
     </Reference>
     <Reference Include="FluentNHibernate, Version=1.1.0.685, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentNHibernate.1.1.0.694\lib\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.ServiceLocation.dll</HintPath>

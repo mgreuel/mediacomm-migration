@@ -78,7 +78,7 @@ namespace MediaCommMVC.UI.Infrastructure
         /// <summary>
         /// Configures the log4net logger using the web.config.
         /// </summary>
-        private static void ConfigureLog4Net()
+        private void ConfigureLog4Net()
         {
             XmlConfigurator.Configure();
         }
