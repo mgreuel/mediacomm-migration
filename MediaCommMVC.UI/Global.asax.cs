@@ -28,7 +28,7 @@ namespace MediaCommMVC.UI
         /// <summary>
         ///   The logger.
         /// </summary>
-        private readonly ILogger logger = new EntLibLogger();
+        private readonly ILogger logger = new Log4NetLogger();
 
         /// <summary>
         ///   The unity IoC container.
