@@ -65,7 +65,7 @@
                     <%= Html.ActionLink(movie.Owner.UserName, "Profile", "Users", new { username = movie.Owner.UserName}, null) %>
                 </td>
                 <td class="deleteMovie">
-                    <% if (WebContext.CurrentUser.IsAdmin || Page.User.Identity.Name.Equals(movie.Owner.UserName, StringComparison.OrdinalIgnoreCase))
+                    <% if (HttpContext.Current.User.IsInRole("Administrators") || Page.User.Identity.Name.Equals(movie.Owner.UserName, StringComparison.OrdinalIgnoreCase))
                        { %>
                     <a id='<%= string.Concat("del_", movie.Id) %>'>
                         <%= Resources.General.Delete %></a>

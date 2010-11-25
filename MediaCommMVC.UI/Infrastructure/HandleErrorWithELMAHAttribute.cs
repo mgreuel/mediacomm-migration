@@ -27,9 +27,9 @@ namespace MediaCommMVC.UI.Infrastructure
             base.OnException(context);
 
             var e = context.Exception;
-            if (!context.ExceptionHandled // if unhandled, will be logged anyhow
-                || RaiseErrorSignal(e) // prefer signaling, if possible
-                || IsFiltered(context)) // filtered?
+            if (!context.ExceptionHandled
+                || RaiseErrorSignal(e)
+                || IsFiltered(context))
             {
                 return;
             }

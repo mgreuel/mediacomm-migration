@@ -1,13 +1,13 @@
 ﻿#region Using Directives
 
-using System;
 using System.Web.Mvc;
 using System.Web.Routing;
+
+using Combres;
 
 using log4net.Config;
 
 using MediaCommMVC.Common.Config;
-using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Data;
 using MediaCommMVC.Data.NHInfrastructure;
@@ -17,43 +17,31 @@ using MediaCommMVC.Data.Repositories;
 
 using Microsoft.Practices.Unity;
 
-using WebExtensions = Combres.WebExtensions;
+using ILogger = MediaCommMVC.Common.Logging.ILogger;
 
 #endregion
 
 namespace MediaCommMVC.UI.Infrastructure
 {
-    /// <summary>
-    ///   Boostrapper initializing the web application.
-    /// </summary>
+    /// <summary>Boostrapper initializing the web application.</summary>
     public class Bootstrapper
     {
         #region Constants and Fields
 
-        /// <summary>
-        ///   The unity container.
-        /// </summary>
+        /// <summary>The unity container.</summary>
         private readonly IUnityContainer container;
 
-        /// <summary>
-        ///   The logger.
-        ///   It is created in the Global.asax file.
-        /// </summary>
+        /// <summary>The logger.
+        /// It is created in the Global.asax file.</summary>
         private readonly ILogger logger;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "Bootstrapper" /> class.
-        /// </summary>
-        /// <param name = "container">
-        ///   The container.
-        /// </param>
-        /// <param name = "logger">
-        ///   The logger.
-        /// </param>
+        /// <summary>Initializes a new instance of the <see cref="Bootstrapper"/> class.</summary>
+        /// <param name="container">The container.</param>
+        /// <param name="logger">The logger.</param>
         public Bootstrapper(IUnityContainer container, ILogger logger)
         {
             this.container = container;
@@ -64,45 +52,31 @@ namespace MediaCommMVC.UI.Infrastructure
 
         #region Public Methods
 
-        /// <summary>
-        ///   Runs the bootstrapper.
-        /// </summary>
+        /// <summary>Runs the bootstrapper.</summary>
         public void Run()
         {
             this.ConfigureContainer();
             RegisterRoutes();
             RegisterControllerFactory();
-            ConfigureLog4Net();
-        }
-
-        /// <summary>
-        /// Configures the log4net logger using the web.config.
-        /// </summary>
-        private void ConfigureLog4Net()
-        {
-            XmlConfigurator.Configure();
+            this.ConfigureLog4Net();
         }
 
         #endregion
 
         #region Methods
 
-        /// <summary>
-        ///   Registers the controller factory.
-        /// </summary>
+        /// <summary>Registers the controller factory.</summary>
         private static void RegisterControllerFactory()
         {
             ControllerBuilder.Current.SetControllerFactory(typeof(UnityControllerFactory));
         }
 
-        /// <summary>
-        ///   Registers the routes.
-        /// </summary>
+        /// <summary>Registers the routes.</summary>
         private static void RegisterRoutes()
         {
             RouteCollection routes = RouteTable.Routes;
 
-            WebExtensions.AddCombresRoute(routes, "Combres Route");
+            routes.AddCombresRoute("Combres Route");
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.IgnoreRoute("{*favicon}", new { favicon = @"(.*/)?favicon.ico(/.*)?" });
@@ -154,9 +128,7 @@ namespace MediaCommMVC.UI.Infrastructure
                 new { controller = "Home", action = "Index" });
         }
 
-        /// <summary>
-        ///   Configures the unity container.
-        /// </summary>
+        /// <summary>Configures the unity container.</summary>
         private void ConfigureContainer()
         {
             this.container.RegisterInstance(typeof(ILogger), this.logger);
@@ -167,9 +139,13 @@ namespace MediaCommMVC.UI.Infrastructure
             this.RegisterRepositories();
         }
 
-        /// <summary>
-        ///   Registers the NNibernate components.
-        /// </summary>
+        /// <summary>Configures the log4net logger using the web.config.</summary>
+        private void ConfigureLog4Net()
+        {
+            XmlConfigurator.Configure();
+        }
+
+        /// <summary>Registers the NNibernate components.</summary>
         private void RegisterNHibernateComponents()
         {
             this.container.RegisterType(typeof(IAutoMapGenerator), typeof(AutoMapGenerator));
@@ -182,9 +158,7 @@ namespace MediaCommMVC.UI.Infrastructure
             this.container.RegisterInstance(typeof(ISessionManager), webSessionManager);
         }
 
-        /// <summary>
-        ///   Registers the repositories.
-        /// </summary>
+        /// <summary>Registers the repositories.</summary>
         private void RegisterRepositories()
         {
             this.container.RegisterType(

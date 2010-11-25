@@ -155,7 +155,7 @@
     <Compile Include="Helpers\Pagination.cs" />
     <Compile Include="Infrastructure\ErrorHandlingActionInvoker.cs" />
     <Compile Include="Infrastructure\HandleErrorWithELMAHAttribute.cs" />
-    <Compile Include="Infrastructure\WebContext.cs" />
+    <Compile Include="Infrastructure\MediaCommIdentity.cs" />
     <Compile Include="ViewModel\Account\CreateUser.cs" />
     <Compile Include="ViewModel\Account\UserLogin.cs" />
     <Compile Include="ViewModel\CreateTopicInfo.cs" />

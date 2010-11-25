@@ -103,7 +103,7 @@
                     </ul>
                 </li>
             </ul>
-            <% if (WebContext.CurrentUser.IsAdmin)
+            <% if (HttpContext.Current.User.IsInRole("Administrators"))
                 
                { %>
             <ul>

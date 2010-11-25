@@ -44,7 +44,7 @@ namespace MediaCommMVC.UI.Controllers
 
         #region Public Methods
 
-        /// <summary>Handles Errors.</summary>
+        /// <summary>Shows a message when an error occurs..</summary>
         /// <returns>The error view.</returns>
         public ActionResult Error()
         {
@@ -55,8 +55,6 @@ namespace MediaCommMVC.UI.Controllers
         /// <returns>The welcome/what's new view.</returns>
         public ActionResult Index()
         {
-            throw new Exception("Test");
-
             IEnumerable<Topic> topicsWithNewestPosts = this.forumRepository.Get10TopicsWithNewestPosts(this.userRepository.GetUserByName(this.User.Identity.Name));
 
             IEnumerable<PhotoAlbum> newestPhotoAlbums = this.photoRepository.Get4NewestAlbums();
