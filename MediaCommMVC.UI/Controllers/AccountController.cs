@@ -1,5 +1,7 @@
 ﻿#region Using Directives
 
+using System;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -73,7 +75,23 @@ namespace MediaCommMVC.UI.Controllers
             {
                 if (this.userRepository.ValidateUser(userLogin.UserName, userLogin.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(userLogin.UserName, userLogin.RememberMe);
+                    string roles = string.Empty;
+
+                    if (this.userRepository.GetUserByName(userLogin.UserName).IsAdmin)
+                    {
+                        roles = "Administrators";
+                    }
+
+                    FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
+                        version: 1,
+                        name: userLogin.UserName,
+                        issueDate: DateTime.Now,
+                        expiration: DateTime.Now.AddMonths(1),
+                        isPersistent: userLogin.RememberMe,
+                        userData: roles);
+
+                    string encTicket = FormsAuthentication.Encrypt(authTicket);
+                    this.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
 
                     return !string.IsNullOrEmpty(returnUrl)
                                ? (ActionResult)this.Redirect(returnUrl)
@@ -81,7 +99,7 @@ namespace MediaCommMVC.UI.Controllers
                 }
                 else
                 {
-                    this.ModelState.AddModelError(string.Empty, "The user name or password provided is incorrect.");
+                    this.ModelState.AddModelError(string.Empty, Resources.Users.LoginFailed);
                 }
             }
 

@@ -148,7 +148,7 @@
                     <div class="postOptions">
                         <%
                             if (post.Author.UserName.Equals(this.User.Identity.Name, StringComparison.OrdinalIgnoreCase) ||
-                                WebContext.CurrentUser.IsAdmin)
+                                HttpContext.Current.User.IsInRole("Administrators"))
                             {
                                 Writer.Write(Html.ActionLink(Resources.Forums.Edit, "EditPost", new { id = post.Id }));
                             }%>

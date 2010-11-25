@@ -108,7 +108,7 @@
                     <%= Html.Encode(Model.City) %>
                 </td>
             </tr>
-            <% if (WebContext.CurrentUser.IsAdmin)
+            <% if (HttpContext.Current.User.IsInRole("Administrators"))
                {%>
             <tr>
                 <td>
