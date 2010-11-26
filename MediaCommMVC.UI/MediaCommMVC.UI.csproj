@@ -41,7 +41,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Combres, Version=2.1.0.0, Culture=neutral, PublicKeyToken=1ca6b37997dd7536, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Combres.2.1\lib\Combres.dll</HintPath>
     </Reference>
     <Reference Include="Combres.Mvc">
