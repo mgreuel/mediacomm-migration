@@ -2,7 +2,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Web.Security;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.IO;
 
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
@@ -16,8 +18,9 @@ using MediaCommMVC.Tests.Common.TestImplementations;
 using MediaCommMVC.Tests.TestImplementations;
 
 using NHibernate;
-using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+
+using Configuration = NHibernate.Cfg.Configuration;
 
 #endregion
 
@@ -99,14 +102,12 @@ namespace MediaCommMVC.DBSetup
 
                     ISession session = sessionManager.Session;
 
-                    List<MovieQuality> movieQualities = new List<MovieQuality>
-                        {
+                    List<MovieQuality> movieQualities = new List<MovieQuality> {
                            new MovieQuality { Name = "DVD" }, new MovieQuality { Name = "BluRay" } 
                         };
                     movieQualities.ForEach(q => session.Save(q));
 
-                    List<MovieLanguage> movieLanguages = new List<MovieLanguage>
-                        {
+                    List<MovieLanguage> movieLanguages = new List<MovieLanguage> {
                            new MovieLanguage { Name = "EN" }, 
                           new MovieLanguage { Name = "DE" }, 
                           new MovieLanguage { Name = "ES" }, 
@@ -117,7 +118,7 @@ namespace MediaCommMVC.DBSetup
                     session.Flush();
                     session.Close();
 
- 
+
                     Console.WriteLine("Successfully created DB Schema.");
                 }
                 else
