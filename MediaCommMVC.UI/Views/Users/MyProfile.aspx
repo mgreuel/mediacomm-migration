@@ -98,9 +98,6 @@
            }%>
     </p>
     <% } %>
-    <p class="text">
-        <%= Html.ActionLink(Resources.Users.ChangePassword, "ChangePassword", "Account") %>
-    </p>
     <script language="javascript" type="text/javascript">
 
         $(document).ready(function ()

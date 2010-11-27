@@ -61,7 +61,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The 4 newest Photo Albums.
+        ///   Looks up a localized string similar to The newest Photo Albums.
         /// </summary>
         internal static string NewPhotoAlbums {
             get {
@@ -70,7 +70,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The 10 newest Posts.
+        ///   Looks up a localized string similar to The newest Posts.
         /// </summary>
         internal static string NewPosts {
             get {
