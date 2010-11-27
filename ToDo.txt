@@ -1,5 +1,3 @@
-Account:
-- Use Roles instead of custom identiy/principal
 
 Admin:
 - Movie Qual + Language
@@ -16,21 +14,14 @@ Movies:
 
 General:
 - get rid of multiflex!
-- * error handling
 - better input validation
 -*  config db
 -* strongly typed config
 - Use Ajax action where useful
-- * Logging
-- * Permission Manager
 - cleanup css
 - cleanup and check routes
 - mvc 3
-- nuget
 - introduce view models
-
-Install:
-- Web-Install?
 
 * Videos
 

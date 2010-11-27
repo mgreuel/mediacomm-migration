@@ -77,9 +77,9 @@ namespace MediaCommMVC.UI.Infrastructure
             RouteCollection routes = RouteTable.Routes;
 
             routes.AddCombresRoute("Combres Route");
+            routes.IgnoreRoute("{*favicon}", new { favicon = @"(.*/)?favicon.ico(/.*)?" });
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            routes.IgnoreRoute("{*favicon}", new { favicon = @"(.*/)?favicon.ico(/.*)?" });
 #warning clean routes
 
             routes.MapRoute(
