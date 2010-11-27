@@ -453,6 +453,7 @@
     <Content Include="Content\tiny_mce\utils\form_utils.js" />
     <Content Include="Content\tiny_mce\utils\mctabs.js" />
     <Content Include="Content\tiny_mce\utils\validate.js" />
+    <Content Include="favicon.ico" />
     <Content Include="Scripts\custom\photos.js" />
     <Content Include="Scripts\custom\movies.js" />
     <Compile Include="Serialization\DataTableParameters.cs" />
