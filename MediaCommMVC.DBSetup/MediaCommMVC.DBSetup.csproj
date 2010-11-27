@@ -96,8 +96,12 @@
     <Content Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SQLScripts\SetupElmah.sql" />
-    <Content Include="SQLScripts\SetupLog4Net.sql" />
+    <Content Include="SQLScripts\SetupElmah.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SQLScripts\SetupLog4Net.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MediaCommMVC.Common\MediaCommMVC.Common.csproj">
