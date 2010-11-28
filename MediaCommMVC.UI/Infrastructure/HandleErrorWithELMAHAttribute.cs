@@ -68,7 +68,7 @@ namespace MediaCommMVC.UI.Infrastructure
         /// <param name="exception">The exception.</param>
         private static void LogException(Exception exception)
         {
-            var context = HttpContext.Current;
+            HttpContext context = HttpContext.Current;
             ErrorLog.GetDefault(context).Log(new Error(exception, context));
         }
 

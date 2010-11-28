@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
+using Elmah;
+
 using MediaCommMVC.Common.Config;
 using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
@@ -199,7 +201,10 @@ namespace MediaCommMVC.UI.Controllers
             }
             else
             {
-                this.logger.Warn("No file was sent to the server");
+                HttpContext context = System.Web.HttpContext.Current;
+                ErrorLog.GetDefault(context).Log(
+                    new Error(
+                        new FileNotFoundException("No file was send to the server on the PhotoUpload Action"), context));
                 return "false";
             }
 
