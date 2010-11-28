@@ -17,7 +17,7 @@
         }
     %>
     <%= Html.CombresLink("uploadJs")%>
-    <% using (Html.BeginForm())
+    <% using (Html.BeginForm("Upload", "Photos", FormMethod.Post, new { enctype = "multipart/form-data" }))
        {%>
     <table id="uploadTable" class="defaultTable">
         <thead>
@@ -25,23 +25,23 @@
         <tbody>
             <tr>
                 <td>
-                    <%= Resources.Photos.Category %>
+                    <%= Resources.Photos.Category%>
                 </td>
                 <td>
-                    <%= Html.DropDownList("Category.Name", new SelectList(Model.Categories, "Id", "Name"), new { @class = "required"} ) %>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <%= Resources.Photos.Album %>
-                </td>
-                <td>
-                    <%= Html.TextBox("Album.Name", null, new { @class = "required", minlength = "2" } ) %>
+                    <%= Html.DropDownList("Category.Name", new SelectList(Model.Categories, "Id", "Name"), new { @class = "required" })%>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <%= Resources.Photos.PhotosTitle %>
+                    <%= Resources.Photos.Album%>
+                </td>
+                <td>
+                    <%= Html.TextBox("Album.Name", null, new { @class = "required", minlength = "2" })%>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <%= Resources.Photos.PhotosTitle%>
                 </td>
                 <td>
                     <input id="fileInput" name="fileInput" type="file" />
@@ -57,7 +57,7 @@
         </tbody>
     </table>
     <%
-        }%>
+       }%>
     <script type="text/javascript">
 
         function startUpload()
