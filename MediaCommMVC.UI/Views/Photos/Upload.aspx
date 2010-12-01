@@ -4,7 +4,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
     <%=  Resources.Navigation.Photos %>
     » <strong>
-        <%= Html.ActionLink(Resources.Photos.Upload, "Upload" ) %> </strong>
+        <%= Html.ActionLink(Resources.Photos.Upload, "Upload" ) %>
+    </strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <%
@@ -107,12 +108,13 @@
                 'folder': '/uploads',
                 'fileExt': '*.zip',
                 'fileDesc': 'Zip Archive',
+                'sizeLimit': 269484032,
                 onError: function (a, b, c, d)
                 {
                     if (d.type === "HTTP")
                         alert("error " + d.type + ": " + d.status);
                     else if (d.type === "File Size")
-                        alert(c.name + " " + d.type + " Limit: " + Math.round(d.sizeLimit / 1024) + "KB");
+                        alert('<%= GetGlobalResourceObject("Photos", "UploadLimitMessage") %>');
                     else
                         alert("error " + d.type + ": " + d.text);
                 },
@@ -121,7 +123,7 @@
                     if (data.percentage == 100 && complete == false)
                     {
                         complete = true;
-                        location.href = "/Photos/UploadSuccessFull";
+                        setTimeout(function () { location.href = "/Photos/UploadSuccessFull"; }, 500);                       
                     }
                 }
             });

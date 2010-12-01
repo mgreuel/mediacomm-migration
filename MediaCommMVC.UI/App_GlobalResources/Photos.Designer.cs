@@ -142,6 +142,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The maximum file size is 250MB! If you want to upload more, please split it into multiple .zip files..
+        /// </summary>
+        internal static string UploadLimitMessage {
+            get {
+                return ResourceManager.GetString("UploadLimitMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The photos were successfully uploaded and are now beeing processed..
         /// </summary>
         internal static string UploadSuccessfullText {
