@@ -150,4 +150,7 @@
   <data name="ProcessingUpload" xml:space="preserve">
     <value>Please wait while the photos are beeing processed.</value>
   </data>
+  <data name="UploadLimitMessage" xml:space="preserve">
+    <value>The maximum file size is 250MB! If you want to upload more, please split it into multiple .zip files.</value>
+  </data>
 </root>
