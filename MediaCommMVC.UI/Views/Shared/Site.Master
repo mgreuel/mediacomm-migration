@@ -13,6 +13,9 @@
     <title>
         <%= Resources.General.Title %>
     </title>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" type="text/javascript"></script>
+   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js" type="text/javascript"></script>   
     <%= Html.CombresLink("siteCss") %>
     <%= Html.CombresLink("siteJs")%>
     <asp:ContentPlaceHolder ID="Header" runat="server" />

@@ -61,11 +61,11 @@ hs.addSlideshow({
         offsetY: '-10',
         relativeTo: 'viewport',
         hideOnMouseOut: false
-    },
-    thumbstrip: {
-        mode: 'vertical',
-        position: 'middle left',
-        relativeTo: 'viewport'
+//    },
+//    thumbstrip: {
+//        mode: 'vertical',
+//        position: 'middle left',
+//        relativeTo: 'viewport'
     }
 
 });
