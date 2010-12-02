@@ -207,6 +207,7 @@
     <Content Include="Content\Forum\readme.txt" />
     <Content Include="Content\Forum\whosonline.gif" />
     <Content Include="Content\jQuery-ui-cupertino\images\ui-anim_basic_16x16.gif" />
+    <Content Include="Content\loading.png" />
     <Content Include="Content\Multiflex\css\mf54_content_nosidebar.css" />
     <Content Include="Content\tiny_mce\jquery.tinymce.js" />
     <Content Include="Content\tiny_mce\langs\en.js" />
@@ -571,11 +572,9 @@
     <Content Include="Scripts\custom\global.js" />
     <Content Include="Scripts\highslide-with-gallery.packed.js" />
     <Content Include="Scripts\jquery-1.4.2-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.4.2.min.js" />
-    <Content Include="Scripts\jquery-ui-1.8.custom.min.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.lazyload.js" />
     <Content Include="Scripts\jquery.uploadify.v2.1.0.min.js" />
-    <Content Include="Scripts\swfobject.js" />
     <Content Include="Views\Admin\CategoryCreated.aspx" />
     <Content Include="Views\Admin\CreateForum.aspx" />
     <Content Include="Views\Admin\CreatePhotoCategory.aspx" />
@@ -604,8 +603,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Views\Account\LogOn.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />

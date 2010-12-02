@@ -1,6 +1,9 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.PhotoUpload>" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
+<asp:Content ID="Content3" ContentPlaceHolderID="Header" runat="server">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
     <%=  Resources.Navigation.Photos %>
     » <strong>
