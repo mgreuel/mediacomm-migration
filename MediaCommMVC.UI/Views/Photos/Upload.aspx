@@ -52,7 +52,7 @@
                 <td>
                 </td>
                 <td>
-                    <input type="button" class="button" value='<%= Resources.Photos.Upload %>' onclick="javascript:startUpload();" />
+                    <input id="uploadButton" type="button" class="button" value='<%= Resources.Photos.Upload %>' onclick="javascript:startUpload();" />
                 </td>
             </tr>
         </tbody>
@@ -68,6 +68,8 @@
                 var auth = "<% = Request.Cookies[FormsAuthentication.FormsCookieName]==null ? string.Empty : Request.Cookies[FormsAuthentication.FormsCookieName].Value %>";
 
                 $('#fileInput').uploadifySettings('scriptData', { 'Category.Id': $('#Category_Name :selected').val(), 'Category.Name': $('#Category_Name :selected').text(), 'Album.Name': $('#Album_Name').val(), "token": auth });
+
+                $("#uploadButton").hide("slow");
                 $('#fileInput').uploadifyUpload();
             }
         }
