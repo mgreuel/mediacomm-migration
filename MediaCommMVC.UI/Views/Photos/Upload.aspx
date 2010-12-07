@@ -11,15 +11,6 @@
     </strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <%
-        if (false)
-        {
-    %>
-    <script src="../../Scripts/jquery-1.4.2.min.js" type="text/javascript"></script>
-    <script src="../../Scripts/jquery.validate.min.js" type="text/javascript"></script>
-    <%
-        }
-    %>
     <%= Html.CombresLink("uploadJs")%>
     <% using (Html.BeginForm("Upload", "Photos", FormMethod.Post, new { enctype = "multipart/form-data" }))
        {%>
