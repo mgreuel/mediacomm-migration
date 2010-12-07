@@ -29,24 +29,12 @@
         </div>
     </div>
     <script type="text/javascript">
-
         $(document).ready(function ()
         {
-            $(".highslide > img:lt(15)").lazyload(
+            $(".highslide > img").lazyload(
             {
                 placeholder: "/Content/loading.png"
             });
-
-            $(".highslide > img").lazyload(
-            {
-                placeholder: "/Content/loading.png",
-                event: "lazy2"
-            });
-        });
-
-        $(window).bind("load", function ()
-        {
-            var timeout = setTimeout(function () { $("img:gt(14)").trigger("lazy2") }, 5000);
         });
     </script>
 </asp:Content>
