@@ -3,11 +3,10 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 
-using Combres;
-
 using log4net.Config;
 
 using MediaCommMVC.Common.Config;
+using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Data;
 using MediaCommMVC.Data.NHInfrastructure;
@@ -17,7 +16,7 @@ using MediaCommMVC.Data.Repositories;
 
 using Microsoft.Practices.Unity;
 
-using ILogger = MediaCommMVC.Common.Logging.ILogger;
+using WebExtensions = Combres.WebExtensions;
 
 #endregion
 
@@ -58,12 +57,18 @@ namespace MediaCommMVC.UI.Infrastructure
             this.ConfigureContainer();
             RegisterRoutes();
             RegisterControllerFactory();
-            this.ConfigureLog4Net();
+            ConfigureLog4Net();
         }
 
         #endregion
 
         #region Methods
+
+        /// <summary>Configures the log4net logger using the web.config.</summary>
+        private static void ConfigureLog4Net()
+        {
+            XmlConfigurator.Configure();
+        }
 
         /// <summary>Registers the controller factory.</summary>
         private static void RegisterControllerFactory()
@@ -76,7 +81,7 @@ namespace MediaCommMVC.UI.Infrastructure
         {
             RouteCollection routes = RouteTable.Routes;
 
-            routes.AddCombresRoute("Combres Route");
+            WebExtensions.AddCombresRoute(routes, "Combres Route");
             routes.IgnoreRoute("{*favicon}", new { favicon = @"(.*/)?favicon.ico(/.*)?" });
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
@@ -137,12 +142,6 @@ namespace MediaCommMVC.UI.Infrastructure
 
             this.RegisterNHibernateComponents();
             this.RegisterRepositories();
-        }
-
-        /// <summary>Configures the log4net logger using the web.config.</summary>
-        private void ConfigureLog4Net()
-        {
-            XmlConfigurator.Configure();
         }
 
         /// <summary>Registers the NNibernate components.</summary>
