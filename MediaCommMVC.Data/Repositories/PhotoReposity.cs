@@ -187,7 +187,6 @@ namespace MediaCommMVC.Data.Repositories
             return photo;
         }
 
-
         /// <summary>
         /// Gets the absolut path to store the photos for this album in.
         /// </summary>
@@ -264,18 +263,9 @@ namespace MediaCommMVC.Data.Repositories
                                 Uploader = uploader, 
                                 Width = width
                             };
-
-                        if (!session.Query<Photo>().Any(p =>
-                                p.FileName.Equals(photo.FileName) &&
-                                p.PhotoAlbum.Id == photo.PhotoAlbum.Id))
-                        {
+   
                             this.Logger.Debug("Adding photo '{0}' to the database");
                             session.Save(photo);
-                        }
-                        else
-                        {
-                            this.Logger.Debug("The photo '{0}' already exists in the database");
-                        }
                     }
                 });
 
