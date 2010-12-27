@@ -1,11 +1,8 @@
 <%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
-
 <%@ Import Namespace="MediaCommMVC.UI" %>
-
 <%@ Import Namespace="MediaCommMVC.Core.Model.Users" %>
-
 <%@ Import Namespace="MediaCommMVC.UI.Infrastructure" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,9 +10,11 @@
     <title>
         <%= Resources.General.Title %>
     </title>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
-   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" type="text/javascript"></script>
-   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js" type="text/javascript"></script>   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"
+        type="text/javascript"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"
+        type="text/javascript"></script>
     <%= Html.CombresLink("siteCss") %>
     <%= Html.CombresLink("siteJs")%>
     <asp:ContentPlaceHolder ID="Header" runat="server" />
@@ -24,49 +23,25 @@
 <!-- Following line MUST remain as a comment to have the proper effect -->
 <!--[if IE]><style type="text/css"> body {word-wrap: break-word;}</style><![endif]-->
 <body>
-    <!-- CONTAINER FOR ENTIRE PAGE -->
     <div class="container">
-        <!-- A. HEADER -->
         <div class="corner-page-top">
         </div>
         <div class="header">
             <div class="header-top">
-                <!-- A.1 SITENAME -->
-                <!-- <a class="sitelogo" href="index.html" title="Home"></a> -->
                 <div class="sitename">
                     <h1>
                         <a href="/" title="Home">
                             <%= Resources.General.Title %>
                         </a>
                     </h1>
-                    <!-- <h2>Open Source Designs</h2>-->
                 </div>
-                <!-- A.2 BUTTON NAVIGATION 
-        <div class="navbutton">
-          <ul>
-            <li><a href="#" title="English"><img src="./img/icon_flag_us.gif" alt="Flag" /></a></li>
-            <li><a href="#" title="Deutsch"><img src="./img/icon_flag_de.gif" alt="Flag" /></a></li>
-            <li><a href="#" title="Svenska"><img src="./img/icon_flag_se.gif" alt="Flag" /></a></li>
-            <li><a href="#" title="RSS"><img src="./img/icon_rss.gif" alt="RSS-Button" /></a></li>
-          </ul>
-        </div>-->
                 <div id="loginInfo">
                     <% Html.RenderPartial("LogOnUserControl"); %>
                 </div>
-                <!-- A.3 GLOBAL NAVIGATION -->
-                <%--                <div class="navglobal">
-                    <ul>
-                        <li><a href="#" title="">About</a></li>
-                        <li><a href="#" title="">Contact</a></li>
-                        <li><a href="#" title="">Sitemap</a></li>
-                        <li><a href="#" title="">Links</a></li>
-                    </ul>
-                </div>--%>
             </div>
         </div>
         <div class="corner-page-bottom">
         </div>
-        <!-- B. NAVIGATION BAR -->
         <div class="corner-page-top">
         </div>
         <div class="navbar">
@@ -107,7 +82,6 @@
                 </li>
             </ul>
             <% if (HttpContext.Current.User.IsInRole("Administrators"))
-                
                { %>
             <ul>
                 <li><a>
@@ -127,11 +101,7 @@
             </ul>
             <% } %>
         </div>
-        <!-- C. MAIN SECTION -->
         <div class="main">
-            <!-- <h1 class="pagetitle">
-               </h1> -->
-            <!-- C.1 CONTENT -->
             <div class="content">
                 <div class="corner-content-1col-top">
                 </div>
@@ -147,7 +117,6 @@
                 </div>
             </div>
         </div>
-        <!-- D. FOOTER -->
         <div class="footer">
             <p>
                 Copyright &copy;

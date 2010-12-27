@@ -121,8 +121,6 @@
                 onAllComplete: function (event, queueId, file, data)
                 {
                     $("form").submit();
-
-                    //setTimeout(function () { location.href = "/Photos/UploadSuccessFull"; }, 500);
                 }
             });
         }  

@@ -84,7 +84,7 @@ namespace MediaCommMVC.Data.Repositories
         public IEnumerable<PhotoAlbum> Get4NewestAlbums()
         {
             List<PhotoAlbum> albums =
-                this.Session.Linq<PhotoAlbum>().OrderByDescending(a => a.LastPicturesAdded).Take(4).ToList();
+                this.Session.Query<PhotoAlbum>().OrderByDescending(a => a.LastPicturesAdded).Take(4).ToList();
 
             return albums;
         }
@@ -96,7 +96,7 @@ namespace MediaCommMVC.Data.Repositories
         {
             this.Logger.Debug("Getting album with id '{0}'", albumId);
 
-            PhotoAlbum album = this.Session.Linq<PhotoAlbum>().Single(a => a.Id == albumId);
+            PhotoAlbum album = this.Session.Query<PhotoAlbum>().Single(a => a.Id == albumId);
 
             this.Logger.Debug("Got album: " + album);
 
@@ -111,7 +111,7 @@ namespace MediaCommMVC.Data.Repositories
         {
             this.Logger.Debug("Getting albums for category id '{0}'", catId);
             IEnumerable<PhotoAlbum> albums =
-                this.Session.Linq<PhotoAlbum>().Where(
+                this.Session.Query<PhotoAlbum>().Where(
                     a => a.PhotoCategory.Id == catId && a.Name.StartsWith(term)).
                     ToList();
 
@@ -125,7 +125,7 @@ namespace MediaCommMVC.Data.Repositories
         {
             this.Logger.Debug("Getting all photo catgories");
 
-            IEnumerable<PhotoCategory> categories = this.Session.Linq<PhotoCategory>().ToList();
+            IEnumerable<PhotoCategory> categories = this.Session.Query<PhotoCategory>().ToList();
 
             this.Logger.Debug("Got {0} photo categories", categories.Count());
             return categories;
@@ -241,7 +241,7 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Adding {0} photos from the folder to the database. Album: '{1}', Uploader: '{2}'", filesToAdd.Count(), album, uploader);
 
             PhotoAlbum photoAlbum =
-                this.Session.Linq<PhotoAlbum>().SingleOrDefault(
+                this.Session.Query<PhotoAlbum>().SingleOrDefault(
                     a => a.Name.Equals(album.Name)) ?? album;
 
             photoAlbum.LastPicturesAdded = DateTime.Now;
@@ -265,7 +265,7 @@ namespace MediaCommMVC.Data.Repositories
                                 Width = width
                             };
 
-                        if (!session.Linq<Photo>().Any(p =>
+                        if (!session.Query<Photo>().Any(p =>
                                 p.FileName.Equals(photo.FileName) &&
                                 p.PhotoAlbum.Id == photo.PhotoAlbum.Id))
                         {
