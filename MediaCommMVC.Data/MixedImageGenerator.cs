@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Security.Permissions;
+using System.Threading;
 
 using MediaCommMVC.Common.Config;
 using MediaCommMVC.Common.Logging;
@@ -62,8 +63,8 @@ namespace MediaCommMVC.Data
 
             string sourcePath = Path.Combine(pathToPhotos, unprocessedPhotosFolder);
 
-            GenerateSmallImages(pathToPhotos, sourcePath);
-            this.GenerateMediumAndLargeImages(pathToPhotos, sourcePath);
+            Tuple<string, string> paths = new Tuple<string, string>(pathToPhotos, sourcePath);
+            ThreadPool.QueueUserWorkItem(this.QueueImageGeneration, paths);
         }
 
         #endregion
@@ -72,12 +73,15 @@ namespace MediaCommMVC.Data
 
         #region Methods
 
-        /// <summary>Generates the small images.</summary>
-        /// <param name="targetPath">The target path.</param>
-        /// <param name="sourcePath">The source path.</param>
-        private static void GenerateSmallImages(string targetPath, string sourcePath)
+        /// <summary>
+        /// Generates the small images.
+        /// </summary>
+        /// <param name="pathsTupel">The paths tupel.</param>
+        private static void GenerateSmallImages(object pathsTupel)
         {
-            IEnumerable<FileInfo> originalImages = new DirectoryInfo(sourcePath).GetFiles();
+            Tuple<string, string> paths = (Tuple<string, string>)pathsTupel;
+
+            IEnumerable<FileInfo> originalImages = new DirectoryInfo(paths.Item2).GetFiles();
 
             foreach (FileInfo originalFile in originalImages)
             {
@@ -87,7 +91,7 @@ namespace MediaCommMVC.Data
                     {
                         string thumbFilename = string.Format(
                             "{0}small{1}", originalFile.Name.Replace(originalFile.Extension, string.Empty), originalFile.Extension);
-                        thumbnailImage.Save(Path.Combine(targetPath, thumbFilename), ImageFormat.Jpeg);
+                        thumbnailImage.Save(Path.Combine(paths.Item1, thumbFilename), ImageFormat.Jpeg);
                     }
                 }
             }
@@ -128,6 +132,18 @@ namespace MediaCommMVC.Data
 
             Process process = Process.Start(photoCreatorBatchPath, param);
             process.PriorityClass = ProcessPriorityClass.BelowNormal;
+        }
+
+        /// <summary>
+        /// Queues the image generation.
+        /// </summary>
+        /// <param name="pathsTupel">The paths tupel.</param>
+        private void QueueImageGeneration(object pathsTupel)
+        {
+            Tuple<string, string> paths = (Tuple<string, string>)pathsTupel;
+
+            GenerateSmallImages(pathsTupel);
+            this.GenerateMediumAndLargeImages(paths.Item1, paths.Item2);
         }
 
         #endregion

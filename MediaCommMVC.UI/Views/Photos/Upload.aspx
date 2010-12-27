@@ -66,7 +66,8 @@
 
                 $("#uploadButton").hide("slow");
                 $('#fileInput').uploadifyUpload();
-
+                $('#Category_Id option:not(:selected)').remove();
+                $('#Album_Name').attr('readonly', true);
                 $('html, body').animate({ scrollTop: 0 }, 'slow');
             }
         }
