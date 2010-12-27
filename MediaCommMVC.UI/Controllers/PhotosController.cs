@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -157,13 +158,15 @@ namespace MediaCommMVC.UI.Controllers
             return this.View(new PhotoUpload { Categories = categories });
         }
 
-        /// <summary>Uploads the zip file containing the photos.</summary>
+        /// <summary>
+        /// Uploads the zip file containing the photos.
+        /// </summary>
         /// <param name="category">The category.</param>
         /// <param name="album">The album.</param>
-        /// <param name="token">The authentication token.</param>
-        /// <returns>The uploaded view.</returns>
+        /// <param name="token">The forms authentication token.</param>
+        /// <returns>true or false, depending on the success.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
-        public string Upload(PhotoCategory category, PhotoAlbum album, string token)
+        public string UploadFile(PhotoCategory category, PhotoAlbum album, string token)
         {
             this.logger.Debug("Uploading file with category '{0}' and album '{1}'", category, album);
 
@@ -171,27 +174,21 @@ namespace MediaCommMVC.UI.Controllers
             {
                 try
                 {
-                    FormsIdentity uploaderIdentity = GetUploaderIdentity(token);
+                    if (string.IsNullOrEmpty(token) || !GetUploaderIdentity(token).IsAuthenticated)
+                    {
+                        throw new UnauthorizedAccessException("Anonymous upload is not allowed");
+                    }
 
                     category.Name = category.Name.Trim();
                     album.Name = album.Name.Trim();
                     album.PhotoCategory = category;
 
                     HttpPostedFileBase file = this.Request.Files[0];
-                    string directoryPath = this.configAccessor.GetConfigValue("PhotoRootDir");
+                    string directoryPath = this.photoRepository.GetStoragePathForAlbum(album);
                     string targetPath = Path.Combine(directoryPath, file.FileName);
-
-                    if (!Directory.Exists(directoryPath))
-                    {
-                        this.logger.Debug("The path '{0}' does not exist, creating now.", directoryPath);
-                        Directory.CreateDirectory(directoryPath);
-                    }
 
                     this.logger.Debug("Saving file '{0}'", targetPath);
                     file.SaveAs(targetPath);
-
-                    MediaCommUser uploader = this.userRepository.GetUserByName(uploaderIdentity.Name);
-                    this.photoRepository.ExtractAndAddPhotos(targetPath, album, uploader);
                 }
                 catch (Exception ex)
                 {
@@ -211,6 +208,25 @@ namespace MediaCommMVC.UI.Controllers
             return "true";
         }
 
+        /// <summary>
+        /// Uploads the zip file containing the photos.
+        /// </summary>
+        /// <param name="category">The category.</param>
+        /// <param name="album">The album.</param>
+        /// <returns>A redirect to the UploadSuccessfull action.</returns>
+        [Authorize]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult CompleteUpload(PhotoCategory category, PhotoAlbum album)
+        {
+            album.Name = album.Name.Trim();
+            album.PhotoCategory = this.photoRepository.GetCategoryById(category.Id);
+
+            MediaCommUser uploader = this.userRepository.GetUserByName(this.User.Identity.Name);
+            this.photoRepository.AddPhotos(album, uploader);
+
+            return this.RedirectToAction("UploadSuccessFull");
+        }
+
         /// <summary>Shows the uploads success full page.</summary>
         /// <returns>The upload successfull view.</returns>
         [HttpGet]
@@ -224,7 +240,7 @@ namespace MediaCommMVC.UI.Controllers
 
         #region Methods
 
-        /// <summary>Gets the uploader identity from the sepcified authentication token.</summary>
+        /// <summary>Gets the uploader identity from the specified authentication token.</summary>
         /// <param name="token">The token.</param>
         /// <returns>The identity.</returns>
         private static FormsIdentity GetUploaderIdentity(string token)

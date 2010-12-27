@@ -7,8 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-using ICSharpCode.SharpZipLib.Zip;
-
 using MediaCommMVC.Common.Config;
 using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
@@ -62,31 +60,23 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Adding photo category: " + category);
 
             this.InvokeTransaction(s => s.SaveOrUpdate(category));
-
-            this.Logger.Debug("Finished adding photo category");
         }
 
-        /// <summary>Extracts and deletes the zip file.</summary>
-        /// <param name="zipFilename">The zip filename.</param>
+        /// <summary>Adds the photos in the specified folder to the DB.</summary>
         /// <param name="album">The album.</param>
         /// <param name="uploader">The uploader.</param>
-        public void ExtractAndAddPhotos(string zipFilename, PhotoAlbum album, MediaCommUser uploader)
+        public void AddPhotos(PhotoAlbum album, MediaCommUser uploader)
         {
-            this.Logger.Debug("Extracting and adding photos. ZipFilename: '{0}', Album: '{1}, Uploader: '{2}'", zipFilename, album, uploader);
+            this.Logger.Debug("Extracting and adding photos. ZipFilename: '{0}', Album: '{1}, Uploader: '{2}'", album, uploader);
 
             string targetPath = this.GetTargetPath(album);
-            string supportedPhotoExt = this.ConfigAccessor.GetConfigValue("SupportedPhotoExt");
             string unprocessedPath = Path.Combine(targetPath, UnprocessedPhotosFolder);
-
-            this.ExtractAndDeleteZip(zipFilename, targetPath, supportedPhotoExt);
 
             IEnumerable<FileInfo> newFiles = this.MovePhotos(targetPath, unprocessedPath);
 
             this.AddPicturesToDB(newFiles, album, uploader);
 
             this.imageGenerator.GenerateImages(targetPath, UnprocessedPhotosFolder);
-
-            this.Logger.Debug("Finished extracting and adding photos");
         }
 
         /// <summary>Gets the 4 newest albums.</summary>
@@ -143,7 +133,7 @@ namespace MediaCommMVC.Data.Repositories
 
         /// <summary>Gets the category by id.</summary>
         /// <param name="id">The category id.</param>
-        /// <returns>THe photo category.</returns>
+        /// <returns>The photo category.</returns>
         public PhotoCategory GetCategoryById(int id)
         {
             PhotoCategory category = this.Session.Get<PhotoCategory>(id);
@@ -194,8 +184,27 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Getting photo with id '{0}'", id);
             Photo photo = this.Session.Get<Photo>(id);
 
-            this.Logger.Debug("Finished getting photo");
             return photo;
+        }
+
+
+        /// <summary>
+        /// Gets the absolut path to store the photos for this album in.
+        /// </summary>
+        /// <param name="album">The album.</param>
+        /// <returns>
+        /// The absolut path to store the photos for this album in.
+        /// </returns>
+        public string GetStoragePathForAlbum(PhotoAlbum album)
+        {
+            string storagePathForAlbum = Path.Combine(this.GetTargetPath(album), UnprocessedPhotosFolder);
+
+            if (!Directory.Exists(storagePathForAlbum))
+            {
+                Directory.CreateDirectory(storagePathForAlbum);
+            }
+
+            return storagePathForAlbum;
         }
 
         #endregion
@@ -205,11 +214,11 @@ namespace MediaCommMVC.Data.Repositories
         #region Methods
 
         /// <summary>Gets all files in the directory recursively.</summary>
-        /// <param name="dirInfo">The dirrecory info.</param>
+        /// <param name="directory">The dirrecory info.</param>
         /// <returns>All files.</returns>
-        private static IEnumerable<FileInfo> GetFilesRecursive(DirectoryInfo dirInfo)
+        private static IEnumerable<FileInfo> GetFilesRecursive(DirectoryInfo directory)
         {
-            foreach (DirectoryInfo di in dirInfo.GetDirectories())
+            foreach (DirectoryInfo di in directory.GetDirectories())
             {
                 foreach (FileInfo fi in GetFilesRecursive(di))
                 {
@@ -217,7 +226,7 @@ namespace MediaCommMVC.Data.Repositories
                 }
             }
 
-            foreach (FileInfo fi in dirInfo.GetFiles())
+            foreach (FileInfo fi in directory.GetFiles())
             {
                 yield return fi;
             }
@@ -271,24 +280,6 @@ namespace MediaCommMVC.Data.Repositories
                 });
 
             this.Logger.Debug("Finished adding photos to the database.");
-        }
-
-        /// <summary>Extracts deletes the zip file.</summary>
-        /// <param name="filename">The filename.</param>
-        /// <param name="targetPath">The target path.</param>
-        /// <param example=".jpg|.jpeg" name="extensionsToExtract">The extensions to extract.</param>
-        private void ExtractAndDeleteZip(string filename, string targetPath, string extensionsToExtract)
-        {
-            this.Logger.Debug("Extracting files with the extensions '{0}' from '{1}' to '{2}'", extensionsToExtract, filename, targetPath);
-
-            FastZip zip = new FastZip();
-            string unprocessedTargetPath = Path.Combine(targetPath, UnprocessedPhotosFolder);
-            zip.ExtractZip(filename, unprocessedTargetPath, extensionsToExtract);
-
-            this.Logger.Debug("Deleting file '{0}'", filename);
-            File.Delete(filename);
-
-            this.Logger.Debug("Finished extracting and deleting zip file");
         }
 
         /// <summary>Gets the path where the photos will be stored.</summary>

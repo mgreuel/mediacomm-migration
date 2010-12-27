@@ -19,11 +19,10 @@ namespace MediaCommMVC.Core.DataInterfaces
         /// <param name="category">The category.</param>
         void AddCategory(PhotoCategory category);
 
-        /// <summary>Extracts photos and adds them to the persistence layer.</summary>
-        /// <param name="zipFileName">Name of the zip file.</param>
+        /// <summary>Adds the photos in the specified folder to the persistens storage.</summary>
         /// <param name="album">The album.</param>
         /// <param name="uploader">The uploader.</param>
-        void ExtractAndAddPhotos(string zipFileName, PhotoAlbum album, MediaCommUser uploader);
+        void AddPhotos(PhotoAlbum album, MediaCommUser uploader);
 
         /// <summary>Gets the 4 newest albums.</summary>
         /// <returns>The 4 newest albums.</returns>
@@ -46,7 +45,7 @@ namespace MediaCommMVC.Core.DataInterfaces
 
         /// <summary>Gets the category by id.</summary>
         /// <param name="id">The category id.</param>
-        /// <returns>THe photo category.</returns>
+        /// <returns>The photo category.</returns>
         PhotoCategory GetCategoryById(int id);
 
         /// <summary>Gets the image.</summary>
@@ -59,6 +58,13 @@ namespace MediaCommMVC.Core.DataInterfaces
         /// <param name="id">The photo id.</param>
         /// <returns>The photo.</returns>
         Photo GetPhotoById(int id);
+
+        /// <summary>
+        /// Gets the absolut path to store the photos for this album in.
+        /// </summary>
+        /// <param name="album">The album.</param>
+        /// <returns>The absolut path to store the photos for this album in.</returns>
+        string GetStoragePathForAlbum(PhotoAlbum album);
 
         #endregion
     }
