@@ -126,7 +126,8 @@ namespace MediaCommMVC.Data
 
             this.logger.Debug("Executing '{0}' with parameters '{1}'", photoCreatorBatchPath, param);
 
-            Process.Start(photoCreatorBatchPath, param);
+            Process process = Process.Start(photoCreatorBatchPath, param);
+            process.PriorityClass = ProcessPriorityClass.BelowNormal;
         }
 
         #endregion

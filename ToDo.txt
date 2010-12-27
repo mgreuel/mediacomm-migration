@@ -24,6 +24,7 @@ General:
 - cleanup and check routes
 - mvc 3
 - introduce view models
+- code contracts
 
 * Videos
 
