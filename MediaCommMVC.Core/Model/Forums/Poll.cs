@@ -31,10 +31,6 @@ namespace MediaCommMVC.Core.Model.Forums
         /// <value>The title of the poll.</value>
         public virtual string Question { get; set; }
 
-        /// <summary>Gets or sets the topic the poll belongs to.</summary>
-        /// <value>The forum topic.</value>
-        public virtual Topic Topic { get; set; }
-
         /// <summary>Gets or sets the type of the poll.
         /// <example>
         ///     Single Answer or multiple answers.</example>
