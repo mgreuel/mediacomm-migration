@@ -130,7 +130,6 @@ namespace MediaCommMVC.UI.Controllers
 
             if (poll != null && !string.IsNullOrEmpty(poll.Question))
             {
-                poll.Topic = topic;
                 topic.Poll = poll;
             }
 
