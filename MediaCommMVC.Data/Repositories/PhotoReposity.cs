@@ -302,7 +302,7 @@ namespace MediaCommMVC.Data.Repositories
             this.Logger.Debug("Getting valid directory name for '{0}'", directoryName);
 
             string invalidChars = Regex.Escape(new string(Path.GetInvalidFileNameChars()));
-            invalidChars += " ";
+            invalidChars += " &";
             string invalidReStr = string.Format(@"[{0}]", invalidChars);
             string validName = Regex.Replace(directoryName, invalidReStr, "_");
 
