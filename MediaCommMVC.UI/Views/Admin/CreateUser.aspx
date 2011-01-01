@@ -17,7 +17,7 @@
                     <%= Resources.Users.UserName %>:</label>
             </td>
             <td class="secondColumn">
-                <%= Html.TextBox("userName", null, new { @class="required", minlength = "5", maxlength = "50" })%>
+                <%= Html.TextBox("userName", null, new { @class="required", minlength = "3", maxlength = "50" })%>
             </td>
         </tr>
         <tr>
