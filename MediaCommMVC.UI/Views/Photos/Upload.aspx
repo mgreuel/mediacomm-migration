@@ -62,7 +62,7 @@
             {
                 var auth = "<% = Request.Cookies[FormsAuthentication.FormsCookieName]==null ? string.Empty : Request.Cookies[FormsAuthentication.FormsCookieName].Value %>";
 
-                $('#fileInput').uploadifySettings('scriptData', { 'Category.Id': $('#Category_Id :selected').val(), 'Category.Name': $('#Category_Id :selected').text(), 'Album.Name': $('#Album_Name').val(), "token": auth });
+                $('#fileInput').uploadifySettings('scriptData', { 'Category.Id': $('#Category_Id :selected').val(), 'Category.Name': encodeURIComponent($('#Category_Id :selected').text()), 'Album.Name': encodeURIComponent($('#Album_Name').val()), "token": auth });
 
                 $("#uploadButton").hide("slow");
                 $('#fileInput').uploadifyUpload();

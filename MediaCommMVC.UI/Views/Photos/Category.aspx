@@ -1,11 +1,10 @@
-<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Photos.PhotoCategory>"
-    MasterPageFile="~/Views/Shared/Site.Master" %>
+<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Photos.PhotoCategory>"MasterPageFile="~/Views/Shared/Site.Master" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="BreadCrumbContent" runat="server">
-  <%= Resources.Navigation.Photos %>
+    <%= Resources.Navigation.Photos %>
     » <strong>
         <%= Html.ActionLink(Model.Name, "Category", new { id = Model.Id, name = Url.ToFriendlyUrl(Model.Name) } ) %>
     </strong>
@@ -15,7 +14,7 @@
         <ul>
             <% foreach (var album in Model.Albums)
                { %>
-            <li><a href='<%= string.Format("/Photos/Album/{0}/{1}", album.Id, album.Name) %>'>
+            <li><a href='<%= string.Format("/Photos/Album/{0}/{1}", album.Id,  Url.ToFriendlyUrl(album.Name)) %>'>
                 <div class="albumTitle">
                     <%= album.Name %>
                 </div>
