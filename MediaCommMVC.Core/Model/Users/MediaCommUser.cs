@@ -41,10 +41,9 @@ namespace MediaCommMVC.Core.Model.Users
         /// <value>The user's date of birth.</value>
         public virtual DateTime? DateOfBirth { get; set; }
 
-        /// <summary>Gets or sets the user's E-Mail address.
-        ///   The E-Mail address should only be set within the constructor or by the ORM.</summary>
+        /// <summary>Gets or sets the user's E-Mail address.</summary>
         /// <value>The user's E-Mail address.</value>
-        public virtual string EMailAddress { get; protected set; }
+        public virtual string EMailAddress { get;  set; }
 
         /// <summary>Gets or sets the user's first name.</summary>
         /// <value>The user's first name.</value>

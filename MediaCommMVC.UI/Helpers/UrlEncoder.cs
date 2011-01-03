@@ -64,7 +64,6 @@ namespace MediaCommMVC.UI.Helpers
             }
 
             return urlToEncode;
-
         }
 
         #endregion

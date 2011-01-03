@@ -68,7 +68,7 @@ namespace MediaCommMVC.UI.Controllers
 
             MediaCommUser user = this.userRepository.GetUserByName(username);
 
-            this.UpdateModel(user, "user", null, new[] { "Id", "DateOfBirth", "LastVisit", "EMailAddress", "UserName" });
+            this.UpdateModel(user, "user", null, new[] { "Id", "LastVisit", "UserName", "DateOfBirth" });
 
             this.ViewData["ChangesSaved"] = General.ChangesSaved;
 
