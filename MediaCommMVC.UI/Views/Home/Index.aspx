@@ -61,7 +61,7 @@
                 <ul>
                     <% foreach (var album in Model.Albums)
                        { %>
-                    <li><a href='<%= string.Format("/Photos/Album/{0}/{1}", album.Id, album.Name) %>'>
+                    <li><a href='<%= string.Format("/Photos/Album/{0}/{1}", album.Id, Url.ToFriendlyUrl(album.Name)) %>'>
                         <div class="albumTitle">
                             <%= album.Name %>
                         </div>
