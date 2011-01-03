@@ -37,7 +37,7 @@
                     :</label>
             </td>
             <td class="secondColumn">
-                <%= Html.TextBox("mailAddress", null, new { @class="required email"})%>
+                <%= Html.TextBox("mailAddress", null, new { @class="required email" })%>
             </td>
         </tr>
         <tr>

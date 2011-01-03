@@ -27,6 +27,14 @@
                 <%= Html.TextBox("user.LastName", Model.LastName, new { minlength = "2", maxlength="75"})%>
             </td>
         </tr>
+<%--        <tr>
+            <td>
+                <%= Resources.Users.DateOfBirth %>:
+            </td>
+            <td>
+                <%= Html.TextBox("user.DateOfBirth", Model.DateOfBirth, new { @class = "date" })%>
+            </td>
+        </tr>--%>
         <tr>
             <td>
                 <%= Resources.Users.Street%>:
@@ -69,6 +77,14 @@
         </tr>
         <tr>
             <td>
+                <%= Resources.Users.EMailAddress%>:
+            </td>
+            <td>
+                <%= Html.TextBox("user.EMailAddress", Model.EMailAddress, new { @class = "required email" })%>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <%= Resources.Users.ICQUin%>:
             </td>
             <td>
@@ -98,12 +114,14 @@
            }%>
     </p>
     <% } %>
-    <script language="javascript" type="text/javascript">
+    <script type="text/javascript">
 
         $(document).ready(function ()
         {
             $("#myProfileTable > tbody > tr > td:nth-child(odd)")._addClass("firstColumn");
             $("#myProfileTable > tbody > tr > td:nth-child(even)")._addClass("secondColumn");
+
+            $("#user_DateOfBirth").datepicker();
 
             $("form").validate();
         });
