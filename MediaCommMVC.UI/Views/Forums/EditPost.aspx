@@ -9,7 +9,7 @@
     »
     <%= Html.ActionLink(Model.Topic.Forum.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Topic.Forum.Title), id = Model.Topic.Forum.Id })   %>
     »
-    <%=  Html.ActionLink(Model.Topic.Title, "Topic", new { name = Model.Topic.Title, Id = Model.Topic.Id }) %>
+    <%=  Html.ActionLink(Model.Topic.Title, "Topic", new { name =  Url.ToFriendlyUrl(Model.Topic.Title), Id = Model.Topic.Id }) %>
     » <strong>
         <%= Resources.Forums.EditPost %>
     </strong>
