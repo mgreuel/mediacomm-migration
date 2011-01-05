@@ -301,10 +301,9 @@ namespace MediaCommMVC.Data.Repositories
         {
             this.Logger.Debug("Getting valid directory name for '{0}'", directoryName);
 
-            string invalidChars = Regex.Escape(new string(Path.GetInvalidFileNameChars()));
-            invalidChars += " &";
-            string invalidReStr = string.Format(@"[{0}]", invalidChars);
-            string validName = Regex.Replace(directoryName, invalidReStr, "_");
+            char[] invalidChars = Path.GetInvalidFileNameChars().Concat(Path.GetInvalidPathChars()).Distinct().ToArray();
+            string invalidCharsRegexString = string.Format(@"[{0}]", Regex.Escape(new string(invalidChars) + " $.§ß%^&;=,'^´`#"));
+            string validName = Regex.Replace(directoryName, invalidCharsRegexString, "_");
 
             this.Logger.Debug("Got '{0}' as valid directory name", validName);
 
