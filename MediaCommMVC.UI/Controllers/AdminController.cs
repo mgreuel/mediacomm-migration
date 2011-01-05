@@ -13,8 +13,7 @@ namespace MediaCommMVC.UI.Controllers
     /// <summary>
     ///   The Admin controller.
     /// </summary>
-#warning reimplement roles
-    [Authorize]
+    [Authorize(Roles = "Administrators")]
     public class AdminController : Controller
     {
         #region Constants and Fields
