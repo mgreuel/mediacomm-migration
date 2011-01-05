@@ -7,6 +7,7 @@ using System.Web.Security;
 
 using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
+using MediaCommMVC.Core.Model.Users;
 using MediaCommMVC.UI.ViewModel.Account;
 
 #endregion
@@ -77,7 +78,8 @@ namespace MediaCommMVC.UI.Controllers
                 {
                     string roles = string.Empty;
 
-                    if (this.userRepository.GetUserByName(userLogin.UserName).IsAdmin)
+                    MediaCommUser user = this.userRepository.GetUserByName(userLogin.UserName);
+                    if (user.IsAdmin)
                     {
                         roles = "Administrators";
                     }
@@ -86,12 +88,15 @@ namespace MediaCommMVC.UI.Controllers
                         version: 1,
                         name: userLogin.UserName,
                         issueDate: DateTime.Now,
-                        expiration: DateTime.Now.AddMonths(1),
+                        expiration: DateTime.Now.AddDays(7),
                         isPersistent: userLogin.RememberMe,
                         userData: roles);
 
                     string encTicket = FormsAuthentication.Encrypt(authTicket);
                     this.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+
+                    user.LastVisit = DateTime.Now;
+                    this.userRepository.UpdateUser(user);
 
                     return !string.IsNullOrEmpty(returnUrl)
                                ? (ActionResult)this.Redirect(returnUrl)

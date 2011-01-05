@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using System.Web.Security;
 
 using MediaCommMVC.Common.Logging;
+using MediaCommMVC.Core.DataInterfaces;
+using MediaCommMVC.Core.Model.Users;
 using MediaCommMVC.UI.Infrastructure;
 
 using Microsoft.Practices.Unity;
