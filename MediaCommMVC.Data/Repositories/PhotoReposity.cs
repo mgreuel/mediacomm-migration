@@ -67,7 +67,7 @@ namespace MediaCommMVC.Data.Repositories
         /// <param name="uploader">The uploader.</param>
         public void AddPhotos(PhotoAlbum album, MediaCommUser uploader)
         {
-            this.Logger.Debug("Extracting and adding photos. ZipFilename: '{0}', Album: '{1}, Uploader: '{2}'", album, uploader);
+            this.Logger.Debug("Extracting and adding photos.Album: '{0}, Uploader: '{1}'", album, uploader);
 
             string targetPath = this.GetTargetPath(album);
             string unprocessedPath = Path.Combine(targetPath, UnprocessedPhotosFolder);
