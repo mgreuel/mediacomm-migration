@@ -84,16 +84,21 @@ namespace MediaCommMVC.UI.Controllers
                         roles = "Administrators";
                     }
 
+                    DateTime expiration = DateTime.Now.AddDays(7);
+
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
                         version: 1,
                         name: userLogin.UserName,
                         issueDate: DateTime.Now,
-                        expiration: DateTime.Now.AddDays(7),
+                        expiration: expiration,
                         isPersistent: userLogin.RememberMe,
-                        userData: roles);
+                        userData: roles,
+                        cookiePath: FormsAuthentication.FormsCookiePath);
 
                     string encTicket = FormsAuthentication.Encrypt(authTicket);
-                    this.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+                    HttpCookie httpCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
+                    httpCookie.Expires = expiration;
+                    this.Response.Cookies.Add(httpCookie);
 
                     user.LastVisit = DateTime.Now;
                     this.userRepository.UpdateUser(user);
