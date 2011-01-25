@@ -166,7 +166,7 @@ namespace MediaCommMVC.UI.Controllers
 
             this.forumRepository.UpdatePost(postToUpdate);
 
-            string url = this.GetPostUrl(id, postToUpdate);
+            string url = this.GetPostUrl(postToUpdate.Topic.Id, postToUpdate);
             return this.Redirect(url);
         }
 
