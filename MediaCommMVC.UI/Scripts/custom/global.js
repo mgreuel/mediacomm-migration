@@ -1,5 +1,7 @@
 ﻿$(document).ready(function ()
 {
+    $('a[href^="http://"]').attr("target", "_blank");
+
     $("button, input:submit, .button").button();
 
     $.getJSON("/Photos/GetCategories", function (categories)
