@@ -30,8 +30,8 @@
             </thead>
             <tbody>
                 <%
-                    foreach (KeyValuePair<PollAnswer, int> answerWithCount in this.Model.Topic.Poll.UserAnswersWithCount)
-                    {%>
+           foreach (KeyValuePair<PollAnswer, int> answerWithCount in this.Model.Topic.Poll.UserAnswersWithCount)
+           {%>
                 <tr>
                     <td>
                         <%:answerWithCount.Key.Text%>
@@ -42,27 +42,27 @@
                     </td>
                     <td style="width: 50px; text-align: right">
                         <%
-                            this.Writer.Write(
-                                (totalAnswers != 0
-                                     ? Math.Round(
-                                         Convert.ToDouble(
-                                             (Convert.ToDouble(answerWithCount.Value) / Convert.ToDouble(totalAnswers)) * 100),
-                                         2)
-                                     : Math.Round(0f, 2)) + "%");
+               this.Writer.Write(
+                   (totalAnswers != 0
+                        ? Math.Round(
+                            Convert.ToDouble(
+                                (Convert.ToDouble(answerWithCount.Value) / Convert.ToDouble(totalAnswers)) * 100),
+                            2)
+                        : Math.Round(0f, 2)) + "%");
                         %>
                     </td>
                 </tr>
                 <%
-                    }%>
+           }%>
             </tbody>
         </table>
         <%
-            if (
-                !this.Model.Topic.Poll.UserAnswers.Any(
-                    ua => ua.User.UserName.Equals(this.User.Identity.Name, StringComparison.OrdinalIgnoreCase)))
-            {
-                using (Html.BeginForm("AnswerPoll", "Forums"))
-                {%>
+           if (
+               !this.Model.Topic.Poll.UserAnswers.Any(
+                   ua => ua.User.UserName.Equals(this.User.Identity.Name, StringComparison.OrdinalIgnoreCase)))
+           {
+               using (Html.BeginForm("AnswerPoll", "Forums"))
+               {%>
         <%=Html.Hidden("pollId", this.Model.Topic.Poll.Id)%>
         <table id="pollQuestions" class="pollTable">
             <thead>
@@ -76,19 +76,19 @@
             </thead>
             <tbody>
                 <%
-                    foreach (PollAnswer possibleAnswer in this.Model.Topic.Poll.PossibleAnswers)
-                    {
+                   foreach (PollAnswer possibleAnswer in this.Model.Topic.Poll.PossibleAnswers)
+                   {
                 %>
                 <tr>
                     <td>
                         <%
-                            if (this.Model.Topic.Poll.Type == PollType.SingleAnswer)
-                            {%>
+                        if (this.Model.Topic.Poll.Type == PollType.SingleAnswer)
+                        {%>
                         <input type="radio" class="pollAnswerInput" name="answerIds" value="<%=possibleAnswer.Id%>" />
                         <%
-                            }
-                       else if (this.Model.Topic.Poll.Type == PollType.MultiAnswer)
-                       {%>
+                        }
+                        else if (this.Model.Topic.Poll.Type == PollType.MultiAnswer)
+                        {%>
                         <input type="checkbox" name="answerIds" value="<%=possibleAnswer.Id%>" />
                         <%
                             }%>
@@ -104,12 +104,12 @@
         </table>
         <input type="submit" class="button" value="<%=Resources.Forums.SubmitVote%>" />
         <%
-            }
+               }
            }
         %>
     </div>
     <%
-        }%>
+       }%>
     <div id="topicHeader">
         <div class="forumPager forumPagerTop">
             <%=
@@ -147,11 +147,19 @@
                 <td class="postText">
                     <div class="postOptions">
                         <%
-                            if (post.Author.UserName.Equals(this.User.Identity.Name, StringComparison.OrdinalIgnoreCase) ||
-                                HttpContext.Current.User.IsInRole("Administrators"))
-                            {
-                                Writer.Write(Html.ActionLink(Resources.Forums.Edit, "EditPost", new { id = post.Id }));
-                            }%>
+                    if (post.Author.UserName.Equals(this.User.Identity.Name, StringComparison.OrdinalIgnoreCase) ||
+                        HttpContext.Current.User.IsInRole("Administrators"))
+                    {
+                        Writer.Write(Html.ActionLink(Resources.Forums.Edit, "EditPost", new { id = post.Id }));
+
+                        using (Html.BeginForm("DeletePost", "Forums", new { id = post.Id }))
+                        {
+                        %>
+                        <a id='<%= "submitDelete_" + post.Id %>' class="deletePost" href="#">
+                            <%=Resources.Forums.Delete%></a>
+                        <%
+                        }
+                    }%>
                     </div>
                     <div>
                         <%=post.Text%>
@@ -190,6 +198,11 @@
             {
                 var content = tinyMCE.activeEditor.getContent();
                 $('#post_Text').val(content);
+            });
+
+            $(".deletePost").click(function ()
+            {
+                $(this).closest("form").submit();
             });
 
             $("form").validate();

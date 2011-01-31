@@ -433,8 +433,8 @@ namespace MediaCommMVC.Data.Repositories
         private void DeleteTopic(Topic topic, ISession session)
         {
             this.Logger.Debug("Deleting all posts in the topic: " + topic);
-            session.Query<Post>().Where(p => p.Topic.Equals(topic)).ToList()
-                .ForEach(session.Delete);
+            session.Query<Post>().Where(p => p.Topic.Id == topic.Id).ToList().ForEach(session.Delete);
+            session.Query<TopicRead>().Where(tr => tr.ReadTopic.Id == topic.Id).ForEach(session.Delete);
 
             this.Logger.Debug("Deleting topic: " + topic);
             session.Delete(topic);

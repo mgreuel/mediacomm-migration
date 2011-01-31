@@ -27,7 +27,7 @@ namespace MediaCommMVC.Data.NHInfrastructure.Mapping
             mapping.Map(t => t.Title).Not.Nullable();
             mapping.References(t => t.Poll).Cascade.All();
             mapping.IgnoreProperty(t => t.ReadByCurrentUser);
-            mapping.HasManyToMany(t => t.ExcludedUsers).Table("ForumTopicsExcludedUsers").Cascade.SaveUpdate();
+            mapping.HasManyToMany(t => t.ExcludedUsers).Table("ForumTopicsExcludedUsers").Cascade.None();
         }
 
         #endregion
