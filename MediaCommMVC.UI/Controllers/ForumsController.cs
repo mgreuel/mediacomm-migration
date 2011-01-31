@@ -24,7 +24,7 @@ namespace MediaCommMVC.UI.Controllers
         #region Constants and Fields
 
         /// <summary>The number of posts displayed per page.</summary>
-        private const int PostsPerTopicPage = 10;
+        private const int PostsPerTopicPage = 15;
 
         /// <summary>The number of topics displayed per page.</summary>
         private const int TopicsPerForumPage = 25;
@@ -193,7 +193,7 @@ namespace MediaCommMVC.UI.Controllers
 
             PagingParameters pagingParameters = new PagingParameters
                 {
-                    CurrentPage = page, 
+                    CurrentPage = page,
                     PageSize = TopicsPerForumPage
                 };
 
@@ -238,7 +238,7 @@ namespace MediaCommMVC.UI.Controllers
 
             PagingParameters pagingParameters = new PagingParameters
                 {
-                    CurrentPage = page, 
+                    CurrentPage = page,
                     PageSize = PostsPerTopicPage
                 };
 
@@ -249,6 +249,31 @@ namespace MediaCommMVC.UI.Controllers
                 id, pagingParameters, this.userRepository.GetUserByName(this.User.Identity.Name));
 
             return this.View(new TopicPage { Topic = topic, Posts = posts, PagingParameters = pagingParameters });
+        }
+
+        /// <summary>
+        /// Deletes the post with the speciofied id.
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <returns>The topic the post belonged to.</returns>
+        [HttpPost]
+        public ActionResult DeletePost(int id)
+        {
+#warning check if allowed
+            Post postToDelete = this.forumRepository.GetPostById(id);
+            this.forumRepository.DeletePost(postToDelete);
+
+            if (this.forumRepository.GetTopicById(id) != null)
+            {
+                return this.RedirectToAction(
+                    "Topic", new { id = postToDelete.Topic.Id, name = this.Url.ToFriendlyUrl(postToDelete.Topic.Title) });
+            }
+            else
+            {
+                return this.RedirectToAction(
+                    "Forum",
+                    new { id = postToDelete.Topic.Forum.Id, name = Url.ToFriendlyUrl(postToDelete.Topic.Forum.Title) });
+            }
         }
 
         /// <summary>Adds a new reply to the topic.</summary>
