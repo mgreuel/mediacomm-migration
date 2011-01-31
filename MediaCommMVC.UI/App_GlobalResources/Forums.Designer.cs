@@ -205,6 +205,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invisible for: .
+        /// </summary>
+        internal static string InvisibleFor {
+            get {
+                return ResourceManager.GetString("InvisibleFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Post.
         /// </summary>
         internal static string LastPost {
@@ -277,7 +286,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PollType.
+        ///   Looks up a localized string similar to Type.
         /// </summary>
         internal static string PollType {
             get {

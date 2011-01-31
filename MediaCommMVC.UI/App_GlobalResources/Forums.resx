@@ -225,4 +225,7 @@
   <data name="PollResults" xml:space="preserve">
     <value>Results</value>
   </data>
+  <data name="InvisibleFor" xml:space="preserve">
+    <value>Invisible for: </value>
+  </data>
 </root>
