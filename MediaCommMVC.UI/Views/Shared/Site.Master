@@ -63,6 +63,15 @@
                     </ul>
                 </li>
             </ul>
+                        <ul>
+                <li><a>
+                    <%= Resources.Navigation.Videos %></a>
+                    <ul id="videonavi">
+                        <li>
+                            <%= Html.ActionLink(Resources.Videos.Upload, "Upload", "Videos") %></li>
+                    </ul>
+                </li>
+            </ul>
             <ul>
                 <li>
                     <%= Html.ActionLink(Resources.Navigation.Movies, "Index", "Movies") %>

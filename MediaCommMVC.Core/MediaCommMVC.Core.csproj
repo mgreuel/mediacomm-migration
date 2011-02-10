@@ -70,6 +70,8 @@
     <Compile Include="Model\Photos\PhotoAlbum.cs" />
     <Compile Include="Model\Photos\PhotoCategory.cs" />
     <Compile Include="Model\Users\MediaCommUser.cs" />
+    <Compile Include="Model\Videos\Video.cs" />
+    <Compile Include="Model\Videos\VideoCategory.cs" />
     <Compile Include="Parameters\PagingParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

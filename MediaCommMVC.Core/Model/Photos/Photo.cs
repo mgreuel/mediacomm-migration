@@ -11,8 +11,8 @@ namespace MediaCommMVC.Core.Model.Photos
     {
         #region Properties
 
-        /// <summary>Gets or sets the name.</summary>
-        /// <value>The Photo's name.</value>
+        /// <summary>Gets or sets the filename.</summary>
+        /// <value>The Photo's filename.</value>
         public virtual string FileName { get; set; }
 
         /// <summary>Gets or sets the size of the file.</summary>
