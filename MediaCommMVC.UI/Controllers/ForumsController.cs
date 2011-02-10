@@ -252,9 +252,9 @@ namespace MediaCommMVC.UI.Controllers
         }
 
         /// <summary>
-        /// Deletes the post with the speciofied id.
+        /// Deletes the post with the specified id.
         /// </summary>
-        /// <param name="id">The id.</param>
+        /// <param name="id">The post id.</param>
         /// <returns>The topic the post belonged to.</returns>
         [HttpPost]
         public ActionResult DeletePost(int id)

@@ -165,6 +165,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Users.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Videos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Videos.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\VideosController.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\IconHelper.cs" />
     <Compile Include="Helpers\Pagination.cs" />
@@ -611,6 +617,7 @@
     <Content Include="Views\Users\Index.aspx" />
     <Content Include="Views\Users\MyProfile.aspx" />
     <Content Include="Views\Users\Profile.aspx" />
+    <Content Include="Views\Videos\Category.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -694,6 +701,12 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Home.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Videos.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Videos.Designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -11,4 +11,12 @@
             $("#photonavi").append("<li><a href='/Photos/Category/" + this.Id + "/" + this.EncodedName + "'>" + this.Name + " (" + this.AlbumCount + ")</a></li>");
         })
     })
+
+    $.getJSON("/Videos/GetCategories", function (categories)
+    {
+        $.each(categories, function ()
+        {
+            $("#videonavi").append("<li><a href='/Videos/Category/" + this.Id + "/" + this.EncodedName + "'>" + this.Name + " (" + this.VideoCount + ")</a></li>");
+        })
+    })
 });

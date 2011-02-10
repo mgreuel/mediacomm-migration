@@ -94,7 +94,7 @@ namespace MediaCommMVC.UI.Controllers
         /// <param name="id">The cat id.</param>
         /// <param name="term">The term the album starts with.</param>
         /// <returns>All matching albums.</returns>
-        [HttpGet]
+        [HttpGet]   
         [Authorize]
         public ActionResult GetAlbumsForCategoryId(int id, string term)
         {
@@ -113,7 +113,7 @@ namespace MediaCommMVC.UI.Controllers
         /// <returns>The photo categories as Json string.</returns>
         [HttpGet]
         [Authorize]
-        [OutputCache(Duration = 60, VaryByParam = "")]
+        [OutputCache(Duration = 3600, VaryByParam = "")]
         public ActionResult GetCategories()
         {
             IEnumerable<PhotoCategory> categories = this.photoRepository.GetAllCategories();
