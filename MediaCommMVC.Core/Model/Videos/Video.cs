@@ -31,5 +31,7 @@ namespace MediaCommMVC.Core.Model.Videos
         public virtual MediaCommUser Uploader { get; set; }
 
         public virtual string Title { get; set; }
+
+        public virtual VideoCategory VideoCategory { get; set; }
     }
 }

@@ -14,7 +14,7 @@
                 <div class="albumCover">
                     <img src='<%= string.Format("/Videos/Video/{0}/{1}/Cover", video.Id,  Url.ToFriendlyUrl(video.Title)) %>'></div>
                 <div class="imageSub">
-                    ></div>
+                    </div>
             </a></li>
             <% } %>
         </ul>
