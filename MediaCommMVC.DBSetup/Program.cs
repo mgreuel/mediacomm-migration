@@ -54,8 +54,7 @@ namespace MediaCommMVC.DBSetup
         /// <summary>
         /// Generates a FluentConfiguration.
         /// </summary>
-        /// <returns>
-        /// The FluentConfiguration.
+        /// <returns>/// The FluentConfiguration.
         /// </returns>
         public static FluentConfiguration Generate()
         {
