@@ -1,0 +1,61 @@
+﻿h2
+{
+    font-size: 160%;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+#editMovie td
+{
+    padding-top: 5px;
+}
+
+#editMovie td.leftTd
+{
+    width: 20%;
+    padding-right: 5px;
+    text-align: right;
+}
+
+#editMovie td.rightTd
+{
+    width: 80%;
+    text-align: left;
+}
+
+#editMovie table
+{
+    width: 100%;
+}
+
+#editMovie select
+{
+    width: 50px;    
+}
+
+#editMovie input[type=text]
+{
+    width: 220px;    
+}
+
+.centerDiv
+{
+    margin-top: 5px;
+    text-align: center;
+    margin:0 auto;
+}
+
+#movieTable
+{
+    width: 100%;
+}
+
+#movieTable th
+{
+    /*font-size: 150%;*/
+}
+
+#userTable
+{
+    margin-bottom: 6px;
+}
