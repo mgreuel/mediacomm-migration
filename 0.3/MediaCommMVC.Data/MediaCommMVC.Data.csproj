@@ -124,6 +124,7 @@
     <Compile Include="Repositories\PhotoReposity.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\VideoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MediaCommMVC.Common\MediaCommMVC.Common.csproj">
