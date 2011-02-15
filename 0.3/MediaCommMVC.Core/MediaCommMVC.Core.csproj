@@ -53,6 +53,7 @@
     <Compile Include="DataInterfaces\IMovieRepository.cs" />
     <Compile Include="DataInterfaces\IPhotoRepository.cs" />
     <Compile Include="DataInterfaces\IUserRepository.cs" />
+    <Compile Include="DataInterfaces\IVideoRepository.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\Forums\Forum.cs" />
     <Compile Include="Model\Forums\Poll.cs" />
