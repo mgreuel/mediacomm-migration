@@ -150,32 +150,19 @@ namespace MediaCommMVC.UI.Infrastructure
             this.container.RegisterType(typeof(IAutoMapGenerator), typeof(AutoMapGenerator));
             this.container.RegisterType(typeof(IConfigurationGenerator), typeof(ConfigurationGenerator));
 
-            WebSessionManager webSessionManager =
-                new WebSessionManager(
-                    (IConfigurationGenerator)this.container.Resolve(typeof(IConfigurationGenerator)), 
-                    (ILogger)this.container.Resolve(typeof(ILogger)));
+            WebSessionManager webSessionManager = new WebSessionManager(
+                this.container.Resolve<IConfigurationGenerator>(), this.container.Resolve<ILogger>());
             this.container.RegisterInstance(typeof(ISessionManager), webSessionManager);
         }
 
         /// <summary>Registers the repositories.</summary>
         private void RegisterRepositories()
         {
-            this.container.RegisterType(
-                typeof(IForumRepository), 
-                typeof(ForumRepository), 
-                new HttpContextLifetimeManager<ForumRepository>());
-            this.container.RegisterType(
-                typeof(IPhotoRepository), 
-                typeof(PhotoRepository), 
-                new HttpContextLifetimeManager<PhotoRepository>());
-            this.container.RegisterType(
-                typeof(IMovieRepository), 
-                typeof(MovieRepository), 
-                new HttpContextLifetimeManager<MovieRepository>());
-            this.container.RegisterType(
-                typeof(IUserRepository), 
-                typeof(UserRepository), 
-                new HttpContextLifetimeManager<UserRepository>());
+            this.container.RegisterType(typeof(IForumRepository), typeof(ForumRepository), new HttpContextLifetimeManager<ForumRepository>());
+            this.container.RegisterType(typeof(IPhotoRepository), typeof(PhotoRepository), new HttpContextLifetimeManager<PhotoRepository>());
+            this.container.RegisterType(typeof(IMovieRepository), typeof(MovieRepository), new HttpContextLifetimeManager<MovieRepository>());
+            this.container.RegisterType(typeof(IUserRepository), typeof(UserRepository), new HttpContextLifetimeManager<UserRepository>());
+            this.container.RegisterType(typeof(IVideoRepository), typeof(VideoRepository), new HttpContextLifetimeManager<UserRepository>());
         }
 
         #endregion

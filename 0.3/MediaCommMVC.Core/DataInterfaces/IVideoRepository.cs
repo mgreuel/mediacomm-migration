@@ -12,5 +12,9 @@ namespace MediaCommMVC.Core.DataInterfaces
         VideoCategory GetCategoryById(int id);
 
         IEnumerable<VideoCategory> GetAllCategories();
+
+        IEnumerable<string> GetUnmappedThumbnailFiles();
+
+        IEnumerable<string> GetUnmappedVideoFiles();
     }
 }
