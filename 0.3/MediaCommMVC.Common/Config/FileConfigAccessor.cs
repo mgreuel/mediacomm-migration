@@ -82,9 +82,7 @@ namespace MediaCommMVC.Common.Config
         /// <param name="value">The config value.</param>
         public void SaveConfigValue(string key, string value)
         {
-            this.logger.Debug("Saving configuration value. key: '{0} value: '{1}", key, value);
-
-            ConfigurationManager.AppSettings[key] = value;
+            throw new NotSupportedException();
         }
 
         /// <summary>Adds multiple config values.</summary>
@@ -92,17 +90,7 @@ namespace MediaCommMVC.Common.Config
         /// <param name="values">The config values.</param>
         public void SaveConfigValues(string key, IEnumerable<string> values)
         {
-            if (values.Any(v => v.Contains("#;")))
-            {
-                throw new ArgumentException("Configuration values must not contain '#;'");
-            }
-
-            StringBuilder builder = new StringBuilder();
-            values.ToList().ForEach(v => builder.Append(v + "#;"));
-
-            this.logger.Debug("Saving configuration values. key: '{0}' value: '{1}'", key, builder.ToString());
-
-            ConfigurationManager.AppSettings[key] = builder.ToString();
+            throw new NotSupportedException();
         }
 
         #endregion

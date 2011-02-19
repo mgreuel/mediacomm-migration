@@ -18,9 +18,13 @@ namespace MediaCommMVC.Core.Model.Videos
         /// <value>The video id.</value>
         public virtual int Id { get; set; }
 
-        /// <summary>Gets or sets the filename.</summary>
-        /// <value>The Photo's filename.</value>
-        public virtual string FileName { get; set; }
+        /// <summary>Gets or sets the video filename.</summary>
+        /// <value>The videos's filename.</value>
+        public virtual string VideoFileName { get; set; }
+
+        /// <summary>Gets or sets the thumbnail filename.</summary>
+        /// <value>The videos's filename.</value>
+        public virtual string ThumbnailFileName { get; set; }
 
         /// <summary>Gets or sets the size of the file.</summary>
         /// <value>The size of the file.</value>
@@ -31,6 +35,8 @@ namespace MediaCommMVC.Core.Model.Videos
         public virtual MediaCommUser Uploader { get; set; }
 
         public virtual string Title { get; set; }
+
+        public virtual string Description { get; set; }
 
         public virtual VideoCategory VideoCategory { get; set; }
     }

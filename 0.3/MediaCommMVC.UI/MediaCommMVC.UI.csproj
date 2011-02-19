@@ -179,6 +179,7 @@
     <Compile Include="Infrastructure\MediaCommIdentity.cs" />
     <Compile Include="ViewModel\Account\CreateUser.cs" />
     <Compile Include="ViewModel\Account\UserLogin.cs" />
+    <Compile Include="ViewModel\AddVideoInfo.cs" />
     <Compile Include="ViewModel\CreateTopicInfo.cs" />
     <Compile Include="ViewModel\ForumPage.cs" />
     <Compile Include="ViewModel\PhotoUpload.cs" />
@@ -616,6 +617,7 @@
     <Content Include="Views\Users\Index.aspx" />
     <Content Include="Views\Users\MyProfile.aspx" />
     <Content Include="Views\Users\Profile.aspx" />
+    <Content Include="Views\Videos\AddVideo.aspx" />
     <Content Include="Views\Videos\Category.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
