@@ -602,6 +602,7 @@
     <Content Include="Views\Admin\CreateForum.aspx" />
     <Content Include="Views\Admin\CreatePhotoCategory.aspx" />
     <Content Include="Views\Admin\CreateUser.aspx" />
+    <Content Include="Views\Admin\CreateVideoCategory.aspx" />
     <Content Include="Views\Admin\UserCreated.aspx" />
     <Content Include="Views\Forums\CreateTopic.aspx" />
     <Content Include="Views\Forums\EditPost.aspx" />
