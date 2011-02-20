@@ -81,6 +81,15 @@ namespace MediaCommMVC.UI.Controllers
             return this.View();
         }
 
+
+        /// <summary>Shows the create video category page.</summary>
+        /// <returns>The create video category view.</returns>
+        [HttpGet]
+        public ActionResult CreateVideoCategory()
+        {
+            return this.View();
+        }
+
         /// <summary>Creates the photo category.</summary>
         /// <param name="photoCategory">The photo category.</param>
         /// <returns>Redirection to the category created page.</returns>

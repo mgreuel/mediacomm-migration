@@ -1,26 +1,25 @@
-<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Photos.PhotoCategory>"
-    MasterPageFile="~/Views/Shared/Site.Master" %>
-
-<asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
+<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage" MasterPageFile="~/Views/Shared/Site.Master" %>
+<asp:Content runat="server" ID="Header" ContentPlaceHolderID="Header"></asp:Content>
+<asp:Content runat="server" ID="BreadCrumb" ContentPlaceHolderID="BreadCrumbContent">
     <%= Resources.Navigation.Admin %>
     » <strong>
         <%= Html.ActionLink(Resources.Admin.CreatePhotoCategory, "CreatePhotoCategory")%>
     </strong>
 </asp:Content>
-<asp:Content runat="server" ID="Content2" ContentPlaceHolderID="MainContent">
+<asp:Content runat="server" ID="Main" ContentPlaceHolderID="MainContent">
     <div id="validationSummary">
         <%= Html.ValidationSummary(Resources.General.ValidationSummary) %>
     </div>
     <% using (Html.BeginForm())
        {%>
-    <table id="createPhotoCategoryTable" class="defaultTable">
+    <table id="createVideoCategoryTable" class="defaultTable">
         <tr>
             <td class="firstColumn">
                 <label>
                     <%= Resources.Admin.Title %></label>
             </td>
             <td class="secondColumn">
-                <%=  Html.TextBox("PhotoCategory.Name", null , new { @class="required", minlength = "3", maxlength = "75" }) %>
+                <%=  Html.TextBox("VideoCategory.Name", null , new { @class="required", minlength = "3", maxlength = "75" }) %>
             </td>
         </tr>
         <tr>
