@@ -3,7 +3,7 @@
 <asp:Content runat="server" ID="BreadCrumb" ContentPlaceHolderID="BreadCrumbContent">
     <%= Resources.Navigation.Admin %>
     » <strong>
-        <%= Html.ActionLink(Resources.Admin.CreatePhotoCategory, "CreatePhotoCategory")%>
+        <%= Html.ActionLink(Resources.Admin.CreateVideoCategory, "CreateVideoCategory")%>
     </strong>
 </asp:Content>
 <asp:Content runat="server" ID="Main" ContentPlaceHolderID="MainContent">

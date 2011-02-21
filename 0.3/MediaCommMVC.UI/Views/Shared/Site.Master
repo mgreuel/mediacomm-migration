@@ -63,12 +63,12 @@
                     </ul>
                 </li>
             </ul>
-                        <ul>
+            <ul>
                 <li><a>
                     <%= Resources.Navigation.Videos %></a>
                     <ul id="videonavi">
                         <li>
-                            <%= Html.ActionLink(Resources.Videos.Upload, "AddVideo", "Videos") %></li>
+                            <%= Html.ActionLink(Resources.Videos.AddVideo, "AddVideo", "Videos") %></li>
                     </ul>
                 </li>
             </ul>
@@ -104,6 +104,9 @@
                         </li>
                         <li>
                             <%= Html.ActionLink(Resources.Admin.CreatePhotoCategory, "CreatePhotoCategory", "Admin") %>
+                        </li>
+                        <li>
+                            <%= Html.ActionLink(Resources.Admin.CreateVideoCategory, "CreateVideoCategory", "Admin") %>
                         </li>
                     </ul>
                 </li>

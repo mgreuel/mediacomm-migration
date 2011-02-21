@@ -57,7 +57,7 @@
                     <%:Resources.Videos.Description%>
                 </td>
                 <td>
-                    <%=Html.TextBox("video.Description", null, new { @class = "required" })%>
+                    <%=Html.TextArea("video.Description", null, new { @class = "required" })%>
                 </td>
             </tr>
             <tr>
@@ -71,4 +71,11 @@
         <%
        }%>
     </table>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#addVideoTable > tbody > tr > td:nth-child(odd)")._addClass("firstColumn");
+            $("#addVideoTable > tbody > tr > td:nth-child(even)")._addClass("secondColumn");
+        });
+    </script>
 </asp:Content>

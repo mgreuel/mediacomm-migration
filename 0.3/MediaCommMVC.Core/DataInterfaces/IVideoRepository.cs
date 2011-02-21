@@ -16,5 +16,9 @@ namespace MediaCommMVC.Core.DataInterfaces
         IEnumerable<string> GetUnmappedThumbnailFiles();
 
         IEnumerable<string> GetUnmappedVideoFiles();
+
+        void AddCategory(VideoCategory videoCategory);
+
+        void AddVideo(Video video);
     }
 }

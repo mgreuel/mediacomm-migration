@@ -210,6 +210,7 @@
     <Content Include="Content\Custom\movies.css" />
     <Content Include="Content\Custom\photos.css" />
     <Content Include="Content\Custom\users.css" />
+    <Content Include="Content\Custom\video.css" />
     <Content Include="Content\Forum\davbo.gif" />
     <Content Include="Content\Forum\folder.gif" />
     <Content Include="Content\Forum\folder_announce.gif" />

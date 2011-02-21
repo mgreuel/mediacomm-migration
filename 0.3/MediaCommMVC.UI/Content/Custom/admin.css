@@ -74,3 +74,31 @@
 
 
 /* Create Photo Category End */
+
+/* Create Video Category Start */
+
+#createVideoCategoryTable
+{
+    width: 400px;
+}
+
+#createVideoCategoryTable .firstColumn
+{
+    width: 100px !important;
+    font-weight: bold !important;
+    text-align: right !important;
+    vertical-align: top;
+}
+
+#createVideoCategoryTable .secondColumn
+{
+    width: 300px;
+}
+
+#createVideoCategoryTable .secondColumn input, #createVideoCategoryTable .secondColumn textarea
+{
+    width: 296px;
+}
+
+
+/* Create Video Category End */

@@ -162,7 +162,7 @@ namespace MediaCommMVC.UI.Infrastructure
             this.container.RegisterType(typeof(IPhotoRepository), typeof(PhotoRepository), new HttpContextLifetimeManager<PhotoRepository>());
             this.container.RegisterType(typeof(IMovieRepository), typeof(MovieRepository), new HttpContextLifetimeManager<MovieRepository>());
             this.container.RegisterType(typeof(IUserRepository), typeof(UserRepository), new HttpContextLifetimeManager<UserRepository>());
-            this.container.RegisterType(typeof(IVideoRepository), typeof(VideoRepository), new HttpContextLifetimeManager<UserRepository>());
+            this.container.RegisterType(typeof(IVideoRepository), typeof(VideoRepository), new HttpContextLifetimeManager<VideoRepository>());
         }
 
         #endregion
