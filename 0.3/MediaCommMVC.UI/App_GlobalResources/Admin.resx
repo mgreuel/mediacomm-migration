@@ -135,6 +135,9 @@
   <data name="CreateUser" xml:space="preserve">
     <value>Create User</value>
   </data>
+  <data name="CreateVideoCategory" xml:space="preserve">
+    <value>Create Video Category</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>

@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Forums;
 using MediaCommMVC.Core.Model.Photos;
+using MediaCommMVC.Core.Model.Videos;
 
 #endregion
 
@@ -24,6 +25,8 @@ namespace MediaCommMVC.UI.Controllers
         /// <summary>The photo repository.</summary>
         private readonly IPhotoRepository photoRepository;
 
+        private readonly IVideoRepository videoRepository;
+
         /// <summary>The user repository.</summary>
         private readonly IUserRepository userRepository;
 
@@ -31,16 +34,20 @@ namespace MediaCommMVC.UI.Controllers
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="AdminController"/> class.</summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdminController"/> class.
+        /// </summary>
         /// <param name="forumRepository">The forum repository.</param>
         /// <param name="userRepository">The user repository.</param>
         /// <param name="photoRepository">The photo repository.</param>
+        /// <param name="videoRepository">The video repository.</param>
         public AdminController(
-            IForumRepository forumRepository, IUserRepository userRepository, IPhotoRepository photoRepository)
+            IForumRepository forumRepository, IUserRepository userRepository, IPhotoRepository photoRepository, IVideoRepository videoRepository)
         {
             this.forumRepository = forumRepository;
             this.userRepository = userRepository;
             this.photoRepository = photoRepository;
+            this.videoRepository = videoRepository;
         }
 
         #endregion
@@ -88,6 +95,19 @@ namespace MediaCommMVC.UI.Controllers
         public ActionResult CreateVideoCategory()
         {
             return this.View();
+        }
+
+        /// <summary>Creates the video category.</summary>
+        /// <param name="videoCategory">The video category.</param>
+        /// <returns>Redirection to the category created page.</returns>
+        [HttpPost]
+        public ActionResult CreateVideoCategory(VideoCategory videoCategory)
+        {
+            this.videoRepository.AddCategory(videoCategory);
+
+            this.ViewData["categoyName"] = videoCategory.Name;
+
+            return this.RedirectToAction("CategoryCreated");
         }
 
         /// <summary>Creates the photo category.</summary>

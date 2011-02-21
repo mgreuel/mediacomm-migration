@@ -15,13 +15,16 @@ namespace MediaCommMVC.UI.Controllers
     [Authorize]
     public class VideosController : Controller
     {
-        private IVideoRepository videoRepository;
+        private readonly IVideoRepository videoRepository;
 
-        public VideosController(IVideoRepository videoRepository)
+        private readonly IUserRepository userRepository;
+
+        public VideosController(IVideoRepository videoRepository, IUserRepository userRepository)
         {
             this.videoRepository = videoRepository;
+            this.userRepository = userRepository;
         }
-        
+
         [HttpGet]
         public ActionResult Category(int id)
         {
@@ -43,6 +46,17 @@ namespace MediaCommMVC.UI.Controllers
             return this.Json(categoryViewModels, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult AddVideo(Video video, VideoCategory category)
+        {
+            video.Uploader = this.userRepository.GetUserByName(this.User.Identity.Name);
+            video.VideoCategory = this.videoRepository.GetCategoryById(category.Id);
+
+            this.videoRepository.AddVideo(video);
+
+            return null;
+        }
+
         [HttpGet]
         public ActionResult AddVideo()
         {
@@ -52,8 +66,7 @@ namespace MediaCommMVC.UI.Controllers
 
             IEnumerable<string> videos = this.videoRepository.GetUnmappedVideoFiles();
 
-            AddVideoInfo addVideoInfo = new AddVideoInfo
-                { AvailableCategories = categories, AvailableThumbnails = thumbnails, AvailableVideos = videos };
+            AddVideoInfo addVideoInfo = new AddVideoInfo { AvailableCategories = categories, AvailableThumbnails = thumbnails, AvailableVideos = videos };
 
             return this.View(addVideoInfo);
         }

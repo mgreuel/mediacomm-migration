@@ -1,0 +1,30 @@
+﻿/* Add Video Start */
+#addVideoTable
+{
+    width: 450px;
+}
+
+#addVideoTable .firstColumn
+{
+    font-weight: bold;
+    width: 100px !important;
+    text-align: right !important;
+    vertical-align: top !important;
+}
+
+#addVideoTable .secondColumn
+{
+    width: 350px !important;
+}
+
+#addVideoTable .secondColumn input[type=text]
+{
+    width: 98%;
+}
+
+#addVideoTable .secondColumn select
+{
+    width: 99%;
+}
+
+/* Add Video End */

@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Video Category.
+        /// </summary>
+        internal static string CreateVideoCategory {
+            get {
+                return ResourceManager.GetString("CreateVideoCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         internal static string Description {
