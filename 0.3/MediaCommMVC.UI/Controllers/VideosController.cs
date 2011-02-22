@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,6 +9,7 @@ using MediaCommMVC.Core.DataInterfaces;
 using MediaCommMVC.Core.Model.Users;
 using MediaCommMVC.Core.Model.Videos;
 using MediaCommMVC.UI.Helpers;
+using MediaCommMVC.UI.Infrastructure;
 using MediaCommMVC.UI.ViewModel;
 
 namespace MediaCommMVC.UI.Controllers
@@ -55,6 +57,14 @@ namespace MediaCommMVC.UI.Controllers
             this.videoRepository.AddVideo(video);
 
             return null;
+        }
+
+        [HttpGet]
+        public ActionResult Cover(int id)
+        {
+            Image image = this.videoRepository.GetCoverImage(id);
+
+            return new ImageResult { Image = image };
         }
 
         [HttpGet]

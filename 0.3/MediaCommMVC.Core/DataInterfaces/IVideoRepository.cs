@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -20,5 +21,7 @@ namespace MediaCommMVC.Core.DataInterfaces
         void AddCategory(VideoCategory videoCategory);
 
         void AddVideo(Video video);
+
+        Image GetCoverImage(int videoId);
     }
 }

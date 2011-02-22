@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -79,6 +80,16 @@ namespace MediaCommMVC.Data.Repositories
             this.MoveVideoFiles(video);
 
             this.InvokeTransaction(s => s.Save(video));
+        }
+
+        public Image GetCoverImage(int videoId)
+        {
+            Video video = this.Session.Get<Video>(videoId);
+
+            string basePath = this.ConfigAccessor.GetConfigValue(videoRootDirKey);
+            string thumbnailFilename = Path.Combine(basePath, video.VideoCategory.Name, video.ThumbnailFileName);
+
+            return Image.FromFile(thumbnailFilename);
         }
 
         private void MoveVideoFiles(Video video)
