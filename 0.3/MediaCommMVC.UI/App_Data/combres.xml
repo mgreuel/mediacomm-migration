@@ -23,6 +23,7 @@
     <resourceSet name="siteJs" type="js">
       <resource path="~/Scripts/jquery.dataTables.min.js" />
       <resource path="~/Scripts/custom/global.js" />
+      <resource path="~/Scripts/custom/photos.js" />
     </resourceSet>
     <resourceSet name="uploadJs" type="js">
       <resource path="~/Scripts/jquery.uploadify.v2.1.0.min.js" />
@@ -33,7 +34,7 @@
     <resourceSet name="photosJs" type="js">
       <resource path="~/Scripts/highslide-with-gallery.packed.js" />
       <resource path="~/Scripts/jquery.lazyload.js" />
-      <resource path="~/Scripts/custom/photos.js" />
+
     </resourceSet>
   </resourceSets>
 </combres>

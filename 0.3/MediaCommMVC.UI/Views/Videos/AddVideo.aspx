@@ -4,6 +4,10 @@
 <asp:Content runat="server" ID="Header" ContentPlaceHolderID="Header">
 </asp:Content>
 <asp:Content runat="server" ID="BreadCrumb" ContentPlaceHolderID="BreadCrumbContent">
+    <%=  Resources.Navigation.Videos %>
+    » <strong>
+        <%= Html.ActionLink(Resources.Videos.AddVideo, "AddVideo" ) %>
+    </strong>
 </asp:Content>
 <asp:Content runat="server" ID="Main" ContentPlaceHolderID="MainContent">
     <% using (Html.BeginForm())
