@@ -68,6 +68,14 @@ namespace MediaCommMVC.UI.Controllers
         }
 
         [HttpGet]
+        public ActionResult Video(int id)
+        {
+            Video video = this.videoRepository.GetVideoById(id);
+
+            return this.View(video);
+        }
+
+        [HttpGet]
         public ActionResult AddVideo()
         {
             IEnumerable<VideoCategory> categories = this.videoRepository.GetAllCategories();

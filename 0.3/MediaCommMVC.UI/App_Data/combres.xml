@@ -9,7 +9,6 @@
       <resource path="~/Content/Multiflex/css/mf54_reset.css" />
       <resource path="~/Content/Multiflex/css/mf54_grid_nosidebar.css" />
       <resource path="~/Content/Multiflex/css/mf54_content_nosidebar.css" />
-      <resource path="~/Content/jQuery-ui-cupertino/jquery-ui-1.8.custom.css" />
       <resource path="~/Content/UploadIfy/uploadify.css" />
       <resource path="~/Content/Highslide/highslide.css" />
       <resource path="~/Content/Custom/forums.css" />
@@ -34,7 +33,6 @@
     <resourceSet name="photosJs" type="js">
       <resource path="~/Scripts/highslide-with-gallery.packed.js" />
       <resource path="~/Scripts/jquery.lazyload.js" />
-
-    </resourceSet>
+    </resourceSet>    
   </resourceSets>
 </combres>

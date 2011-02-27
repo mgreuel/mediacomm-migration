@@ -15,6 +15,7 @@
         type="text/javascript"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"
         type="text/javascript"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/cupertino/jquery-ui.css" rel="stylesheet" type="text/css" />
     <%= Html.CombresLink("siteCss") %>
     <%= Html.CombresLink("siteJs")%>
     <asp:ContentPlaceHolder ID="Header" runat="server" />

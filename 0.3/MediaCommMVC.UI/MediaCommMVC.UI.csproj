@@ -18,6 +18,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <UseIISExpress>true</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -475,6 +476,7 @@
     <Content Include="Content\tiny_mce\utils\form_utils.js" />
     <Content Include="Content\tiny_mce\utils\mctabs.js" />
     <Content Include="Content\tiny_mce\utils\validate.js" />
+    <Content Include="Content\video-js.css" />
     <Content Include="favicon.ico" />
     <Content Include="Scripts\custom\photos.js" />
     <Content Include="Scripts\custom\movies.js" />
@@ -599,6 +601,7 @@
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.lazyload.js" />
     <Content Include="Scripts\jquery.uploadify.v2.1.0.min.js" />
+    <Content Include="Scripts\video.js" />
     <Content Include="Views\Admin\CategoryCreated.aspx" />
     <Content Include="Views\Admin\CreateForum.aspx" />
     <Content Include="Views\Admin\CreatePhotoCategory.aspx" />
@@ -621,6 +624,7 @@
     <Content Include="Views\Users\Profile.aspx" />
     <Content Include="Views\Videos\AddVideo.aspx" />
     <Content Include="Views\Videos\Category.aspx" />
+    <Content Include="Views\Videos\Video.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -639,6 +643,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\tiny_mce\plugins\autosave\images\" />
+    <Folder Include="Videos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Site.Master" />
@@ -725,12 +730,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>54321</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:54321/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

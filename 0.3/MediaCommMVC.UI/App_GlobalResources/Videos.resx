@@ -138,4 +138,7 @@
   <data name="VideoFile" xml:space="preserve">
     <value>Video File</value>
   </data>
+  <data name="WebMNotSupported" xml:space="preserve">
+    <value>Your browser does not support html5/webm videos. Try Firefox 4 or Chrome.</value>
+  </data>
 </root>
