@@ -92,6 +92,11 @@ namespace MediaCommMVC.Data.Repositories
             return Image.FromFile(thumbnailFilename);
         }
 
+        public Video GetVideoById(int id)
+        {
+            return this.Session.Get<Video>(id);
+        }
+
         private void MoveVideoFiles(Video video)
         {
             string basePath = this.ConfigAccessor.GetConfigValue(videoRootDirKey);

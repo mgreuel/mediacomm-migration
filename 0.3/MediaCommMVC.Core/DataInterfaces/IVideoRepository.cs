@@ -23,5 +23,7 @@ namespace MediaCommMVC.Core.DataInterfaces
         void AddVideo(Video video);
 
         Image GetCoverImage(int videoId);
+
+        Video GetVideoById(int id);
     }
 }
