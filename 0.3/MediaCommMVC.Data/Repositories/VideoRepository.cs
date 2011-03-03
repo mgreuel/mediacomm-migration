@@ -82,7 +82,7 @@ namespace MediaCommMVC.Data.Repositories
             this.InvokeTransaction(s => s.Save(video));
         }
 
-        public Image GetCoverImage(int videoId)
+        public Image GetThumbnailImage(int videoId)
         {
             Video video = this.Session.Get<Video>(videoId);
 
@@ -95,6 +95,18 @@ namespace MediaCommMVC.Data.Repositories
         public Video GetVideoById(int id)
         {
             return this.Session.Get<Video>(id);
+        }
+
+        public IEnumerable<string> GetUnmappedPosterFiles()
+        {
+            string incomingVideoPath = this.GetIncomingVideosPath();
+
+            return
+                Directory.GetFiles(incomingVideoPath).Where(
+                    f =>
+                    f.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
+                    f.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase)).Select(
+                        f => f.Substring(f.LastIndexOf('\\') + 1)).ToList();
         }
 
         private void MoveVideoFiles(Video video)
@@ -111,6 +123,7 @@ namespace MediaCommMVC.Data.Repositories
 
             File.Move(Path.Combine(incomingVideosPath, video.VideoFileName), Path.Combine(targetPath, video.VideoFileName));
             File.Move(Path.Combine(incomingVideosPath, video.ThumbnailFileName), Path.Combine(targetPath, video.ThumbnailFileName));
+            File.Move(Path.Combine(incomingVideosPath, video.PosterFileName), Path.Combine(targetPath, video.PosterFileName));
         }
 
         #endregion

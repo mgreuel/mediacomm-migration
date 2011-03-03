@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,5 +15,7 @@ namespace MediaCommMVC.UI.ViewModel
         public IEnumerable<string> AvailableThumbnails { get; set; }
 
         public IEnumerable<VideoCategory> AvailableCategories { get; set; }
+
+        public IEnumerable<string> AvailablePosters { get; set; }
     }
 }

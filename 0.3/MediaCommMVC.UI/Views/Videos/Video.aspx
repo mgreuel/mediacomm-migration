@@ -26,15 +26,21 @@
     <div id="videoContainer">
         <!-- Begin VideoJS -->
         <div class="video-js-box">
-            <!-- Using the Video for Everybody Embed Code http://camendesign.com/code/video_for_everybody -->
-            <video id="video" class="video-js" controls="controls" width="480" height="320" preload="auto"
-                poster='/videos/<%= this.Model.VideoCategory.Name + "/" + this.Model.ThumbnailFileName %>'>
+            <!-- Using the Video for Everybody Embed Code http://camendesign.com/code/video_for_everybody  width="480" height="270" -->
+            <video id="video" class="video-js" controls="controls" preload="auto"
+                poster='/videos/<%= this.Model.VideoCategory.Name + "/" + this.Model.PosterFileName %>'>
             <source src='/videos/<%= this.Model.VideoCategory.Name + "/" + this.Model.VideoFileName %>' type='video/webm; codecs="vp8, vorbis"' />
         </video>
             <p class="vjs-no-video text">
                 <%: Resources.Videos.WebMNotSupported %>
             </p>
         </div>
-        <!-- End VideoJS -->
+        <!-- End VideoJS -->        
     </div>
+
+    <p class="text">
+        <%: this.Model.Description %>
+    </p>
+
+ 
 </asp:Content>
