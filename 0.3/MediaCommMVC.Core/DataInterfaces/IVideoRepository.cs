@@ -22,8 +22,10 @@ namespace MediaCommMVC.Core.DataInterfaces
 
         void AddVideo(Video video);
 
-        Image GetCoverImage(int videoId);
+        Image GetThumbnailImage(int videoId);
 
         Video GetVideoById(int id);
+
+        IEnumerable<string> GetUnmappedPosterFiles();
     }
 }

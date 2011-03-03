@@ -126,6 +126,9 @@
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="PosterFile" xml:space="preserve">
+    <value>Poster File</value>
+  </data>
   <data name="ThumbnailFile" xml:space="preserve">
     <value>Thumbnail File</value>
   </data>
@@ -134,6 +137,12 @@
   </data>
   <data name="Upload" xml:space="preserve">
     <value>Upload</value>
+  </data>
+  <data name="UploadSuccessfullText" xml:space="preserve">
+    <value>The video was successfully uploaded.</value>
+  </data>
+  <data name="UploadSuccessfullTitle" xml:space="preserve">
+    <value>Upload successfull</value>
   </data>
   <data name="VideoFile" xml:space="preserve">
     <value>Video File</value>

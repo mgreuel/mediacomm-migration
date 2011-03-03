@@ -48,6 +48,16 @@
                    "video.ThumbnailFileName", new SelectList( this.Model.AvailableThumbnails), new { @class = "required" })%>
                 </td>
             </tr>
+                        <tr>
+                <td>
+                    <%: Resources.Videos.PosterFile %>
+                </td>
+                <td>
+                    <%=
+               Html.DropDownList(
+                   "video.PosterFileName", new SelectList( this.Model.AvailablePosters), new { @class = "required" })%>
+                </td>
+            </tr>
             <tr>
                 <td>
                     <%:Resources.Videos.Title%>

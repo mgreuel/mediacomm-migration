@@ -624,6 +624,7 @@
     <Content Include="Views\Users\Profile.aspx" />
     <Content Include="Views\Videos\AddVideo.aspx" />
     <Content Include="Views\Videos\Category.aspx" />
+    <Content Include="Views\Videos\UploadSuccessFull.aspx" />
     <Content Include="Views\Videos\Video.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
