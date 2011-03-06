@@ -202,7 +202,10 @@
 
             $(".deletePost").click(function ()
             {
-                $(this).closest("form").submit();
+                if (confirm("Do you really want to delete the this post ?"))
+                {
+                    $(this).closest("form").submit();
+                }
             });
 
             $("form").validate();

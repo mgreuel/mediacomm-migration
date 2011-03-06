@@ -26,6 +26,7 @@
     </resourceSet>
     <resourceSet name="uploadJs" type="js">
       <resource path="~/Scripts/jquery.uploadify.v2.1.0.min.js" />
+      <resource path="~/Scripts/swfobject.js" />
     </resourceSet>
     <resourceSet name="moviesJs" type="js">
       <resource path="~/Scripts/custom/movies.js" />

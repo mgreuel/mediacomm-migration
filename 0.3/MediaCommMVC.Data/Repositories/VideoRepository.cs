@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+using MediaCommMVC.Common;
 using MediaCommMVC.Common.Config;
 using MediaCommMVC.Common.Logging;
 using MediaCommMVC.Core.DataInterfaces;
@@ -121,9 +122,17 @@ namespace MediaCommMVC.Data.Repositories
                 Directory.CreateDirectory(targetPath);
             }
 
-            File.Move(Path.Combine(incomingVideosPath, video.VideoFileName), Path.Combine(targetPath, video.VideoFileName));
-            File.Move(Path.Combine(incomingVideosPath, video.ThumbnailFileName), Path.Combine(targetPath, video.ThumbnailFileName));
-            File.Move(Path.Combine(incomingVideosPath, video.PosterFileName), Path.Combine(targetPath, video.PosterFileName));
+            string urlEncodedVideoFileName = UrlStripper.RemoveIllegalCharactersFromUrl(video.VideoFileName);
+            string urlEncodedThumbnailFileName = UrlStripper.RemoveIllegalCharactersFromUrl(video.ThumbnailFileName);
+            string urlEncodedPosterFileName = UrlStripper.RemoveIllegalCharactersFromUrl(video.PosterFileName);
+
+            File.Move(Path.Combine(incomingVideosPath, video.VideoFileName), Path.Combine(targetPath, urlEncodedVideoFileName));
+            File.Move(Path.Combine(incomingVideosPath, video.ThumbnailFileName), Path.Combine(targetPath, urlEncodedThumbnailFileName));
+            File.Move(Path.Combine(incomingVideosPath, video.PosterFileName), Path.Combine(targetPath, urlEncodedPosterFileName));
+
+            video.VideoFileName = urlEncodedVideoFileName;
+            video.ThumbnailFileName = urlEncodedThumbnailFileName;
+            video.PosterFileName = urlEncodedPosterFileName;
         }
 
         #endregion

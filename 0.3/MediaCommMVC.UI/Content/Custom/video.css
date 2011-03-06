@@ -17,9 +17,15 @@
     width: 350px !important;
 }
 
-#addVideoTable .secondColumn input[type=text]
+#addVideoTable .secondColumn input[type=text], #addVideoTable .secondColumn textarea
 {
     width: 98%;
+}
+
+#addVideoTable .secondColumn textarea
+{
+    resize:none;
+    height: 50px;
 }
 
 #addVideoTable .secondColumn select
@@ -28,3 +34,73 @@
 }
 
 /* Add Video End */
+
+/* Category Gallery Start */
+.video-category-gallery, .video-category-gallery a:hover
+{
+    text-decoration: none;
+}
+
+.video-category-gallery li
+{
+    height: 190px !important;
+    line-height: normal !important;
+    padding-top: 0px;
+    padding-bottom: 6px;
+}
+
+.video-category-gallery .albumCover
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 140px;
+}
+
+.video-category-gallery .sub
+{
+    font-size: 12px;
+    margin: 0px 4px 0px 4px;
+}
+
+.video-category-gallery .left
+{
+    float: left;
+}
+
+.video-category-gallery .right
+{
+    float: right;
+}
+
+.video-category-gallery .imageSub
+{
+    margin-top: 2px;
+    margin-bottom: 3px;
+}
+
+.video-category-gallery .albumTitle
+{
+    margin-top: 2px;
+    height: 32px;
+    text-align: left;
+    margin-left: 4px;
+    font-size: 12px;
+}
+
+.video-category-gallery a
+{
+    padding-top: 0px;
+    left: -50% !important;
+    top: -50% !important;
+    background-color: White !important;
+}
+/* Category Gallery End */
+
+/* Video Start */
+
+#videoContainer
+{
+    padding: 16px 0 10px 20px;
+}
+
+/* Video End */

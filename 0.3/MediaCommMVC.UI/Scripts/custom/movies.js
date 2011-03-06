@@ -17,8 +17,9 @@ $(document).ready(function ()
                                         null,
                                         { "bSortable": false }
                                     ],
+                                    "aaSorting": [[1, 'asc']],
                                     "iDisplayLength": 50,
-                                    "iCookieDuration": 60 * 60 * 24 * 30 /* 30 Days */
+                                    "iCookieDuration": 60 * 60 * 24 * 180 /* 180 Days */
                                 });
 
     oTable.fnSetColumnVis(0, false);
