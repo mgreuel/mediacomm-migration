@@ -90,6 +90,8 @@
         $(function () {
             $("#addVideoTable > tbody > tr > td:nth-child(odd)")._addClass("firstColumn");
             $("#addVideoTable > tbody > tr > td:nth-child(even)")._addClass("secondColumn");
+
+            $("form").validate();
         });
     </script>
 </asp:Content>

@@ -339,7 +339,7 @@ p.text
     width: 300px;
 }
 
-#createForumTable .secondColumn input, textarea
+#createForumTable .secondColumn input, #createForumTable .secondColumn textarea
 {
     width: 296px;
 }

@@ -10,7 +10,7 @@
 </asp:Content>
 
 <asp:Content runat="server" ID="Main" ContentPlaceHolderID="MainContent">
-    <div class="highslide-gallery category-gallery">
+    <div class="highslide-gallery video-category-gallery">
         <ul>
             <% foreach (var video in Model.Videos)
                { %>
@@ -19,7 +19,7 @@
                     <%= video.Title %>
                 </div>
                 <div class="albumCover">
-                    <img src='<%= string.Format("/Videos/Cover/{0}/{1}/", video.Id,  Url.ToFriendlyUrl(video.Title)) %>'></div>
+                    <img src='<%= string.Format("/Videos/Thumbnail/{0}/{1}/", video.Id,  Url.ToFriendlyUrl(video.Title)) %>'></div>
                 <div class="imageSub">
                 </div>
             </a></li>
