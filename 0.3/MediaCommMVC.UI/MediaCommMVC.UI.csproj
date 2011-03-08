@@ -601,7 +601,6 @@
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.lazyload.js" />
     <Content Include="Scripts\jquery.uploadify.v2.1.0.min.js" />
-    <Content Include="Scripts\swfobject.js" />
     <Content Include="Scripts\video.js" />
     <Content Include="Views\Admin\CategoryCreated.aspx" />
     <Content Include="Views\Admin\CreateForum.aspx" />
@@ -642,10 +641,10 @@
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Views\Web.config" />
+    <Content Include="Videos\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\tiny_mce\plugins\autosave\images\" />
-    <Folder Include="Videos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Site.Master" />

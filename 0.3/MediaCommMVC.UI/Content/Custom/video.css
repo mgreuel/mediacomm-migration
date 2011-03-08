@@ -103,4 +103,9 @@
     padding: 16px 0 10px 20px;
 }
 
+.vjs-no-video
+{
+    width: 500px;
+}
+
 /* Video End */
