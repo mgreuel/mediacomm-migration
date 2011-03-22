@@ -91,7 +91,7 @@
     <Compile Include="UnitTests\HomeControllerTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UI\Web.csproj">
+    <ProjectReference Include="..\Web\Web.csproj">
       <Project>{A0413025-B190-4AFA-8626-9BC3C2EF5063}</Project>
       <Name>Web</Name>
     </ProjectReference>
