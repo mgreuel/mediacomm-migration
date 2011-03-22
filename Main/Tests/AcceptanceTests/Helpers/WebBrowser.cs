@@ -3,15 +3,18 @@
     #region Using Directives
 
     using System.Configuration;
-    using MvcContrib.TestHelper.WatiN;
+
     using TechTalk.SpecFlow;
+
     using WatiN.Core;
 
     #endregion
 
     public static class WebBrowser
     {
-        public static IE Current
+        #region Properties
+
+        public static Browser Current
         {
             get
             {
@@ -20,7 +23,7 @@
                     ScenarioContext.Current["browser"] = new IE();
                 }
 
-                return (IE)ScenarioContext.Current["browser"];
+                return (Browser)ScenarioContext.Current["browser"];
             }
         }
 
@@ -30,11 +33,14 @@
             {
                 if (!ScenarioContext.Current.ContainsKey("browserDriver"))
                 {
-                    ScenarioContext.Current["browserDriver"] = new WatinDriver(Current, ConfigurationManager.AppSettings["baseUrl"]);
+                    ScenarioContext.Current["browserDriver"] = new WatinDriver(
+                        Current, ConfigurationManager.AppSettings["baseUrl"]);
                 }
 
                 return (WatinDriver)ScenarioContext.Current["browserDriver"];
             }
         }
+
+        #endregion
     }
 }

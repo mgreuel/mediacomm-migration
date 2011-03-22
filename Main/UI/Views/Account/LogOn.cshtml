@@ -1,0 +1,45 @@
+﻿@model MediaCommMVC.UI.ViewModels.LogOnViewModel
+@{
+    ViewBag.Title = Resources.AccountResources.Login;
+}
+<h2>
+    @Resources.AccountResources.Login
+</h2>
+@using (Html.BeginForm())
+{
+    <table id="loginTable">
+        <tr>        
+            <td>
+                @Html.LabelFor(l => l.UserName)
+            </td>
+            <td>
+                @Html.TextBoxFor(l => l.UserName)
+                @Html.ValidationMessageFor(l => l.UserName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(l => l.Password)
+            </td>
+            <td>
+                @Html.TextBoxFor(l => l.Password)
+                @Html.ValidationMessageFor(l => l.Password)
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                @Html.CheckBoxFor(l => l.RememberMe)
+                @Html.LabelFor(l => l.RememberMe)
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input id="loginButton" type="submit" value='@Resources.AccountResources.Login' />
+            </td>
+        </tr>
+    </table>
+}

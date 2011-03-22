@@ -1,13 +1,17 @@
-﻿using System.Web.Mvc;
-using System.Web.Routing;
-
-namespace MediaCommMVC.UI
+﻿namespace MediaCommMVC.UI
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
+    #region Using Directives
 
-    public class MvcApplication : System.Web.HttpApplication
+    using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Routing;
+
+    #endregion
+
+    public class MvcApplication : HttpApplication
     {
+        #region Public Methods
+
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
@@ -18,12 +22,14 @@ namespace MediaCommMVC.UI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "Default", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-            );
-
+                "Default",
+                "{controller}/{action}/{id}",
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional });
         }
+
+        #endregion
+
+        #region Methods
 
         protected void Application_Start()
         {
@@ -32,5 +38,7 @@ namespace MediaCommMVC.UI
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
         }
+
+        #endregion
     }
 }
