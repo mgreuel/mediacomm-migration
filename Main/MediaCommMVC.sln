@@ -15,8 +15,8 @@ Global
 		SccProjectName1 = Tests
 		SccLocalPath1 = Tests
 		SccProjectUniqueName2 = Web\\Web.csproj
-		SccProjectName2 = UI
-		SccLocalPath2 = UI
+		SccProjectName2 = Web
+		SccLocalPath2 = Web
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
