@@ -3,25 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{A0413025-B190-4AFA-8626-9BC3C2EF5063}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{5C2BCC5E-C4BC-4D30-953F-F2EA48EF1EFE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{DAF75D86-D2AF-492F-A874-751AFEB18AA4}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = UI\\UI.csproj
 		SccProjectName1 = UI
 		SccLocalPath1 = UI
-		SccProjectUniqueName2 = Core\\Core.csproj
-		SccProjectName2 = Core
-		SccLocalPath2 = Core
-		SccProjectUniqueName3 = Tests\\Tests.csproj
-		SccProjectName3 = Tests
-		SccLocalPath3 = Tests
+		SccProjectUniqueName2 = Tests\\Tests.csproj
+		SccProjectName2 = Tests
+		SccLocalPath2 = Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,10 +27,6 @@ Global
 		{A0413025-B190-4AFA-8626-9BC3C2EF5063}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0413025-B190-4AFA-8626-9BC3C2EF5063}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0413025-B190-4AFA-8626-9BC3C2EF5063}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C2BCC5E-C4BC-4D30-953F-F2EA48EF1EFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C2BCC5E-C4BC-4D30-953F-F2EA48EF1EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C2BCC5E-C4BC-4D30-953F-F2EA48EF1EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C2BCC5E-C4BC-4D30-953F-F2EA48EF1EFE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DAF75D86-D2AF-492F-A874-751AFEB18AA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DAF75D86-D2AF-492F-A874-751AFEB18AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAF75D86-D2AF-492F-A874-751AFEB18AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU

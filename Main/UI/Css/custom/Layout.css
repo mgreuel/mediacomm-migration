@@ -1,0 +1,46 @@
+﻿body
+{
+	font-size: 11px;
+	font-family: arial,sans-serif;
+}
+
+h1
+{
+	margin: 4px 0 6px 6px;
+}
+
+#container
+{
+	 width: 978px;
+	 margin: 0 auto;
+	 min-height:500px;
+
+	/* test code 
+	border-color: Black;
+	border-style: solid;*/
+}
+
+#mainHeader
+{
+	/* test code
+	border-color: orange;
+	border-style: solid; */
+}
+
+#content
+{
+	/* test code 
+	border-color: red;
+	border-style: solid;*/
+	padding: 2px;
+	margin-left: 4px;
+}
+
+#footer
+{
+	/* test code 
+	border-color: blue;
+	border-style: solid;*/
+	padding: 2px;
+	margin-left: 4px;
+}
