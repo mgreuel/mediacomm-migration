@@ -44,3 +44,10 @@ Scenario: LongPasswordEntered
 	And I have entered "myusername" as username and "ThisIsAreallyLongPass" as password
 	When I press "loginButton"
 	Then I see an error message telling me "The field Password must be a string with a minimum length of 5 and a maximum length of 20"
+
+Scenario: UsernameAndPasswordDoNotMatch
+	Given I navigate to "/Account/Logon" 
+	And I have entered "testuser" as username and "wrongPwd" as password
+	When I press "loginButton"
+	Then I see an error message telling me "Wrong username or password"
+
