@@ -4,8 +4,13 @@
 
     using System.Web.Mvc;
 
-    using MediaCommMVC.UI.Controllers;
-    using MediaCommMVC.UI.ViewModels;
+    using MediaCommMVC.UI.Core.Controllers;
+    using MediaCommMVC.UI.Core.Services;
+    using MediaCommMVC.UI.Core.ViewModel;
+
+    using MvcContrib.TestHelper;
+
+    using Moq;
 
     using NUnit.Framework;
 
@@ -18,12 +23,14 @@
 
         private AccountController accountController;
 
+        private Mock<IAccountService> accountServiceMock;
+
         #endregion
 
         #region Public Methods
 
         [Test]
-        public void Logon_ReturnsViewWithLogOnViewModel()
+        public void GetLogon_ReturnsViewWithLogOnViewModel()
         {
             // Arrange
 
@@ -35,10 +42,40 @@
             Assert.IsInstanceOf(typeof(LogOnViewModel), result.Model);
         }
 
+        [Test]
+        public void PostLogon_UsernameAndPasswordDoNotMatch_LogOnViewIsReturned()
+        {
+            // Arrange
+            LogOnViewModel logOnViewModel = new LogOnViewModel { UserName = "testUser", Password = "wrong" };
+            this.accountServiceMock.Setup(a => a.LoginDataIsValid(It.IsAny<LogOnViewModel>())).Returns(false);
+
+            // Act
+            ViewResult result = this.accountController.LogOn(logOnViewModel, string.Empty) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOf(typeof(LogOnViewModel), result.Model);
+        }
+
+        [Test]
+        public void PostLogon_UsernameAndPasswordDoNotMatch_ModelStateIsInvalid()
+        {
+            // Arrange
+            LogOnViewModel logOnViewModel = new LogOnViewModel { UserName = "testUser", Password = "wrong" };
+            this.accountServiceMock.Setup(a => a.LoginDataIsValid(It.IsAny<LogOnViewModel>())).Returns(false);
+
+            // Act
+            this.accountController.LogOn(logOnViewModel, string.Empty);
+
+            // Assert
+            Assert.IsFalse(this.accountController.ModelState.IsValid);
+        }
+
         [SetUp]
         public void SetupEachTest()
         {
-            this.accountController = new AccountController();
+            this.accountServiceMock = new Mock<IAccountService>();
+            this.accountController = new AccountController(this.accountServiceMock.Object);
         }
 
         #endregion

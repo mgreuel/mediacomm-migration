@@ -132,4 +132,10 @@
   <data name="UserNameMissing" xml:space="preserve">
     <value>Please enter a user name</value>
   </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember Me</value>
+  </data>
+  <data name="UserNameAndPasswordDoNoMatch" xml:space="preserve">
+    <value>Wrong username or passwort</value>
+  </data>
 </root>

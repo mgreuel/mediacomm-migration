@@ -2,6 +2,7 @@
 {
     #region Using Directives
 
+    using System;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
@@ -33,6 +34,7 @@
 
         protected void Application_Start()
         {
+            throw new NotImplementedException("Wire up Ioc Container");
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
