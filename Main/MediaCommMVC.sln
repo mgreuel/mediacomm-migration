@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{A0413025-B190-4AFA-8626-9BC3C2EF5063}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{A0413025-B190-4AFA-8626-9BC3C2EF5063}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{DAF75D86-D2AF-492F-A874-751AFEB18AA4}"
 EndProject
@@ -11,12 +11,12 @@ Global
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = UI\\UI.csproj
-		SccProjectName1 = UI
-		SccLocalPath1 = UI
-		SccProjectUniqueName2 = Tests\\Tests.csproj
-		SccProjectName2 = Tests
-		SccLocalPath2 = Tests
+		SccProjectUniqueName1 = Tests\\Tests.csproj
+		SccProjectName1 = Tests
+		SccLocalPath1 = Tests
+		SccProjectUniqueName2 = Web\\Web.csproj
+		SccProjectName2 = UI
+		SccLocalPath2 = UI
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

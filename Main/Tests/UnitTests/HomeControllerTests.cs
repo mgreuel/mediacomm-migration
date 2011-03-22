@@ -4,8 +4,8 @@
 
     using System.Web.Mvc;
 
-    using MediaCommMVC.UI.Core.Controllers;
-    using MediaCommMVC.UI.Core.ViewModel;
+    using MediaCommMVC.Core.Controllers;
+    using MediaCommMVC.Core.ViewModel;
 
     using NUnit.Framework;
 

@@ -1,4 +1,4 @@
-﻿namespace MediaCommMVC.UI
+﻿namespace MediaCommMVC
 {
     #region Using Directives
 
@@ -23,8 +23,8 @@
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "Default",
-                "{controller}/{action}/{id}",
+                "Default", 
+                "{controller}/{action}/{id}", 
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional });
         }
 

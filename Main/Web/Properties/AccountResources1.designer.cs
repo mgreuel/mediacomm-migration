@@ -39,7 +39,7 @@ namespace Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MediaCommMVC.UI.Properties.AccountResources", typeof(AccountResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MediaCommMVC.Properties.AccountResources", typeof(AccountResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

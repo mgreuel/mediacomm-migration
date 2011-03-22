@@ -1,10 +1,10 @@
-﻿namespace MediaCommMVC.UI.Core.Controllers
+﻿namespace MediaCommMVC.Core.Controllers
 {
     #region Using Directives
 
     using System.Web.Mvc;
 
-    using MediaCommMVC.UI.Core.ViewModel;
+    using MediaCommMVC.Core.ViewModel;
 
     #endregion
 
