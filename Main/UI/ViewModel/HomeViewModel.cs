@@ -1,4 +1,4 @@
-﻿namespace MediaCommMVC.UI.Core.ViewModel
+﻿namespace MediaCommMVC.UI.ViewModels
 {
     public class HomeViewModel
     {

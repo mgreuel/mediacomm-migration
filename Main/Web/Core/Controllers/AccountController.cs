@@ -1,24 +1,34 @@
-﻿namespace MediaCommMVC.UI.Core.Controllers
+﻿namespace MediaCommMVC.Core.Controllers
 {
     #region Using Directives
 
     using System.Web.Mvc;
 
-    using MediaCommMVC.UI.Core.Services;
-    using MediaCommMVC.UI.Core.ViewModel;
+    using MediaCommMVC.Core.Services;
+    using MediaCommMVC.Core.ViewModel;
+
+    using Resources;
 
     #endregion
 
     public class AccountController : Controller
     {
+        #region Constants and Fields
+
         private readonly IAccountService accountService;
 
-        #region Public Methods
+        #endregion
+
+        #region Constructors and Destructors
 
         public AccountController(IAccountService accountService)
         {
             this.accountService = accountService;
         }
+
+        #endregion
+
+        #region Public Methods
 
         public ActionResult LogOn()
         {
@@ -30,7 +40,7 @@
         {
             if (!this.accountService.LoginDataIsValid(logOnViewModel))
             {
-                this.ModelState.AddModelError("Password", Resources.AccountResources.UserNameAndPasswordDoNoMatch);
+                this.ModelState.AddModelError("Password", AccountResources.UserNameAndPasswordDoNoMatch);
             }
 
             if (!this.ModelState.IsValid)

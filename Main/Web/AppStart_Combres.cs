@@ -1,4 +1,4 @@
-namespace MediaCommMVC.UI
+namespace MediaCommMVC
 {
     #region Using Directives
 

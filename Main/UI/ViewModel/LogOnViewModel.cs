@@ -1,4 +1,4 @@
-﻿namespace MediaCommMVC.UI.Core.ViewModel
+﻿namespace MediaCommMVC.UI.ViewModels
 {
     #region Using Directives
 
@@ -18,7 +18,6 @@
         [Display(Name = "Password", ResourceType = typeof(AccountResources))]
         public string Password { get; set; }
 
-        [Display(Name = "RememberMe", ResourceType = typeof(AccountResources))]
         public bool RememberMe { get; set; }
 
         [Required]

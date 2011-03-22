@@ -4,9 +4,9 @@
 
     using System.Web.Mvc;
 
-    using MediaCommMVC.UI.Core.Controllers;
-    using MediaCommMVC.UI.Core.Services;
-    using MediaCommMVC.UI.Core.ViewModel;
+    using MediaCommMVC.Core.Controllers;
+    using MediaCommMVC.Core.Services;
+    using MediaCommMVC.Core.ViewModel;
 
     using MvcContrib.TestHelper;
 

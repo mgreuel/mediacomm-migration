@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-using MediaCommMVC.UI;
+using MediaCommMVC;
 
 using WebActivator;
 
@@ -40,5 +40,4 @@ using WebActivator;
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-
 [assembly: PreApplicationStartMethod(typeof(AppStart_Combres), "Start")]
