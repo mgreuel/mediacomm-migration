@@ -1,4 +1,4 @@
-﻿namespace MediaCommMVC.Tests.UnitTests
+﻿namespace MediaCommMVC.Tests.UnitTests.Controllers
 {
     #region Using Directives
 

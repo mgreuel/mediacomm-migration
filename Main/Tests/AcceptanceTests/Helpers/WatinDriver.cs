@@ -83,13 +83,24 @@
 
         public virtual string GetHtml(string id)
         {
-            Element textField = this.browser.Element(Find.ById(id));
-            if (textField == null)
+            Element element = this.browser.Element(Find.ById(id));
+            if (element == null)
+            {
+                throw new Exception(string.Format("Could not find element '{0}' on form.", id));
+            }
+            
+            return element.InnerHtml;
+        }
+
+        public virtual string GetText(string id)
+        {
+            Element element = this.browser.Element(Find.ById(id));
+            if (element == null)
             {
                 throw new Exception(string.Format("Could not find element '{0}' on form.", id));
             }
 
-            return textField.InnerHtml;
+            return element.Text;
         }
 
         public virtual int GetRowCount<T>(string tableName, List<RowFilter<T>> filters)

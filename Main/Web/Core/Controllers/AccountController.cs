@@ -4,6 +4,7 @@
 
     using System.Web.Mvc;
 
+    using MediaCommMVC.Core.Infrastructure;
     using MediaCommMVC.Core.Services;
     using MediaCommMVC.Core.ViewModel;
 
@@ -36,6 +37,7 @@
         }
 
         [HttpPost]
+        [TransactionFilter]
         public ActionResult LogOn(LogOnViewModel logOnViewModel, string returnUrl)
         {
             if (!this.accountService.LoginDataIsValid(logOnViewModel))
@@ -48,9 +50,7 @@
                 return this.View(logOnViewModel);
             }
 
-            return !string.IsNullOrEmpty(returnUrl)
-                       ? (ActionResult)this.Redirect(returnUrl)
-                       : this.RedirectToAction("Index", "Home");
+            return !string.IsNullOrEmpty(returnUrl) ? (ActionResult)this.Redirect(returnUrl) : this.RedirectToAction("Index", "Home");
         }
 
         #endregion
