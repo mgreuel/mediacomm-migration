@@ -4,19 +4,35 @@
 
     using System;
 
+    using MediaCommMVC.Core.Data;
+    using MediaCommMVC.Core.Model;
     using MediaCommMVC.Core.ViewModel;
 
     #endregion
 
     public class AccountService : IAccountService
     {
+        private readonly IUserRepository userRepository;
+
+        public AccountService(IUserRepository userRepository)
+        {
+            if (userRepository == null)
+            {
+                throw new ArgumentNullException("userRepository");
+            }
+
+            this.userRepository = userRepository;
+        }
+
         #region Implemented Interfaces
 
         #region IAccountService
 
         public bool LoginDataIsValid(LogOnViewModel logOnViewModel)
         {
-            throw new NotImplementedException();
+            MediaCommUser user = this.userRepository.GetByName(logOnViewModel.UserName);
+
+            return user != null && user.Password.Equals(logOnViewModel.Password);
         }
 
         #endregion

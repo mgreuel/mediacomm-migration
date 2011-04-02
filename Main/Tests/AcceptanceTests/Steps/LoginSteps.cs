@@ -18,7 +18,7 @@
         [Then(@"I see an error message telling me ""(.*?)""")]
         public void ThenISeeAnErrorMessageTellingMe(string message)
         {
-            StringAssert.Contains(message, WebBrowser.Driver.GetHtml("content"));
+            StringAssert.Contains(message, WebBrowser.Driver.GetText("content"));
         }
 
         #endregion

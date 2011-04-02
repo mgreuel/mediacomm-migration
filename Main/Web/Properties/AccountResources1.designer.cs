@@ -106,7 +106,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wrong username or passwort.
+        ///   Looks up a localized string similar to Wrong username or password.
         /// </summary>
         public static string UserNameAndPasswordDoNoMatch {
             get {
