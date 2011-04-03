@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=1.1.0.188, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL" />
     <Reference Include="Interop.SHDocVw">
       <HintPath>..\packages\WatiN.2.0.50\lib\net40\Interop.SHDocVw.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -76,6 +77,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcceptanceTests\Features\Forums\ForumIndex.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ForumIndex.feature</DependentUpon>
+    </Compile>
     <Compile Include="AcceptanceTests\Features\Login.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -84,11 +90,13 @@
     <Compile Include="AcceptanceTests\Helpers\BrowserHelper.cs" />
     <Compile Include="AcceptanceTests\Helpers\WatinDriver.cs" />
     <Compile Include="AcceptanceTests\Helpers\WebBrowser.cs" />
+    <Compile Include="AcceptanceTests\Steps\ForumsSteps.cs" />
     <Compile Include="AcceptanceTests\Steps\LoginSteps.cs" />
     <Compile Include="AcceptanceTests\Steps\NavigationSteps.cs" />
     <Compile Include="AcceptanceTests\Steps\PageInteractionSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\Controllers\AccountControllerTests.cs" />
+    <Compile Include="UnitTests\Controllers\ForumsControllerTests.cs" />
     <Compile Include="UnitTests\Controllers\HomeControllerTests.cs" />
     <Compile Include="UnitTests\Services\AccountServiceTests.cs" />
   </ItemGroup>
@@ -99,6 +107,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="AcceptanceTests\Features\Forums\ForumIndex.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ForumIndex.feature.cs</LastGenOutput>
+    </None>
     <None Include="AcceptanceTests\Features\Login.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Login.feature.cs</LastGenOutput>

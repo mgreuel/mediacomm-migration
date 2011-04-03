@@ -3,9 +3,12 @@
     #region Using Directives
 
     using System;
+    using System.Collections.Generic;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
+
+    using AutoMapper;
 
     using Combres;
 
@@ -13,7 +16,10 @@
 
     using MediaCommMVC.Core.Data.Nh.Config;
     using MediaCommMVC.Core.Data.Nh.Mapping;
+    using MediaCommMVC.Core.Infrastructure;
     using MediaCommMVC.Core.Infrastructure.DependencyResolution;
+    using MediaCommMVC.Core.Model;
+    using MediaCommMVC.Core.ViewModel;
 
     using NHibernate;
     using NHibernate.Context;
@@ -28,6 +34,8 @@
 
         private static ISessionFactory sessionFactory;
 
+        private static object sessionFactoryLock = new object();
+
         #endregion
 
         #region Properties
@@ -36,7 +44,10 @@
         {
             get
             {
-                return sessionFactory ?? (sessionFactory = CreateSessionFactory());
+                lock (sessionFactoryLock)
+                {
+                    return sessionFactory ?? (sessionFactory = CreateSessionFactory());
+                }
             }
         }
 
@@ -84,6 +95,8 @@
 
             // remove if not profiling
             NHibernateProfiler.Initialize();
+
+            AutomapperSetup.Initialize();
         }
 
         private static ISessionFactory CreateSessionFactory()

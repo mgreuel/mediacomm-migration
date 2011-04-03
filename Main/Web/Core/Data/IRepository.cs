@@ -8,5 +8,9 @@ namespace MediaCommMVC.Core.Data
     public interface IRepository<T>
     {
         T GetById(int id);
+
+        IEnumerable<T> GetAllMatching(Func<T, bool> filter);
+
+        IEnumerable<T> GetAll();
     }
 }
