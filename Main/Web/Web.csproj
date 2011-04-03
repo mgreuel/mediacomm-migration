@@ -44,6 +44,9 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.1.3.42154\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.1.1.0.118\lib\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
     </Reference>
@@ -120,28 +123,46 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\Forums.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Forums.resx</DependentUpon>
+    </Compile>
     <Compile Include="Core\Controllers\AccountController.cs" />
+    <Compile Include="Core\Controllers\ForumsController.cs" />
     <Compile Include="Core\Controllers\HomeController.cs" />
+    <Compile Include="Core\Data\IForumsRepository.cs" />
     <Compile Include="Core\Data\IRepository.cs" />
     <Compile Include="Core\Data\IUserRepository.cs" />
     <Compile Include="Core\Data\Nh\Config\ConfigurationGenerator.cs" />
     <Compile Include="Core\Data\Nh\Config\IConfigurationGenerator.cs" />
     <Compile Include="Core\Data\Nh\Mapping\AutoMapGenerator.cs" />
     <Compile Include="Core\Data\Nh\Mapping\IAutoMapGenerator.cs" />
+    <Compile Include="Core\Data\Nh\Mapping\Overrides\ForumMap.cs" />
     <Compile Include="Core\Data\Nh\Mapping\Overrides\MediaCommUserMap.cs" />
+    <Compile Include="Core\Data\Nh\NhForumsRepository.cs" />
     <Compile Include="Core\Data\Nh\NhRepository.cs" />
     <Compile Include="Core\Data\Nh\NhUserRepository.cs" />
+    <Compile Include="Core\Infrastructure\AutomapSetup.cs" />
     <Compile Include="Core\Infrastructure\DependencyResolution\NhRepositoryConvention.cs" />
     <Compile Include="Core\Infrastructure\IConfig.cs" />
     <Compile Include="Core\Infrastructure\TransactionFilter.cs" />
-    <Compile Include="Core\Infrastructure\UnityDependencyResolver.cs" />
+    <Compile Include="Core\Model\Forum.cs" />
     <Compile Include="Core\Model\MediaCommUser.cs" />
     <Compile Include="Core\Services\AccountService.cs" />
     <Compile Include="Core\Services\IAccountService.cs" />
+    <Compile Include="Core\Helpers\UrlEncoder.cs" />
+    <Compile Include="Core\ViewModel\ForumsIndexViewModel.cs" />
+    <Compile Include="Core\ViewModel\ForumViewModel.cs" />
     <Compile Include="Core\ViewModel\HomeViewModel.cs" />
     <Compile Include="Core\ViewModel\LogOnViewModel.cs" />
     <Compile Include="Core\Infrastructure\DependencyResolution\IoC.cs" />
     <Compile Include="Core\Infrastructure\DependencyResolution\SmDependencyResolver.cs" />
+    <Compile Include="App_GlobalResources\GeneralResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeneralResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AccountResources1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -164,9 +185,11 @@
     <Content Include="App_Data\MediaCommDemo_log.ldf">
       <DependentUpon>MediaCommDemo.mdf</DependentUpon>
     </Content>
+    <Content Include="Css\Custom\Header.css" />
     <Content Include="Css\Custom\Layout.css" />
-    <Content Include="Css\Custom\menu.css" />
+    <Content Include="Css\Custom\Menu.css" />
     <Content Include="Global.asax" />
+    <None Include="Views\Forums\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -196,8 +219,19 @@
     <None Include="combres.readme" />
     <Content Include="Views\Account\LogOn.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_LogOnPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_GlobalResources\Forums.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Forums.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <EmbeddedResource Include="App_GlobalResources\GeneralResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GeneralResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\AccountResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountResources1.designer.cs</LastGenOutput>
@@ -212,7 +246,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_GlobalResources\" />
     <Folder Include="App_Start\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

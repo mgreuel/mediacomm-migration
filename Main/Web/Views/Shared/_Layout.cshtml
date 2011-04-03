@@ -3,7 +3,7 @@
 <head>
     <title>@ViewBag.Title</title>
     @Html.CombresLink("siteCss")
-    @Html.CombresLink("siteJs")    
+    @Html.CombresLink("siteJs")
     <script type="text/javascript">
         $(function () {
             $("#mainNav").buttonset();
@@ -13,8 +13,11 @@
 <body>
     <div id="container" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
         <header id="mainHeader">
-            <h1>
+            <h1 id="title">
                 My nice Title</h1>
+            <div id="logindisplay">
+                @Html.Partial("_LogOnPartial")
+            </div>
             <nav id="mainNav">
                 <div class="menu-item">
                     <input type="radio" id="radio1" name="menu" /><label for="radio1">Home</label>

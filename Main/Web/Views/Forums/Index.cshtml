@@ -1,0 +1,65 @@
+@model MediaCommMVC.Core.ViewModel.ForumsIndexViewModel
+
+<table id="forumsTable">
+    <thead>
+        <tr>
+            <th colspan="2">
+                @Resources.Forums.Forum
+            </th>
+            <th>
+                @Resources.Forums.Topics
+            </th>
+            <th>
+                @Resources.Forums.Posts
+            </th>
+            <th>
+                @Resources.Forums.LastPost
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (MediaCommMVC.Core.ViewModel.ForumViewModel forum in Model.Forums.OrderBy(f => f.DisplayOrderIndex))
+           { 
+            <tr>
+                <td>
+                    <img src='@Url.Content("/Content/Forum/" + forum.IconUrl)' alt="icon" />
+                </td>
+                <td>
+                    <div class="forumTitle">
+                        @Html.ActionLink(forum.Title, "Forum", new { id = forum.Id, name = forum.UrlFriendlyTitle })                        
+                    </div>
+                    <div class="forumDesc">
+                        @Html.Encode(forum.Description)
+                    </div>
+                </td>
+                <td style="text-align: center;">
+                    @forum.TopicCount
+                </td>
+                <td style="text-align: center;">
+                    @forum.PostCount
+                </td>
+                <td>
+                    last post 123
+                </td>
+            </tr>
+            }
+    </tbody>
+</table>
+<div id="forumIndexFooter">
+    <table id="legend">
+        <tr>
+            <td>
+                <img src='@Url.Content("~/Content/Forum/folder_new.gif")' alt='@Resources.Forums.NewPosts' />
+            </td>
+            <td class="caption">
+                @Resources.Forums.NewPosts
+            </td>
+            <td>
+                <img src='@Url.Content("/Content/Forum/folder.gif")' alt='@Resources.Forums.NoNewPosts' />
+            </td>
+            <td class="caption">
+                @Resources.Forums.NoNewPosts
+            </td>
+        </tr>
+    </table>
+</div>

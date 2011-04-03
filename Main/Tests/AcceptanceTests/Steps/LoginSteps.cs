@@ -8,6 +8,8 @@
 
     using TechTalk.SpecFlow;
 
+    using WatiN.Core;
+
     #endregion
 
     [Binding]
@@ -19,6 +21,24 @@
         public void ThenISeeAnErrorMessageTellingMe(string message)
         {
             StringAssert.Contains(message, WebBrowser.Driver.GetText("content"));
+        }
+
+        [Binding]
+        public class StepDefinitions
+        {
+            [Given(@"I am logged in")]
+            public void GivenIAmLoggedIn()
+            {
+                WebBrowser.Driver.Navigate("/Account/Logon");
+                if (WebBrowser.Current.Element(Find.ById("logindisplay")).Text.Contains("Log Off"))
+                {
+                    return;
+                }
+
+                PageInteractionSteps pageInteractionSteps = new PageInteractionSteps();
+                pageInteractionSteps.GivenIHaveEnteredAUsernameAndAPassword("testuser", "secret");
+                pageInteractionSteps.WhenIPressTheButton("loginButton");
+            }
         }
 
         #endregion

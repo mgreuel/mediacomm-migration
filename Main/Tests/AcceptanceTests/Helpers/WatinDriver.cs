@@ -103,9 +103,9 @@
             return element.Text;
         }
 
-        public virtual int GetRowCount<T>(string tableName, List<RowFilter<T>> filters)
+        public virtual int GetRowCount<T>(string tableId, List<RowFilter<T>> filters)
         {
-            List<TableRow> filteredRows = this.GetFilteredRows(tableName, filters);
+            List<TableRow> filteredRows = this.GetFilteredRows(tableId, filters);
             return filteredRows.Count;
         }
 
@@ -158,9 +158,9 @@
 
         #region Methods
 
-        private List<TableRow> GetFilteredRows<T>(string tableName, List<RowFilter<T>> filters)
+        private List<TableRow> GetFilteredRows<T>(string tableId, List<RowFilter<T>> filters)
         {
-            Table table = this.browser.Table(tableName);
+            Table table = this.browser.Table(tableId);
             var rows = table.TableRows;
 
             var filteredRows = new List<TableRow>();
