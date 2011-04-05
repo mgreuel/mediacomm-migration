@@ -19,12 +19,13 @@
         public void GivenINavigateTo(string url)
         {
             WebBrowser.Driver.Navigate(url);
+            WebBrowser.Current.WaitForComplete();
         }
 
         [Then(@"I am redirected to ""(.*?)""")]
         public void ThenIAmRedirectedTo(string url)
         {
-            Assert.AreEqual(url, WebBrowser.Driver.Url);
+            StringAssert.IsMatch(url.ToLowerInvariant(), WebBrowser.Driver.Url.ToLowerInvariant());
         }
 
         #endregion

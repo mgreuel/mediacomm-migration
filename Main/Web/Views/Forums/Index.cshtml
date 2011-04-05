@@ -22,7 +22,7 @@
            { 
             <tr>
                 <td>
-                    <img src='@Url.Content("/Content/Forum/" + forum.IconUrl)' alt="icon" />
+                    <img src='@Url.Content("~/Content/Forum/" + forum.IconUrl)' alt="icon" />
                 </td>
                 <td>
                     <div class="forumTitle">
@@ -55,7 +55,7 @@
                 @Resources.Forums.NewPosts
             </td>
             <td>
-                <img src='@Url.Content("/Content/Forum/folder.gif")' alt='@Resources.Forums.NoNewPosts' />
+                <img src='@Url.Content("~/Content/Forum/folder.gif")' alt='@Resources.Forums.NoNewPosts' />
             </td>
             <td class="caption">
                 @Resources.Forums.NoNewPosts

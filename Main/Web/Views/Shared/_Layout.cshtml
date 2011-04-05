@@ -13,10 +13,12 @@
 <body>
     <div id="container" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
         <header id="mainHeader">
-            <h1 id="title">
-                My nice Title</h1>
-            <div id="logindisplay">
-                @Html.Partial("_LogOnPartial")
+            <div id="upperHeader" class="ui-helper-clearfix">
+                <h1 id="title">
+                    My nice Title</h1>
+                <div id="logindisplay">
+                    @Html.Partial("_LogOnPartial")
+                </div>
             </div>
             <nav id="mainNav">
                 <div class="menu-item">
@@ -26,8 +28,8 @@
                     <input type="radio" id="radio2" name="menu" /><label for="radio2">Forums</label>
                     <div class="hover-menu">
                         <div class="menu-item">
-                            <input type="radio" id="forumsRadio1" name="ForumsMenu" /><label for="forumsRadio1"
-                                class="ui-corner-top">Forum 123</label>
+                            <input type="radio" id="forumsRadio1" name="ForumsMenu" /><label for="forumsRadio1">Forum
+                                123</label>
                         </div>
                         <div class="menu-item">
                             <input type="radio" id="forumsRadio2" name="ForumsMenu" /><label for="forumsRadio2"

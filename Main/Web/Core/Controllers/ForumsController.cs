@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace MediaCommMVC.Core.Controllers
+﻿namespace MediaCommMVC.Core.Controllers
 {
-    using System.Collections;
+    #region Using Directives
 
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using Data;
+    using Infrastructure;
+    using Model;
+    using ViewModel;
     using AutoMapper;
 
-    using MediaCommMVC.Core.Data;
-    using MediaCommMVC.Core.Infrastructure;
-    using MediaCommMVC.Core.Model;
-    using MediaCommMVC.Core.ViewModel;
+    #endregion
 
+    [Authorize]
     public class ForumsController : Controller
     {
         private readonly IForumsRepository forumsRepository;
