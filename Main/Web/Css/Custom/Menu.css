@@ -1,43 +1,41 @@
 ﻿#mainNav
 {
-	font-family: tahoma,arial,sans-serif;
-	float: left;
-	width: 100%;	
-	margin-left: 4px;
+    font-family: tahoma,arial,sans-serif;
+    width: 100%;
 }
 
 #mainNav .menu-item .hover-menu
 {
-	display: none;
-	border: none;
+    display: none;
+    border: none;
 }
 
 #mainNav .menu-item:hover .hover-menu
 {
-	display: block;
-	white-space: normal;	
-	width: 163px;
-	position: absolute;
-	left: 0;
-	top: 21px;
+    display: block;
+    white-space: normal;
+    width: 163px;
+    position: absolute;
+    left: 0;
+    top: 21px;
 }
 
 #mainNav .menu-item:hover
 {
-	position: relative;
+    position: relative;
 }
 #mainNav .menu-item
 {
-	display: inline;
+    display: inline;
 }
 
 #mainNav > .menu-item > label
 {
-	width: 80px !important;
+    width: 80px !important;
 }
 
 .hover-menu > .menu-item > label
 {
-	width: 163px !important;
-	text-align: left;
+    width: 163px !important;
+    text-align: left;
 }

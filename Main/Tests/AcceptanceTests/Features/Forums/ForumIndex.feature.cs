@@ -17,8 +17,8 @@ namespace MediaCommMVC.Tests.AcceptanceTests.Features.Forums
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.5.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Addition")]
-    public partial class AdditionFeature
+    [NUnit.Framework.DescriptionAttribute("View Forum Index")]
+    public partial class ViewForumIndexFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -30,7 +30,7 @@ namespace MediaCommMVC.Tests.AcceptanceTests.Features.Forums
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Addition", "In order to see what forums exist\nAs a logged in user\nI want to see an overview o" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "View Forum Index", "In order to see what forums exist\nAs a logged in user\nI want to see an overview o" +
                     "ver all forums", GenerationTargetLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -55,19 +55,34 @@ namespace MediaCommMVC.Tests.AcceptanceTests.Features.Forums
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("View Forum Index")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
         public virtual void ViewForumIndex()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("View Forum Index", new string[] {
-                        "mytag"});
-#line 7
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("View Forum Index", ((string[])(null)));
+#line 6
 this.ScenarioSetup(scenarioInfo);
-#line 8
+#line 7
  testRunner.Given("I am logged in");
-#line 9
+#line 8
  testRunner.And("I navigate to \"/Forums\"");
-#line 10
+#line 9
  testRunner.Then("I see the Forum Index containing 3 forums");
+#line hidden
+            testRunner.CollectScenarioErrors();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("View Forum Index without permission")]
+        public virtual void ViewForumIndexWithoutPermission()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("View Forum Index without permission", ((string[])(null)));
+#line 11
+this.ScenarioSetup(scenarioInfo);
+#line 12
+ testRunner.Given("I am not logged in");
+#line 13
+ testRunner.And("I navigate to \"/Forums\"");
+#line 14
+ testRunner.Then("I am redirected to \"/Account/Logon.*?\"");
 #line hidden
             testRunner.CollectScenarioErrors();
         }

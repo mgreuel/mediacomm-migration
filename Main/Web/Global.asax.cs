@@ -4,9 +4,11 @@
 
     using System;
     using System.Collections.Generic;
+    using System.Security.Principal;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using System.Web.Security;
 
     using AutoMapper;
 
@@ -97,6 +99,20 @@
             NHibernateProfiler.Initialize();
 
             AutomapperSetup.Initialize();
+        }
+
+        protected void MvcApplication_PostAuthenticateRequest(object sender, EventArgs e)
+        {
+            HttpCookie authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+
+            if (authCookie != null && !string.IsNullOrEmpty(authCookie.Value))
+            {
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                MediaCommIdentity identity = new MediaCommIdentity(ticket);
+                string[] roles = ticket.UserData.Split(',');
+                GenericPrincipal principal = new GenericPrincipal(identity, roles);
+                HttpContext.Current.User = principal;
+            }
         }
 
         private static ISessionFactory CreateSessionFactory()

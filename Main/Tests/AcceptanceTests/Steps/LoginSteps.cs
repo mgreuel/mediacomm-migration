@@ -23,22 +23,30 @@
             StringAssert.Contains(message, WebBrowser.Driver.GetText("content"));
         }
 
-        [Binding]
-        public class StepDefinitions
+        [Given(@"I am logged in")]
+        public void GivenIAmLoggedIn()
         {
-            [Given(@"I am logged in")]
-            public void GivenIAmLoggedIn()
+            WebBrowser.Driver.Navigate("/Account/Logon");
+            if (WebBrowser.Current.Element(Find.ById("logindisplay")).Text.Contains("Log Off"))
             {
-                WebBrowser.Driver.Navigate("/Account/Logon");
-                if (WebBrowser.Current.Element(Find.ById("logindisplay")).Text.Contains("Log Off"))
-                {
-                    return;
-                }
-
-                PageInteractionSteps pageInteractionSteps = new PageInteractionSteps();
-                pageInteractionSteps.GivenIHaveEnteredAUsernameAndAPassword("testuser", "secret");
-                pageInteractionSteps.WhenIPressTheButton("loginButton");
+                return;
             }
+
+            PageInteractionSteps pageInteractionSteps = new PageInteractionSteps();
+            pageInteractionSteps.GivenIHaveEnteredAUsernameAndAPassword("testuser", "secret");
+            pageInteractionSteps.WhenIPressTheButton("loginButton");
+        }
+
+        [Given(@"I am not logged in")]
+        public void GivenIAmNotLoggedIn()
+        {
+            WebBrowser.Driver.Navigate("/Account/Logon");
+            if (WebBrowser.Current.Element(Find.ById("logindisplay")).Text.Contains("Log On"))
+            {
+                return;
+            }
+
+            WebBrowser.Current.Link(Find.ByText("Log Off")).Click();
         }
 
         #endregion

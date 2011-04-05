@@ -22,7 +22,7 @@ namespace MediaCommMVC.Tests.AcceptanceTests.Steps
             [Then(@"I see the Forum Index containing 3 forums")]
             public void ThenISeeTheForumIndexContaining3Forums()
             {
-                int forumCount = WebBrowser.Driver.GetRowCount("forums", new List<RowFilter<string>>());
+                int forumCount = WebBrowser.Driver.GetRowCount("forumsTable", new List<RowFilter<string>> { new RowFilter<string>(f => f, "forum") });
                 Assert.AreEqual(3, forumCount);
             }
         }
