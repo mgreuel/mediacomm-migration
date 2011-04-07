@@ -74,7 +74,6 @@
             }
 
             DateTime expiration = DateTime.Now.AddYears(1);
-
             FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
                 version: 1,
                 name: logOnViewModel.UserName,
@@ -83,7 +82,6 @@
                 isPersistent: logOnViewModel.RememberMe,
                 userData: roles,
                 cookiePath: FormsAuthentication.FormsCookiePath);
-
             string encTicket = FormsAuthentication.Encrypt(authTicket);
             HttpCookie httpCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket) { Expires = expiration };
             this.Response.Cookies.Add(httpCookie);

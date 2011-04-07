@@ -1,39 +1,40 @@
 ﻿namespace MediaCommMVC.Core.ViewModel
 {
-    using System;
-    using System.Web.Mvc;
+    #region Using Directives
+
     using MediaCommMVC.Core.Helpers;
+
+    #endregion
 
     public class ForumViewModel
     {
-        public string Title { get; set; }
+        #region Properties
+
+        public string Description { get; set; }
 
         public int DisplayOrderIndex { get; set; }
 
-        public string IconUrl
+        public bool HasUnreadTopics { get; set; }
+
+        public string IconClass
         {
             get
             {
-                string filename = "folder";
-
-                if (this.HasUnreadTopics)
-                {
-                    filename = filename + "_new";
-                }
-
-                return filename + ".gif";
+                return this.HasUnreadTopics ? "ui-icon-mail-closed" : "ui-icon ui-icon-mail-open";
             }
         }
 
-        public string TopicCount { get; set; }
+        public string LastPostTime { get; set; }
 
-        public string PostCount { get; set; }
-
-        public bool HasUnreadTopics { get; set; }
+        public string LastPostAuthor { get; set; }
 
         public string Id { get; set; }
 
-        public string Description { get; set; }
+        public string PostCount { get; set; }
+
+        public string Title { get; set; }
+
+        public string TopicCount { get; set; }
 
         public string UrlFriendlyTitle
         {
@@ -42,5 +43,7 @@
                 return UrlEncoder.ToFriendlyUrl(this.Title);
             }
         }
+
+        #endregion
     }
 }

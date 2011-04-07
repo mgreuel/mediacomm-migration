@@ -1,0 +1,35 @@
+﻿@model MediaCommMVC.Core.ViewModel.CreateTopicViewModel
+@{
+    ViewBag.Title = "CreateTopic";
+}
+@using(Html.BeginForm())
+{
+<table>
+    <thead>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.TopicSubject)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.TopicSubject)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.PostText)
+            </td>
+            <td>
+                @Html.TextAreaFor(m => m.PostText)
+            </td>
+        </tr>
+        <tr>
+        <td></td>
+        <td>
+            <input type="submit" value='@Resources.GeneralResources.Save' />
+        </td>
+        </tr>
+    </tbody>
+</table>
+}

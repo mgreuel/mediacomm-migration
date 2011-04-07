@@ -26,6 +26,8 @@ namespace MediaCommMVC.Tests.UnitTests.Controllers
 
         private Mock<IForumsRepository> forumsRepositoryMock;
 
+        private Mock<IUserRepository> userRepositoryMock;
+
         [Test]
         public void Index_ReturnsViewWithForumsIndexViewModel()
         {
@@ -58,8 +60,9 @@ namespace MediaCommMVC.Tests.UnitTests.Controllers
         {
             AutomapperSetup.Initialize();
             this.forumsRepositoryMock = new Mock<IForumsRepository>();
+            this.userRepositoryMock = new Mock<IUserRepository>();
 
-            this.forumsController = new ForumsController(forumsRepositoryMock.Object);
+            this.forumsController = new ForumsController(this.forumsRepositoryMock.Object, this.userRepositoryMock.Object);
         }
     }
 }

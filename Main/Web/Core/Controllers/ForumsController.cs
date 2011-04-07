@@ -3,6 +3,7 @@
     #region Using Directives
 
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
     using Data;
     using Infrastructure;
@@ -17,9 +18,12 @@
     {
         private readonly IForumsRepository forumsRepository;
 
-        public ForumsController(IForumsRepository forumsRepository)
+        private readonly IUserRepository userRepository;
+
+        public ForumsController(IForumsRepository forumsRepository, IUserRepository userRepository)
         {
             this.forumsRepository = forumsRepository;
+            this.userRepository = userRepository;
         }
 
         [TransactionFilter]
@@ -29,7 +33,16 @@
             IEnumerable<ForumViewModel> forumViewModels = Mapper.Map<IEnumerable<Forum>, IEnumerable<ForumViewModel>>(forums);
             ForumsIndexViewModel forumsIndexViewModel = new ForumsIndexViewModel { Forums = forumViewModels };
 
-            return View(forumsIndexViewModel);
+            return this.View(forumsIndexViewModel);
+        }
+
+        [HttpGet]
+        public ActionResult CreateTopic(int id)
+        {
+            IEnumerable<string> userNames = this.userRepository.GetAll().Select(u => u.UserName).ToList();
+            CreateTopicViewModel createTopicViewModel = new CreateTopicViewModel { UserNames = userNames };
+
+            return this.View(createTopicViewModel);
         }
     }
 }
