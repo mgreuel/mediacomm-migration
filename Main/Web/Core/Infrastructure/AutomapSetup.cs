@@ -14,7 +14,11 @@ namespace MediaCommMVC.Core.Infrastructure
     {
         public static void Initialize()
         {
-            Mapper.CreateMap<Forum, ForumViewModel>();
+            Mapper.CreateMap<Forum, ForumViewModel>().ForMember(
+                v => v.LastPostTime,
+                opt =>
+                opt.MapFrom(
+                    f => string.IsNullOrEmpty(f.LastPostAuthor) ? string.Empty : string.Format("{0:g}", f.LastPostTime)));
             Mapper.CreateMap<Forum[], ForumViewModel[]>();
 
             Mapper.AssertConfigurationIsValid();

@@ -7,6 +7,7 @@
     <script type="text/javascript">
         $(function () {
             $("#mainNav").buttonset();
+            $("#themeswitcher").themeswitcher();
         });
     </script>
 </head>
@@ -17,6 +18,7 @@
                 <h1 id="title">
                     My nice Title</h1>
                 <div id="logindisplay">
+                    <span id="themeswitcher"></span>
                     @Html.Partial("_LogOnPartial")
                 </div>
             </div>

@@ -123,9 +123,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="App_GlobalResources\Forums.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -156,6 +153,7 @@
     <Compile Include="Core\Services\AccountService.cs" />
     <Compile Include="Core\Services\IAccountService.cs" />
     <Compile Include="Core\Helpers\UrlEncoder.cs" />
+    <Compile Include="Core\ViewModel\CreateTopicViewModel.cs" />
     <Compile Include="Core\ViewModel\ForumsIndexViewModel.cs" />
     <Compile Include="Core\ViewModel\ForumViewModel.cs" />
     <Compile Include="Core\ViewModel\HomeViewModel.cs" />
@@ -166,12 +164,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GeneralResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ForumsController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="HomeController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AccountResources1.designer.cs">
       <AutoGen>True</AutoGen>
@@ -187,14 +179,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SharedController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T4MVC.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\combres.xml" />
@@ -207,11 +191,12 @@
     <Content Include="Css\Custom\Layout.css" />
     <Content Include="Css\Custom\Menu.css" />
     <Content Include="Global.asax" />
-    <None Include="T4MVC.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>T4MVC.cs</LastGenOutput>
-    </None>
-    <None Include="T4MVC.tt.settings.t4" />
+    <Content Include="Images\Themeroller\base.png" />
+    <Content Include="Images\Themeroller\buttonbg.png" />
+    <Content Include="Images\Themeroller\icon_color_arrow.gif" />
+    <Content Include="Images\Themeroller\menuhoverbg.png" />
+    <Content Include="Scripts\themeswitchertool.js" />
+    <Content Include="Views\Forums\CreateTopic.cshtml" />
     <None Include="Views\Forums\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -270,6 +255,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\" />
+    <Folder Include="Images\Forums\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

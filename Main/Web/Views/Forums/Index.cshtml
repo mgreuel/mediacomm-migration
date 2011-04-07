@@ -1,5 +1,4 @@
 @model MediaCommMVC.Core.ViewModel.ForumsIndexViewModel
-
 <table id="forumsTable">
     <thead>
         <tr>
@@ -19,47 +18,52 @@
     </thead>
     <tbody>
         @foreach (MediaCommMVC.Core.ViewModel.ForumViewModel forum in Model.Forums.OrderBy(f => f.DisplayOrderIndex))
-           { 
+        { 
             <tr>
                 <td>
-                    <img src='@Url.Content("~/Content/Forum/" + forum.IconUrl)' alt="icon" />
+                    <span class="ui-icon @forum.IconClass"></span>
                 </td>
                 <td>
                     <div class="forumTitle">
-                        @Html.ActionLink(forum.Title, "Forum", new { id = forum.Id, name = forum.UrlFriendlyTitle })                        
+                        @Html.ActionLink(forum.Title, "Forum", new { id = forum.Id, name = forum.UrlFriendlyTitle })
                     </div>
                     <div class="forumDesc">
-                        @Html.Encode(forum.Description)
+                        @forum.Description
                     </div>
                 </td>
-                <td style="text-align: center;">
+                <td>
                     @forum.TopicCount
                 </td>
-                <td style="text-align: center;">
+                <td>
                     @forum.PostCount
                 </td>
                 <td>
-                    last post 123
+                    @forum.LastPostAuthor
+                    @if (!string.IsNullOrEmpty(forum.LastPostAuthor))
+                    { 
+                        @Resources.Forums.By 
+                        @Html.ActionLink(forum.LastPostAuthor, "Profile", "Users", new { username = forum.LastPostAuthor }, null)
+                    }
                 </td>
             </tr>
-            }
+        }
     </tbody>
 </table>
-<div id="forumIndexFooter">
-    <table id="legend">
+<footer id="forumIndexFooter">
+    <table>
         <tr>
             <td>
-                <img src='@Url.Content("~/Content/Forum/folder_new.gif")' alt='@Resources.Forums.NewPosts' />
+                <span class="ui-icon ui-icon-mail-closed"></span>
             </td>
-            <td class="caption">
+            <td>
                 @Resources.Forums.NewPosts
             </td>
             <td>
-                <img src='@Url.Content("~/Content/Forum/folder.gif")' alt='@Resources.Forums.NoNewPosts' />
+                <span class="ui-icon ui-icon-mail-open"></span>
             </td>
-            <td class="caption">
+            <td>
                 @Resources.Forums.NoNewPosts
             </td>
         </tr>
     </table>
-</div>
+</footer>
