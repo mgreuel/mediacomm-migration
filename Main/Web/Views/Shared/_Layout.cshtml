@@ -1,7 +1,13 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+
     <title>@ViewBag.Title</title>
+
+        <script type="text/javascript">
+            var baseUrl = '@Request.ApplicationPath'
+    </script>
+
     @Html.CombresLink("siteCss")
     @Html.CombresLink("siteJs")
     <script type="text/javascript">
@@ -9,8 +15,6 @@
             $("#mainNav").buttonset();
             $("#themeswitcher").themeswitcher();
         });
-
-        var baseUrl = '@Request.ApplicationPath'
     </script>
 </head>
 <body>

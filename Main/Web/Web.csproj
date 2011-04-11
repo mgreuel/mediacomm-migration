@@ -302,7 +302,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>4321</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4321/</IISUrl>
+          <IISUrl>http://localhost:4321/subDir</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
