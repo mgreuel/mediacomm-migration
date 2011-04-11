@@ -20,7 +20,6 @@
       <resource path="~/Css/Custom/Layout.css" />
       <resource path="~/Css/Custom/Menu.css" />
       <resource path="~/Css/Custom/Header.css" />
-      <resource path="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/ui-lightness/jquery-ui.css" mode="dynamic" />
     </resourceSet>
     <resourceSet name="siteJs" type="js">
       <resource path="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" mode="dynamic" />

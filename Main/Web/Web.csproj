@@ -195,6 +195,30 @@
     <Content Include="Images\Themeroller\buttonbg.png" />
     <Content Include="Images\Themeroller\icon_color_arrow.gif" />
     <Content Include="Images\Themeroller\menuhoverbg.png" />
+    <Content Include="Images\Themeroller\theme_90_black_matte.png" />
+    <Content Include="Images\Themeroller\theme_90_black_tie.png" />
+    <Content Include="Images\Themeroller\theme_90_blitzer.png" />
+    <Content Include="Images\Themeroller\theme_90_cupertino.png" />
+    <Content Include="Images\Themeroller\theme_90_dark_hive.png" />
+    <Content Include="Images\Themeroller\theme_90_dot_luv.png" />
+    <Content Include="Images\Themeroller\theme_90_eggplant.png" />
+    <Content Include="Images\Themeroller\theme_90_excite_bike.png" />
+    <Content Include="Images\Themeroller\theme_90_flick.png" />
+    <Content Include="Images\Themeroller\theme_90_hot_sneaks.png" />
+    <Content Include="Images\Themeroller\theme_90_humanity.png" />
+    <Content Include="Images\Themeroller\theme_90_le_frog.png" />
+    <Content Include="Images\Themeroller\theme_90_mint_choc.png" />
+    <Content Include="Images\Themeroller\theme_90_overcast.png" />
+    <Content Include="Images\Themeroller\theme_90_pepper_grinder.png" />
+    <Content Include="Images\Themeroller\theme_90_smoothness.png" />
+    <Content Include="Images\Themeroller\theme_90_south_street.png" />
+    <Content Include="Images\Themeroller\theme_90_redmond.png" />
+    <Content Include="Images\Themeroller\theme_90_start.png" />
+    <Content Include="Images\Themeroller\theme_90_sunny.png" />
+    <Content Include="Images\Themeroller\theme_90_swanky_purse.png" />
+    <Content Include="Images\Themeroller\theme_90_trontastic.png" />
+    <Content Include="Images\Themeroller\theme_90_ui_darkness.png" />
+    <Content Include="Images\Themeroller\theme_90_ui_lightness.png" />
     <Content Include="Scripts\themeswitchertool.js" />
     <Content Include="Views\Forums\CreateTopic.cshtml" />
     <None Include="Views\Forums\Index.cshtml" />
@@ -255,7 +279,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\" />
-    <Folder Include="Images\Forums\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
