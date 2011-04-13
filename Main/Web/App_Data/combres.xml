@@ -28,6 +28,7 @@
       <resource path="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.unobtrusive-ajax.min.js" mode="dynamic" />
       <resource path="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js" mode="dynamic" />
       <resource path="~/Scripts/themeswitchertool.js" />
+      <resource path="~/Scripts/jquery.tinymce.js" />
     </resourceSet>
   </resourceSets>
 </combres>
