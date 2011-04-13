@@ -4,9 +4,13 @@
 
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Web.Mvc;
     using Data;
     using Infrastructure;
+
+    using MediaCommMVC.Core.Helpers;
+
     using Model;
     using ViewModel;
     using AutoMapper;
@@ -43,6 +47,16 @@
             CreateTopicViewModel createTopicViewModel = new CreateTopicViewModel { UserNames = userNames };
 
             return this.View(createTopicViewModel);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateInput(false)]
+        public ActionResult CreateTopic(CreateTopicViewModel createTopic, int id)
+        {
+            createTopic.PostText = UrlResolver.ResolveLinks(createTopic.PostText);
+
+            return this.RedirectToAction("Index");
+            //this.RedirectToAction("Topic", new { id = createdTopic.Id, name = this.Url.ToFriendlyUrl(createdTopic.Title) });
         }
     }
 }
