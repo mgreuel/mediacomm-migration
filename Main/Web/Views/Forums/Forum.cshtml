@@ -1,0 +1,87 @@
+﻿@model MediaCommMVC.Core.ViewModels.Pages.ForumPageViewModel
+@{
+    ViewBag.Title = "Forum";
+}
+<div id="forumHeader">
+    <div id="newTopicButton">
+        @Html.ActionLink(Resources.Forums.CreateTopic, "CreateTopic", null, new { @class = "button" })
+    </div>
+    <div class="forumPager forumPagerTop">
+    </div>
+</div>
+<table id="forumTable">
+    <thead>
+        <tr>
+            <th colspan="2">
+                @Resources.Forums.Topic
+            </th>
+            <th>
+                @Resources.Forums.Author
+            </th>
+            <th>
+                @Resources.Forums.Posts
+            </th>
+            <th>
+                @Resources.Forums.LastPost
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var topic in Model.Topics)
+        { 
+            <tr>
+                <td>
+                    <span class="ui-icon @topic.IconClass"></span>
+                </td>
+                <td>
+                    <span class="topicTitle">
+                        @Html.ActionLink(topic.Title, "Topic", new { id = topic.Id, topic.UrlFriendlyTitle })
+                    </span>
+                </td>
+                <td style="white-space: nowrap; text-align: center;">
+                    @Html.ActionLink(topic.CreatedBy, "Profile", "Users", new { username = topic.CreatedBy }, null)
+                </td>
+                <td style="text-align: center;">
+                    @topic.PostCount
+                </td>
+                <td>
+                    <div>
+                        @topic.LastPostTime</div>
+                    <div>
+                        @Html.ActionLink(topic.LastPostAuthor, "Profile", "Users", new { username = topic.LastPostAuthor }, null)
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="forumFooter">
+    <table>
+        <tr>
+            <td>
+                <span class="ui-icon ui-icon-mail-closed"></span>
+            </td>
+            <td>
+                @Resources.Forums.NewPosts
+            </td>
+            <td>
+                <span class="ui-icon ui-icon-mail-open"></span>
+            </td>
+            <td>
+                @Resources.Forums.NoNewPosts
+            </td>
+            <td>
+                <span class="ui-icon ui-icon-alert"></span>
+            </td>
+            <td>
+                @Resources.Forums.StickyNewPosts
+            </td>
+            <td>
+                <span class="ui-icon ui-icon-info"></span>
+            </td>
+            <td>
+                @Resources.Forums.StickyNoNewPosts
+            </td>
+        </tr>
+    </table>
+</div>

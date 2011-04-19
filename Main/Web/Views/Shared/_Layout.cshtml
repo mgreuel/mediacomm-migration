@@ -1,13 +1,10 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-
     <title>@ViewBag.Title</title>
-
-        <script type="text/javascript">
-            var baseUrl = '@Request.ApplicationPath'
+    <script type="text/javascript">
+        var baseUrl = '@Request.ApplicationPath'
     </script>
-
     @Html.CombresLink("siteCss")
     @Html.CombresLink("siteJs")
     <script type="text/javascript">
@@ -30,29 +27,41 @@
             </div>
             <nav id="mainNav">
                 <div class="menu-item">
-                    <input type="radio" id="radio1" name="menu" /><label for="radio1">Home</label>
+                    <input type="radio" id="menuHome" name="menu" />
+                    @Html.ActionLink(Resources.Navigation.Home, "Index", "Home")
                 </div>
                 <div class="menu-item">
-                    <input type="radio" id="radio2" name="menu" /><label for="radio2">Forums</label>
-                    <div class="hover-menu">
+                    <input type="radio" id="menuForums" name="menu" />
+                    @Html.ActionLink(Resources.Navigation.Forums, "Index", "Forums")
+                </div>
+                <div class="menu-item">
+                    <input type="radio" id="menuPhotos" name="menu" />
+                    <label for="menuPhotos">
+                        Photos</label>
+                    <div class="hover-menu photonavi">
                         <div class="menu-item">
-                            <input type="radio" id="forumsRadio1" name="ForumsMenu" /><label for="forumsRadio1">Forum
-                                123</label>
-                        </div>
-                        <div class="menu-item">
-                            <input type="radio" id="forumsRadio2" name="ForumsMenu" /><label for="forumsRadio2"
-                                class="ui-corner-bottom">Forum abc</label>
+                            <input type="radio" id="menuPhotosUpload" name="ForumsMenu" />
+                            @Html.ActionLink(Resources.Photos.Upload, "Upload", "Photos")
                         </div>
                     </div>
                 </div>
                 <div class="menu-item">
-                    <input type="radio" id="radio3" name="menu" /><label for="radio3">Photos</label>
+                    <input type="radio" id="menuMovies" name="menu" />
+                    @Html.ActionLink(Resources.Navigation.Movies, "Index", "Movies")
                 </div>
                 <div class="menu-item">
-                    <input type="radio" id="radio4" name="menu" /><label for="radio4">Movies</label>
-                </div>
-                <div class="menu-item">
-                    <input type="radio" id="radio5" name="menu" /><label for="radio5">Users</label>
+                    <input type="radio" id="menuUsers" name="menu" />
+                    @Html.ActionLink(Resources.Navigation.Users, "Index", "Users")
+                    <div class="hover-menu">
+                        <div class="menu-item">
+                            <input type="radio" id="menuUsersOverview" name="menu" />
+                            @Html.ActionLink(Resources.Navigation.Overview, "Index", "Users")
+                        </div>
+                        <div class="menu-item">
+                            <input type="radio" id="menuUsersMyProfile" name="menu" />
+                            @Html.ActionLink(Resources.Users.MyProfile, "MyProfile", "Users")
+                        </div>
+                    </div>
                 </div>
             </nav>
         </header>
@@ -64,3 +73,7 @@
     </div>
 </body>
 </html>
+@*                        <div class="menu-item">
+                            <input type="radio" name="ForumsMenu" /><label for="forumsRadio2" class="ui-corner-bottom">Forum
+                                abc</label>
+                        </div>*@

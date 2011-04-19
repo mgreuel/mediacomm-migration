@@ -10,6 +10,8 @@
     using Infrastructure;
 
     using MediaCommMVC.Core.Helpers;
+    using MediaCommMVC.Core.ViewModels;
+    using MediaCommMVC.Core.ViewModels.Pages;
 
     using Model;
     using ViewModel;
@@ -38,6 +40,35 @@
             ForumsIndexViewModel forumsIndexViewModel = new ForumsIndexViewModel { Forums = forumViewModels };
 
             return this.View(forumsIndexViewModel);
+        }
+
+        public ActionResult Forum(int id)
+        {
+            ForumPageViewModel forumPageViewModel = new ForumPageViewModel
+                {
+                    Topics =
+                        new List<TopicViewModel>
+                            {
+                                new TopicViewModel
+                                    {
+                                        CreatedBy = "Autor1",
+                                        Id = "1",
+                                        LastPostAuthor = "Autor2",
+                                        PostCount = "1",
+                                        Title = "Title 1"
+                                    },
+                                new TopicViewModel
+                                    {
+                                        CreatedBy = "Autor3",
+                                        Id = "2",
+                                        LastPostAuthor = "Autor4",
+                                        PostCount = "5",
+                                        Title = "Title abc"
+                                    }
+                            }
+                };
+
+            return this.View(forumPageViewModel);
         }
 
         [HttpGet]
