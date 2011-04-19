@@ -66,7 +66,12 @@
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+
+
+            routes.MapRoute(
+                "Default",
+                "{controller}/{action}/{id}/{name}",
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional, name = UrlParameter.Optional });
         }
 
         #endregion

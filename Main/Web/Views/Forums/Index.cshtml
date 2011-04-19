@@ -17,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (MediaCommMVC.Core.ViewModel.ForumViewModel forum in Model.Forums.OrderBy(f => f.DisplayOrderIndex))
+        @foreach (var forum in Model.Forums.OrderBy(f => f.DisplayOrderIndex))
         { 
             <tr>
                 <td>

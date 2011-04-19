@@ -29,12 +29,12 @@
     display: inline;
 }
 
-#mainNav > .menu-item > label
+#mainNav > .menu-item > a, #mainNav > .menu-item > label
 {
     width: 80px !important;
 }
 
-.hover-menu > .menu-item > label
+.hover-menu > .menu-item > a
 {
     width: 163px !important;
     text-align: left;

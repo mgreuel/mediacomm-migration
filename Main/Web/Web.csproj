@@ -123,10 +123,50 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\Admin.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Admin.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Forums.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Forums.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\General.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>General.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Home.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Home.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Movies.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Movies.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Navigation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Navigation.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Photos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Photos.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Users.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Users.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Videos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Videos.resx</DependentUpon>
     </Compile>
     <Compile Include="Core\Controllers\AccountController.cs" />
     <Compile Include="Core\Controllers\ForumsController.cs" />
@@ -151,14 +191,17 @@
     <Compile Include="Core\Infrastructure\TransactionFilter.cs" />
     <Compile Include="Core\Model\Forum.cs" />
     <Compile Include="Core\Model\MediaCommUser.cs" />
+    <Compile Include="Core\Model\TopicDisplayPriority.cs" />
     <Compile Include="Core\Services\AccountService.cs" />
     <Compile Include="Core\Services\IAccountService.cs" />
     <Compile Include="Core\Helpers\UrlEncoder.cs" />
-    <Compile Include="Core\ViewModel\CreateTopicViewModel.cs" />
-    <Compile Include="Core\ViewModel\ForumsIndexViewModel.cs" />
-    <Compile Include="Core\ViewModel\ForumViewModel.cs" />
-    <Compile Include="Core\ViewModel\HomeViewModel.cs" />
-    <Compile Include="Core\ViewModel\LogOnViewModel.cs" />
+    <Compile Include="Core\ViewModels\Pages\Forums\CreateTopicPageViewModel.cs" />
+    <Compile Include="Core\ViewModels\Pages\Forums\ForumPageViewModel.cs" />
+    <Compile Include="Core\ViewModels\Pages\Forums\ForumsIndexPageViewModel.cs" />
+    <Compile Include="Core\ViewModels\ForumViewModel.cs" />
+    <Compile Include="Core\ViewModels\TopicViewModel.cs" />
+    <Compile Include="Core\ViewModels\Pages\HomePageViewModel.cs" />
+    <Compile Include="Core\ViewModels\Pages\LogOnPageViewModel.cs" />
     <Compile Include="Core\Infrastructure\DependencyResolution\IoC.cs" />
     <Compile Include="Core\Infrastructure\DependencyResolution\SmDependencyResolver.cs" />
     <Compile Include="App_GlobalResources\GeneralResources.Designer.cs">
@@ -271,6 +314,7 @@
     <Content Include="Scripts\tinyMce\themes\simple\skins\o2k7\ui.css" />
     <Content Include="Scripts\tinyMce\tiny_mce.js" />
     <Content Include="Views\Forums\CreateTopic.cshtml" />
+    <Content Include="Views\Forums\Forum.cshtml" />
     <None Include="Views\Forums\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -309,11 +353,44 @@
       <LastGenOutput>Forums.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_GlobalResources\Admin.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Admin.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\General.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>General.designer.cs</LastGenOutput>
+    </Content>
     <EmbeddedResource Include="App_GlobalResources\GeneralResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>GeneralResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Content Include="App_GlobalResources\Navigation.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Navigation.designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </Content>
+    <Content Include="App_GlobalResources\Home.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Home.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Movies.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Movies.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Photos.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Photos.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Users.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Users.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Videos.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Videos.designer.cs</LastGenOutput>
+    </Content>
     <EmbeddedResource Include="Properties\AccountResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountResources1.designer.cs</LastGenOutput>
