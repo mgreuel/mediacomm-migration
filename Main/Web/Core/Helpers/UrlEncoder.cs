@@ -1,12 +1,17 @@
 ﻿namespace MediaCommMVC.Core.Helpers
 {
-    using System;
+    #region Using Directives
+
     using System.Text;
     using System.Web.Mvc;
+
+    #endregion
 
     public static class UrlEncoder
     {
         // http://stackoverflow.com/questions/25259/how-do-you-include-a-webpage-title-as-part-of-a-webpage-url/25486#25486"/>
+        #region Public Methods
+
         public static string ToFriendlyUrl(this UrlHelper helper, string urlToEncode)
         {
             return ToFriendlyUrl(urlToEncode);
@@ -28,7 +33,7 @@
             for (int i = 0; i < urlToEncode.Length; i++)
             {
                 c = urlToEncode[i];
-                if (c == ' ' || c == ',' /*|| c == '.'*/ || c == '/' || c == '\\' || c == '-')
+                if (c == ' ' || c == ',' /*|| c == '.'*/|| c == '/' || c == '\\' || c == '-')
                 {
                     if (!prevdash)
                     {
@@ -57,5 +62,7 @@
 
             return urlToEncode;
         }
+
+        #endregion
     }
 }

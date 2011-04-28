@@ -14,6 +14,14 @@
 
         public int DisplayOrderIndex { get; set; }
 
+        public bool HasPosts
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(this.LastPostAuthor) && !string.IsNullOrEmpty(this.LastPostTime);
+            }
+        }
+
         public bool HasUnreadTopics { get; set; }
 
         public string IconClass
@@ -24,11 +32,11 @@
             }
         }
 
-        public string LastPostTime { get; set; }
+        public string Id { get; set; }
 
         public string LastPostAuthor { get; set; }
 
-        public string Id { get; set; }
+        public string LastPostTime { get; set; }
 
         public string PostCount { get; set; }
 

@@ -39,16 +39,16 @@
 
         #region Public Methods
 
-        public ActionResult LogOn()
-        {
-            return this.View(new LogOnViewModel());
-        }
-
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
 
             return this.RedirectToAction("Logon");
+        }
+
+        public ActionResult LogOn()
+        {
+            return this.View(new LogOnViewModel());
         }
 
         [HttpPost]
@@ -75,12 +75,12 @@
 
             DateTime expiration = DateTime.Now.AddYears(1);
             FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
-                version: 1,
-                name: logOnViewModel.UserName,
-                issueDate: DateTime.Now,
-                expiration: expiration,
-                isPersistent: logOnViewModel.RememberMe,
-                userData: roles,
+                version: 1, 
+                name: logOnViewModel.UserName, 
+                issueDate: DateTime.Now, 
+                expiration: expiration, 
+                isPersistent: logOnViewModel.RememberMe, 
+                userData: roles, 
                 cookiePath: FormsAuthentication.FormsCookiePath);
             string encTicket = FormsAuthentication.Encrypt(authTicket);
             HttpCookie httpCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket) { Expires = expiration };

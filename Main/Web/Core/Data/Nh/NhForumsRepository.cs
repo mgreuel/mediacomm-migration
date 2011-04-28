@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace MediaCommMVC.Core.Data.Nh
+﻿namespace MediaCommMVC.Core.Data.Nh
 {
+    #region Using Directives
+
     using MediaCommMVC.Core.Model;
 
     using NHibernate;
 
+    #endregion
+
     public class NhForumsRepository : NhRepository<Forum>, IForumsRepository
     {
+        #region Constructors and Destructors
+
         public NhForumsRepository(ISession session)
             : base(session)
         {
         }
+
+        #endregion
     }
 }

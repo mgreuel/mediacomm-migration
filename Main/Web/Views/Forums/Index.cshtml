@@ -1,11 +1,16 @@
-@model MediaCommMVC.Core.ViewModel.ForumsIndexViewModel
-<table id="forumsTable">
-    <thead>
+@model MediaCommMVC.Core.ViewModels.Pages.Forums.ForumsIndexViewModel
+<nav id="breadcrumb">
+    <span class="ui-icon ui-icon-home"></span><strong>
+        @Html.ActionLink(Resources.Navigation.Forums, "Index")
+    </strong>
+</nav>
+<table id="forums-table" class="ui-widget">
+    <thead class="ui-widget-header">
         <tr>
             <th colspan="2">
                 @Resources.Forums.Forum
             </th>
-            <th>
+            <th class="forum-topicCount">
                 @Resources.Forums.Topics
             </th>
             <th>
@@ -16,32 +21,34 @@
             </th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="ui-widget-content">
         @foreach (var forum in Model.Forums.OrderBy(f => f.DisplayOrderIndex))
         { 
             <tr>
-                <td>
+                <td class="forum-icon">
                     <span class="ui-icon @forum.IconClass"></span>
                 </td>
-                <td>
-                    <div class="forumTitle">
+                <td class="forum-main">
+                    <div class="forum-title">
                         @Html.ActionLink(forum.Title, "Forum", new { id = forum.Id, name = forum.UrlFriendlyTitle })
                     </div>
-                    <div class="forumDesc">
+                    <div class="forum-desc">
                         @forum.Description
                     </div>
                 </td>
-                <td>
+                <td class="forum-topicCount">
                     @forum.TopicCount
                 </td>
-                <td>
+                <td class="forum-postCount">
                     @forum.PostCount
                 </td>
-                <td>
-                    @forum.LastPostAuthor
-                    @if (!string.IsNullOrEmpty(forum.LastPostAuthor))
+                <td class="forum-lastPost">
+                    @if (forum.HasPosts)
                     { 
-                        @Resources.Forums.By 
+                        <div class="forum-lastPostTime">
+                            @forum.LastPostTime
+                        </div>
+                        @Resources.Forums.By@:&nbsp;
                         @Html.ActionLink(forum.LastPostAuthor, "Profile", "Users", new { username = forum.LastPostAuthor }, null)
                     }
                 </td>
@@ -49,19 +56,19 @@
         }
     </tbody>
 </table>
-<footer id="forumIndexFooter">
+<footer id="forums-footer">
     <table>
         <tr>
             <td>
                 <span class="ui-icon ui-icon-mail-closed"></span>
             </td>
-            <td>
+            <td class="caption">
                 @Resources.Forums.NewPosts
             </td>
             <td>
                 <span class="ui-icon ui-icon-mail-open"></span>
             </td>
-            <td>
+            <td class="caption">
                 @Resources.Forums.NoNewPosts
             </td>
         </tr>

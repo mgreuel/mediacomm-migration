@@ -10,19 +10,23 @@
 
     public class AutoMapGenerator : IAutoMapGenerator
     {
-        #region Public Methods
+        #region Implemented Interfaces
+
+        #region IAutoMapGenerator
 
         public AutoPersistenceModel Generate()
         {
             const string NamespaceToAdd = "MediaCommMVC.Core.Model";
 
             AutoPersistenceModel autoPersistenceModel =
-                AutoMap.AssemblyOf<AutoMapGenerator>()
-                    .Where(t => t.Namespace != null && t.Namespace.StartsWith(NamespaceToAdd, StringComparison.Ordinal))
-                    .UseOverridesFromAssemblyOf<AutoMapGenerator>().Conventions.AddFromAssemblyOf<AutoMapGenerator>();
+                AutoMap.AssemblyOf<AutoMapGenerator>().Where(
+                    t => t.Namespace != null && t.Namespace.StartsWith(NamespaceToAdd, StringComparison.Ordinal)).UseOverridesFromAssemblyOf
+                    <AutoMapGenerator>().Conventions.AddFromAssemblyOf<AutoMapGenerator>();
 
             return autoPersistenceModel;
         }
+
+        #endregion
 
         #endregion
     }

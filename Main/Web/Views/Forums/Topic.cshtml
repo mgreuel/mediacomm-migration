@@ -1,0 +1,47 @@
+﻿@model MediaCommMVC.Core.ViewModels.Pages.Forums.TopicPageViewModel
+@{
+    ViewBag.Title = "Topic";
+}
+<table>
+    <thead>
+        <tr>
+            <th>
+                @Resources.Forums.Author
+            </th>
+            <th>
+                @Resources.Forums.Message
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var post in Model.Posts)
+        {
+            <tr id="@post.Id">
+                <td class="postInfo">
+                    <div class="author">
+                        @Html.ActionLink(post.AuthorUserName, "Profile", "Users", new { username = post.AuthorUserName }, null)
+                    </div>
+                    <div class="postDate">
+                        @post.CreatedDate
+                    </div>
+                </td>
+                <td class="postText">
+                    <div class="postOptions">
+                        @if (post.CurrentUserIsAllowedToEdit)
+                        {
+                            @:@Html.ActionLink(Resources.Forums.Edit, "EditPost", new { id = post.Id })
+
+                            using (Html.BeginForm("DeletePost", "Forums", new { id = post.Id }))
+                            {                        
+                                @:<a id="submitDelete_@post.Id" class="deletePost" href="#"> @Resources.Forums.Delete</a>
+                            }
+                        }
+                    </div>
+                    <div>
+                        @post.Text
+                    </div>
+                </td>
+            </tr>            
+        }
+    </tbody>
+</table>

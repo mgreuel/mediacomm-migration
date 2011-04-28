@@ -1,16 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace MediaCommMVC.Core.Data
+﻿namespace MediaCommMVC.Core.Data
 {
+    #region Using Directives
+
+    using System;
+    using System.Collections.Generic;
+
+    #endregion
+
     public interface IRepository<T>
     {
-        T GetById(int id);
+        #region Public Methods
+
+        IEnumerable<T> GetAll();
 
         IEnumerable<T> GetAllMatching(Func<T, bool> filter);
 
-        IEnumerable<T> GetAll();
+        T GetById(int id);
+
+        #endregion
     }
 }

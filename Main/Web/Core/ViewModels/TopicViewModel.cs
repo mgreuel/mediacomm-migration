@@ -1,29 +1,39 @@
 ﻿namespace MediaCommMVC.Core.ViewModels
 {
+    #region Using Directives
+
     using MediaCommMVC.Core.Helpers;
     using MediaCommMVC.Core.Model;
 
+    #endregion
+
     public class TopicViewModel
     {
-        public TopicDisplayPriority DisplayPriority { get; set; }
+        #region Constants and Fields
 
-        public bool HasUnreadPosts { get; set; }
+        private const int PostsPerPage = 10;
 
-        public string Title { get; set; }
+        private PagingParameters pagingParameters;
 
-        public string Id { get; set; }
+        #endregion
+
+        #region Properties
 
         public string CreatedBy { get; set; }
 
-        public string LastPostAuthor { get; set; }
+        public TopicDisplayPriority DisplayPriority { get; set; }
 
-        public string UrlFriendlyTitle
+        public string ExcludedUsers { get; set; }
+
+        public bool HasExcludedUsers
         {
             get
             {
-                return UrlEncoder.ToFriendlyUrl(this.Title);
+                return !string.IsNullOrEmpty(this.ExcludedUsers);
             }
         }
+
+        public bool HasUnreadPosts { get; set; }
 
         public string IconClass
         {
@@ -38,9 +48,33 @@
             }
         }
 
+        public string Id { get; set; }
 
-        public string PostCount { get; set; }
+        public string LastPostAuthor { get; set; }
 
         public string LastPostTime { get; set; }
+
+        public PagingParameters PagingParameters
+        {
+            get
+            {
+                return this.pagingParameters ??
+                       (this.pagingParameters = new PagingParameters { CurrentPage = 1, PageSize = PostsPerPage, TotalCount = this.PostCount });
+            }
+        }
+
+        public int PostCount { get; set; }
+
+        public string Title { get; set; }
+
+        public string UrlFriendlyTitle
+        {
+            get
+            {
+                return UrlEncoder.ToFriendlyUrl(this.Title);
+            }
+        }
+
+        #endregion
     }
 }

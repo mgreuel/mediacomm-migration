@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace MediaCommMVC.Tests.UnitTests.Controllers
 {
+    using System.Collections.Generic;
     using System.Web.Mvc;
 
     using AutoMapper;
@@ -13,7 +13,9 @@ namespace MediaCommMVC.Tests.UnitTests.Controllers
     using MediaCommMVC.Core.Data;
     using MediaCommMVC.Core.Infrastructure;
     using MediaCommMVC.Core.Model;
+    using MediaCommMVC.Core.Services;
     using MediaCommMVC.Core.ViewModel;
+    using MediaCommMVC.Core.ViewModels.Pages.Forums;
 
     using Moq;
 
@@ -27,6 +29,8 @@ namespace MediaCommMVC.Tests.UnitTests.Controllers
         private Mock<IForumsRepository> forumsRepositoryMock;
 
         private Mock<IUserRepository> userRepositoryMock;
+
+        private Mock<IForumsService> forumsServiceMock;
 
         [Test]
         public void Index_ReturnsViewWithForumsIndexViewModel()
@@ -61,8 +65,9 @@ namespace MediaCommMVC.Tests.UnitTests.Controllers
             AutomapperSetup.Initialize();
             this.forumsRepositoryMock = new Mock<IForumsRepository>();
             this.userRepositoryMock = new Mock<IUserRepository>();
+            this.forumsServiceMock = new Mock<IForumsService>();
 
-            this.forumsController = new ForumsController(this.forumsRepositoryMock.Object, this.userRepositoryMock.Object);
+            this.forumsController = new ForumsController(this.forumsRepositoryMock.Object, this.userRepositoryMock.Object, this.forumsServiceMock.Object);
         }
     }
 }
