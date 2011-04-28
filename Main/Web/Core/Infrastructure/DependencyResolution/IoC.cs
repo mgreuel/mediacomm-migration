@@ -2,16 +2,14 @@ namespace MediaCommMVC.Core.Infrastructure.DependencyResolution
 {
     #region Using Directives
 
-    using System;
-    using System.Web.Mvc;
+    using System.Web;
 
     using MediaCommMVC.Core.Data;
+    using MediaCommMVC.Core.Model;
 
     using NHibernate;
 
     using StructureMap;
-    using StructureMap.Configuration.DSL;
-    using StructureMap.Graph;
 
     #endregion
 
@@ -25,38 +23,23 @@ namespace MediaCommMVC.Core.Infrastructure.DependencyResolution
             return ObjectFactory.Container;
         }
 
+        #endregion
+
+        #region Methods
+
         private static void InitContainer(IInitializationExpression container)
         {
             container.For<ISession>().Use(s => MvcApplication.SessionFactory.GetCurrentSession());
-            container.Scan(scan =>
-            {
-                scan.TheCallingAssembly();
-                scan.WithDefaultConventions();
-                scan.Convention<NhRepositoryConvention>();
-            });
+            container.Scan(
+                scan =>
+                    {
+                        scan.TheCallingAssembly();
+                        scan.WithDefaultConventions();
+                        scan.Convention<NhRepositoryConvention>();
+                    });
+
+            container.For<MediaCommUser>().HybridHttpOrThreadLocalScoped().Use(u => u.GetInstance<IUserRepository>().GetByName(HttpContext.Current.User.Identity.Name));
         }
-
-
-        //private static IUnityContainer CreateUnityContainer()
-        //{
-        //    UnityContainer container = new UnityContainer();
-        //    container.RegisterType<IAccountService, AccountService>();
-
-        //    List<Type> controllerTypes =
-        //        (from t in Assembly.GetCallingAssembly().GetTypes() where typeof(IController).IsAssignableFrom(t) && !t.IsAbstract select t).ToList();
-
-        //    controllerTypes.ForEach(t => container.RegisterType(t));
-
-        //    container.RegisterType<IAutoMapGenerator, AutoMapGenerator>();
-
-        //    container.RegisterType<IUserRepository, NhUserRepository>();
-
-        //    IConfigurationGenerator configurationGenerator = container.Resolve<IConfigurationGenerator>();
-        //    SessionFactory = configurationGenerator.Generate().BuildSessionFactory();
-        //    container.RegisterInstance(SessionFactory);
-
-        //    return container;
-        //}
 
         #endregion
     }

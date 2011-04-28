@@ -12,7 +12,13 @@
 
     public class AccountService : IAccountService
     {
+        #region Constants and Fields
+
         private readonly IUserRepository userRepository;
+
+        #endregion
+
+        #region Constructors and Destructors
 
         public AccountService(IUserRepository userRepository)
         {
@@ -23,6 +29,8 @@
 
             this.userRepository = userRepository;
         }
+
+        #endregion
 
         #region Implemented Interfaces
 

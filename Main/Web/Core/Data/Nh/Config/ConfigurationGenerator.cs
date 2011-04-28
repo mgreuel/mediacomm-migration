@@ -38,13 +38,9 @@
             AutoPersistenceModel autoMapModel = this.autoMapGenerator.Generate();
 
             FluentConfiguration fluentConfiguration =
-                Fluently.Configure()
-                    .Database(
-                        MsSqlConfiguration.MsSql2008
-                        .ConnectionString(c => c.FromConnectionStringWithKey("MediaCommDb"))
-                        .ProxyFactoryFactory<ProxyFactoryFactory>()
-                        .AdoNetBatchSize(100).CurrentSessionContext("web"))
-                    .Mappings(m => m.AutoMappings.Add(autoMapModel));
+                Fluently.Configure().Database(
+                    MsSqlConfiguration.MsSql2008.ConnectionString(c => c.FromConnectionStringWithKey("MediaCommDb")).ProxyFactoryFactory
+                        <ProxyFactoryFactory>().AdoNetBatchSize(100).CurrentSessionContext("web")).Mappings(m => m.AutoMappings.Add(autoMapModel));
 
             return fluentConfiguration;
         }

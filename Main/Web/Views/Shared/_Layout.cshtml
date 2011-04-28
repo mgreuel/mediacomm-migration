@@ -10,7 +10,17 @@
     <script type="text/javascript">
         $(function () {
             $("#mainNav").buttonset();
+            $("#menuPhotos").button({ icons: { secondary: 'ui-icon-triangle-1-s'} });
+            $("#menuUsers").button({ icons: { secondary: 'ui-icon-triangle-1-s'} });
             $("#themeswitcher").themeswitcher();
+
+            $('a[href^="http://"]').attr("target", "_blank");
+
+            $("button, input:submit, .button").button();
+
+            var color = $("#menu-photosText > span").css("color");
+            console.log(color);
+            $("a").css("color", color);
         });
     </script>
 </head>
@@ -31,13 +41,10 @@
                     @Html.ActionLink(Resources.Navigation.Home, "Index", "Home")
                 </div>
                 <div class="menu-item">
-                    <input type="radio" id="menuForums" name="menu" />
-                    @Html.ActionLink(Resources.Navigation.Forums, "Index", "Forums")
-                </div>
-                <div class="menu-item">
                     <input type="radio" id="menuPhotos" name="menu" />
                     <label for="menuPhotos">
-                        Photos</label>
+                        @Resources.Navigation.Photos
+                    </label>
                     <div class="hover-menu photonavi">
                         <div class="menu-item">
                             <input type="radio" id="menuPhotosUpload" name="ForumsMenu" />
@@ -46,12 +53,8 @@
                     </div>
                 </div>
                 <div class="menu-item">
-                    <input type="radio" id="menuMovies" name="menu" />
-                    @Html.ActionLink(Resources.Navigation.Movies, "Index", "Movies")
-                </div>
-                <div class="menu-item">
-                    <input type="radio" id="menuUsers" name="menu" />
-                    @Html.ActionLink(Resources.Navigation.Users, "Index", "Users")
+                        <input type="radio" id="menuUsers" name="menu" />
+                        <label for="menuUsers"> @Resources.Navigation.Users </label>
                     <div class="hover-menu">
                         <div class="menu-item">
                             <input type="radio" id="menuUsersOverview" name="menu" />
@@ -63,6 +66,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="menu-item">
+                    <input type="radio" id="menuForums" name="menu" />
+                    @Html.ActionLink(Resources.Navigation.Forums, "Index", "Forums")
+                </div>
+                <div class="menu-item">
+                    <input type="radio" id="menuMovies" name="menu" />
+                    @Html.ActionLink(Resources.Navigation.Movies, "Index", "Movies")
+                </div>
             </nav>
         </header>
         <div id="content">
@@ -73,7 +84,3 @@
     </div>
 </body>
 </html>
-@*                        <div class="menu-item">
-                            <input type="radio" name="ForumsMenu" /><label for="forumsRadio2" class="ui-corner-bottom">Forum
-                                abc</label>
-                        </div>*@

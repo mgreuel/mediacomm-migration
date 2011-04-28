@@ -1,16 +1,23 @@
-﻿@model MediaCommMVC.Core.ViewModels.Pages.ForumPageViewModel
+﻿@model MediaCommMVC.Core.ViewModels.Pages.Forums.ForumPageViewModel
 @{
     ViewBag.Title = "Forum";
 }
-<div id="forumHeader">
-    <div id="newTopicButton">
-        @Html.ActionLink(Resources.Forums.CreateTopic, "CreateTopic", null, new { @class = "button" })
+<nav id="breadcrumb">
+    <span class="ui-icon ui-icon-home"></span><span>@Html.ActionLink(Resources.Navigation.Forums, "Index")</span>
+    <span class="ui-icon ui-icon-carat-1-e"></span><span><strong>
+        @Html.ActionLink(Model.Title, "Forum", new { name = Model.UrlFriendlyForumTitle, id = Model.Id })
+    </strong></span>
+</nav>
+<header id="topics-header" class="ui-helper-clearfix">
+    <div id="topics-newTopic">
+        @Html.ActionLink(Resources.Forums.CreateTopic, "CreateTopic", new { forumId = Model.Id }, new { @class = "button" })
     </div>
-    <div class="forumPager forumPagerTop">
+    <div class="topics-pager topics-pagerTop">
+        @Html.Pager(Model.PagingParameters, Url.Action("Forum", new { id = Model.Id, name = Model.UrlFriendlyForumTitle }))
     </div>
-</div>
-<table id="forumTable">
-    <thead>
+</header>
+<table id="topics-table" class="ui-widget">
+    <thead class="ui-widget-header">
         <tr>
             <th colspan="2">
                 @Resources.Forums.Topic
@@ -26,62 +33,78 @@
             </th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="ui-widget-content">
         @foreach (var topic in Model.Topics)
         { 
             <tr>
                 <td>
                     <span class="ui-icon @topic.IconClass"></span>
                 </td>
-                <td>
-                    <span class="topicTitle">
-                        @Html.ActionLink(topic.Title, "Topic", new { id = topic.Id, topic.UrlFriendlyTitle })
-                    </span>
+                <td class="topic-main">
+                    <div class="topic-title">
+                        @Html.ActionLink(topic.Title, "Topic", new { id = topic.Id, name = topic.UrlFriendlyTitle })
+                    </div>
+                    <div class="topic-SmallPager">
+                        @if (topic.HasUnreadPosts)
+                           {
+                                @Html.ActionLink(Resources.Forums.NewPost, "FirstNewPostInTopic", new { id = topic.Id }, new { title = Resources.Forums.GotoFirstNewPost })
+                                @:&nbsp;
+                           }
+                           
+                           @Html.NumbersOnlyPager(topic.PagingParameters, Url.Action(topic.Title, "Topic", new { id = topic.Id, name = topic.UrlFriendlyTitle }))     
+                           
+                           @if (topic.HasExcludedUsers)
+                           {
+                              @Resources.Forums.InvisibleFor  @topic.ExcludedUsers
+                           }                                             
+                    </div>
                 </td>
-                <td style="white-space: nowrap; text-align: center;">
+                <td class="topic-createdBy">
                     @Html.ActionLink(topic.CreatedBy, "Profile", "Users", new { username = topic.CreatedBy }, null)
                 </td>
-                <td style="text-align: center;">
+                <td class="topic-postCount">
                     @topic.PostCount
                 </td>
-                <td>
-                    <div>
+                <td class="topic-lastPost">
+                    <div class="topic-lastPostTime">
                         @topic.LastPostTime</div>
-                    <div>
-                        @Html.ActionLink(topic.LastPostAuthor, "Profile", "Users", new { username = topic.LastPostAuthor }, null)
-                    </div>
+                    @Resources.Forums.By
+                    @Html.ActionLink(topic.LastPostAuthor, "Profile", "Users", new { username = topic.LastPostAuthor }, null)
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<div class="forumFooter">
+<footer id="topics-footer">
+    <div class="topics-pager topics-pagerBottom">
+        @Html.Pager(Model.PagingParameters, Url.Action("Forum", new { id = Model.Id, name = Model.UrlFriendlyForumTitle }))
+    </div>
     <table>
         <tr>
             <td>
                 <span class="ui-icon ui-icon-mail-closed"></span>
             </td>
-            <td>
+            <td class="caption">
                 @Resources.Forums.NewPosts
             </td>
             <td>
                 <span class="ui-icon ui-icon-mail-open"></span>
             </td>
-            <td>
+            <td class="caption">
                 @Resources.Forums.NoNewPosts
             </td>
             <td>
                 <span class="ui-icon ui-icon-alert"></span>
             </td>
-            <td>
+            <td class="caption">
                 @Resources.Forums.StickyNewPosts
             </td>
             <td>
                 <span class="ui-icon ui-icon-info"></span>
             </td>
-            <td>
+            <td class="caption">
                 @Resources.Forums.StickyNoNewPosts
             </td>
         </tr>
     </table>
-</div>
+</footer>

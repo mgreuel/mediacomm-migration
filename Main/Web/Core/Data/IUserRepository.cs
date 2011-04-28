@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace MediaCommMVC.Core.Data
+﻿namespace MediaCommMVC.Core.Data
 {
+    #region Using Directives
+
     using MediaCommMVC.Core.Model;
+
+    #endregion
 
     public interface IUserRepository : IRepository<MediaCommUser>
     {
+        #region Public Methods
+
         MediaCommUser GetByName(string name);
+
+        #endregion
     }
 }

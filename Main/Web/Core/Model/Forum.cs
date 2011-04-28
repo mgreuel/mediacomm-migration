@@ -3,6 +3,7 @@
     #region Using Directives
 
     using System;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -27,6 +28,8 @@
         public virtual string Title { get; set; }
 
         public virtual int TopicCount { get; protected set; }
+
+        public virtual IEnumerable<Topic> Topics { get; set; }
 
         #endregion
     }

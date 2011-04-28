@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace MediaCommMVC.Core.Data
+﻿namespace MediaCommMVC.Core.Data
 {
+    #region Using Directives
+
     using MediaCommMVC.Core.Model;
+
+    #endregion
 
     public interface IForumsRepository : IRepository<Forum>
     {

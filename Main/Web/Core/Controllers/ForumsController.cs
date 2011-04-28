@@ -2,34 +2,103 @@
 {
     #region Using Directives
 
+    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Web.Mvc;
-    using Data;
-    using Infrastructure;
 
-    using MediaCommMVC.Core.Helpers;
-    using MediaCommMVC.Core.ViewModels;
-    using MediaCommMVC.Core.ViewModels.Pages;
-
-    using Model;
-    using ViewModel;
     using AutoMapper;
+
+    using MediaCommMVC.Core.Data;
+    using MediaCommMVC.Core.Helpers;
+    using MediaCommMVC.Core.Infrastructure;
+    using MediaCommMVC.Core.Model;
+    using MediaCommMVC.Core.Services;
+    using MediaCommMVC.Core.ViewModel;
+    using MediaCommMVC.Core.ViewModels;
+    using MediaCommMVC.Core.ViewModels.Pages.Forums;
 
     #endregion
 
     [Authorize]
     public class ForumsController : Controller
     {
+        #region Constants and Fields
+
         private readonly IForumsRepository forumsRepository;
 
         private readonly IUserRepository userRepository;
 
-        public ForumsController(IForumsRepository forumsRepository, IUserRepository userRepository)
+        private readonly IForumsService forumsService;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        public ForumsController(IForumsRepository forumsRepository, IUserRepository userRepository, IForumsService forumsService)
         {
             this.forumsRepository = forumsRepository;
             this.userRepository = userRepository;
+            this.forumsService = forumsService;
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        [HttpGet]
+        public ActionResult CreateTopic(int id)
+        {
+            IEnumerable<string> userNames = this.userRepository.GetAll().Select(u => u.UserName).ToList();
+            CreateTopicViewModel createTopicViewModel = new CreateTopicViewModel { UserNames = userNames };
+
+            return this.View(createTopicViewModel);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult CreateTopic(CreateTopicViewModel createTopic, int id)
+        {
+            createTopic.PostText = UrlResolver.ResolveLinks(createTopic.PostText);
+
+            return this.RedirectToAction("Index");
+
+            // this.RedirectToAction("Topic", new { id = createdTopic.Id, name = this.Url.ToFriendlyUrl(createdTopic.Title) });
+        }
+
+        public ActionResult Forum(int id, int page)
+        {
+            //ForumPageViewModel forumPageViewModel = new ForumPageViewModel
+            //    {
+            //        ForumTitle = "SomeForum",
+            //        ForumId = id.ToString(),
+            //        PagingParameters = new PagingParameters { CurrentPage = 1, PageSize = 10, TotalCount = 34 },
+            //        Topics =
+            //            new List<TopicViewModel> {
+            //                    new TopicViewModel
+            //                        {
+            //                            CreatedBy = "Autor1", 
+            //                            Id = "1", 
+            //                            LastPostAuthor = "Autor2", 
+            //                            LastPostTime = DateTime.Now.ToString(), 
+            //                            ExcludedUsers = "Schlaefisch, test",
+            //                            PostCount = 60, 
+            //                            Title = "Title 1"
+            //                        }, 
+            //                    new TopicViewModel
+            //                        {
+            //                            CreatedBy = "Autor3", 
+            //                            Id = "2", 
+            //                            LastPostAuthor = "Autor4", 
+            //                            LastPostTime = DateTime.Now.ToString(), 
+            //                            PostCount = 20, 
+            //                            Title = "Title abc"
+            //                        }
+            //                }
+            //    };
+
+            ForumPageViewModel forumPageViewModel = this.forumsService.GetForumPage(id, page);
+
+            return this.View(forumPageViewModel);
         }
 
         [TransactionFilter]
@@ -42,52 +111,35 @@
             return this.View(forumsIndexViewModel);
         }
 
-        public ActionResult Forum(int id)
+        [HttpGet]
+        public ActionResult Topic(int id)
         {
-            ForumPageViewModel forumPageViewModel = new ForumPageViewModel
+            TopicPageViewModel topicPageViewModel = new TopicPageViewModel
                 {
-                    Topics =
-                        new List<TopicViewModel>
-                            {
-                                new TopicViewModel
+                    Posts =
+                        new List<PostViewModel> {
+                                new PostViewModel
                                     {
-                                        CreatedBy = "Autor1",
-                                        Id = "1",
-                                        LastPostAuthor = "Autor2",
-                                        PostCount = "1",
-                                        Title = "Title 1"
-                                    },
-                                new TopicViewModel
+                                        AuthorUserName = "User1", 
+                                        CreatedDate = "10.1", 
+                                        CurrentUserIsAllowedToEdit = true, 
+                                        Id = "1", 
+                                        Text = "FirstPost"
+                                    }, 
+                                new PostViewModel
                                     {
-                                        CreatedBy = "Autor3",
-                                        Id = "2",
-                                        LastPostAuthor = "Autor4",
-                                        PostCount = "5",
-                                        Title = "Title abc"
+                                        AuthorUserName = "User3", 
+                                        CreatedDate = "5.2", 
+                                        CurrentUserIsAllowedToEdit = false, 
+                                        Id = "2", 
+                                        Text = "SecondPost"
                                     }
                             }
                 };
 
-            return this.View(forumPageViewModel);
+            return this.View(topicPageViewModel);
         }
 
-        [HttpGet]
-        public ActionResult CreateTopic(int id)
-        {
-            IEnumerable<string> userNames = this.userRepository.GetAll().Select(u => u.UserName).ToList();
-            CreateTopicViewModel createTopicViewModel = new CreateTopicViewModel { UserNames = userNames };
-
-            return this.View(createTopicViewModel);
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        [ValidateInput(false)]
-        public ActionResult CreateTopic(CreateTopicViewModel createTopic, int id)
-        {
-            createTopic.PostText = UrlResolver.ResolveLinks(createTopic.PostText);
-
-            return this.RedirectToAction("Index");
-            //this.RedirectToAction("Topic", new { id = createdTopic.Id, name = this.Url.ToFriendlyUrl(createdTopic.Title) });
-        }
+        #endregion
     }
 }

@@ -32,14 +32,14 @@
 
         #region IRepository<T>
 
-        public IEnumerable<T> GetAllMatching(Func<T, bool> filter)
-        {
-            return this.Session.Query<T>().Where(x => filter(x)).ToList();
-        }
-
         public IEnumerable<T> GetAll()
         {
             return this.Session.Query<T>().ToList();
+        }
+
+        public IEnumerable<T> GetAllMatching(Func<T, bool> filter)
+        {
+            return this.Session.Query<T>().Where(x => filter(x)).ToList();
         }
 
         public T GetById(int id)

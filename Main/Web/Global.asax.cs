@@ -3,14 +3,11 @@
     #region Using Directives
 
     using System;
-    using System.Collections.Generic;
     using System.Security.Principal;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
     using System.Web.Security;
-
-    using AutoMapper;
 
     using Combres;
 
@@ -21,7 +18,6 @@
     using MediaCommMVC.Core.Infrastructure;
     using MediaCommMVC.Core.Infrastructure.DependencyResolution;
     using MediaCommMVC.Core.Model;
-    using MediaCommMVC.Core.ViewModel;
 
     using NHibernate;
     using NHibernate.Context;
@@ -34,9 +30,9 @@
     {
         #region Constants and Fields
 
-        private static ISessionFactory sessionFactory;
+        private static readonly object sessionFactoryLock = new object();
 
-        private static object sessionFactoryLock = new object();
+        private static ISessionFactory sessionFactory;
 
         #endregion
 
@@ -66,12 +62,17 @@
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-
+            routes.MapRoute(
+                "Paged",
+                "{controller}/{action}/{id}/{name}/{page}",
+                new { controller = "Home", action = "Index", page = 1 });
 
             routes.MapRoute(
-                "Default",
-                "{controller}/{action}/{id}/{name}",
+                "Default", 
+                "{controller}/{action}/{id}/{name}", 
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional, name = UrlParameter.Optional });
+
+            routes.MapRoute("Forums", "{controller}/{action}");
         }
 
         #endregion
@@ -85,7 +86,12 @@
 
         protected void Application_EndRequest(object sender, EventArgs e)
         {
-            CurrentSessionContext.Unbind(SessionFactory).Dispose();
+            ISession session = CurrentSessionContext.Unbind(SessionFactory);
+
+            if (session != null)
+            {
+                session.Dispose();
+            }
         }
 
         protected void Application_Start()
@@ -119,7 +125,7 @@
                 HttpContext.Current.User = principal;
             }
         }
-
+        
         private static ISessionFactory CreateSessionFactory()
         {
             ConfigurationGenerator configurationGenerator = new ConfigurationGenerator(new AutoMapGenerator());

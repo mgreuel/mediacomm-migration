@@ -1,16 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace MediaCommMVC.Core.ViewModel
+﻿namespace MediaCommMVC.Core.ViewModels.Pages.Forums
 {
+    #region Using Directives
+
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+
+    #endregion
+
     public class CreateTopicViewModel
     {
-        public IEnumerable<string> UserNames { get; set; }
+        #region Properties
+
+        [AllowHtml]
+        public string PostText { get; set; }
 
         public string TopicSubject { get; set; }
 
-        public string PostText { get; set; }
+        public IEnumerable<string> UserNames { get; set; }
+
+        #endregion
     }
 }
