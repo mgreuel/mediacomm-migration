@@ -39,16 +39,10 @@ namespace MediaCommMVC.Core.Infrastructure.DependencyResolution
                 return null;
             }
 
-            try
-            {
-                return serviceType.IsAbstract || serviceType.IsInterface
-                           ? this.container.TryGetInstance(serviceType)
-                           : this.container.GetInstance(serviceType);
-            }
-            catch
-            {
-                return null;
-            }
+
+            return serviceType.IsAbstract || serviceType.IsInterface
+                       ? this.container.TryGetInstance(serviceType)
+                       : this.container.GetInstance(serviceType);
         }
 
         public IEnumerable<object> GetServices(Type serviceType)

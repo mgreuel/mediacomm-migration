@@ -6,7 +6,8 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using NHibernate;
+    using MediaCommMVC.Core.Infrastructure;
+
     using NHibernate.Linq;
 
     #endregion
@@ -15,16 +16,16 @@
     {
         #region Constructors and Destructors
 
-        protected NhRepository(ISession session)
+        protected NhRepository(ISessionContainer sessionContainer)
         {
-            this.Session = session;
+            this.SessionContainer = sessionContainer;
         }
 
         #endregion
 
         #region Properties
 
-        protected ISession Session { get; private set; }
+        protected ISessionContainer SessionContainer { get; private set; }
 
         #endregion
 
@@ -34,17 +35,17 @@
 
         public IEnumerable<T> GetAll()
         {
-            return this.Session.Query<T>().ToList();
+            return this.SessionContainer.CurrentSession.Query<T>().ToList();
         }
 
         public IEnumerable<T> GetAllMatching(Func<T, bool> filter)
         {
-            return this.Session.Query<T>().Where(x => filter(x)).ToList();
+            return this.SessionContainer.CurrentSession.Query<T>().Where(x => filter(x)).ToList();
         }
 
         public T GetById(int id)
         {
-            return this.Session.Get<T>(id);
+            return this.SessionContainer.CurrentSession.Get<T>(id);
         }
 
         #endregion

@@ -13,6 +13,7 @@ namespace MediaCommMVC.Tests.UnitTests.Controllers
     using MediaCommMVC.Core.Data;
     using MediaCommMVC.Core.Infrastructure;
     using MediaCommMVC.Core.Model;
+    using MediaCommMVC.Core.Model.Forums;
     using MediaCommMVC.Core.Services;
     using MediaCommMVC.Core.ViewModel;
     using MediaCommMVC.Core.ViewModels.Pages.Forums;

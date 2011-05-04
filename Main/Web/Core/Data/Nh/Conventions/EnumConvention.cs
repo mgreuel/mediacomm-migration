@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace MediaCommMVC.Core.Data.Nh.Conventions
+﻿namespace MediaCommMVC.Core.Data.Nh.Conventions
 {
+    #region Using Directives
+
     using FluentNHibernate.Conventions;
     using FluentNHibernate.Conventions.AcceptanceCriteria;
     using FluentNHibernate.Conventions.Inspections;
     using FluentNHibernate.Conventions.Instances;
+
+    #endregion
 
     public class EnumConvention : IUserTypeConvention
     {

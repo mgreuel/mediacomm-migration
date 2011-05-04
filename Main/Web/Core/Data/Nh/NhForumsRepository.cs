@@ -2,9 +2,8 @@
 {
     #region Using Directives
 
-    using MediaCommMVC.Core.Model;
-
-    using NHibernate;
+    using MediaCommMVC.Core.Infrastructure;
+    using MediaCommMVC.Core.Model.Forums;
 
     #endregion
 
@@ -12,8 +11,8 @@
     {
         #region Constructors and Destructors
 
-        public NhForumsRepository(ISession session)
-            : base(session)
+        public NhForumsRepository(ISessionContainer sessionContainer)
+            : base(sessionContainer)
         {
         }
 

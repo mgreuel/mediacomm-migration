@@ -5,7 +5,7 @@
     using FluentNHibernate.Automapping;
     using FluentNHibernate.Automapping.Alterations;
 
-    using MediaCommMVC.Core.Model;
+    using MediaCommMVC.Core.Model.Forums;
 
     #endregion
 

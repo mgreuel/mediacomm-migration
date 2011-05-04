@@ -7,8 +7,6 @@ namespace MediaCommMVC.Core.Infrastructure.DependencyResolution
     using MediaCommMVC.Core.Data;
     using MediaCommMVC.Core.Model;
 
-    using NHibernate;
-
     using StructureMap;
 
     #endregion
@@ -29,14 +27,14 @@ namespace MediaCommMVC.Core.Infrastructure.DependencyResolution
 
         private static void InitContainer(IInitializationExpression container)
         {
-            container.For<ISession>().Use(s => MvcApplication.SessionFactory.GetCurrentSession());
+            container.For<ISessionContainer>().Use<HttpContextSessionContainer>();
             container.Scan(
                 scan =>
-                    {
-                        scan.TheCallingAssembly();
-                        scan.WithDefaultConventions();
-                        scan.Convention<NhRepositoryConvention>();
-                    });
+                {
+                    scan.TheCallingAssembly();
+                    scan.WithDefaultConventions();
+                    scan.Convention<NhRepositoryConvention>();
+                });
 
             container.For<MediaCommUser>().HybridHttpOrThreadLocalScoped().Use(u => u.GetInstance<IUserRepository>().GetByName(HttpContext.Current.User.Identity.Name));
         }

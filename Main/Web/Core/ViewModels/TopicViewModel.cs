@@ -3,7 +3,7 @@
     #region Using Directives
 
     using MediaCommMVC.Core.Helpers;
-    using MediaCommMVC.Core.Model;
+    using MediaCommMVC.Core.Model.Forums;
 
     #endregion
 

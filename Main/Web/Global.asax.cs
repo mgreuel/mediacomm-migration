@@ -13,14 +13,8 @@
 
     using HibernatingRhinos.Profiler.Appender.NHibernate;
 
-    using MediaCommMVC.Core.Data.Nh.Config;
-    using MediaCommMVC.Core.Data.Nh.Mapping;
     using MediaCommMVC.Core.Infrastructure;
     using MediaCommMVC.Core.Infrastructure.DependencyResolution;
-    using MediaCommMVC.Core.Model;
-
-    using NHibernate;
-    using NHibernate.Context;
 
     using StructureMap;
 
@@ -28,29 +22,6 @@
 
     public class MvcApplication : HttpApplication
     {
-        #region Constants and Fields
-
-        private static readonly object sessionFactoryLock = new object();
-
-        private static ISessionFactory sessionFactory;
-
-        #endregion
-
-        #region Properties
-
-        public static ISessionFactory SessionFactory
-        {
-            get
-            {
-                lock (sessionFactoryLock)
-                {
-                    return sessionFactory ?? (sessionFactory = CreateSessionFactory());
-                }
-            }
-        }
-
-        #endregion
-
         #region Public Methods
 
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
@@ -63,8 +34,8 @@
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "Paged",
-                "{controller}/{action}/{id}/{name}/{page}",
+                "Paged", 
+                "{controller}/{action}/{id}/{name}/{page}", 
                 new { controller = "Home", action = "Index", page = 1 });
 
             routes.MapRoute(
@@ -78,21 +49,6 @@
         #endregion
 
         #region Methods
-
-        protected void Application_BeginRequest(object sender, EventArgs e)
-        {
-            CurrentSessionContext.Bind(SessionFactory.OpenSession());
-        }
-
-        protected void Application_EndRequest(object sender, EventArgs e)
-        {
-            ISession session = CurrentSessionContext.Unbind(SessionFactory);
-
-            if (session != null)
-            {
-                session.Dispose();
-            }
-        }
 
         protected void Application_Start()
         {
@@ -124,12 +80,6 @@
                 GenericPrincipal principal = new GenericPrincipal(identity, roles);
                 HttpContext.Current.User = principal;
             }
-        }
-        
-        private static ISessionFactory CreateSessionFactory()
-        {
-            ConfigurationGenerator configurationGenerator = new ConfigurationGenerator(new AutoMapGenerator());
-            return configurationGenerator.Generate().BuildSessionFactory();
         }
 
         #endregion

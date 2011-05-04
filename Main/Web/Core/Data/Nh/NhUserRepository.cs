@@ -4,9 +4,9 @@
 
     using System.Linq;
 
+    using MediaCommMVC.Core.Infrastructure;
     using MediaCommMVC.Core.Model;
 
-    using NHibernate;
     using NHibernate.Linq;
 
     #endregion
@@ -15,8 +15,8 @@
     {
         #region Constructors and Destructors
 
-        public NhUserRepository(ISession session)
-            : base(session)
+        public NhUserRepository(ISessionContainer sessionContainer)
+            : base(sessionContainer)
         {
         }
 
@@ -28,7 +28,7 @@
 
         public MediaCommUser GetByName(string userName)
         {
-            return this.Session.Query<MediaCommUser>().SingleOrDefault(u => u.UserName.Equals(userName));
+            return this.SessionContainer.CurrentSession.Query<MediaCommUser>().SingleOrDefault(u => u.UserName.Equals(userName));
         }
 
         #endregion

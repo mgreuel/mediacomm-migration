@@ -4,12 +4,10 @@
 
     using AutoMapper;
 
-    using MediaCommMVC.Core.Model;
+    using MediaCommMVC.Core.Model.Forums;
     using MediaCommMVC.Core.ViewModel;
     using MediaCommMVC.Core.ViewModels;
     using MediaCommMVC.Core.ViewModels.Pages.Forums;
-
-    using NHibernate.Mapping;
 
     #endregion
 
