@@ -2,7 +2,6 @@
 {
     #region Using Directives
 
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
@@ -12,7 +11,7 @@
     using MediaCommMVC.Core.Data;
     using MediaCommMVC.Core.Helpers;
     using MediaCommMVC.Core.Infrastructure;
-    using MediaCommMVC.Core.Model;
+    using MediaCommMVC.Core.Model.Forums;
     using MediaCommMVC.Core.Services;
     using MediaCommMVC.Core.ViewModel;
     using MediaCommMVC.Core.ViewModels;
@@ -27,9 +26,9 @@
 
         private readonly IForumsRepository forumsRepository;
 
-        private readonly IUserRepository userRepository;
-
         private readonly IForumsService forumsService;
+
+        private readonly IUserRepository userRepository;
 
         #endregion
 
@@ -47,6 +46,7 @@
         #region Public Methods
 
         [HttpGet]
+        [NHibernateActionFilter]
         public ActionResult CreateTopic(int id)
         {
             IEnumerable<string> userNames = this.userRepository.GetAll().Select(u => u.UserName).ToList();
@@ -56,6 +56,7 @@
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateInput(false)]
         public ActionResult CreateTopic(CreateTopicViewModel createTopic, int id)
         {
             createTopic.PostText = UrlResolver.ResolveLinks(createTopic.PostText);
@@ -65,43 +66,43 @@
             // this.RedirectToAction("Topic", new { id = createdTopic.Id, name = this.Url.ToFriendlyUrl(createdTopic.Title) });
         }
 
+        [NHibernateActionFilter]
         public ActionResult Forum(int id, int page)
         {
-            //ForumPageViewModel forumPageViewModel = new ForumPageViewModel
-            //    {
-            //        ForumTitle = "SomeForum",
-            //        ForumId = id.ToString(),
-            //        PagingParameters = new PagingParameters { CurrentPage = 1, PageSize = 10, TotalCount = 34 },
-            //        Topics =
-            //            new List<TopicViewModel> {
-            //                    new TopicViewModel
-            //                        {
-            //                            CreatedBy = "Autor1", 
-            //                            Id = "1", 
-            //                            LastPostAuthor = "Autor2", 
-            //                            LastPostTime = DateTime.Now.ToString(), 
-            //                            ExcludedUsers = "Schlaefisch, test",
-            //                            PostCount = 60, 
-            //                            Title = "Title 1"
-            //                        }, 
-            //                    new TopicViewModel
-            //                        {
-            //                            CreatedBy = "Autor3", 
-            //                            Id = "2", 
-            //                            LastPostAuthor = "Autor4", 
-            //                            LastPostTime = DateTime.Now.ToString(), 
-            //                            PostCount = 20, 
-            //                            Title = "Title abc"
-            //                        }
-            //                }
-            //    };
-
+            // ForumPageViewModel forumPageViewModel = new ForumPageViewModel
+            // {
+            // ForumTitle = "SomeForum",
+            // ForumId = id.ToString(),
+            // PagingParameters = new PagingParameters { CurrentPage = 1, PageSize = 10, TotalCount = 34 },
+            // Topics =
+            // new List<TopicViewModel> {
+            // new TopicViewModel
+            // {
+            // CreatedBy = "Autor1", 
+            // Id = "1", 
+            // LastPostAuthor = "Autor2", 
+            // LastPostTime = DateTime.Now.ToString(), 
+            // ExcludedUsers = "Schlaefisch, test",
+            // PostCount = 60, 
+            // Title = "Title 1"
+            // }, 
+            // new TopicViewModel
+            // {
+            // CreatedBy = "Autor3", 
+            // Id = "2", 
+            // LastPostAuthor = "Autor4", 
+            // LastPostTime = DateTime.Now.ToString(), 
+            // PostCount = 20, 
+            // Title = "Title abc"
+            // }
+            // }
+            // };
             ForumPageViewModel forumPageViewModel = this.forumsService.GetForumPage(id, page);
 
             return this.View(forumPageViewModel);
         }
 
-        [TransactionFilter]
+        [NHibernateActionFilter]
         public ActionResult Index()
         {
             IEnumerable<Forum> forums = this.forumsRepository.GetAll();
@@ -112,6 +113,7 @@
         }
 
         [HttpGet]
+        [NHibernateActionFilter]
         public ActionResult Topic(int id)
         {
             TopicPageViewModel topicPageViewModel = new TopicPageViewModel

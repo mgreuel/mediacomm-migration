@@ -10,7 +10,7 @@
 </nav>
 <header id="topics-header" class="ui-helper-clearfix">
     <div id="topics-newTopic">
-        @Html.ActionLink(Resources.Forums.CreateTopic, "CreateTopic", new { forumId = Model.Id }, new { @class = "button" })
+        @Html.ActionLink(Resources.Forums.CreateTopic, "CreateTopic", new { id = Model.Id }, new { @class = "button" })
     </div>
     <div class="topics-pager topics-pagerTop">
         @Html.Pager(Model.PagingParameters, Url.Action("Forum", new { id = Model.Id, name = Model.UrlFriendlyForumTitle }))

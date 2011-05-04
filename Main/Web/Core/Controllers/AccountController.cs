@@ -17,6 +17,7 @@
 
     #endregion
 
+    [NHibernateActionFilter]
     public class AccountController : Controller
     {
         #region Constants and Fields
@@ -52,7 +53,7 @@
         }
 
         [HttpPost]
-        [TransactionFilter]
+        [NHibernateActionFilter]
         public ActionResult LogOn(LogOnViewModel logOnViewModel, string returnUrl)
         {
             if (!this.accountService.LoginDataIsValid(logOnViewModel))
