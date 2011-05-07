@@ -2,6 +2,7 @@
 {
     #region Using Directives
 
+    using MediaCommMVC.Core.ViewModels;
     using MediaCommMVC.Core.ViewModels.Pages.Forums;
 
     #endregion
@@ -13,5 +14,7 @@
         ForumPageViewModel GetForumPage(int id, int page);
 
         #endregion
+
+        TopicViewModel AddNewTopic(CreateTopicViewModel createTopic, int forumId);
     }
 }

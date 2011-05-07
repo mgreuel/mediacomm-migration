@@ -58,7 +58,7 @@
         {
             if (!this.accountService.LoginDataIsValid(logOnViewModel))
             {
-                this.ModelState.AddModelError("Password", AccountResources.UserNameAndPasswordDoNoMatch);
+                this.ModelState.AddModelError("Password", Account.UserNameAndPasswordDoNoMatch);
             }
 
             if (!this.ModelState.IsValid)

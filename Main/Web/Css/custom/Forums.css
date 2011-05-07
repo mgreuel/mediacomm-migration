@@ -107,6 +107,29 @@
     font-size: 9px;
 }
 
-#forum
 
 /* End View Forum */
+
+/* Start Create Topic */
+
+#createTopicTable
+{ 
+    width: 100%;
+}
+
+#createTopicTable .PostText_parent
+{ 
+    width: 87%;
+}
+
+#createTopicTable .fullWidth
+{ 
+    width: 98%;
+}
+
+/*#createTopicTable
+{
+    background-color: Red;
+}*/
+
+/* End Create Topic */

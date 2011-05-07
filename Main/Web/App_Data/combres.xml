@@ -11,7 +11,7 @@
   <resourceSets url="~/combres.axd"
                 defaultDuration="30"
                 defaultVersion="auto"
-                defaultDebugEnabled="auto"
+                defaultDebugEnabled="false"
                 defaultIgnorePipelineWhenDebug="true"
                 localChangeMonitorInterval="30"
                 remoteChangeMonitorInterval="60"
@@ -19,16 +19,13 @@
     <resourceSet name="siteCss" type="css">
       <resource path="~/Css/Custom/Reset.css" />
       <resource path="~/Css/Custom/Layout.css" />
+      <resource path="~/Css/Custom/General.css" />
       <resource path="~/Css/Custom/Menu.css" />
       <resource path="~/Css/Custom/Header.css" />
       <resource path="~/Css/Custom/Forums.css" />
     </resourceSet>
     <resourceSet name="siteJs" type="js">
-      <resource path="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" mode="dynamic" />
-      <resource path="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js" mode="dynamic" />
-      <resource path="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js" mode="dynamic" />
-      <resource path="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.unobtrusive-ajax.min.js" mode="dynamic" />
-      <resource path="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js" mode="dynamic" />
+
       <resource path="~/Scripts/themeswitchertool.js" />
       <resource path="~/Scripts/jquery.tinymce.js" />
     </resourceSet>

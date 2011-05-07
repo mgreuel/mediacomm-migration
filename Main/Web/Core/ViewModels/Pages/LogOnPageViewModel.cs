@@ -15,15 +15,15 @@
         [Required]
         [DataType(DataType.Password)]
         [StringLength(maximumLength: 20, MinimumLength = 5)]
-        [Display(Name = "Password", ResourceType = typeof(AccountResources))]
+        [Display(Name = "Password", ResourceType = typeof(Account))]
         public string Password { get; set; }
 
-        [Display(Name = "RememberMe", ResourceType = typeof(AccountResources))]
+        [Display(Name = "RememberMe", ResourceType = typeof(Account))]
         public bool RememberMe { get; set; }
 
         [Required]
         [StringLength(maximumLength: 20, MinimumLength = 3)]
-        [Display(Name = "Username", ResourceType = typeof(AccountResources))]
+        [Display(Name = "Username", ResourceType = typeof(Account))]
         public string UserName { get; set; }
 
         #endregion
