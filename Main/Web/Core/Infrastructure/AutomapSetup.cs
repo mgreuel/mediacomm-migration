@@ -2,6 +2,8 @@
 {
     #region Using Directives
 
+    using System;
+
     using AutoMapper;
 
     using MediaCommMVC.Core.Model.Forums;
@@ -24,6 +26,11 @@
 
             Mapper.CreateMap<Topic[], TopicViewModel[]>();
             Mapper.CreateMap<Topic, TopicViewModel>();
+
+            //Mapper.CreateMap<TopicViewModel, Topic>().ForMember(t => t.Forum, opt => opt.Ignore()).ForMember(t => t.Created, opt => opt.Ignore()).
+            //    ForMember(t => t.Poll, opt => opt.UseValue(null)).ForMember(t => t.ExcludedUsers, opt => opt.Ignore()).ForMember(t => t.Id, opt => opt.Ignore()).ForMember(t => t.LastPostTime, opt => opt.);
+
+            //Mapper.CreateMap<TopicViewModel, Topic>().ConvertUsing((vm) => { return new Topic { Created = DateTime.Now, LastPostTime = DateTime.Now, Title = vm.Title, P}; });
 
             Mapper.CreateMap<Forum, ForumPageViewModel>().ForMember(f => f.Topics, opt => opt.Ignore());
 

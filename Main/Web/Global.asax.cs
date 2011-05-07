@@ -54,10 +54,10 @@
         {
             AreaRegistration.RegisterAllAreas();
 
+            RouteTable.Routes.AddCombresRoute("Combres");
+
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
-
-            RouteTable.Routes.AddCombresRoute("Combres");
 
             IContainer container = IoC.Initialize();
             DependencyResolver.SetResolver(new SmDependencyResolver(container));

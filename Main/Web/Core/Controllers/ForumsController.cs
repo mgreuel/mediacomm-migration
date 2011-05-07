@@ -45,25 +45,28 @@
 
         #region Public Methods
 
+
+        /// <param name="id">The forum id.</param>
         [HttpGet]
         [NHibernateActionFilter]
         public ActionResult CreateTopic(int id)
         {
             IEnumerable<string> userNames = this.userRepository.GetAll().Select(u => u.UserName).ToList();
-            CreateTopicViewModel createTopicViewModel = new CreateTopicViewModel { UserNames = userNames };
+            ForumViewModel forum = Mapper.Map<Forum, ForumViewModel>(this.forumsRepository.GetById(id));
+
+            CreateTopicViewModel createTopicViewModel = new CreateTopicViewModel { UserNames = userNames, Forum = forum };
 
             return this.View(createTopicViewModel);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         [ValidateInput(false)]
+        [NHibernateActionFilter]
         public ActionResult CreateTopic(CreateTopicViewModel createTopic, int id)
         {
-            createTopic.PostText = UrlResolver.ResolveLinks(createTopic.PostText);
+            TopicViewModel createdTopic = this.forumsService.AddNewTopic(createTopic, id);
 
-            return this.RedirectToAction("Index");
-
-            // this.RedirectToAction("Topic", new { id = createdTopic.Id, name = this.Url.ToFriendlyUrl(createdTopic.Title) });
+            return this.RedirectToAction("Topic", new { id = createdTopic.Id, name = createdTopic.UrlFriendlyTitle });
         }
 
         [NHibernateActionFilter]
