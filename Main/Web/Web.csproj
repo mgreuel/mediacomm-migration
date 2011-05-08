@@ -123,47 +123,47 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_GlobalResources\Admin.Designer.cs">
+    <Compile Include="Core\Resources\Admin.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Admin.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\Forums.Designer.cs">
+    <Compile Include="Core\Resources\Forums.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Forums.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\General.Designer.cs">
+    <Compile Include="Core\Resources\General.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>General.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\Home.Designer.cs">
+    <Compile Include="Core\Resources\Home.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Home.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\Movies.Designer.cs">
+    <Compile Include="Core\Resources\Movies.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Movies.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\Navigation.Designer.cs">
+    <Compile Include="Core\Resources\Navigation.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Navigation.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\Photos.Designer.cs">
+    <Compile Include="Core\Resources\Photos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Photos.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\Users.Designer.cs">
+    <Compile Include="Core\Resources\Users.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Users.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\Videos.Designer.cs">
+    <Compile Include="Core\Resources\Videos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Videos.resx</DependentUpon>
@@ -227,7 +227,7 @@
     <Compile Include="Core\ViewModels\Pages\LogOnPageViewModel.cs" />
     <Compile Include="Core\Infrastructure\DependencyResolution\IoC.cs" />
     <Compile Include="Core\Infrastructure\DependencyResolution\SmDependencyResolver.cs" />
-    <Compile Include="App_GlobalResources\Account.Designer.cs">
+    <Compile Include="Core\Resources\Account.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Account.resx</DependentUpon>
@@ -369,50 +369,60 @@
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Forums.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
+    <EmbeddedResource Include="Core\Resources\Forums.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Forums.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_GlobalResources\Admin.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <Content Include="Core\Resources\Admin.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Admin.designer.cs</LastGenOutput>
-    </Content>
-    <Content Include="App_GlobalResources\General.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>General.designer.cs</LastGenOutput>
-    </Content>
-    <Content Include="App_GlobalResources\Navigation.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Navigation.designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </Content>
-    <Content Include="App_GlobalResources\Home.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
+    <EmbeddedResource Include="Core\Resources\General.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>General.designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Resources\Navigation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Navigation.designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Resources\Home.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Home.designer.cs</LastGenOutput>
-    </Content>
-    <Content Include="App_GlobalResources\Movies.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Resources\Movies.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Movies.designer.cs</LastGenOutput>
-    </Content>
-    <Content Include="App_GlobalResources\Photos.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Resources\Photos.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Photos.designer.cs</LastGenOutput>
-    </Content>
-    <Content Include="App_GlobalResources\Users.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Resources\Users.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Users.designer.cs</LastGenOutput>
-    </Content>
-    <Content Include="App_GlobalResources\Videos.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Resources\Videos.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Videos.designer.cs</LastGenOutput>
-    </Content>
-    <EmbeddedResource Include="App_GlobalResources\Account.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Resources\Account.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Account.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_GlobalResources\" />
     <Folder Include="App_Start\" />
   </ItemGroup>
   <ItemGroup>
