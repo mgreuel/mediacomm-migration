@@ -1,13 +1,15 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.PhotoUpload>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.ViewModel.PhotoUpload>" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
+
+<%@ Import Namespace="Resources" %>
 <asp:Content ID="Content3" ContentPlaceHolderID="Header" runat="server">
    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
-    <%=  Resources.Navigation.Photos %>
+    <%=  Navigation.Photos %>
     » <strong>
-        <%= Html.ActionLink(Resources.Photos.Upload, "Upload" ) %>
+        <%= Html.ActionLink(Photos.Upload, "Upload" ) %>
     </strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -20,7 +22,7 @@
         <tbody>
             <tr>
                 <td>
-                    <%= Resources.Photos.Category%>
+                    <%= Photos.Category%>
                 </td>
                 <td>
                     <%= Html.DropDownList("Category.Id", new SelectList(Model.Categories, "Id", "Name"), new { @class = "required" })%>
@@ -28,7 +30,7 @@
             </tr>
             <tr>
                 <td>
-                    <%= Resources.Photos.Album%>
+                    <%= Photos.Album%>
                 </td>
                 <td>
                     <%= Html.TextBox("Album.Name", null, new { @class = "required", minlength = "2" })%>
@@ -36,7 +38,7 @@
             </tr>
             <tr>
                 <td>
-                    <%= Resources.Photos.PhotosTitle%>
+                    <%= Photos.PhotosTitle%>
                 </td>
                 <td>
                     <input id="fileInput" name="fileInput" type="file" />
@@ -46,7 +48,7 @@
                 <td>
                 </td>
                 <td>
-                    <input id="uploadButton" type="button" class="button" value='<%= Resources.Photos.Upload %>'
+                    <input id="uploadButton" type="button" class="button" value='<%= Photos.Upload %>'
                         onclick="javascript:startUpload();" />
                 </td>
             </tr>

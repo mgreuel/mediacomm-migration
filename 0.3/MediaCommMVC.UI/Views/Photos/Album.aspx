@@ -1,10 +1,14 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Photos.PhotoAlbum>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.Model.Photos.PhotoAlbum>" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
+
+<%@ Import Namespace="Resources" %>
+
+<%@ Import Namespace="MediaCommMVC.Web.Core.Helpers" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
-    <%= Resources.Navigation.Photos %>
+    <%= Navigation.Photos %>
     »
     <%= Html.ActionLink(Model.PhotoCategory.Name, "Category", new { id = Model.PhotoCategory.Id, name = Url.ToFriendlyUrl(Model.PhotoCategory.Name) } ) %>
     » <strong>

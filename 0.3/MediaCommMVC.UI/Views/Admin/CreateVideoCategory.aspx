@@ -1,14 +1,15 @@
 <%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage" MasterPageFile="~/Views/Shared/Site.Master" %>
+<%@ Import Namespace="Resources" %>
 <asp:Content runat="server" ID="Header" ContentPlaceHolderID="Header"></asp:Content>
 <asp:Content runat="server" ID="BreadCrumb" ContentPlaceHolderID="BreadCrumbContent">
-    <%= Resources.Navigation.Admin %>
+    <%= Navigation.Admin %>
     » <strong>
-        <%= Html.ActionLink(Resources.Admin.CreateVideoCategory, "CreateVideoCategory")%>
+        <%= Html.ActionLink(Admin.CreateVideoCategory, "CreateVideoCategory")%>
     </strong>
 </asp:Content>
 <asp:Content runat="server" ID="Main" ContentPlaceHolderID="MainContent">
     <div id="validationSummary">
-        <%= Html.ValidationSummary(Resources.General.ValidationSummary) %>
+        <%= Html.ValidationSummary(General.ValidationSummary) %>
     </div>
     <% using (Html.BeginForm())
        {%>
@@ -16,7 +17,7 @@
         <tr>
             <td class="firstColumn">
                 <label>
-                    <%= Resources.Admin.Title %></label>
+                    <%= Admin.Title %></label>
             </td>
             <td class="secondColumn">
                 <%=  Html.TextBox("VideoCategory.Name", null , new { @class="required", minlength = "3", maxlength = "75" }) %>
@@ -26,7 +27,7 @@
             <td>
             </td>
             <td>
-                <input type="submit" value='<%= Resources.General.Create %>' />
+                <input type="submit" value='<%= General.Create %>' />
             </td>
         </tr>
     </table>

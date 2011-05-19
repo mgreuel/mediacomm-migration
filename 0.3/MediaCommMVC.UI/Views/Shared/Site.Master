@@ -1,14 +1,15 @@
 <%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
-<%@ Import Namespace="MediaCommMVC.UI" %>
-<%@ Import Namespace="MediaCommMVC.Core.Model.Users" %>
-<%@ Import Namespace="MediaCommMVC.UI.Infrastructure" %>
+<%@ Import Namespace="MediaCommMVC.Web" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Model.Users" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Infrastructure" %>
+<%@ Import Namespace="Resources" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>
-        <%= Resources.General.Title %>
+        <%= General.Title %>
     </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"
@@ -32,7 +33,7 @@
                 <div class="sitename">
                     <h1>
                         <a href="/" title="Home">
-                            <%= Resources.General.Title %>
+                            <%= General.Title %>
                         </a>
                     </h1>
                 </div>
@@ -48,45 +49,45 @@
         <div class="navbar">
             <ul>
                 <li>
-                    <%= Html.ActionLink(Resources.Navigation.Home, "Index", "Home")%></li>
+                    <%= Html.ActionLink(Navigation.Home, "Index", "Home")%></li>
             </ul>
             <ul>
                 <li>
-                    <%= Html.ActionLink(Resources.Navigation.Forums, "Index", "Forums") %>
+                    <%= Html.ActionLink(Navigation.Forums, "Index", "Forums") %>
                 </li>
             </ul>
             <ul>
                 <li><a>
-                    <%= Resources.Navigation.Photos %></a>
+                    <%= Navigation.Photos %></a>
                     <ul id="photonavi">
                         <li>
-                            <%= Html.ActionLink(Resources.Photos.Upload, "Upload", "Photos") %></li>
+                            <%= Html.ActionLink(Photos.Upload, "Upload", "Photos") %></li>
                     </ul>
                 </li>
             </ul>
             <ul>
                 <li><a>
-                    <%= Resources.Navigation.Videos %></a>
+                    <%= Navigation.Videos %></a>
                     <ul id="videonavi">
                         <li>
-                            <%= Html.ActionLink(Resources.Videos.AddVideo, "AddVideo", "Videos") %></li>
+                            <%= Html.ActionLink(Videos.AddVideo, "AddVideo", "Videos") %></li>
                     </ul>
                 </li>
             </ul>
             <ul>
                 <li>
-                    <%= Html.ActionLink(Resources.Navigation.Movies, "Index", "Movies") %>
+                    <%= Html.ActionLink(Navigation.Movies, "Index", "Movies") %>
                 </li>
             </ul>
             <ul>
                 <li>
-                    <%= Html.ActionLink(Resources.Navigation.Users, "Index", "Users") %>
+                    <%= Html.ActionLink(Navigation.Users, "Index", "Users") %>
                     <ul>
                         <li>
-                            <%= Html.ActionLink(Resources.Navigation.Overview, "Index", "Users") %>
+                            <%= Html.ActionLink(Navigation.Overview, "Index", "Users") %>
                         </li>
                         <li>
-                            <%= Html.ActionLink(Resources.Users.MyProfile, "MyProfile", "Users") %>
+                            <%= Html.ActionLink(Users.MyProfile, "MyProfile", "Users") %>
                         </li>
                     </ul>
                 </li>
@@ -95,19 +96,19 @@
                { %>
             <ul>
                 <li><a>
-                    <%= Resources.Navigation.Admin %></a>
+                    <%= Navigation.Admin %></a>
                     <ul>
                         <li>
-                            <%= Html.ActionLink(Resources.Admin.CreateUser, "CreateUser", "Admin") %>
+                            <%= Html.ActionLink(Admin.CreateUser, "CreateUser", "Admin") %>
                         </li>
                         <li>
-                            <%= Html.ActionLink(Resources.Admin.CreateForum, "CreateForum", "Admin") %>
+                            <%= Html.ActionLink(Admin.CreateForum, "CreateForum", "Admin") %>
                         </li>
                         <li>
-                            <%= Html.ActionLink(Resources.Admin.CreatePhotoCategory, "CreatePhotoCategory", "Admin") %>
+                            <%= Html.ActionLink(Admin.CreatePhotoCategory, "CreatePhotoCategory", "Admin") %>
                         </li>
                         <li>
-                            <%= Html.ActionLink(Resources.Admin.CreateVideoCategory, "CreateVideoCategory", "Admin") %>
+                            <%= Html.ActionLink(Admin.CreateVideoCategory, "CreateVideoCategory", "Admin") %>
                         </li>
                     </ul>
                 </li>
@@ -133,7 +134,7 @@
         <div class="footer">
             <p>
                 Copyright &copy;
-                <%= Resources.General.WebSite  %>
+                <%= General.WebSite  %>
             </p>
             <p class="credits">
                 Design by <a href="http://1234.info/" title="Designer Homepage">1234.info</a>

@@ -1,10 +1,11 @@
-<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.Account.CreateUser>"
+<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.ViewModel.Account.CreateUser>"
     MasterPageFile="~/Views/Shared/Site.Master" %>
+<%@ Import Namespace="Resources" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="BreadCrumbContent" runat="server">
-    <%= Resources.Navigation.Admin %>
+    <%= Navigation.Admin %>
     » <strong>
-        <%= Html.ActionLink(Resources.Admin.CreateUser, "CreateUser") %>
+        <%= Html.ActionLink(Admin.CreateUser, "CreateUser") %>
     </strong>
 </asp:Content>
 <asp:Content runat="server" ID="Content1" ContentPlaceHolderID="MainContent">
@@ -14,7 +15,7 @@
         <tr>
             <td class="firstColumn">
                 <label for="UserInfo.UserName">
-                    <%= Resources.Users.UserName %>:</label>
+                    <%= Users.UserName %>:</label>
             </td>
             <td class="secondColumn">
                 <%= Html.TextBox("userName", null, new { @class="required", minlength = "3", maxlength = "50" })%>
@@ -23,7 +24,7 @@
         <tr>
             <td class="firstColumn">
                 <label for="UserInfo.Password">
-                    <%= Resources.Users.Password %>
+                    <%= Users.Password %>
                     :</label>
             </td>
             <td class="secondColumn">
@@ -33,7 +34,7 @@
         <tr>
             <td class="firstColumn">
                 <label for="UserInfo.MailAddress">
-                    <%= Resources.Users.EMailAddress %>
+                    <%= Users.EMailAddress %>
                     :</label>
             </td>
             <td class="secondColumn">
@@ -44,7 +45,7 @@
             <td>
             </td>
             <td>
-                <input type="submit" id="submitUser" value='<%= Resources.General.Create%>' />
+                <input type="submit" id="submitUser" value='<%= General.Create%>' />
             </td>
         </tr>
     </table>

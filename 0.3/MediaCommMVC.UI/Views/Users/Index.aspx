@@ -1,21 +1,22 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Core.Model.Users.MediaCommUser>>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Web.Core.Model.Users.MediaCommUser>>" %>
+<%@ Import Namespace="Resources" %>
 
 <asp:Content ID="changePasswordTitle" ContentPlaceHolderID="BreadCrumbContent" runat="server">
     <strong>
-        <%= Html.ActionLink(Resources.Users.Userlist, "Index", "Users") %></strong>
+        <%= Html.ActionLink(Users.Userlist, "Index", "Users") %></strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <table id="userTable" class="defaultTable">
         <thead>
             <tr>
                 <th class="top">
-                    <%= Resources.Users.UserName %>
+                    <%= Users.UserName %>
                 </th>
                 <th class="top">
-                    <%= Resources.Users.FirstName %>
+                    <%= Users.FirstName %>
                 </th>
                 <th class="top">
-                    <%= Resources.Users.LastName %>
+                    <%= Users.LastName %>
                 </th>
                 <th class="top">
                 </th>
@@ -35,7 +36,7 @@
                     <%= Html.Encode(item.LastName) %>
                 </td>
                 <td>
-                    <%= Html.ActionLink(Resources.Users.Details, "Profile", "Users", new { username = item.UserName}, null) %>
+                    <%= Html.ActionLink(Users.Details, "Profile", "Users", new { username = item.UserName}, null) %>
                 </td>
             </tr>
             <% } %>

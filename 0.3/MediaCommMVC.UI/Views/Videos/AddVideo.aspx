@@ -1,12 +1,13 @@
-<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.AddVideoInfo>"
+<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.ViewModel.AddVideoInfo>"
     MasterPageFile="~/Views/Shared/Site.Master" %>
+<%@ Import Namespace="Resources" %>
 
 <asp:Content runat="server" ID="Header" ContentPlaceHolderID="Header">
 </asp:Content>
 <asp:Content runat="server" ID="BreadCrumb" ContentPlaceHolderID="BreadCrumbContent">
-    <%=  Resources.Navigation.Videos %>
+    <%=  Navigation.Videos %>
     » <strong>
-        <%= Html.ActionLink(Resources.Videos.AddVideo, "AddVideo" ) %>
+        <%= Html.ActionLink(Videos.AddVideo, "AddVideo" ) %>
     </strong>
 </asp:Content>
 <asp:Content runat="server" ID="Main" ContentPlaceHolderID="MainContent">
@@ -18,7 +19,7 @@
         <tbody>
             <tr>
                 <td>
-                    <%:Resources.Videos.Category%>
+                    <%:Videos.Category%>
                 </td>
                 <td>
                     <%=
@@ -30,7 +31,7 @@
             </tr>
             <tr>
                 <td>
-                    <%:Resources.Videos.VideoFile%>
+                    <%:Videos.VideoFile%>
                 </td>
                 <td>
                     <%=
@@ -40,7 +41,7 @@
             </tr>
             <tr>
                 <td>
-                    <%:Resources.Videos.ThumbnailFile%>
+                    <%:Videos.ThumbnailFile%>
                 </td>
                 <td>
                     <%=
@@ -50,7 +51,7 @@
             </tr>
                         <tr>
                 <td>
-                    <%: Resources.Videos.PosterFile %>
+                    <%: Videos.PosterFile %>
                 </td>
                 <td>
                     <%=
@@ -60,7 +61,7 @@
             </tr>
             <tr>
                 <td>
-                    <%:Resources.Videos.Title%>
+                    <%:Videos.Title%>
                 </td>
                 <td>
                     <%=Html.TextBox("video.Title", null, new { @class = "required" })%>
@@ -68,7 +69,7 @@
             </tr>
             <tr>
                 <td>
-                    <%:Resources.Videos.Description%>
+                    <%:Videos.Description%>
                 </td>
                 <td>
                     <%=Html.TextArea("video.Description", null, new { @class = "required" })%>
@@ -78,7 +79,7 @@
                 <td>
                 </td>
                 <td>
-                    <input type="submit" id="submitVideo" value='<%=Resources.General.Create%>' />
+                    <input type="submit" id="submitVideo" value='<%=General.Create%>' />
                 </td>
             </tr>
         </tbody>

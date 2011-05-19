@@ -1,11 +1,12 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.Account.UserLogin>" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.ViewModel.Account.UserLogin>" %>
+<%@ Import Namespace="Resources" %>
 
 <asp:Content ID="changePasswordTitle" ContentPlaceHolderID="BreadCrumbContent" runat="server">
     <strong>
-        <%= Resources.Navigation.LogOn  %></strong>
+        <%= Navigation.LogOn  %></strong>
 </asp:Content>
 <asp:Content ID="loginContent" ContentPlaceHolderID="MainContent" runat="server">
-    <%= Html.ValidationSummary(true, Resources.Users.LoginFailed) %>
+    <%= Html.ValidationSummary(true, Users.LoginFailed) %>
     <% using (Html.BeginForm())
        { %>
     <table id="loginTable" class="defaultTable">
@@ -39,7 +40,7 @@
             <td>
             </td>
             <td>
-                <input id="loginButton" type="submit" value='<%= Resources.General.Login %>' />
+                <input id="loginButton" type="submit" value='<%= General.Login %>' />
             </td>
         </tr>
     </table>

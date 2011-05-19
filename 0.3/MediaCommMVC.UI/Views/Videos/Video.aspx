@@ -1,5 +1,7 @@
-<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Videos.Video>"
+<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.Model.Videos.Video>"
     MasterPageFile="~/Views/Shared/Site.Master" %>
+<%@ Import Namespace="Resources" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Helpers" %>
 
 <asp:Content runat="server" ID="Header" ContentPlaceHolderID="Header">
     <script src="/Scripts/video.js" type="text/javascript" charset="utf-8"></script>
@@ -12,7 +14,7 @@
         title="Video JS">
 </asp:Content>
 <asp:Content runat="server" ID="BreadCrumb" ContentPlaceHolderID="BreadCrumbContent">
-    <%=  Resources.Navigation.Videos %>
+    <%=  Navigation.Videos %>
     »
     <%= Html.ActionLink(Model.VideoCategory.Name, "Category", new { id = Model.VideoCategory.Id, name = Url.ToFriendlyUrl(Model.VideoCategory.Name) } ) %>
     » <strong>
@@ -32,7 +34,7 @@
             <source src='/videos/<%= this.Model.VideoCategory.Name + "/" + this.Model.VideoFileName %>' type='video/webm; codecs="vp8, vorbis"' />
         </video>
             <p class="vjs-no-video text">
-                <%: Resources.Videos.WebMNotSupported %>
+                <%: Videos.WebMNotSupported %>
             </p>
         </div>
         <!-- End VideoJS -->        

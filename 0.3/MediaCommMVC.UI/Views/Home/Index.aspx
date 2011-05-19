@@ -1,25 +1,28 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.WhatsNewInfo>" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.ViewModel.WhatsNewInfo>" %>
 
-<%@ Import Namespace="MediaCommMVC.Core.Parameters" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Parameters" %>
 <%@ Import Namespace="Combres.Mvc" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Parameters" %>
+<%@ Import Namespace="Resources" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Helpers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
     <strong>
-        <%= Html.ActionLink(Resources.Navigation.Home, "Index" ) %>
+        <%= Html.ActionLink(Navigation.Home, "Index" ) %>
     </strong>
 </asp:Content>
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="content-2col-box-leftcolumn">
         <div id="newPostsWrapper" class="content-2col-box">
             <h3>
-                <%= Resources.Home.NewPosts %></h3>
+                <%= Home.NewPosts %></h3>
             <table id="newPostsTable" class="defaultTable">
                 <thead>
                     <tr>
                         <th colspan="2">
-                            <%= Resources.Forums.Topic %>
+                            <%= Forums.Topic %>
                         </th>
                         <th>
-                            <%= Resources.Forums.LastPost %>
+                            <%= Forums.LastPost %>
                         </th>
                     </tr>
                 </thead>
@@ -55,7 +58,7 @@
     <div class="content-2col-box-rightcolumn">
         <div id="newPhotoAlbums" class="content-2col-box">
             <h3>
-                <%= Resources.Home.NewPhotoAlbums %>
+                <%= Home.NewPhotoAlbums %>
             </h3>
             <div class="highslide-gallery newPhotos-gallery">
                 <ul>

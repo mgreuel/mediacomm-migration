@@ -1,17 +1,19 @@
-<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Forums.Post>"
+<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.Model.Forums.Post>"
     MasterPageFile="~/Views/Shared/Site.Master" %>
+<%@ Import Namespace="Resources" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Helpers" %>
 
 <asp:Content runat="server" ID="Header" ContentPlaceHolderID="Header">
     <script src="/Content/tiny_mce/tiny_mce.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
-    <%= Html.ActionLink( Resources.Navigation.Forums, "Index" ) %>
+    <%= Html.ActionLink( Navigation.Forums, "Index" ) %>
     »
     <%= Html.ActionLink(Model.Topic.Forum.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Topic.Forum.Title), id = Model.Topic.Forum.Id })   %>
     »
     <%=  Html.ActionLink(Model.Topic.Title, "Topic", new { name =  Url.ToFriendlyUrl(Model.Topic.Title), Id = Model.Topic.Id }) %>
     » <strong>
-        <%= Resources.Forums.EditPost %>
+        <%= Forums.EditPost %>
     </strong>
 </asp:Content>
 <asp:Content runat="server" ID="Main" ContentPlaceHolderID="MainContent">
@@ -19,10 +21,10 @@
        {%>
     <div id="reply">
         <h2>
-            <%= Resources.Forums.Reply %>
+            <%= Forums.Reply %>
         </h2>
         <%= Html.TextArea("post.Text", this.Model.Text, new { @class = "required", minlength = "3" }) %>
-        <input id="save" type="submit" value='<%= Resources.General.Save %>' />
+        <input id="save" type="submit" value='<%= General.Save %>' />
     </div>
     <% } %>
     <script type="text/javascript">

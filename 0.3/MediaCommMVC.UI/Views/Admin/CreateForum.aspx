@@ -1,14 +1,15 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Forums.Forum>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.Model.Forums.Forum>" %>
+<%@ Import Namespace="Resources" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
-    <%= Resources.Navigation.Admin %>
+    <%= Navigation.Admin %>
     » <strong>
-        <%= Html.ActionLink(Resources.Admin.CreateForum, "CreateForum") %>
+        <%= Html.ActionLink(Admin.CreateForum, "CreateForum") %>
     </strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="validationSummary">
-        <%= Html.ValidationSummary(Resources.General.ValidationSummary) %>
+        <%= Html.ValidationSummary(General.ValidationSummary) %>
     </div>
     <% using (Html.BeginForm())
        {%>
@@ -16,7 +17,7 @@
         <tr>
             <td class="firstColumn">
                 <label for="Forum.Title">
-                    <%= Resources.Admin.Title %>:</label>
+                    <%= Admin.Title %>:</label>
             </td>
             <td class="secondColumn">
                 <%= Html.TextBox("Forum.Title", null , new { @class="required", minlength = "3", maxlength = "75" }) %>
@@ -25,7 +26,7 @@
         <tr>
             <td class="firstColumn">
                 <label for="Forum.Description">
-                    <%= Resources.Admin.Description %>:</label>
+                    <%= Admin.Description %>:</label>
             </td>
             <td class="secondColumn">
                 <%= Html.TextArea("Forum.Description", null , new { minlength = "6", maxlength = "250" }) %>
@@ -35,7 +36,7 @@
             <td>
             </td>
             <td>
-                <input type="submit" value='<%= Resources.General.Create %>' />
+                <input type="submit" value='<%= General.Create %>' />
             </td>
         </tr>
     </table>
