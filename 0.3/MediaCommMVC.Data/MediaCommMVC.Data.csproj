@@ -60,27 +60,23 @@
     <CodeAnalysisRuleSet>..\CodeAnalysis\Basic.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Antlr.3.1.3.42154\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.2.5.1\lib\NET35\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="FluentNHibernate, Version=1.1.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentNHibernate.1.1.1.694\lib\FluentNHibernate.dll</HintPath>
+    <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentNHibernate.1.2.0.712\lib\FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="Iesi.Collections">
-      <HintPath>..\packages\Iesi.Collections.1.0.1\lib\Iesi.Collections.dll</HintPath>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.2001\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate">
-      <HintPath>..\packages\NHibernate.3.0.0.2001\lib\NHibernate.dll</HintPath>
+    <Reference Include="NHibernate, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.3.1.0.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate.ByteCode.Castle">
-      <HintPath>..\packages\NHibernate.3.0.0.2001\lib\NHibernate.ByteCode.Castle.dll</HintPath>
-    </Reference>
-    <Reference Include="Remotion.Data.Linq">
-      <HintPath>..\packages\NHibernate.3.0.0.2001\lib\Remotion.Data.Linq.dll</HintPath>
+    <Reference Include="NHibernate.ByteCode.Castle, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.Castle.3.1.0.4000\lib\Net35\NHibernate.ByteCode.Castle.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -94,47 +90,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="IImageGenerator.cs" />
-    <Compile Include="MixedImageGenerator.cs" />
-    <Compile Include="NHInfrastructure\Config\ConfigurationGenerator.cs" />
-    <Compile Include="NHInfrastructure\Config\IConfigurationGenerator.cs" />
-    <Compile Include="NHInfrastructure\Conventions\EnumConvention.cs" />
-    <Compile Include="NHInfrastructure\Conventions\FkConvention.cs" />
-    <Compile Include="NHInfrastructure\ISessionManager.cs" />
-    <Compile Include="NHInfrastructure\Mapping\AutoMapGenerator.cs" />
-    <Compile Include="NHInfrastructure\Mapping\ForumMapper.cs" />
-    <Compile Include="NHInfrastructure\Mapping\IAutoMapGenerator.cs" />
-    <Compile Include="NHInfrastructure\Mapping\MediaCommUserMapper.cs" />
-    <Compile Include="NHInfrastructure\Mapping\MovieMapper.cs" />
-    <Compile Include="NHInfrastructure\Mapping\PhotoAlbumMapper.cs" />
-    <Compile Include="NHInfrastructure\Mapping\PhotoCategoryMapper.cs" />
-    <Compile Include="NHInfrastructure\Mapping\PhotoMapper.cs" />
-    <Compile Include="NHInfrastructure\Mapping\PollAnswerMapper.cs" />
-    <Compile Include="NHInfrastructure\Mapping\PollMapper.cs" />
-    <Compile Include="NHInfrastructure\Mapping\PollUserAnswerMapping.cs" />
-    <Compile Include="NHInfrastructure\Mapping\PostMapper.cs" />
-    <Compile Include="NHInfrastructure\Mapping\TopicMapper.cs" />
-    <Compile Include="NHInfrastructure\Mapping\TopicReadMapper.cs" />
-    <Compile Include="NHInfrastructure\Mapping\VideoCategoryMapper.cs" />
-    <Compile Include="NHInfrastructure\Mapping\VideoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ForumRepository.cs" />
-    <Compile Include="Repositories\MovieRepository.cs" />
-    <Compile Include="Repositories\PhotoReposity.cs" />
-    <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="Repositories\VideoRepository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MediaCommMVC.Common\MediaCommMVC.Common.csproj">
-      <Project>{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}</Project>
-      <Name>MediaCommMVC.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MediaCommMVC.Core\MediaCommMVC.Core.csproj">
-      <Project>{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5}</Project>
-      <Name>MediaCommMVC.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

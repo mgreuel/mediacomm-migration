@@ -1,59 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.UI", "MediaCommMVC.UI\MediaCommMVC.UI.csproj", "{D746E91F-7B79-4416-B5D5-FCE5FCA74D52}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.Data", "MediaCommMVC.Data\MediaCommMVC.Data.csproj", "{6060137F-843B-412E-95FE-B43A1421B813}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.Core", "MediaCommMVC.Core\MediaCommMVC.Core.csproj", "{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.Common", "MediaCommMVC.Common\MediaCommMVC.Common.csproj", "{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.DBSetup", "MediaCommMVC.DBSetup\MediaCommMVC.DBSetup.csproj", "{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.Web", "MediaCommMVC.UI\MediaCommMVC.Web.csproj", "{D746E91F-7B79-4416-B5D5-FCE5FCA74D52}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7BD4A439-1E18-4529-BC39-F28D3D0F46B1}"
 	ProjectSection(SolutionItems) = preProject
 		createpictures.bat = createpictures.bat
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{812C58B6-3471-4E62-9DA5-A7E779092043}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{FE991195-2DC3-425B-8B31-383F95E6739C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{D711CE14-9DF1-4CDC-A30F-A7652464C9C1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.Tests.Common", "MediaCommMVC.Tests.Common\MediaCommMVC.Tests.Common.csproj", "{D84C4891-18F6-4295-86D7-1296764EF959}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 2
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = MediaCommMVC.UI\\MediaCommMVC.UI.csproj
-		SccProjectTopLevelParentUniqueName1 = MediaCommMVC.sln
+		SccProjectUniqueName1 = MediaCommMVC.UI\\MediaCommMVC.Web.csproj
 		SccProjectName1 = MediaCommMVC.UI
 		SccLocalPath1 = MediaCommMVC.UI
-		SccProjectUniqueName2 = MediaCommMVC.Data\\MediaCommMVC.Data.csproj
-		SccProjectTopLevelParentUniqueName2 = MediaCommMVC.sln
-		SccProjectName2 = MediaCommMVC.Data
-		SccLocalPath2 = MediaCommMVC.Data
-		SccProjectUniqueName3 = MediaCommMVC.Core\\MediaCommMVC.Core.csproj
-		SccProjectTopLevelParentUniqueName3 = MediaCommMVC.sln
-		SccProjectName3 = MediaCommMVC.Core
-		SccLocalPath3 = MediaCommMVC.Core
-		SccProjectUniqueName4 = MediaCommMVC.Common\\MediaCommMVC.Common.csproj
-		SccProjectTopLevelParentUniqueName4 = MediaCommMVC.sln
-		SccProjectName4 = MediaCommMVC.Common
-		SccLocalPath4 = MediaCommMVC.Common
-		SccProjectUniqueName5 = MediaCommMVC.DBSetup\\MediaCommMVC.DBSetup.csproj
-		SccProjectTopLevelParentUniqueName5 = MediaCommMVC.sln
-		SccProjectName5 = MediaCommMVC.DBSetup
-		SccLocalPath5 = MediaCommMVC.DBSetup
-		SccProjectUniqueName6 = MediaCommMVC.Tests.Common\\MediaCommMVC.Tests.Common.csproj
-		SccProjectTopLevelParentUniqueName6 = MediaCommMVC.sln
-		SccProjectName6 = MediaCommMVC.Tests.Common
-		SccLocalPath6 = MediaCommMVC.Tests.Common
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,67 +37,9 @@ Global
 		{D746E91F-7B79-4416-B5D5-FCE5FCA74D52}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D746E91F-7B79-4416-B5D5-FCE5FCA74D52}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D746E91F-7B79-4416-B5D5-FCE5FCA74D52}.Release|x86.ActiveCfg = Release|Any CPU
-		{6060137F-843B-412E-95FE-B43A1421B813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6060137F-843B-412E-95FE-B43A1421B813}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6060137F-843B-412E-95FE-B43A1421B813}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{6060137F-843B-412E-95FE-B43A1421B813}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{6060137F-843B-412E-95FE-B43A1421B813}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6060137F-843B-412E-95FE-B43A1421B813}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6060137F-843B-412E-95FE-B43A1421B813}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6060137F-843B-412E-95FE-B43A1421B813}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{6060137F-843B-412E-95FE-B43A1421B813}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{6060137F-843B-412E-95FE-B43A1421B813}.Release|x86.ActiveCfg = Release|Any CPU
-		{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5}.Release|x86.ActiveCfg = Release|Any CPU
-		{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}.Release|x86.ActiveCfg = Release|Any CPU
-		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA}.Release|x86.ActiveCfg = Release|Any CPU
-		{D84C4891-18F6-4295-86D7-1296764EF959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D84C4891-18F6-4295-86D7-1296764EF959}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D84C4891-18F6-4295-86D7-1296764EF959}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{D84C4891-18F6-4295-86D7-1296764EF959}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{D84C4891-18F6-4295-86D7-1296764EF959}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D84C4891-18F6-4295-86D7-1296764EF959}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D84C4891-18F6-4295-86D7-1296764EF959}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D84C4891-18F6-4295-86D7-1296764EF959}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{D84C4891-18F6-4295-86D7-1296764EF959}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{D84C4891-18F6-4295-86D7-1296764EF959}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{6060137F-843B-412E-95FE-B43A1421B813} = {D711CE14-9DF1-4CDC-A30F-A7652464C9C1}
-		{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5} = {D711CE14-9DF1-4CDC-A30F-A7652464C9C1}
-		{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C} = {D711CE14-9DF1-4CDC-A30F-A7652464C9C1}
-		{D746E91F-7B79-4416-B5D5-FCE5FCA74D52} = {D711CE14-9DF1-4CDC-A30F-A7652464C9C1}
-		{2A0BC3BF-6328-464B-AE59-C8F7BB5663BA} = {FE991195-2DC3-425B-8B31-383F95E6739C}
-		{D84C4891-18F6-4295-86D7-1296764EF959} = {812C58B6-3471-4E62-9DA5-A7E779092043}
 	EndGlobalSection
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True

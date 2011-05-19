@@ -49,38 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataInterfaces\IForumRepository.cs" />
-    <Compile Include="DataInterfaces\IMovieRepository.cs" />
-    <Compile Include="DataInterfaces\IPhotoRepository.cs" />
-    <Compile Include="DataInterfaces\IUserRepository.cs" />
-    <Compile Include="DataInterfaces\IVideoRepository.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Model\Forums\Forum.cs" />
-    <Compile Include="Model\Forums\Poll.cs" />
-    <Compile Include="Model\Forums\PollAnswer.cs" />
-    <Compile Include="Model\Forums\PollType.cs" />
-    <Compile Include="Model\Forums\PollUserAnswer.cs" />
-    <Compile Include="Model\Forums\Post.cs" />
-    <Compile Include="Model\Forums\Topic.cs" />
-    <Compile Include="Model\Forums\TopicDisplayPriority.cs" />
-    <Compile Include="Model\Forums\TopicRead.cs" />
-    <Compile Include="Model\Movies\Movie.cs" />
-    <Compile Include="Model\Movies\MovieLanguage.cs" />
-    <Compile Include="Model\Movies\MovieQuality.cs" />
-    <Compile Include="Model\Photos\Photo.cs" />
-    <Compile Include="Model\Photos\PhotoAlbum.cs" />
-    <Compile Include="Model\Photos\PhotoCategory.cs" />
-    <Compile Include="Model\Users\MediaCommUser.cs" />
-    <Compile Include="Model\Videos\Video.cs" />
-    <Compile Include="Model\Videos\VideoCategory.cs" />
-    <Compile Include="Parameters\PagingParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MediaCommMVC.Common\MediaCommMVC.Common.csproj">
-      <Project>{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}</Project>
-      <Name>MediaCommMVC.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
