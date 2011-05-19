@@ -1,24 +1,26 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Core.Model.Forums.Forum>>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Web.Core.Model.Forums.Forum>>" %>
+<%@ Import Namespace="Resources" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Helpers" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
     <strong>
-        <%= Html.ActionLink(Resources.Navigation.Forums, "Index" ) %>
+        <%= Html.ActionLink(Navigation.Forums, "Index" ) %>
     </strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <table id="forums" class="defaultTable" width="100%">
         <tr>
             <th colspan="2">
-                <%= Resources.Forums.Forum %>
+                <%= Forums.Forum %>
             </th>
             <th width="50">
-                <%= Resources.Forums.Topics %>
+                <%= Forums.Topics %>
             </th>
             <th width="50">
-                <%= Resources.Forums.Posts %>
+                <%= Forums.Posts %>
             </th>
             <th>
-                <%= Resources.Forums.LastPost %>
+                <%= Forums.LastPost %>
             </th>
         </tr>
         <% foreach (var forum in Model.OrderBy(f => f.DisplayOrderIndex))
@@ -47,7 +49,7 @@
                 <div>
                     <%= Html.Encode(String.Format("{0:g}",forum.LastPostTime)) %></div>
                 <div>
-                    <%= Resources.Forums.By + @" " %><%= Html.ActionLink(forum.LastPostAuthor, "Profile", "Users", new { username = forum.LastPostAuthor },null) %></div>
+                    <%= Forums.By + @" " %><%= Html.ActionLink(forum.LastPostAuthor, "Profile", "Users", new { username = forum.LastPostAuthor },null) %></div>
                 <% } %>
             </td>
         </tr>
@@ -60,13 +62,13 @@
                     <img src="/Content/Forum/folder_new.gif" alt="New Posts" />
                 </td>
                 <td class="caption">
-                    <%= Resources.Forums.NewPosts %>
+                    <%= Forums.NewPosts %>
                 </td>
                 <td>
                     <img src="/Content/Forum/folder.gif" alt="No New Posts" />
                 </td>
                 <td class="caption">
-                    <%= Resources.Forums.NoNewPosts %>
+                    <%= Forums.NoNewPosts %>
                 </td>
             </tr>
         </table>

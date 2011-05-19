@@ -1,20 +1,24 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.CreateTopicInfo>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.ViewModel.CreateTopicInfo>" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
+
+<%@ Import Namespace="Resources" %>
+
+<%@ Import Namespace="MediaCommMVC.Web.Core.Helpers" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
     <script src="/Content/tiny_mce/tiny_mce.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
-    <%= Html.ActionLink( Resources.Navigation.Forums, "Index" ) %>
+    <%= Html.ActionLink( Navigation.Forums, "Index" ) %>
     »
     <%= Html.ActionLink(Model.Forum.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Forum.Title), id = Model.Forum.Id })   %>
     » <strong>
-        <%= Html.ActionLink(Resources.Forums.CreateTopic, "CreateTopic") %>
+        <%= Html.ActionLink(Forums.CreateTopic, "CreateTopic") %>
     </strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="validationSummary">
-        <%= Html.ValidationSummary(Resources.General.ValidationSummary) %>
+        <%= Html.ValidationSummary(General.ValidationSummary) %>
     </div>
     <% using (Html.BeginForm())
        {%>
@@ -23,7 +27,7 @@
             <tr>
                 <td class="firstColumn">
                     <label for="Topic.Title">
-                        <%= Resources.Forums.Subject %>:</label>
+                        <%= Forums.Subject %>:</label>
                 </td>
                 <td class="secondColumn">
                     <%= Html.TextBox("Topic.Title", null, new { @class = "required fullWidth", minlength = "3", maxlength ="75"}) %>
@@ -32,7 +36,7 @@
             <tr>
                 <td class="firstColumn">
                     <label for="Post.Text">
-                        <%= Resources.Forums.Message %>:</label>
+                        <%= Forums.Message %>:</label>
                 </td>
                 <td class="secondColumn reset">
                     <%= Html.TextArea("Post.Text", null, new { @class = "required fullWidth", minlength = "3" }) %>
@@ -43,7 +47,7 @@
                 </td>
                 <td class="secondColumn">
                     <strong><a id="optionsButton" href="javascript:void(null);">
-                        <%= Resources.Forums.ShowOptions %></a> </strong>
+                        <%= Forums.ShowOptions %></a> </strong>
                 </td>
             </tr>
         </tbody>
@@ -53,31 +57,31 @@
                 </td>
                 <td class="secondColumn">
                     <%= Html.CheckBox("Sticky", new { @class = "checkBox"}) %>
-                    <%= Resources.Forums.MarkAsSticky  %>
+                    <%= Forums.MarkAsSticky  %>
                 </td>
             </tr>
             <tr>
                 <td class="firstColumn">
-                    <%= Resources.Forums.ExcludeUsers %>:
+                    <%= Forums.ExcludeUsers %>:
                 </td>
                 <td class="secondColumn">
                     <%= Html.TextBox("excludedUsers", null, new { @readonly = "readonly" }) %>
                     <%= Html.DropDownList("userNameToExclude", new SelectList(Model.UserNames)) %>
                     <strong><a href="javascript:AddExcludedUser();" id="showAddPopup">
-                        <%= Resources.General.Add %>
+                        <%= General.Add %>
                     </a></strong>
                 </td>
             </tr>
             <tr>
                 <td class="firstColumn">
-                    <%= Resources.Forums.CreatePoll %>:
+                    <%= Forums.CreatePoll %>:
                 </td>
                 <td class="secondColumn">
                     <table id="createPoll">
                         <tr>
                             <td>
                                 <strong>
-                                    <%= Resources.Forums.PollType %></strong>
+                                    <%= Forums.PollType %></strong>
                             </td>
                             <td>
                                 <%= Html.DropDownList("poll.Type", this.ViewData["PollTypes"] as SelectList) %>
@@ -86,7 +90,7 @@
                         <tr>
                             <td>
                                 <strong>
-                                    <%= Resources.Forums.Question %>:</strong>
+                                    <%= Forums.Question %>:</strong>
                             </td>
                             <td>
                                 <%= Html.TextBox("poll.Question") %>
@@ -95,7 +99,7 @@
                         <tr class="answer">
                             <td>
                                 <strong>
-                                    <%= Resources.Forums.Answer %>
+                                    <%= Forums.Answer %>
                                     1:</strong>
                             </td>
                             <td>
@@ -105,7 +109,7 @@
                     </table>
                     <div id="addAnswer">
                         <strong><a href="javascript:AddPollAnswer();">
-                            <%= Resources.Forums.AddAnswer %>
+                            <%= Forums.AddAnswer %>
                         </a></strong>
                     </div>
                 </td>
@@ -116,7 +120,7 @@
                 <td>
                 </td>
                 <td>
-                    <input id="submitTopic" type="submit" value='<%= Resources.General.Save %>' />
+                    <input id="submitTopic" type="submit" value='<%= General.Save %>' />
                 </td>
             </tr>
         </tbody>
@@ -150,12 +154,12 @@
             (
                 function ()
                 {
-                    $(this).text('<%= Resources.Forums.HideOptions %>');
+                    $(this).text('<%= Forums.HideOptions %>');
                     $(".hide").toggle();
                 },
                 function ()
                 {
-                    $(this).text('<%= Resources.Forums.ShowOptions %>');
+                    $(this).text('<%= Forums.ShowOptions %>');
                     $(".hide").toggle();
                 }
             );
@@ -176,7 +180,7 @@
         {
             var answerCount = $("#createPoll .answer").length;
 
-            $("#createPoll").append('<tr class="answer"><td><strong>' + '<%= Resources.Forums.Answer %> '
+            $("#createPoll").append('<tr class="answer"><td><strong>' + '<%= Forums.Answer %> '
                 + (answerCount + 1) + ':</strong></td><td><input type="text" name="poll.PossibleAnswers[' + answerCount + '].Text" /> </td></tr>');
         }
     </script>

@@ -6,16 +6,14 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
-using MediaCommMVC.Common.Logging;
-using MediaCommMVC.Core.DataInterfaces;
-using MediaCommMVC.Core.Model.Users;
-using MediaCommMVC.UI.Infrastructure;
+using MediaCommMVC.Web.Core.Common.Logging;
+using MediaCommMVC.Web.Core.Infrastructure;
 
 using Microsoft.Practices.Unity;
 
 #endregion
 
-namespace MediaCommMVC.UI
+namespace MediaCommMVC.Web
 {
     /// <summary>The web application.</summary>
     public class MvcApplication : HttpApplication, IUnityContainerAccessor

@@ -1,9 +1,11 @@
-<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Videos.VideoCategory>"MasterPageFile="~/Views/Shared/Site.Master" %>
+<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.Model.Videos.VideoCategory>"MasterPageFile="~/Views/Shared/Site.Master" %>
+<%@ Import Namespace="Resources" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Helpers" %>
 
 <asp:Content runat="server" ID="Header" ContentPlaceHolderID="Header">
 </asp:Content>
 <asp:Content runat="server" ID="BreadCrumb" ContentPlaceHolderID="BreadCrumbContent">
-<%= Resources.Navigation.Videos %>
+<%= Navigation.Videos %>
 » <strong>
     <%= Html.ActionLink(Model.Name, "Category", new { id = Model.Id, name = Url.ToFriendlyUrl(Model.Name) } ) %>
 </strong>

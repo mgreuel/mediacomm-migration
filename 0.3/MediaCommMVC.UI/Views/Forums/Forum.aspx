@@ -1,8 +1,14 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.ForumPage>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.ViewModel.ForumPage>" %>
 
-<%@ Import Namespace="MediaCommMVC.Core.Parameters" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Parameters" %>
+
+<%@ Import Namespace="MediaCommMVC.Web.Core.Parameters" %>
+
+<%@ Import Namespace="Resources" %>
+
+<%@ Import Namespace="MediaCommMVC.Web.Core.Helpers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
-    <%= Html.ActionLink(Resources.Navigation.Forums, "Index" ) %>
+    <%= Html.ActionLink(Navigation.Forums, "Index" ) %>
     » <strong>
         <%= Html.ActionLink(Model.Forum.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Forum.Title), id = Model.Forum.Id })   %>
     </strong>
@@ -10,7 +16,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="forumHeader">
         <div id="newTopicButton">
-            <%= Html.ActionLink(Resources.Forums.CreateTopic, "CreateTopic",null, new { @class = "button" }) %>
+            <%= Html.ActionLink(Forums.CreateTopic, "CreateTopic",null, new { @class = "button" }) %>
         </div>
         <div class="forumPager forumPagerTop">
             <%= Html.Pager(Model.PagingParameters, string.Format("/Forums/Forum/{0}/{1}", Model.Forum.Id, Url.ToFriendlyUrl(Model.Forum.Title))) %>
@@ -20,16 +26,16 @@
         <thead>
             <tr>
                 <th colspan="2">
-                    <%= Resources.Forums.Topic %>
+                    <%= Forums.Topic %>
                 </th>
                 <th>
-                    <%= Resources.Forums.Author %>
+                    <%= Forums.Author %>
                 </th>
                 <th width="50">
-                    <%= Resources.Forums.Posts %>
+                    <%= Forums.Posts %>
                 </th>
                 <th>
-                    <%= Resources.Forums.LastPost %>
+                    <%= Forums.LastPost %>
                 </th>
             </tr>
         </thead>
@@ -47,7 +53,7 @@
                         <br />
                         <% if (!topic.ReadByCurrentUser)
                            {
-                               this.Writer.Write(Html.ActionLink(Resources.Forums.NewPost, "FirstNewPostInTopic", new { id = topic.Id }, new { title = Resources.Forums.GotoFirstNewPost }));
+                               this.Writer.Write(Html.ActionLink(Forums.NewPost, "FirstNewPostInTopic", new { id = topic.Id }, new { title = Forums.GotoFirstNewPost }));
                                this.Writer.Write("&nbsp;");
                            }%>
                         <%= Html.NumbersOnlyPager(new PagingParameters { PageSize = this.Model.PostsPerTopicPage, TotalCount = topic.PostCount}, 
@@ -55,7 +61,7 @@
                         <% if (topic.ExcludedUsers.Count() > 0)
                            {
                                this.Writer.Write("&nbsp;");
-                               this.Writer.Write(Resources.Forums.InvisibleFor + string.Join(", ", topic.ExcludedUsers.Select(u => u.UserName)));
+                               this.Writer.Write(Forums.InvisibleFor + string.Join(", ", topic.ExcludedUsers.Select(u => u.UserName)));
                            }%>
                     </span>
                 </td>
@@ -86,25 +92,25 @@
                     <img src="/Content/Forum/folder_new.gif" alt="New Posts" />
                 </td>
                 <td class="caption">
-                    <%= Resources.Forums.NewPosts %>
+                    <%= Forums.NewPosts %>
                 </td>
                 <td>
                     <img src="/Content/Forum/folder.gif" alt="No New Posts" />
                 </td>
                 <td class="caption">
-                    <%= Resources.Forums.NoNewPosts %>
+                    <%= Forums.NoNewPosts %>
                 </td>
                 <td>
                     <img src="/Content/Forum/folder_sticky_new.gif" alt="New Posts" />
                 </td>
                 <td class="caption">
-                    <%= Resources.Forums.StickyNewPosts %>
+                    <%= Forums.StickyNewPosts %>
                 </td>
                 <td>
                     <img src="/Content/Forum/folder_sticky.gif" alt="No New Posts" />
                 </td>
                 <td class="caption">
-                    <%= Resources.Forums.StickyNoNewPosts %>
+                    <%= Forums.StickyNoNewPosts %>
                 </td>
             </tr>
         </table>

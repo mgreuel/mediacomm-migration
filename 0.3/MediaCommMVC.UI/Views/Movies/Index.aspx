@@ -1,17 +1,19 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Core.Model.Movies.Movie>>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MediaCommMVC.Web.Core.Model.Movies.Movie>>" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
 
-<%@ Import Namespace="MediaCommMVC.UI.Infrastructure" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Infrastructure" %>
+
+<%@ Import Namespace="Resources" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
     <strong>
-        <%= Html.ActionLink(Resources.Navigation.Movies, "Index" ) %>
+        <%= Html.ActionLink(Navigation.Movies, "Index" ) %>
     </strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="addMovie">
         <a href="javascript:ShowAddPopup();" id="showAddPopup" class="button">
-            <%= Resources.Movies.Add %>
+            <%= Movies.Add %>
         </a>
     </div>
     <table id="movieTable" class="defaultTable">
@@ -20,18 +22,18 @@
                 <th>
                 </th>
                 <th>
-                    <%= Resources.Movies.Title %>
+                    <%= Movies.Title %>
                 </th>
                 <th>
-                    <%= Resources.Movies.Language %>
+                    <%= Movies.Language %>
                 </th>
                 <th>
-                    <%= Resources.Movies.Quality %>
+                    <%= Movies.Quality %>
                 </th>
                 <th>
                 </th>
                 <th>
-                    <%= Resources.Movies.Owner %>
+                    <%= Movies.Owner %>
                 </th>
                 <th>
                 </th>
@@ -57,7 +59,7 @@
                     <% if (!string.IsNullOrEmpty(movie.InfoLink))
                        {%>
                     <a target="_blank" href='<%=movie.InfoLink%>'>
-                        <%=Resources.Movies.Info%></a>
+                        <%=Movies.Info%></a>
                     <%
                         }%>
                 </td>
@@ -68,7 +70,7 @@
                     <% if (HttpContext.Current.User.IsInRole("Administrators") || Page.User.Identity.Name.Equals(movie.Owner.UserName, StringComparison.OrdinalIgnoreCase))
                        { %>
                     <a id='<%= string.Concat("del_", movie.Id) %>'>
-                        <%= Resources.General.Delete %></a>
+                        <%= General.Delete %></a>
                     <% } 
                     %>
                 </td>
@@ -85,7 +87,7 @@
             <table style="margin-top: 6px;">
                 <tr>
                     <td class="leftTd">
-                        <%= Resources.Movies.Title %>:
+                        <%= Movies.Title %>:
                     </td>
                     <td class="rightTd">
                         <%= Html.TextBox("Movie.Title",null, new { @class = "required", minlength = "3"}) %>
@@ -93,7 +95,7 @@
                 </tr>
                 <tr>
                     <td class="leftTd">
-                        <%= Resources.Movies.InfoLink %>:
+                        <%= Movies.InfoLink %>:
                     </td>
                     <td class="rightTd">
                         <%= Html.TextBox("Movie.InfoLink",null, new { @class = "url" })%>
@@ -101,7 +103,7 @@
                 </tr>
                 <tr>
                     <td class="leftTd">
-                        <%= Resources.Movies.Language %>:
+                        <%= Movies.Language %>:
                     </td>
                     <td class="rightTd">
                         <%= Html.DropDownList("languageID", ViewData["movieLanguages"] as SelectList) %>
@@ -109,7 +111,7 @@
                 </tr>
                 <tr>
                     <td class="leftTd">
-                        <%= Resources.Movies.Quality %>:
+                        <%= Movies.Quality %>:
                     </td>
                     <td class="rightTd">
                         <%= Html.DropDownList("qualityID", ViewData["movieQualities"] as SelectList) %>
@@ -117,7 +119,7 @@
                 </tr>
             </table>
             <div style="text-align: center; margin-top: 4px;">
-                <input type="submit" value='<%= Resources.General.Save %>' id="sumitMovie" />
+                <input type="submit" value='<%= General.Save %>' id="sumitMovie" />
             </div>
             <% } %>
         </div>

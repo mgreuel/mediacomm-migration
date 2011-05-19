@@ -1,12 +1,15 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.UI.ViewModel.TopicPage>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.ViewModel.TopicPage>" %>
 
-<%@ Import Namespace="MediaCommMVC.Core.Model.Forums" %>
-<%@ Import Namespace="MediaCommMVC.UI.Infrastructure" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Model.Forums" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Infrastructure" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Model.Forums" %>
+<%@ Import Namespace="Resources" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Helpers" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
     <script src="/Content/tiny_mce/tiny_mce.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="BreadcrumbContent" runat="server">
-    <%= Html.ActionLink( Resources.Navigation.Forums, "Index" ) %>
+    <%= Html.ActionLink( Navigation.Forums, "Index" ) %>
     »
     <%= Html.ActionLink(Model.Topic.Forum.Title, "Forum", new { name = Url.ToFriendlyUrl(Model.Topic.Forum.Title), id = Model.Topic.Forum.Id })   %>
     » <strong>
@@ -23,7 +26,7 @@
                 <tr>
                     <th colspan="3">
                         <strong>
-                            <%=Resources.Forums.PollResults%>: </strong>
+                            <%=Forums.PollResults%>: </strong>
                         <%=this.Model.Topic.Poll.Question%>
                     </th>
                 </tr>
@@ -69,7 +72,7 @@
                 <tr>
                     <th>
                         <strong>
-                            <%=Resources.Forums.Poll%>: </strong>
+                            <%=Forums.Poll%>: </strong>
                         <%:this.Model.Topic.Poll.Question%>
                     </th>
                 </tr>
@@ -102,7 +105,7 @@
                 %>
             </tbody>
         </table>
-        <input type="submit" class="button" value="<%=Resources.Forums.SubmitVote%>" />
+        <input type="submit" class="button" value="<%=Forums.SubmitVote%>" />
         <%
                }
            }
@@ -122,10 +125,10 @@
         <thead>
             <tr>
                 <th width="150">
-                    <%=Resources.Forums.Author%>
+                    <%=Forums.Author%>
                 </th>
                 <th>
-                    <%=Resources.Forums.Message%>
+                    <%=Forums.Message%>
                 </th>
             </tr>
         </thead>
@@ -150,13 +153,13 @@
                     if (post.Author.UserName.Equals(this.User.Identity.Name, StringComparison.OrdinalIgnoreCase) ||
                         HttpContext.Current.User.IsInRole("Administrators"))
                     {
-                        Writer.Write(Html.ActionLink(Resources.Forums.Edit, "EditPost", new { id = post.Id }));
+                        Writer.Write(Html.ActionLink(Forums.Edit, "EditPost", new { id = post.Id }));
 
                         using (Html.BeginForm("DeletePost", "Forums", new { id = post.Id }))
                         {
                         %>
                         <a id='<%= "submitDelete_" + post.Id %>' class="deletePost" href="#">
-                            <%=Resources.Forums.Delete%></a>
+                            <%=Forums.Delete%></a>
                         <%
                         }
                     }%>
@@ -181,10 +184,10 @@
         {%>
     <div id="reply">
         <h2>
-            <%=Resources.Forums.Reply%>
+            <%=Forums.Reply%>
         </h2>
         <%=Html.TextArea("post.Text", null, new { @class = "required", minlength = "3" })%>
-        <input id="submitReply" type="submit" value='<%=Resources.Forums.Reply%>' />
+        <input id="submitReply" type="submit" value='<%=Forums.Reply%>' />
     </div>
     <%
         }

@@ -1,10 +1,11 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Users.MediaCommUser>" %>
-<%@ Import Namespace="MediaCommMVC.UI.Infrastructure" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.Model.Users.MediaCommUser>" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.Infrastructure" %>
+<%@ Import Namespace="Resources" %>
 
 <asp:Content ID="changePasswordTitle" ContentPlaceHolderID="BreadCrumbContent" runat="server">
-    <%= Html.ActionLink(Resources.Navigation.Users, "Index") %>
+    <%= Html.ActionLink(Navigation.Users, "Index") %>
     » <strong>
-        <%= Html.ActionLink(Model.UserName + Resources.Users.Profile, "Profile", new { username = Model.UserName })%>
+        <%= Html.ActionLink(Model.UserName + Users.Profile, "Profile", new { username = Model.UserName })%>
     </strong>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -14,7 +15,7 @@
         <tbody>
             <tr>
                 <td style="font-weight: bold">
-                    <%= Resources.Users.UserName %>:
+                    <%= Users.UserName %>:
                 </td>
                 <td style="font-weight: bold">
                     <%= Html.Encode(Model.UserName) %>
@@ -22,7 +23,7 @@
             </tr>
             <tr>
                 <td>
-                    <%= Resources.Users.FirstName %>:
+                    <%= Users.FirstName %>:
                 </td>
                 <td>
                     <%= Html.Encode(Model.FirstName) %>
@@ -30,7 +31,7 @@
             </tr>
             <tr>
                 <td>
-                    <%= Resources.Users.LastName %>:
+                    <%= Users.LastName %>:
                 </td>
                 <td>
                     <%= Html.Encode(Model.LastName) %>
@@ -38,7 +39,7 @@
             </tr>
             <tr>
                 <td>
-                    <%= Resources.Users.EMailAddress %>:
+                    <%= Users.EMailAddress %>:
                 </td>
                 <td>
                     <%= Html.Encode(Model.EMailAddress) %>
@@ -46,7 +47,7 @@
             </tr>
             <tr>
                 <td>
-                    <%= Resources.Users.DateOfBirth %>:
+                    <%= Users.DateOfBirth %>:
                 </td>
                 <td>
                     <%= Html.Encode(String.Format("{0:d}", Model.DateOfBirth)) %>
@@ -54,7 +55,7 @@
             </tr>
             <tr>
                 <td>
-                    <%= Resources.Users.ICQUin %>:
+                    <%= Users.ICQUin %>:
                 </td>
                 <td>
                     <%= Html.Encode(Model.IcqUin) %>
@@ -62,7 +63,7 @@
             </tr>
             <tr>
                 <td>
-                    <%= Resources.Users.SkypeNick %>:
+                    <%= Users.SkypeNick %>:
                 </td>
                 <td>
                     <%= Html.Encode(Model.SkypeNick) %>
@@ -70,7 +71,7 @@
             </tr>
             <tr>
                 <td>
-                    <%= Resources.Users.PhoneNumber %>:
+                    <%= Users.PhoneNumber %>:
                 </td>
                 <td>
                     <%= Html.Encode(Model.PhoneNumber) %>
@@ -78,7 +79,7 @@
             </tr>
             <tr>
                 <td>
-                    <%= Resources.Users.MobilePhoneNumber %>:
+                    <%= Users.MobilePhoneNumber %>:
                 </td>
                 <td>
                     <%= Html.Encode(Model.MobilePhoneNumber) %>
@@ -86,7 +87,7 @@
             </tr>
             <tr>
                 <td>
-                    <%= Resources.Users.Street %>:
+                    <%= Users.Street %>:
                 </td>
                 <td>
                     <%= Html.Encode(Model.Street) %>
@@ -94,7 +95,7 @@
             </tr>
             <tr>
                 <td>
-                    <%= Resources.Users.ZipCode %>:
+                    <%= Users.ZipCode %>:
                 </td>
                 <td>
                     <%= Html.Encode(Model.ZipCode) %>
@@ -102,7 +103,7 @@
             </tr>
             <tr>
                 <td>
-                    <%= Resources.Users.City %>:
+                    <%= Users.City %>:
                 </td>
                 <td>
                     <%= Html.Encode(Model.City) %>
@@ -112,7 +113,7 @@
                {%>
             <tr>
                 <td>
-                    <%= Resources.Users.LastVisit %>:
+                    <%= Users.LastVisit %>:
                 </td>
                 <td>
                     <%= Html.Encode(String.Format("{0:g}", Model.LastVisit)) %>
@@ -123,7 +124,7 @@
         </tbody>
     </table>
     <p class="text">
-        <%=Html.ActionLink(Resources.Users.BackToUserList, "Index") %>
+        <%=Html.ActionLink(Users.BackToUserList, "Index") %>
     </p>
     <script type="text/javascript">
 

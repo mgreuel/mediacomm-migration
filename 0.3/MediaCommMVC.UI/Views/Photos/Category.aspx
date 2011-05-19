@@ -1,10 +1,14 @@
-<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Core.Model.Photos.PhotoCategory>"MasterPageFile="~/Views/Shared/Site.Master" %>
+<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.Model.Photos.PhotoCategory>"MasterPageFile="~/Views/Shared/Site.Master" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
+
+<%@ Import Namespace="Resources" %>
+
+<%@ Import Namespace="MediaCommMVC.Web.Core.Helpers" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="BreadCrumbContent" runat="server">
-    <%= Resources.Navigation.Photos %>
+    <%= Navigation.Photos %>
     » <strong>
         <%= Html.ActionLink(Model.Name, "Category", new { id = Model.Id, name = Url.ToFriendlyUrl(Model.Name) } ) %>
     </strong>
@@ -24,7 +28,7 @@
                     <span class="sub left">
                         <%= album.LastPicturesAdded.ToShortDateString() %>
                     </span><span class="sub right">
-                        <%= string.Format("{0} {1}", album.PhotoCount, Resources.Photos.PhotosTitle)  %></span></div>
+                        <%= string.Format("{0} {1}", album.PhotoCount, Photos.PhotosTitle)  %></span></div>
             </a></li>
             <% } %>
         </ul>
