@@ -20,12 +20,14 @@
         public static void Initialize()
         {
             Mapper.CreateMap<Forum, ForumViewModel>().ForMember(
-                v => v.LastPostTime, 
+                v => v.LastPostTime,
                 opt => opt.MapFrom(f => string.IsNullOrEmpty(f.LastPostAuthor) ? string.Empty : string.Format("{0:g}", f.LastPostTime)));
             Mapper.CreateMap<Forum[], ForumViewModel[]>();
 
             Mapper.CreateMap<Topic[], TopicViewModel[]>();
             Mapper.CreateMap<Topic, TopicViewModel>();
+
+            Mapper.CreateMap<Post, PostViewModel>().ForMember(p => p.CurrentUserIsAllowedToEdit, opt => opt.Ignore());
 
             //Mapper.CreateMap<TopicViewModel, Topic>().ForMember(t => t.Forum, opt => opt.Ignore()).ForMember(t => t.Created, opt => opt.Ignore()).
             //    ForMember(t => t.Poll, opt => opt.UseValue(null)).ForMember(t => t.ExcludedUsers, opt => opt.Ignore()).ForMember(t => t.Id, opt => opt.Ignore()).ForMember(t => t.LastPostTime, opt => opt.);

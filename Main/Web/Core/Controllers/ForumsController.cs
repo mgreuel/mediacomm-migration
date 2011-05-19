@@ -72,34 +72,6 @@
         [NHibernateActionFilter]
         public ActionResult Forum(int id, int page)
         {
-            // ForumPageViewModel forumPageViewModel = new ForumPageViewModel
-            // {
-            // ForumTitle = "SomeForum",
-            // ForumId = id.ToString(),
-            // PagingParameters = new PagingParameters { CurrentPage = 1, PageSize = 10, TotalCount = 34 },
-            // Topics =
-            // new List<TopicViewModel> {
-            // new TopicViewModel
-            // {
-            // CreatedBy = "Autor1", 
-            // Id = "1", 
-            // LastPostAuthor = "Autor2", 
-            // LastPostTime = DateTime.Now.ToString(), 
-            // ExcludedUsers = "Schlaefisch, test",
-            // PostCount = 60, 
-            // Title = "Title 1"
-            // }, 
-            // new TopicViewModel
-            // {
-            // CreatedBy = "Autor3", 
-            // Id = "2", 
-            // LastPostAuthor = "Autor4", 
-            // LastPostTime = DateTime.Now.ToString(), 
-            // PostCount = 20, 
-            // Title = "Title abc"
-            // }
-            // }
-            // };
             ForumPageViewModel forumPageViewModel = this.forumsService.GetForumPage(id, page);
 
             return this.View(forumPageViewModel);
@@ -117,30 +89,9 @@
 
         [HttpGet]
         [NHibernateActionFilter]
-        public ActionResult Topic(int id)
+        public ActionResult Topic(int id, int page)
         {
-            TopicPageViewModel topicPageViewModel = new TopicPageViewModel
-                {
-                    Posts =
-                        new List<PostViewModel> {
-                                new PostViewModel
-                                    {
-                                        AuthorUserName = "User1", 
-                                        CreatedDate = "10.1", 
-                                        CurrentUserIsAllowedToEdit = true, 
-                                        Id = "1", 
-                                        Text = "FirstPost"
-                                    }, 
-                                new PostViewModel
-                                    {
-                                        AuthorUserName = "User3", 
-                                        CreatedDate = "5.2", 
-                                        CurrentUserIsAllowedToEdit = false, 
-                                        Id = "2", 
-                                        Text = "SecondPost"
-                                    }
-                            }
-                };
+            TopicPageViewModel topicPageViewModel = this.forumsService.GetTopicPage(id, page);
 
             return this.View(topicPageViewModel);
         }
