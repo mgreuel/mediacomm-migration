@@ -16,5 +16,7 @@
         #endregion
 
         TopicViewModel AddNewTopic(CreateTopicViewModel createTopic, int forumId);
+
+        TopicPageViewModel GetTopicPage(int id, int page);
     }
 }

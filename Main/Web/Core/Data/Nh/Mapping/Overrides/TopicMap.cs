@@ -25,7 +25,7 @@
 
             // mapping.References(t => t.Poll).Cascade.All();
             mapping.IgnoreProperty(t => t.HasUnreadPosts);
-            mapping.HasManyToMany(t => t.ExcludedUsers).Table("ForumTopicsExcludedUsers").Cascade.None();
+            mapping.HasManyToMany(t => t.ExcludedUsers).Not.LazyLoad().Table("ForumTopicsExcludedUsers").Cascade.None();
         }
 
         #endregion
