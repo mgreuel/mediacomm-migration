@@ -75,26 +75,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FluentNHibernate.1.2.0.712\lib\FluentNHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="HibernatingRhinos.Profiler.Appender.v4.0">
+      <HintPath>..\packages\NHibernateProfiler.1.0.0.865\lib\Net40\HibernatingRhinos.Profiler.Appender.v4.0.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\Iesi.Collections.3.1.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity">
-      <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration">
-      <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.Unity.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Interception">
-      <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.Unity.Interception.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Interception.Configuration">
-      <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NHibernate, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
@@ -104,6 +92,9 @@
     <Reference Include="NHibernate.ByteCode.Castle, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NHibernate.Castle.3.1.0.4000\lib\Net35\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.2\lib\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -192,6 +183,7 @@
       <DependentUpon>Videos.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\Combres.cs" />
+    <Compile Include="App_Start\NHibernateProfiler.cs" />
     <Compile Include="Core\Common\Config\FileConfigAccessor.cs" />
     <Compile Include="Core\Common\Config\IConfigAccessor.cs" />
     <Compile Include="Core\Common\Exceptions\CreateUserException.cs" />
@@ -248,11 +240,11 @@
     <Compile Include="Core\Infrastructure\Bootstrapper.cs" />
     <Compile Include="Core\Infrastructure\ErrorHandlingActionInvoker.cs" />
     <Compile Include="Core\Infrastructure\HandleErrorWithELMAHAttribute.cs" />
-    <Compile Include="Core\Infrastructure\HttpContextLifeTimeManager.cs" />
+    <Compile Include="Core\Infrastructure\HttpContextSessionContainer.cs" />
     <Compile Include="Core\Infrastructure\ImageResult.cs" />
-    <Compile Include="Core\Infrastructure\IUnityContainerAccessor.cs" />
+    <Compile Include="Core\Infrastructure\ISessionContainer.cs" />
     <Compile Include="Core\Infrastructure\MediaCommIdentity.cs" />
-    <Compile Include="Core\Infrastructure\UnityControllerFactory.cs" />
+    <Compile Include="Core\Infrastructure\NHibernateActionFilter.cs" />
     <Compile Include="Core\Infrastructure\WebSessionManager.cs" />
     <Compile Include="Core\Model\Forums\Forum.cs" />
     <Compile Include="Core\Model\Forums\Poll.cs" />
@@ -777,20 +769,6 @@
       <LastGenOutput>Users.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MediaCommMVC.Common\MediaCommMVC.Common.csproj">
-      <Project>{54FC6C42-676E-41C4-B1D9-7CA74F71CD7C}</Project>
-      <Name>MediaCommMVC.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MediaCommMVC.Core\MediaCommMVC.Core.csproj">
-      <Project>{1A7B7F24-5E1A-4C17-A701-744BCF4E40E5}</Project>
-      <Name>MediaCommMVC.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MediaCommMVC.Data\MediaCommMVC.Data.csproj">
-      <Project>{6060137F-843B-412E-95FE-B43A1421B813}</Project>
-      <Name>MediaCommMVC.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Home.resx">

@@ -11,23 +11,16 @@ using MediaCommMVC.Web.Core.Model.Forums;
 
 namespace MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping
 {
-    /// <summary>A Generator for the fluentNHibernate auto map.</summary>
     public class AutoMapGenerator : IAutoMapGenerator
     {
         #region Constants and Fields
-
-        /// <summary>The logger.</summary>
-        private readonly ILogger logger;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="AutoMapGenerator"/> class.</summary>
-        /// <param name="logger">The logger.</param>
-        public AutoMapGenerator(ILogger logger)
+        public AutoMapGenerator()
         {
-            this.logger = logger;    
         }
 
         #endregion
@@ -36,19 +29,14 @@ namespace MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping
 
         #region IAutoMapGenerator
 
-        /// <summary>Generates the FluentNHibernate automap.</summary>
-        /// <returns>The auto persistence model.</returns>
         public AutoPersistenceModel Generate()
         {
             const string NamespaceToAdd = "MediaCommMVC.Web.Core.Model";
 
-            this.logger.Debug("Generating fluent NHibernate automap for the namespace '{0}'", NamespaceToAdd);
-
-            // The Forum type can be replaced by any other type in the core assembly
-            var autoPersistenceModel = AutoMap.AssemblyOf<Forum>()
-                .Where(t => t.Namespace.StartsWith(NamespaceToAdd, StringComparison.Ordinal))
-                .UseOverridesFromAssemblyOf<AutoMapGenerator>()
-                .Conventions.AddFromAssemblyOf<AutoMapGenerator>();
+            AutoPersistenceModel autoPersistenceModel =
+                AutoMap.AssemblyOf<AutoMapGenerator>().Where(
+                    t => t.Namespace != null && t.Namespace.StartsWith(NamespaceToAdd, StringComparison.Ordinal)).UseOverridesFromAssemblyOf
+                    <AutoMapGenerator>().Conventions.AddFromAssemblyOf<AutoMapGenerator>();
             
             return autoPersistenceModel;
         }
