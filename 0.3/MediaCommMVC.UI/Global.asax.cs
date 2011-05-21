@@ -45,7 +45,7 @@ namespace MediaCommMVC.Web
 
             try
             {
-                //new Bootstrapper(container, this.logger).Run();
+                new Bootstrapper().Run();
             }
             catch (HttpUnhandledException unhandledException)
             {

@@ -17,13 +17,15 @@ using Enumerable = System.Linq.Enumerable;
 
 namespace MediaCommMVC.Web.Core.Data.Repositories
 {
+    using MediaCommMVC.Web.Core.Infrastructure;
+
     public class VideoRepository : RepositoryBase, IVideoRepository
     {
         private const string videoRootDirKey = "VideoRootDir";
 
         private const string IncomingvideosFolderName = "incoming";
 
-        public VideoRepository(ISessionManager sessionManager, IConfigAccessor configAccessor, ILogger logger)
+        public VideoRepository(ISessionContainer sessionManager, IConfigAccessor configAccessor, ILogger logger)
             : base(sessionManager, configAccessor, logger)
         {
         }
@@ -74,14 +76,14 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         public void AddCategory(VideoCategory videoCategory)
         {
-            this.InvokeTransaction(s => s.Save(videoCategory));
+            this.Session.Save(videoCategory);
         }
 
         public void AddVideo(Video video)
         {
             this.MoveVideoFiles(video);
 
-            this.InvokeTransaction(s => s.Save(video));
+            this.Session.Save(video);
         }
 
         public Image GetThumbnailImage(int videoId)

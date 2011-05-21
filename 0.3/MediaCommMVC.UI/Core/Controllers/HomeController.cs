@@ -29,10 +29,6 @@ namespace MediaCommMVC.Web.Core.Controllers
         /// <summary>The number of posts displayed per page.</summary>
         private const int PostsPerTopicPage = 15;
 
-        /// <summary>Initializes a new instance of the <see cref="HomeController"/> class.</summary>
-        /// <param name="forumRepository">The forum repository.</param>
-        /// <param name="photoRepository">The photo repository.</param>
-        /// <param name="userRepository">The user repository.</param>
         public HomeController(IForumRepository forumRepository, IPhotoRepository photoRepository, IUserRepository userRepository)
         {
             this.forumRepository = forumRepository;
