@@ -18,6 +18,8 @@ using Enumerable = System.Linq.Enumerable;
 
 namespace MediaCommMVC.Web.Core.Data.Repositories
 {
+    using MediaCommMVC.Web.Core.Infrastructure;
+
     /// <summary>Implements the IMovieRepository using NHibernate.</summary>
     public class MovieRepository : RepositoryBase, IMovieRepository
     {
@@ -27,7 +29,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         /// <param name="sessionManager">The NHibernate session manager.</param>
         /// <param name="configAccessor">The config Accessor.</param>
         /// <param name="logger">The logger.</param>
-        public MovieRepository(ISessionManager sessionManager, IConfigAccessor configAccessor, ILogger logger)
+        public MovieRepository(ISessionContainer sessionManager, IConfigAccessor configAccessor, ILogger logger)
             : base(sessionManager, configAccessor, logger)
         {
         }
@@ -42,83 +44,52 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         /// <param name="movieId">The movie id.</param>
         public void DeleteMovieWithId(int movieId)
         {
-            this.Logger.Debug("Deleting movie with id: " + movieId);
-         
-            this.InvokeTransaction(delegate(ISession session)
-                {
-                    Movie movie = session.Get<Movie>(movieId);
-                    
-                    this.Logger.Debug("Deleting movie: " + movie);
-                    session.Delete(movie);
-                });
+            Movie movie = this.Session.Get<Movie>(movieId);
+
+            this.Logger.Debug("Deleting movie: " + movie);
+            this.Session.Delete(movie);
+
 
             this.Logger.Debug("Finished deleting movie");
         }
 
-        /// <summary>Gets the movie languages.</summary>
-        /// <returns>The movie languages.</returns>
         public IEnumerable<MovieLanguage> GetAllLanguages()
         {
             this.Logger.Debug("Getting all movie languages");
 
-            IEnumerable<MovieLanguage> languages = Enumerable.ToList<MovieLanguage>(this.Session.Query<MovieLanguage>());
+            IEnumerable<MovieLanguage> languages = this.Session.Query<MovieLanguage>().ToList();
 
             this.Logger.Debug("Got {0} movie languages", languages.Count());
 
             return languages;
         }
 
-        /// <summary>Gets all movies from the persistence store.</summary>
-        /// <returns>The movies.</returns>
         public IEnumerable<Movie> GetAllMovies()
         {
             this.Logger.Debug("Getting all movies");
 
-            IEnumerable<Movie> movies = Enumerable.ToList<Movie>(this.Session.Query<Movie>());
+            IEnumerable<Movie> movies = this.Session.Query<Movie>().ToList();
 
             this.Logger.Debug("Got {0} movies", movies.Count());
 
             return movies;
         }
 
-        /// <summary>Gets the movie qualities.</summary>
-        /// <returns>The movie qualities.</returns>
         public IEnumerable<MovieQuality> GetAllQualities()
         {
-            this.Logger.Debug("Getting all movie qualities");
-
-            IEnumerable<MovieQuality> qualities = Enumerable.ToList<MovieQuality>(this.Session.Query<MovieQuality>());
-
-            this.Logger.Debug("Got {0} movie qualities", qualities.Count());
-
+            IEnumerable<MovieQuality> qualities = this.Session.Query<MovieQuality>().ToList();
             return qualities;
         }
 
-        /// <summary>Gets the language by id.</summary>
-        /// <param name="id">The language id.</param>
-        /// <returns>The movie language.</returns>
         public MovieLanguage GetLanguageById(int id)
         {
-            this.Logger.Debug("Getting movie language with the id: " + id);
-
             MovieLanguage language = this.Session.Get<MovieLanguage>(id);
-
-            this.Logger.Debug("Got the movie language: " + language);
-
             return language;
         }
 
-        /// <summary>Gets the quality by id.</summary>
-        /// <param name="id">The quality id.</param>
-        /// <returns>The movie quality.</returns>
         public MovieQuality GetQualityById(int id)
         {
-            this.Logger.Debug("Getting movie quality with the id: " + id);
-
             MovieQuality quality = this.Session.Get<MovieQuality>(id);
-
-            this.Logger.Debug("Got the movie quality: " + quality);
-
             return quality;
         }
 
@@ -126,11 +97,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         /// <param name="movie">The movie.</param>
         public void Save(Movie movie)
         {
-            this.Logger.Debug("Saving movie: " + movie);
-
-            this.InvokeTransaction(s => s.SaveOrUpdate(movie));
-
-            this.Logger.Debug("Finished saving movie");
+            this.Session.SaveOrUpdate(movie);
         }
 
         #endregion

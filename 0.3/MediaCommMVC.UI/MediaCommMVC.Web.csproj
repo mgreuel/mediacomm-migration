@@ -140,6 +140,8 @@
     <Reference Include="System.Web.Helpers" />
     <Reference Include="System.Web.WebPages" />
     <Reference Include="System.Web.Helpers" />
+    <Reference Include="System.Web.WebPages" />
+    <Reference Include="System.Web.Helpers" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_GlobalResources\Admin.Designer.cs">
@@ -215,7 +217,6 @@
     <Compile Include="Core\Data\NHInfrastructure\Config\IConfigurationGenerator.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Conventions\EnumConvention.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Conventions\FkConvention.cs" />
-    <Compile Include="Core\Data\NHInfrastructure\ISessionManager.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Mapping\AutoMapGenerator.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Mapping\ForumMapper.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Mapping\IAutoMapGenerator.cs" />
@@ -247,10 +248,11 @@
     <Compile Include="Core\Infrastructure\HandleErrorWithELMAHAttribute.cs" />
     <Compile Include="Core\Infrastructure\HttpContextSessionContainer.cs" />
     <Compile Include="Core\Infrastructure\ImageResult.cs" />
+    <Compile Include="Core\Infrastructure\StructureMapSetup.cs" />
     <Compile Include="Core\Infrastructure\ISessionContainer.cs" />
     <Compile Include="Core\Infrastructure\MediaCommIdentity.cs" />
     <Compile Include="Core\Infrastructure\NHibernateActionFilter.cs" />
-    <Compile Include="Core\Infrastructure\WebSessionManager.cs" />
+    <Compile Include="Core\Infrastructure\SmDependencyResolver.cs" />
     <Compile Include="Core\Model\Forums\Forum.cs" />
     <Compile Include="Core\Model\Forums\Poll.cs" />
     <Compile Include="Core\Model\Forums\PollAnswer.cs" />

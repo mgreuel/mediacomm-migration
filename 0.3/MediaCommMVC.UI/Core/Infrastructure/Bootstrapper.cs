@@ -21,6 +21,8 @@ using WebExtensions = Combres.WebExtensions;
 
 namespace MediaCommMVC.Web.Core.Infrastructure
 {
+    using StructureMap;
+
     /// <summary>Boostrapper initializing the web application.</summary>
     public class Bootstrapper
     {
@@ -46,9 +48,10 @@ namespace MediaCommMVC.Web.Core.Infrastructure
         /// <summary>Runs the bootstrapper.</summary>
         public void Run()
         {
-            this.ConfigureContainer();
+            IContainer container = StructureMapSetup.Initialize();
+            DependencyResolver.SetResolver(new SmDependencyResolver(container));
+
             RegisterRoutes();
-            RegisterControllerFactory();
             ConfigureLog4Net();
         }
 
@@ -60,11 +63,6 @@ namespace MediaCommMVC.Web.Core.Infrastructure
         private static void ConfigureLog4Net()
         {
             XmlConfigurator.Configure();
-        }
-
-        /// <summary>Registers the controller factory.</summary>
-        private static void RegisterControllerFactory()
-        {
         }
 
         /// <summary>Registers the routes.</summary>

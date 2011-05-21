@@ -24,6 +24,8 @@ using Queryable = System.Linq.Queryable;
 
 namespace MediaCommMVC.Web.Core.Data.Repositories
 {
+    using MediaCommMVC.Web.Core.Infrastructure;
+
     /// <summary>Implements the IPhotoRepository using NHibernate.</summary>
     public class PhotoRepository : RepositoryBase, IPhotoRepository
     {
@@ -44,7 +46,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         /// <param name="configAccessor">The config Accessor.</param>
         /// <param name="logger">The logger.</param>
         /// <param name="imageGenerator">The image generator.</param>
-        public PhotoRepository(ISessionManager sessionManager, IConfigAccessor configAccessor, ILogger logger, IImageGenerator imageGenerator)
+        public PhotoRepository(ISessionContainer sessionManager, IConfigAccessor configAccessor, ILogger logger, IImageGenerator imageGenerator)
             : base(sessionManager, configAccessor, logger)
         {
             this.imageGenerator = imageGenerator;
@@ -60,9 +62,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         /// <param name="category">The category.</param>
         public void AddCategory(PhotoCategory category)
         {
-            this.Logger.Debug("Adding photo category: " + category);
-
-            this.InvokeTransaction(s => s.SaveOrUpdate(category));
+            this.Session.SaveOrUpdate(category);
         }
 
         /// <summary>Adds the photos in the specified folder to the DB.</summary>
@@ -70,8 +70,6 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         /// <param name="uploader">The uploader.</param>
         public void AddPhotos(PhotoAlbum album, MediaCommUser uploader)
         {
-            this.Logger.Debug("Extracting and adding photos.Album: '{0}, Uploader: '{1}'", album, uploader);
-
             string targetPath = this.GetTargetPath(album);
             string unprocessedPath = Path.Combine(targetPath, UnprocessedPhotosFolder);
 
@@ -86,116 +84,71 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         /// <returns>The 4 newest albums.</returns>
         public IEnumerable<PhotoAlbum> Get4NewestAlbums()
         {
-            List<PhotoAlbum> albums =
-                this.Session.Query<PhotoAlbum>().OrderByDescending(a => a.LastPicturesAdded).Take(4).ToList();
+            List<PhotoAlbum> albums = this.Session.Query<PhotoAlbum>().OrderByDescending(a => a.LastPicturesAdded).Take(4).ToList();
 
             return albums;
         }
 
-        /// <summary>Gets the album by id.</summary>
-        /// <param name="albumId">The album id.</param>
-        /// <returns>The album.</returns>
         public PhotoAlbum GetAlbumById(int albumId)
         {
-            this.Logger.Debug("Getting album with id '{0}'", albumId);
-
-            PhotoAlbum album = this.Session.Query<PhotoAlbum>().Single(a => a.Id == albumId);
-
-            this.Logger.Debug("Got album: " + album);
+            PhotoAlbum album = this.Session.Get<PhotoAlbum>(albumId);
 
             return album;
         }
 
-        /// <summary>Gets the albums with the specified category id.</summary>
-        /// <param name="catId">The category id.</param>
-        /// <param name="term">The term the results should start with.</param>
-        /// <returns>The albums.</returns>
         public IEnumerable<PhotoAlbum> GetAlbumsForCategoryIdStartingWith(int catId, string term)
         {
-            this.Logger.Debug("Getting albums for category id '{0}'", catId);
             IEnumerable<PhotoAlbum> albums =
                 this.Session.Query<PhotoAlbum>().Where(
                     a => a.PhotoCategory.Id == catId && a.Name.StartsWith(term)).ToList();
 
-            this.Logger.Debug("Got {0} Albums", albums.Count());
             return albums;
         }
 
-        /// <summary>Gets all categories.</summary>
-        /// <returns>All photo categories.</returns>
         public IEnumerable<PhotoCategory> GetAllCategories()
         {
-            this.Logger.Debug("Getting all photo catgories");
+            IEnumerable<PhotoCategory> categories = this.Session.Query<PhotoCategory>().ToList();
 
-            IEnumerable<PhotoCategory> categories = Enumerable.ToList<PhotoCategory>(this.Session.Query<PhotoCategory>());
-
-            this.Logger.Debug("Got {0} photo categories", categories.Count());
             return categories;
         }
 
-        /// <summary>Gets the category by id.</summary>
-        /// <param name="id">The category id.</param>
-        /// <returns>The photo category.</returns>
         public PhotoCategory GetCategoryById(int id)
         {
             PhotoCategory category = this.Session.Get<PhotoCategory>(id);
 
-            this.Logger.Debug("Got category {0} for category id '{1}'", category, id);
-
             return category;
         }
 
-        /// <summary>Gets the image path.</summary>
-        /// <param name="photoId">The photo id.</param>
-        /// <param name="size">The photo size.</param>
-        /// <returns>The path to the image file.</returns>
         public Image GetImage(int photoId, string size)
         {
-            this.Logger.Debug("Getting image with id '{0}' and size '{1}'", photoId, size);
             Photo photo = this.GetPhotoById(photoId);
 
             string fileName = photo.FileName.Insert(photo.FileName.LastIndexOf("."), size);
 
             string imagePath =
                 Path.Combine(
-                    this.ConfigAccessor.GetConfigValue("PhotoRootDir"), 
+                    this.ConfigAccessor.GetConfigValue("PhotoRootDir"),
                     Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.PhotoCategory.Name), Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.Name), fileName)));
 
-            this.Logger.Debug("Getting image from '{0}'", imagePath);
             Image image = Image.FromFile(imagePath);
 
             // Increase viewcount if the image was not loaded as thumbnail
             if (!size.Equals("small", StringComparison.OrdinalIgnoreCase))
             {
-                this.InvokeTransaction(
-                    s =>
-                    {
-                        photo.ViewCount++;
-                        s.Update(photo);
-                    });
+                photo.ViewCount++;
+                this.Session.Update(photo);
             }
 
             return image;
         }
 
-        /// <summary>Gets the photo by ID.</summary>
-        /// <param name="id">The photo id.</param>
-        /// <returns>The photo.</returns>
         public Photo GetPhotoById(int id)
         {
-            this.Logger.Debug("Getting photo with id '{0}'", id);
             Photo photo = this.Session.Get<Photo>(id);
 
             return photo;
         }
 
-        /// <summary>
-        /// Gets the absolut path to store the photos for this album in.
-        /// </summary>
-        /// <param name="album">The album.</param>
-        /// <returns>
-        /// The absolut path to store the photos for this album in.
-        /// </returns>
         public string GetStoragePathForAlbum(PhotoAlbum album)
         {
             string storagePathForAlbum = Path.Combine(this.GetTargetPath(album), UnprocessedPhotosFolder);
@@ -214,9 +167,6 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         #region Methods
 
-        /// <summary>Gets all files in the directory recursively.</summary>
-        /// <param name="directory">The dirrecory info.</param>
-        /// <returns>All files.</returns>
         private static IEnumerable<FileInfo> GetFilesRecursive(DirectoryInfo directory)
         {
             foreach (DirectoryInfo di in directory.GetDirectories())
@@ -233,10 +183,6 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             }
         }
 
-        /// <summary>Adds the pictures to DB.</summary>
-        /// <param name="filesToAdd">The files to add.</param>
-        /// <param name="album">The album.</param>
-        /// <param name="uploader">The uploader.</param>
         private void AddPicturesToDB(IEnumerable<FileInfo> filesToAdd, PhotoAlbum album, MediaCommUser uploader)
         {
             this.Logger.Debug("Adding {0} photos from the folder to the database. Album: '{1}', Uploader: '{2}'", filesToAdd.Count(), album, uploader);
@@ -245,59 +191,42 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
                 Queryable.SingleOrDefault<PhotoAlbum>(this.Session.Query<PhotoAlbum>(), a => a.Name.Equals(album.Name)) ?? album;
 
             photoAlbum.LastPicturesAdded = DateTime.Now;
+            
+            foreach (FileInfo file in filesToAdd)
+            {
+                Bitmap bmp = new Bitmap(file.FullName);
+                int height = bmp.Height;
+                int width = bmp.Width;
+                bmp.Dispose();
 
-            this.InvokeTransaction(delegate(ISession session)
-                {
-                    foreach (FileInfo file in filesToAdd)
+                Photo photo = new Photo
                     {
-                        Bitmap bmp = new Bitmap(file.FullName);
-                        int height = bmp.Height;
-                        int width = bmp.Width;
-                        bmp.Dispose();
+                        PhotoAlbum = photoAlbum,
+                        FileName = file.Name,
+                        FileSize = file.Length,
+                        Height = height,
+                        Uploader = uploader,
+                        Width = width
+                    };
 
-                        Photo photo = new Photo
-                            {
-                                PhotoAlbum = photoAlbum, 
-                                FileName = file.Name, 
-                                FileSize = file.Length, 
-                                Height = height, 
-                                Uploader = uploader, 
-                                Width = width
-                            };
-   
-                            this.Logger.Debug("Adding photo '{0}' to the database");
-                            session.Save(photo);
-                    }
-                });
-
-            this.Logger.Debug("Finished adding photos to the database.");
+                this.Session.Save(photo);
+            }
         }
 
-        /// <summary>Gets the path where the photos will be stored.</summary>
-        /// <param name="album">The album.</param>
-        /// <returns>The target path.</returns>
         private string GetTargetPath(PhotoAlbum album)
         {
-            this.Logger.Debug("Getting file system path for album: " + album);
-
             string targetPath = Path.Combine(
-                this.ConfigAccessor.GetConfigValue("PhotoRootDir"), 
+                this.ConfigAccessor.GetConfigValue("PhotoRootDir"),
                 Path.Combine(this.GetValidDirectoryName(album.PhotoCategory.Name), this.GetValidDirectoryName(album.Name)));
-
-            this.Logger.Debug("Photos will be stored in the directory '{0}'", targetPath);
 
             if (!Directory.Exists(targetPath))
             {
-                this.Logger.Debug("Creating directory '{0}'", targetPath);
                 Directory.CreateDirectory(targetPath);
             }
 
             return targetPath;
         }
 
-        /// <summary>Gets a valid directory and file path.</summary>
-        /// <param name="directoryName">Name of the directory.</param>
-        /// <returns>The valid path.</returns>
         private string GetValidDirectoryName(string directoryName)
         {
             this.Logger.Debug("Getting valid directory name for '{0}'", directoryName);

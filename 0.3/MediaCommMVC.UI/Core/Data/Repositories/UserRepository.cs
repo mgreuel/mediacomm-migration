@@ -19,6 +19,10 @@ using Queryable = System.Linq.Queryable;
 
 namespace MediaCommMVC.Web.Core.Data.Repositories
 {
+    using System.Linq;
+
+    using MediaCommMVC.Web.Core.Infrastructure;
+
     /// <summary>Implements the IUserRepository using nHibernate.</summary>
     public class UserRepository : RepositoryBase, IUserRepository
     {
@@ -28,7 +32,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         /// <param name="sessionManager">The NHibernate session manager.</param>
         /// <param name="configAccessor">The config Accessor.</param>
         /// <param name="logger">The logger.</param>
-        public UserRepository(ISessionManager sessionManager, IConfigAccessor configAccessor, ILogger logger)
+        public UserRepository(ISessionContainer sessionManager, IConfigAccessor configAccessor, ILogger logger)
             : base(sessionManager, configAccessor, logger)
         {
         }
@@ -39,27 +43,19 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         #region IUserRepository
 
-        /// <summary>Creates an admin user.</summary>
-        /// <param name="userName">Name of the user.</param>
-        /// <param name="password">The password.</param>
-        /// <param name="mailAddress">The mail address.</param>
         public void CreateAdmin(string userName, string password, string mailAddress)
         {
             MediaCommUser user = new MediaCommUser(userName, mailAddress, password) { IsAdmin = true };
-            this.InvokeTransaction(s => s.Save(user));
+            this.Session.Save(user);
         }
 
-        /// <summary>Creates a new user.</summary>
-        /// <param name="username">The username.</param>
-        /// <param name="password">The password.</param>
-        /// <param name="mailAddress">The mail address.</param>
         public void CreateUser(string username, string password, string mailAddress)
         {
             this.Logger.Debug("Creating user with username '{0}', password '{1}', mailAddress: '{2}'", username, password, mailAddress);
 
             try
             {
-                this.InvokeTransaction(s => s.Save(new MediaCommUser(username, mailAddress, password)));
+                this.Session.Save(new MediaCommUser(username, mailAddress, password));
             }
             catch (Exception ex)
             {
@@ -67,33 +63,23 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             }
         }
 
-        /// <summary>Gets all users.</summary>
-        /// <returns>The users.</returns>
         public IEnumerable<MediaCommUser> GetAllUsers()
         {
-            IEnumerable<MediaCommUser> users = Enumerable.ToList<MediaCommUser>(this.Session.Query<MediaCommUser>());
-
+            IEnumerable<MediaCommUser> users = this.Session.Query<MediaCommUser>().ToList();
             return users;
         }
 
-        /// <summary>Gets user by name.</summary>
-        /// <param name="userName">Name of the user.</param>
-        /// <returns>The user with the provided name..</returns>
         public MediaCommUser GetUserByName(string userName)
         {
-            this.Logger.Debug("Getting user for username '{0}'", userName);
-            MediaCommUser user = Queryable.Single<MediaCommUser>(this.Session.Query<MediaCommUser>(), u => u.UserName.Equals(userName));
+            MediaCommUser user = this.Session.Query<MediaCommUser>().Single(u => u.UserName.Equals(userName));
 
-            this.Logger.Debug("Got user: " + user);
             return user;
         }
 
-        /// <summary>Updates the user.</summary>
-        /// <param name="user">The user to update.</param>
         public void UpdateUser(MediaCommUser user)
         {
             this.Logger.Debug("Updating user: " + user);
-            this.InvokeTransaction(s => s.Update(user));
+            this.Session.Update(user);
         }
 
         /// <summary>Validates the user information.</summary>
@@ -102,8 +88,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         /// <returns>true, if the user/password combination is valid, otherwise false.</returns>
         public bool ValidateUser(string userName, string password)
         {
-            return
-                Queryable.Any<MediaCommUser>(this.Session.Query<MediaCommUser>(), u => u.UserName.Equals(userName) && u.Password.Equals(password));
+            return this.Session.Query<MediaCommUser>().Any(u => u.UserName.Equals(userName) && u.Password.Equals(password));
         }
 
         #endregion

@@ -20,18 +20,6 @@ namespace MediaCommMVC.Web.Core.Common.Logging
 
         #region Constructors and Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Log4NetLogger"/> class.
-        /// </summary>
-        /// <param name="callerType">Type of the caller.</param>
-        public Log4NetLogger(Type callerType)
-        {
-            this.log = LogManager.GetLogger(callerType);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Log4NetLogger"/> class.
-        /// </summary>
         public Log4NetLogger()
         {
             this.log = LogManager.GetLogger("Default");
