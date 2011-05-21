@@ -9,42 +9,25 @@ using System.Web.Security;
 using MediaCommMVC.Web.Core.Common.Logging;
 using MediaCommMVC.Web.Core.Infrastructure;
 
-using Microsoft.Practices.Unity;
 
 #endregion
 
 namespace MediaCommMVC.Web
 {
-    /// <summary>The web application.</summary>
-    public class MvcApplication : HttpApplication, IUnityContainerAccessor
+    public class MvcApplication : HttpApplication
     {
         #region Constants and Fields
 
-        /// <summary>The logger.</summary>
         private readonly ILogger logger = new Log4NetLogger();
-
-        /// <summary>The unity IoC container.</summary>
-        private static IUnityContainer container;
 
         #endregion
 
         #region Properties
 
-        /// <summary>Gets the unity container.</summary>
-        /// <value>The unity container.</value>
-        public IUnityContainer Container
-        {
-            get
-            {
-                return container;
-            }
-        }
-
         #endregion
 
         #region Public Methods
 
-        /// <summary>Executes custom initialization code after all event handler modules have been added.</summary>
         public override void Init()
         {
             base.Init();
@@ -56,21 +39,13 @@ namespace MediaCommMVC.Web
 
         #region Methods
 
-        /// <summary>Configures the application during start up.</summary>
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
 
             try
             {
-                if (container == null)
-                {
-                    container = new UnityContainer();
-                }
-
-                new Bootstrapper(container, this.logger).Run();
-
-                // RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
+                //new Bootstrapper(container, this.logger).Run();
             }
             catch (HttpUnhandledException unhandledException)
             {
@@ -84,10 +59,6 @@ namespace MediaCommMVC.Web
             }
         }
 
-        /// <summary>Handles the PostAuthenticateRequest event of the MvcApplication.
-        /// Gets the MediaCommUser from the auth cookie and attaches it to the HttpContext.</summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected void MvcApplication_PostAuthenticateRequest(object sender, EventArgs e)
         {
             HttpCookie authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];

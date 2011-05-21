@@ -14,7 +14,6 @@ using MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping;
 using MediaCommMVC.Web.Core.Data.Repositories;
 using MediaCommMVC.Web.Core.DataInterfaces;
 
-using Microsoft.Practices.Unity;
 
 using WebExtensions = Combres.WebExtensions;
 
@@ -27,13 +26,6 @@ namespace MediaCommMVC.Web.Core.Infrastructure
     {
         #region Constants and Fields
 
-        /// <summary>The unity container.</summary>
-        private readonly IUnityContainer container;
-
-        /// <summary>The logger.
-        /// It is created in the Global.asax file.</summary>
-        private readonly ILogger logger;
-
         #endregion
 
         #region Constructors and Destructors
@@ -41,11 +33,11 @@ namespace MediaCommMVC.Web.Core.Infrastructure
         /// <summary>Initializes a new instance of the <see cref="Bootstrapper"/> class.</summary>
         /// <param name="container">The container.</param>
         /// <param name="logger">The logger.</param>
-        public Bootstrapper(IUnityContainer container, ILogger logger)
-        {
-            this.container = container;
-            this.logger = logger;
-        }
+        //public Bootstrapper(IUnityContainer container, ILogger logger)
+        //{
+        //    this.container = container;
+        //    this.logger = logger;
+        //}
 
         #endregion
 
@@ -73,7 +65,6 @@ namespace MediaCommMVC.Web.Core.Infrastructure
         /// <summary>Registers the controller factory.</summary>
         private static void RegisterControllerFactory()
         {
-            ControllerBuilder.Current.SetControllerFactory(typeof(UnityControllerFactory));
         }
 
         /// <summary>Registers the routes.</summary>
@@ -135,34 +126,10 @@ namespace MediaCommMVC.Web.Core.Infrastructure
         /// <summary>Configures the unity container.</summary>
         private void ConfigureContainer()
         {
-            this.container.RegisterInstance(typeof(ILogger), this.logger);
-            this.container.RegisterType(typeof(IConfigAccessor), typeof(FileConfigAccessor));
-            this.container.RegisterType(typeof(IImageGenerator), typeof(MixedImageGenerator));
 
-            this.RegisterNHibernateComponents();
-            this.RegisterRepositories();
         }
 
-        /// <summary>Registers the NNibernate components.</summary>
-        private void RegisterNHibernateComponents()
-        {
-            this.container.RegisterType(typeof(IAutoMapGenerator), typeof(AutoMapGenerator));
-            this.container.RegisterType(typeof(IConfigurationGenerator), typeof(ConfigurationGenerator));
 
-            WebSessionManager webSessionManager = new WebSessionManager(
-                this.container.Resolve<IConfigurationGenerator>(), this.container.Resolve<ILogger>());
-            this.container.RegisterInstance(typeof(ISessionManager), webSessionManager);
-        }
-
-        /// <summary>Registers the repositories.</summary>
-        private void RegisterRepositories()
-        {
-            this.container.RegisterType(typeof(IForumRepository), typeof(ForumRepository), new HttpContextLifetimeManager<ForumRepository>());
-            this.container.RegisterType(typeof(IPhotoRepository), typeof(PhotoRepository), new HttpContextLifetimeManager<PhotoRepository>());
-            this.container.RegisterType(typeof(IMovieRepository), typeof(MovieRepository), new HttpContextLifetimeManager<MovieRepository>());
-            this.container.RegisterType(typeof(IUserRepository), typeof(UserRepository), new HttpContextLifetimeManager<UserRepository>());
-            this.container.RegisterType(typeof(IVideoRepository), typeof(VideoRepository), new HttpContextLifetimeManager<VideoRepository>());
-        }
 
         #endregion
     }
