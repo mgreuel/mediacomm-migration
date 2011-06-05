@@ -16,34 +16,21 @@ using Resources;
 
 namespace MediaCommMVC.Web.Core.Controllers
 {
-    /// <summary>The account controller.</summary>
+    using MediaCommMVC.Web.Core.Infrastructure;
+
     [HandleError]
     public class AccountController : Controller
     {
         #region Constants and Fields
 
-        /// <summary>
-        /// The logger.
-        /// </summary>
-        private readonly ILogger logger;
-
-        /// <summary>
-        /// The user repository.
-        /// </summary>
         private readonly IUserRepository userRepository;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AccountController"/> class.
-        /// </summary>
-        /// <param name="logger">The logger.</param>
-        /// <param name="userRepository">The user Repository.</param>
-        public AccountController(ILogger logger, IUserRepository userRepository)
+        public AccountController(IUserRepository userRepository)
         {
-            this.logger = logger;
             this.userRepository = userRepository;
         }
 
@@ -51,8 +38,6 @@ namespace MediaCommMVC.Web.Core.Controllers
 
         #region Public Methods
 
-        /// <summary>The log off.</summary>
-        /// <returns>Generated Code.</returns>
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
@@ -60,18 +45,13 @@ namespace MediaCommMVC.Web.Core.Controllers
             return this.RedirectToAction("Index", "Home");
         }
 
-        /// <summary>The log on.</summary>
-        /// <returns>Generated Code.</returns>
         public ActionResult LogOn()
         {
             return this.View();
         }
 
-        /// <summary>The log on.</summary>
-        /// <param name="userLogin">The model.</param>
-        /// <param name="returnUrl">The return url.</param>
-        /// <returns>Generated Code.</returns>
         [HttpPost]
+        [NHibernateActionFilter]
         public ActionResult LogOn(UserLogin userLogin, string returnUrl)
         {
             if (this.ModelState.IsValid)

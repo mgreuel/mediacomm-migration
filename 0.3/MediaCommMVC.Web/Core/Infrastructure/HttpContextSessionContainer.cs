@@ -4,6 +4,7 @@
 
     using System.Web;
 
+    using MediaCommMVC.Web.Core.Common.Exceptions;
     using MediaCommMVC.Web.Core.Data.NHInfrastructure.Config;
     using MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping;
 
@@ -40,11 +41,15 @@
             {
                 if (InternalSession == null)
                 {
-                    InternalSession = SessionFactory.OpenSession();
-                    InternalSession.BeginTransaction();
+                    throw new SessionNotInitializedException("The NH session has not been initialized. Make sure all actions accessing the DB have the NHibernateActionFilter attribute.");
                 }
 
                 return InternalSession;
+            }
+
+            set
+            {
+                InternalSession = value;
             }
         }
 

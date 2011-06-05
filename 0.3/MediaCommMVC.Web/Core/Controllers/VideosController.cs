@@ -15,25 +15,19 @@ using MediaCommMVC.Web.Core.ViewModel;
 
 namespace MediaCommMVC.Web.Core.Controllers
 {
-    /// <summary>The videos controller.</summary>
     [Authorize]
     public class VideosController : Controller
     {
         #region Constants and Fields
 
-        /// <summary>The user repository.</summary>
         private readonly IUserRepository userRepository;
 
-        /// <summary>The video repository.</summary>
         private readonly IVideoRepository videoRepository;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="VideosController"/> class.</summary>
-        /// <param name="videoRepository">The video repository.</param>
-        /// <param name="userRepository">The user repository.</param>
         public VideosController(IVideoRepository videoRepository, IUserRepository userRepository)
         {
             this.videoRepository = videoRepository;
@@ -44,11 +38,8 @@ namespace MediaCommMVC.Web.Core.Controllers
 
         #region Public Methods
 
-        /// <summary>Adds the provided video.</summary>
-        /// <param name="video">The video.</param>
-        /// <param name="category">The category the video belongs to.</param>
-        /// <returns>A redirect to the UploadSuccessFull page.</returns>
         [HttpPost]
+        [NHibernateActionFilter]
         public ActionResult AddVideo(Video video, VideoCategory category)
         {
             video.Uploader = this.userRepository.GetUserByName(this.User.Identity.Name);
@@ -59,9 +50,8 @@ namespace MediaCommMVC.Web.Core.Controllers
             return this.RedirectToAction("UploadSuccessFull");
         }
 
-        /// <summary>Shows the AddVideo page.</summary>
-        /// <returns>The AddVideo view.</returns>
         [HttpGet]
+        [NHibernateActionFilter]
         public ActionResult AddVideo()
         {
             IEnumerable<VideoCategory> categories = this.videoRepository.GetAllCategories();
@@ -81,10 +71,8 @@ namespace MediaCommMVC.Web.Core.Controllers
             return this.View(addVideoInfo);
         }
 
-        /// <summary>Displays the category with the specified id.</summary>
-        /// <param name="id">The category id.</param>
-        /// <returns>THe category view.</returns>
         [HttpGet]
+        [NHibernateActionFilter]
         public ActionResult Category(int id)
         {
             VideoCategory category = this.videoRepository.GetCategoryById(id);
@@ -92,10 +80,9 @@ namespace MediaCommMVC.Web.Core.Controllers
             return this.View(category);
         }
 
-        /// <summary>Gets all video categories.</summary>
-        /// <returns>The video categories as Json string.</returns>
         [HttpGet]
         [OutputCache(Duration = 3600, VaryByParam = "")]
+        [NHibernateActionFilter]
         public ActionResult GetCategories()
         {
             IEnumerable<VideoCategory> categories = this.videoRepository.GetAllCategories();
@@ -105,10 +92,8 @@ namespace MediaCommMVC.Web.Core.Controllers
             return this.Json(categoryViewModels, JsonRequestBehavior.AllowGet);
         }
 
-        /// <summary>Displays the thumbnail of a video.</summary>
-        /// <param name="id">The video id.</param>
-        /// <returns>The thumbnail image.</returns>
         [HttpGet]
+        [NHibernateActionFilter]
         public ActionResult Thumbnail(int id)
         {
             Image image = this.videoRepository.GetThumbnailImage(id);
@@ -116,8 +101,6 @@ namespace MediaCommMVC.Web.Core.Controllers
             return new ImageResult { Image = image };
         }
 
-        /// <summary>Shows the uploads success full page.</summary>
-        /// <returns>The upload successfull view.</returns>
         [HttpGet]
         [Authorize]
         public ActionResult UploadSuccessFull()
@@ -125,10 +108,8 @@ namespace MediaCommMVC.Web.Core.Controllers
             return this.View();
         }
 
-        /// <summary>Displays the video with the specified id.</summary>
-        /// <param name="id">The video id.</param>
-        /// <returns>The video view.</returns>
         [HttpGet]
+        [NHibernateActionFilter]
         public ActionResult Video(int id)
         {
             Video video = this.videoRepository.GetVideoById(id);

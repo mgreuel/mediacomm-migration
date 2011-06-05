@@ -10,7 +10,7 @@
     {
         #region Properties
 
-        ISession CurrentSession { get; }
+        ISession CurrentSession { get; set; }
 
         #endregion
     }
