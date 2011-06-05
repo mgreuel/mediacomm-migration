@@ -24,35 +24,22 @@ using MediaCommMVC.Web.Core.ViewModel;
 
 namespace MediaCommMVC.Web.Core.Controllers
 {
-    /// <summary>The photos controller.</summary>
     public class PhotosController : Controller
     {
         #region Constants and Fields
 
-        /// <summary>The config accessor.</summary>
-        private readonly IConfigAccessor configAccessor;
-
-        /// <summary>The logger.</summary>
         private readonly ILogger logger;
 
-        /// <summary>The photo repsository.</summary>
         private readonly IPhotoRepository photoRepository;
 
-        /// <summary>The user repository.</summary>
         private readonly IUserRepository userRepository;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="PhotosController"/> class.</summary>
-        /// <param name="configAccessor">The config accessor.</param>
-        /// <param name="photoRepository">The photo repository.</param>
-        /// <param name="userRepository">The user repository.</param>
-        /// <param name="logger">The logger.</param>
-        public PhotosController(IConfigAccessor configAccessor, IPhotoRepository photoRepository, IUserRepository userRepository, ILogger logger)
+        public PhotosController(IPhotoRepository photoRepository, IUserRepository userRepository, ILogger logger)
         {
-            this.configAccessor = configAccessor;
             this.photoRepository = photoRepository;
             this.userRepository = userRepository;
             this.logger = logger;
@@ -62,26 +49,18 @@ namespace MediaCommMVC.Web.Core.Controllers
 
         #region Public Methods
 
-        /// <summary>Displays a photo gallery.</summary>
-        /// <param name="id">The album id.</param>
-        /// <returns>The album view.</returns>
         [Authorize]
+        [NHibernateActionFilter]
         public ActionResult Album(int id)
         {
-            this.logger.Debug("Displaying photo album with id " + id);
-
             PhotoAlbum album = this.photoRepository.GetAlbumById(id);
-
-            this.logger.Debug("Displaying view with photo album " + album);
 
             return this.View(album);
         }
 
-        /// <summary>Shows the photo category.</summary>
-        /// <param name="id">The category id.</param>
-        /// <returns>The category view.</returns>
         [HttpGet]
         [Authorize]
+        [NHibernateActionFilter]
         public ActionResult Category(int id)
         {
             PhotoCategory category = this.photoRepository.GetCategoryById(id);
@@ -89,11 +68,8 @@ namespace MediaCommMVC.Web.Core.Controllers
             return this.View(category);
         }
 
-        /// <summary>Gets the albums for the specified category id.</summary>
-        /// <param name="id">The cat id.</param>
-        /// <param name="term">The term the album starts with.</param>
-        /// <returns>All matching albums.</returns>
-        [HttpGet]   
+        [HttpGet]
+        [NHibernateActionFilter]
         [Authorize]
         public ActionResult GetAlbumsForCategoryId(int id, string term)
         {
@@ -108,11 +84,10 @@ namespace MediaCommMVC.Web.Core.Controllers
             return this.Json(albums.Select(a => a.Name), JsonRequestBehavior.AllowGet);
         }
 
-        /// <summary>Gets all photo categories.</summary>
-        /// <returns>The photo categories as Json string.</returns>
         [HttpGet]
         [Authorize]
         [OutputCache(Duration = 3600, VaryByParam = "")]
+        [NHibernateActionFilter]
         public ActionResult GetCategories()
         {
             IEnumerable<PhotoCategory> categories = this.photoRepository.GetAllCategories();
@@ -122,8 +97,6 @@ namespace MediaCommMVC.Web.Core.Controllers
             return this.Json(categoryViewModels, JsonRequestBehavior.AllowGet);
         }
 
-        /// <summary>The index page.</summary>
-        /// <returns>The index view.</returns>
         [Authorize]
         [HttpGet]
         public ActionResult Index()
@@ -131,25 +104,19 @@ namespace MediaCommMVC.Web.Core.Controllers
             return this.View();
         }
 
-        /// <summary>Displays a single photo.</summary>
-        /// <param name="id">The photo id.</param>
-        /// <param name="size">The photo size.</param>
-        /// <returns>The photo.</returns>
         [Authorize]
         [HttpGet]
+        [NHibernateActionFilter]
         public ActionResult Photo(int id, string size)
         {
-            this.logger.Debug("Displaying photo with id '{0}' and size '{1}'", id, size);
-
             Image image = this.photoRepository.GetImage(id, size);
 
             return new ImageResult { Image = image };
         }
 
-        /// <summary>The upload page.</summary>
-        /// <returns>The upload view.</returns>
         [Authorize]
         [HttpGet]
+        [NHibernateActionFilter]
         public ActionResult Upload()
         {
             IEnumerable<PhotoCategory> categories = this.photoRepository.GetAllCategories();
@@ -157,18 +124,10 @@ namespace MediaCommMVC.Web.Core.Controllers
             return this.View(new PhotoUpload { Categories = categories });
         }
 
-        /// <summary>
-        /// Uploads the zip file containing the photos.
-        /// </summary>
-        /// <param name="category">The category.</param>
-        /// <param name="album">The album.</param>
-        /// <param name="token">The forms authentication token.</param>
-        /// <returns>true or false, depending on the success.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
+        [NHibernateActionFilter]
         public string UploadFile(PhotoCategory category, PhotoAlbum album, string token)
         {
-            this.logger.Debug("Uploading file with category '{0}' and album '{1}'", category, album);
-
             if (this.Request.Files.Count > 0)
             {
                 try
@@ -207,14 +166,9 @@ namespace MediaCommMVC.Web.Core.Controllers
             return "true";
         }
 
-        /// <summary>
-        /// Uploads the zip file containing the photos.
-        /// </summary>
-        /// <param name="category">The category.</param>
-        /// <param name="album">The album.</param>
-        /// <returns>A redirect to the UploadSuccessfull action.</returns>
         [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
+        [NHibernateActionFilter]
         public ActionResult CompleteUpload(PhotoCategory category, PhotoAlbum album)
         {
             album.Name = album.Name.Trim();
@@ -226,8 +180,6 @@ namespace MediaCommMVC.Web.Core.Controllers
             return this.RedirectToAction("UploadSuccessFull");
         }
 
-        /// <summary>Shows the uploads success full page.</summary>
-        /// <returns>The upload successfull view.</returns>
         [HttpGet]
         [Authorize]
         public ActionResult UploadSuccessFull()
@@ -239,9 +191,6 @@ namespace MediaCommMVC.Web.Core.Controllers
 
         #region Methods
 
-        /// <summary>Gets the uploader identity from the specified authentication token.</summary>
-        /// <param name="token">The token.</param>
-        /// <returns>The identity.</returns>
         private static FormsIdentity GetUploaderIdentity(string token)
         {
             FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(token);

@@ -113,21 +113,13 @@ namespace MediaCommMVC.Web.Core.Infrastructure
                 "DefaultWithId", 
                 "{controller}/{action}/{id}");
 
-            routes.MapRoute("Error", "Error", new { controller = "Home", action = "Error" });
-
             routes.MapRoute(
                 "Default", 
                 "{controller}/{action}", 
                 new { controller = "Home", action = "Index" });
+
+            routes.MapRoute("Error", "Error", new { controller = "Home", action = "Error" });
         }
-
-        /// <summary>Configures the unity container.</summary>
-        private void ConfigureContainer()
-        {
-
-        }
-
-
 
         #endregion
     }

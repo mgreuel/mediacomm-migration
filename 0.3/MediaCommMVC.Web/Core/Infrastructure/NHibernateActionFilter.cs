@@ -12,6 +12,13 @@
     {
         #region Public Methods
 
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            ISession session = HttpContextSessionContainer.SessionFactory.OpenSession();
+            session.BeginTransaction();
+            new HttpContextSessionContainer().CurrentSession = session;
+        }
+
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             using (ISession session = new HttpContextSessionContainer().CurrentSession)

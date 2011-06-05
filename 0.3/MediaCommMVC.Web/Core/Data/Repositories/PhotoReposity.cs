@@ -114,7 +114,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         public PhotoCategory GetCategoryById(int id)
         {
-            PhotoCategory category = this.Session.Get<PhotoCategory>(id);
+            PhotoCategory category = this.Session.Query<PhotoCategory>().FetchMany(c => c.Albums).Single(c => c.Id == id);
 
             return category;
         }
@@ -191,7 +191,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
                 Queryable.SingleOrDefault<PhotoAlbum>(this.Session.Query<PhotoAlbum>(), a => a.Name.Equals(album.Name)) ?? album;
 
             photoAlbum.LastPicturesAdded = DateTime.Now;
-            
+
             foreach (FileInfo file in filesToAdd)
             {
                 Bitmap bmp = new Bitmap(file.FullName);
