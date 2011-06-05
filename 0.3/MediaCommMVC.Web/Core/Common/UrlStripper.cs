@@ -2,16 +2,8 @@
 
 namespace MediaCommMVC.Web.Core.Common
 {
-    /// <summary>
-    /// Provides helper functions for working with Urls.
-    /// </summary>
     public static class UrlStripper
     {
-        /// <summary>
-        /// Removes the illegal characters from the provided Url.
-        /// </summary>
-        /// <param name="urlToEncode">The URL to encode.</param>
-        /// <returns>A string only containing valid url chracters.</returns>
         public static string RemoveIllegalCharactersFromUrl(string urlToEncode)
         {
             if (string.IsNullOrEmpty(urlToEncode))
