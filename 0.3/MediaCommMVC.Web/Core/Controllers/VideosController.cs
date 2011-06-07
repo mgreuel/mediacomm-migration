@@ -1,6 +1,4 @@
-﻿#region Using Directives
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Web.Mvc;
@@ -11,32 +9,20 @@ using MediaCommMVC.Web.Core.Infrastructure;
 using MediaCommMVC.Web.Core.Model.Videos;
 using MediaCommMVC.Web.Core.ViewModel;
 
-#endregion
-
 namespace MediaCommMVC.Web.Core.Controllers
 {
     [Authorize]
     public class VideosController : Controller
     {
-        #region Constants and Fields
-
         private readonly IUserRepository userRepository;
 
         private readonly IVideoRepository videoRepository;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         public VideosController(IVideoRepository videoRepository, IUserRepository userRepository)
         {
             this.videoRepository = videoRepository;
             this.userRepository = userRepository;
         }
-
-        #endregion
-
-        #region Public Methods
 
         [HttpPost]
         [NHibernateActionFilter]
@@ -62,10 +48,7 @@ namespace MediaCommMVC.Web.Core.Controllers
 
             AddVideoInfo addVideoInfo = new AddVideoInfo
                 {
-                    AvailableCategories = categories, 
-                    AvailableThumbnails = thumbnails, 
-                    AvailableVideos = videos, 
-                    AvailablePosters = posters
+                   AvailableCategories = categories, AvailableThumbnails = thumbnails, AvailableVideos = videos, AvailablePosters = posters 
                 };
 
             return this.View(addVideoInfo);
@@ -116,7 +99,5 @@ namespace MediaCommMVC.Web.Core.Controllers
 
             return this.View(video);
         }
-
-        #endregion
     }
 }

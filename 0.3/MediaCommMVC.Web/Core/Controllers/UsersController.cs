@@ -1,15 +1,10 @@
-﻿#region Using Directives
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 
-using MediaCommMVC.Web.Core.Common.Logging;
 using MediaCommMVC.Web.Core.DataInterfaces;
 using MediaCommMVC.Web.Core.Model.Users;
 
 using Resources;
-
-#endregion
 
 namespace MediaCommMVC.Web.Core.Controllers
 {
@@ -18,22 +13,12 @@ namespace MediaCommMVC.Web.Core.Controllers
     [Authorize]
     public class UsersController : Controller
     {
-        #region Constants and Fields
-
         private readonly IUserRepository userRepository;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         public UsersController(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
         }
-
-        #endregion
-
-        #region Public Methods
 
         [NHibernateActionFilter]
         public ActionResult Index()
@@ -69,7 +54,5 @@ namespace MediaCommMVC.Web.Core.Controllers
             MediaCommUser user = this.userRepository.GetUserByName(username);
             return this.View(user);
         }
-
-        #endregion
     }
 }

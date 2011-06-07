@@ -1,14 +1,10 @@
-﻿#region Using Directives
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
 using MediaCommMVC.Web.Core.Common.Logging;
 using MediaCommMVC.Web.Core.DataInterfaces;
 using MediaCommMVC.Web.Core.Model.Movies;
-
-#endregion
 
 namespace MediaCommMVC.Web.Core.Controllers
 {
@@ -17,17 +13,11 @@ namespace MediaCommMVC.Web.Core.Controllers
     [Authorize]
     public class MoviesController : Controller
     {
-        #region Constants and Fields
-
         private readonly ILogger logger;
 
         private readonly IMovieRepository movieRepository;
 
         private readonly IUserRepository userRepository;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         public MoviesController(IMovieRepository movieRepository, IUserRepository userRepository, ILogger logger)
         {
@@ -35,10 +25,6 @@ namespace MediaCommMVC.Web.Core.Controllers
             this.userRepository = userRepository;
             this.logger = logger;
         }
-
-        #endregion
-
-        #region Public Methods
 
         [AcceptVerbs(HttpVerbs.Post)]
         [NHibernateActionFilter]
@@ -83,7 +69,5 @@ namespace MediaCommMVC.Web.Core.Controllers
             this.logger.Debug("Redirecting to movies index.");
             return this.RedirectToAction("Index");
         }
-
-        #endregion
     }
 }

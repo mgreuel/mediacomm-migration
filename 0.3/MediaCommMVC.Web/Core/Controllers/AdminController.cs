@@ -1,13 +1,9 @@
-﻿#region Using Directives
-
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 using MediaCommMVC.Web.Core.DataInterfaces;
 using MediaCommMVC.Web.Core.Model.Forums;
 using MediaCommMVC.Web.Core.Model.Photos;
 using MediaCommMVC.Web.Core.Model.Videos;
-
-#endregion
 
 namespace MediaCommMVC.Web.Core.Controllers
 {
@@ -16,19 +12,13 @@ namespace MediaCommMVC.Web.Core.Controllers
     [Authorize(Roles = "Administrators")]
     public class AdminController : Controller
     {
-        #region Constants and Fields
-
         private readonly IForumRepository forumRepository;
 
         private readonly IPhotoRepository photoRepository;
 
-        private readonly IVideoRepository videoRepository;
-
         private readonly IUserRepository userRepository;
 
-        #endregion
-
-        #region Constructors and Destructors
+        private readonly IVideoRepository videoRepository;
 
         public AdminController(
             IForumRepository forumRepository, IUserRepository userRepository, IPhotoRepository photoRepository, IVideoRepository videoRepository)
@@ -38,10 +28,6 @@ namespace MediaCommMVC.Web.Core.Controllers
             this.photoRepository = photoRepository;
             this.videoRepository = videoRepository;
         }
-
-        #endregion
-
-        #region Public Methods
 
         public ActionResult CategoryCreated()
         {
@@ -67,24 +53,6 @@ namespace MediaCommMVC.Web.Core.Controllers
         public ActionResult CreatePhotoCategory()
         {
             return this.View();
-        }
-
-
-        [HttpGet]
-        public ActionResult CreateVideoCategory()
-        {
-            return this.View();
-        }
-
-        [HttpPost]
-        [NHibernateActionFilter]
-        public ActionResult CreateVideoCategory(VideoCategory videoCategory)
-        {
-            this.videoRepository.AddCategory(videoCategory);
-
-            this.ViewData["categoyName"] = videoCategory.Name;
-
-            return this.RedirectToAction("CategoryCreated");
         }
 
         [HttpPost]
@@ -115,11 +83,26 @@ namespace MediaCommMVC.Web.Core.Controllers
         }
 
         [HttpGet]
-        public ActionResult UserCreated()
+        public ActionResult CreateVideoCategory()
         {
             return this.View();
         }
 
-        #endregion
+        [HttpPost]
+        [NHibernateActionFilter]
+        public ActionResult CreateVideoCategory(VideoCategory videoCategory)
+        {
+            this.videoRepository.AddCategory(videoCategory);
+
+            this.ViewData["categoyName"] = videoCategory.Name;
+
+            return this.RedirectToAction("CategoryCreated");
+        }
+
+        [HttpGet]
+        public ActionResult UserCreated()
+        {
+            return this.View();
+        }
     }
 }
