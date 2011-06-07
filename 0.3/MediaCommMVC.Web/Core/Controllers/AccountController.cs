@@ -1,42 +1,26 @@
-﻿#region Using Directives
-
-using System;
+﻿using System;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
-using MediaCommMVC.Web.Core.Common.Logging;
 using MediaCommMVC.Web.Core.DataInterfaces;
+using MediaCommMVC.Web.Core.Infrastructure;
 using MediaCommMVC.Web.Core.Model.Users;
 using MediaCommMVC.Web.Core.ViewModel.Account;
 
 using Resources;
 
-#endregion
-
 namespace MediaCommMVC.Web.Core.Controllers
 {
-    using MediaCommMVC.Web.Core.Infrastructure;
-
     [HandleError]
     public class AccountController : Controller
     {
-        #region Constants and Fields
-
         private readonly IUserRepository userRepository;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         public AccountController(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
         }
-
-        #endregion
-
-        #region Public Methods
 
         public ActionResult LogOff()
         {
@@ -69,12 +53,12 @@ namespace MediaCommMVC.Web.Core.Controllers
                     DateTime expiration = DateTime.Now.AddDays(7);
 
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
-                        version: 1,
-                        name: userLogin.UserName,
-                        issueDate: DateTime.Now,
-                        expiration: expiration,
-                        isPersistent: userLogin.RememberMe,
-                        userData: roles,
+                        version: 1, 
+                        name: userLogin.UserName, 
+                        issueDate: DateTime.Now, 
+                        expiration: expiration, 
+                        isPersistent: userLogin.RememberMe, 
+                        userData: roles, 
                         cookiePath: FormsAuthentication.FormsCookiePath);
 
                     string encTicket = FormsAuthentication.Encrypt(authTicket);
@@ -85,9 +69,7 @@ namespace MediaCommMVC.Web.Core.Controllers
                     user.LastVisit = DateTime.Now;
                     this.userRepository.UpdateUser(user);
 
-                    return !string.IsNullOrEmpty(returnUrl)
-                               ? (ActionResult)this.Redirect(returnUrl)
-                               : this.RedirectToAction("Index", "Home");
+                    return !string.IsNullOrEmpty(returnUrl) ? (ActionResult)this.Redirect(returnUrl) : this.RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -98,7 +80,5 @@ namespace MediaCommMVC.Web.Core.Controllers
             // If we got this far, something failed, redisplay form
             return View(userLogin);
         }
-
-        #endregion
     }
 }

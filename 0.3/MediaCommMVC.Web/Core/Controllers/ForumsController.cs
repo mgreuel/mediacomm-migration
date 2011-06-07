@@ -1,6 +1,4 @@
-﻿#region Using Directives
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -8,22 +6,17 @@ using System.Web.Mvc;
 using MediaCommMVC.Web.Core.Common.Logging;
 using MediaCommMVC.Web.Core.DataInterfaces;
 using MediaCommMVC.Web.Core.Helpers;
+using MediaCommMVC.Web.Core.Infrastructure;
 using MediaCommMVC.Web.Core.Model.Forums;
 using MediaCommMVC.Web.Core.Model.Users;
 using MediaCommMVC.Web.Core.Parameters;
 using MediaCommMVC.Web.Core.ViewModel;
 
-#endregion
-
 namespace MediaCommMVC.Web.Core.Controllers
 {
-    using MediaCommMVC.Web.Core.Infrastructure;
-
     [Authorize]
     public class ForumsController : Controller
     {
-        #region Constants and Fields
-
         private const int PostsPerTopicPage = 15;
 
         private const int TopicsPerForumPage = 25;
@@ -36,20 +29,12 @@ namespace MediaCommMVC.Web.Core.Controllers
 
         private MediaCommUser currentUser;
 
-        #endregion
-
-        #region Constructors and Destructors
-
         public ForumsController(IForumRepository forumRepository, IUserRepository userRepository, ILogger logger)
         {
             this.forumRepository = forumRepository;
             this.userRepository = userRepository;
             this.logger = logger;
         }
-
-        #endregion
-
-        #region Public Methods
 
         [HttpPost]
         [NHibernateActionFilter]
@@ -96,8 +81,7 @@ namespace MediaCommMVC.Web.Core.Controllers
                 topic.DisplayPriority = TopicDisplayPriority.Sticky;
             }
 
-            List<string> userNamesToExclude =
-                Enumerable.ToList<string>(excludedUsers.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()));
+            List<string> userNamesToExclude = excludedUsers.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToList();
 
             foreach (string userName in userNamesToExclude)
             {
@@ -115,6 +99,25 @@ namespace MediaCommMVC.Web.Core.Controllers
             Topic createdTopic = this.forumRepository.AddTopic(topic, post);
 
             return this.RedirectToAction("Topic", new { id = createdTopic.Id, name = this.Url.ToFriendlyUrl(createdTopic.Title) });
+        }
+
+        [HttpPost]
+        [NHibernateActionFilter]
+        public ActionResult DeletePost(int id)
+        {
+#warning check if allowed
+            Post postToDelete = this.forumRepository.GetPostById(id);
+            this.forumRepository.DeletePost(postToDelete);
+
+            if (this.forumRepository.GetTopicById(id) != null)
+            {
+                return this.RedirectToAction("Topic", new { id = postToDelete.Topic.Id, name = this.Url.ToFriendlyUrl(postToDelete.Topic.Title) });
+            }
+            else
+            {
+                return this.RedirectToAction(
+                    "Forum", new { id = postToDelete.Topic.Forum.Id, name = this.Url.ToFriendlyUrl(postToDelete.Topic.Forum.Title) });
+            }
         }
 
         [HttpGet]
@@ -160,19 +163,16 @@ namespace MediaCommMVC.Web.Core.Controllers
         {
             this.logger.Debug("Displaying page {0} of the forum with id '{1}'", page, id);
 
-            PagingParameters pagingParameters = new PagingParameters
-                {
-                    CurrentPage = page,
-                    PageSize = TopicsPerForumPage
-                };
+            PagingParameters pagingParameters = new PagingParameters { CurrentPage = page, PageSize = TopicsPerForumPage };
 
             Forum forum = this.forumRepository.GetForumById(id);
             pagingParameters.TotalCount = forum.TopicCount;
 
-            IEnumerable<Topic> topics = this.forumRepository.GetTopicsForForum(
-                id, pagingParameters, this.GetCurrentUser());
+            IEnumerable<Topic> topics = this.forumRepository.GetTopicsForForum(id, pagingParameters, this.GetCurrentUser());
 
-            return this.View(new ForumPage { Forum = forum, Topics = topics, PagingParameters = pagingParameters, PostsPerTopicPage = PostsPerTopicPage });
+            return
+                this.View(
+                    new ForumPage { Forum = forum, Topics = topics, PagingParameters = pagingParameters, PostsPerTopicPage = PostsPerTopicPage });
         }
 
         [HttpGet]
@@ -197,13 +197,7 @@ namespace MediaCommMVC.Web.Core.Controllers
         [NHibernateActionFilter]
         public ActionResult Topic(int id, int page)
         {
-            this.logger.Debug("Displaying page {0} of the topic with id '{1}'", page, id);
-
-            PagingParameters pagingParameters = new PagingParameters
-                {
-                    CurrentPage = page,
-                    PageSize = PostsPerTopicPage
-                };
+            PagingParameters pagingParameters = new PagingParameters { CurrentPage = page, PageSize = PostsPerTopicPage };
 
             Topic topic = this.forumRepository.GetTopicById(id);
             pagingParameters.TotalCount = topic.PostCount;
@@ -212,27 +206,6 @@ namespace MediaCommMVC.Web.Core.Controllers
                 id, pagingParameters, this.userRepository.GetUserByName(this.User.Identity.Name));
 
             return this.View(new TopicPage { Topic = topic, Posts = posts, PagingParameters = pagingParameters });
-        }
-
-        [HttpPost]
-        [NHibernateActionFilter]
-        public ActionResult DeletePost(int id)
-        {
-#warning check if allowed
-            Post postToDelete = this.forumRepository.GetPostById(id);
-            this.forumRepository.DeletePost(postToDelete);
-
-            if (this.forumRepository.GetTopicById(id) != null)
-            {
-                return this.RedirectToAction(
-                    "Topic", new { id = postToDelete.Topic.Id, name = this.Url.ToFriendlyUrl(postToDelete.Topic.Title) });
-            }
-            else
-            {
-                return this.RedirectToAction(
-                    "Forum",
-                    new { id = postToDelete.Topic.Forum.Id, name = Url.ToFriendlyUrl(postToDelete.Topic.Forum.Title) });
-            }
         }
 
         [HttpPost]
@@ -256,10 +229,6 @@ namespace MediaCommMVC.Web.Core.Controllers
             return this.RedirectToAction("Topic", new { page = lastPage });
         }
 
-        #endregion
-
-        #region Methods
-
         private MediaCommUser GetCurrentUser()
         {
             return this.currentUser ?? (this.currentUser = this.userRepository.GetUserByName(this.User.Identity.Name));
@@ -267,18 +236,12 @@ namespace MediaCommMVC.Web.Core.Controllers
 
         private string GetPostUrl(int topicId, Post post)
         {
-            int page = this.forumRepository.GetPageNumberForPost(
-                postId: post.Id, topicId: topicId, pageSize: PostsPerTopicPage);
+            int page = this.forumRepository.GetPageNumberForPost(postId: post.Id, topicId: topicId, pageSize: PostsPerTopicPage);
             string postAnker = string.Format("#{0}", post.Id);
 
             this.logger.Debug("Redirecting to page {0} of the topic with the id '{0}'", page, topicId);
 
-            return
-                this.Url.RouteUrl(
-                    "ViewTopic", new { id = post.Topic.Id, page, name = this.Url.ToFriendlyUrl(post.Topic.Title) }) +
-                postAnker;
+            return this.Url.RouteUrl("ViewTopic", new { id = post.Topic.Id, page, name = this.Url.ToFriendlyUrl(post.Topic.Title) }) + postAnker;
         }
-
-        #endregion
     }
 }

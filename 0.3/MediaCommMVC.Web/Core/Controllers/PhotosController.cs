@@ -1,6 +1,4 @@
-﻿#region Using Directives
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -11,7 +9,6 @@ using System.Web.Security;
 
 using Elmah;
 
-using MediaCommMVC.Web.Core.Common.Config;
 using MediaCommMVC.Web.Core.Common.Logging;
 using MediaCommMVC.Web.Core.DataInterfaces;
 using MediaCommMVC.Web.Core.Helpers;
@@ -20,23 +17,15 @@ using MediaCommMVC.Web.Core.Model.Photos;
 using MediaCommMVC.Web.Core.Model.Users;
 using MediaCommMVC.Web.Core.ViewModel;
 
-#endregion
-
 namespace MediaCommMVC.Web.Core.Controllers
 {
     public class PhotosController : Controller
     {
-        #region Constants and Fields
-
         private readonly ILogger logger;
 
         private readonly IPhotoRepository photoRepository;
 
         private readonly IUserRepository userRepository;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         public PhotosController(IPhotoRepository photoRepository, IUserRepository userRepository, ILogger logger)
         {
@@ -44,10 +33,6 @@ namespace MediaCommMVC.Web.Core.Controllers
             this.userRepository = userRepository;
             this.logger = logger;
         }
-
-        #endregion
-
-        #region Public Methods
 
         [Authorize]
         [NHibernateActionFilter]
@@ -66,6 +51,20 @@ namespace MediaCommMVC.Web.Core.Controllers
             PhotoCategory category = this.photoRepository.GetCategoryById(id);
 
             return this.View(category);
+        }
+
+        [Authorize]
+        [AcceptVerbs(HttpVerbs.Post)]
+        [NHibernateActionFilter]
+        public ActionResult CompleteUpload(PhotoCategory category, PhotoAlbum album)
+        {
+            album.Name = album.Name.Trim();
+            album.PhotoCategory = this.photoRepository.GetCategoryById(category.Id);
+
+            MediaCommUser uploader = this.userRepository.GetUserByName(this.User.Identity.Name);
+            this.photoRepository.AddPhotos(album, uploader);
+
+            return this.RedirectToAction("UploadSuccessFull");
         }
 
         [HttpGet]
@@ -158,26 +157,11 @@ namespace MediaCommMVC.Web.Core.Controllers
             {
                 HttpContext context = System.Web.HttpContext.Current;
                 ErrorLog.GetDefault(context).Log(
-                    new Error(
-                        new FileNotFoundException("No file was send to the server on the PhotoUpload Action"), context));
+                    new Error(new FileNotFoundException("No file was send to the server on the PhotoUpload Action"), context));
                 return "false";
             }
 
             return "true";
-        }
-
-        [Authorize]
-        [AcceptVerbs(HttpVerbs.Post)]
-        [NHibernateActionFilter]
-        public ActionResult CompleteUpload(PhotoCategory category, PhotoAlbum album)
-        {
-            album.Name = album.Name.Trim();
-            album.PhotoCategory = this.photoRepository.GetCategoryById(category.Id);
-
-            MediaCommUser uploader = this.userRepository.GetUserByName(this.User.Identity.Name);
-            this.photoRepository.AddPhotos(album, uploader);
-
-            return this.RedirectToAction("UploadSuccessFull");
         }
 
         [HttpGet]
@@ -186,10 +170,6 @@ namespace MediaCommMVC.Web.Core.Controllers
         {
             return this.View();
         }
-
-        #endregion
-
-        #region Methods
 
         private static FormsIdentity GetUploaderIdentity(string token)
         {
@@ -209,7 +189,5 @@ namespace MediaCommMVC.Web.Core.Controllers
 
             return formsIdentity;
         }
-
-        #endregion
     }
 }

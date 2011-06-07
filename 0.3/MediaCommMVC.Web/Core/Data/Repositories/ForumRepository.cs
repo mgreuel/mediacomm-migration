@@ -249,7 +249,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         public Topic GetTopicById(int id)
         {
-            Topic topic = this.Session.Get<Topic>(id);
+            Topic topic = this.Session.Query<Topic>().Fetch(t => t.Poll).Fetch(t => t.Forum).Single(t => t.Id == id);
 
 #warning check excluded users
 

@@ -1,23 +1,12 @@
-﻿#region Using Directives
-
-using FluentNHibernate.Automapping;
+﻿using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
 
 using MediaCommMVC.Web.Core.Model.Forums;
 
-#endregion
-
 namespace MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping
 {
-    /// <summary>Makes customizations to the auto mapping of the Topic type.</summary>
     public class TopicMapper : IAutoMappingOverride<Topic>
     {
-        #region Implemented Interfaces
-
-        #region IAutoMappingOverride<Topic>
-
-        /// <summary>Overrides the specified mapping.</summary>
-        /// <param name="mapping">The Topic auto mapping.</param>
         public void Override(AutoMapping<Topic> mapping)
         {
             mapping.Table("ForumTopics");
@@ -27,11 +16,7 @@ namespace MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping
             mapping.Map(t => t.Title).Not.Nullable();
             mapping.References(t => t.Poll).Cascade.All();
             mapping.IgnoreProperty(t => t.ReadByCurrentUser);
-            mapping.HasManyToMany(t => t.ExcludedUsers).Table("ForumTopicsExcludedUsers").Cascade.None();
+            mapping.HasManyToMany(t => t.ExcludedUsers).Not.LazyLoad().Table("ForumTopicsExcludedUsers").Cascade.None();
         }
-
-        #endregion
-
-        #endregion
     }
 }
