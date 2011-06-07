@@ -109,7 +109,7 @@ namespace MediaCommMVC.Web.Core.Controllers
             Post postToDelete = this.forumRepository.GetPostById(id);
             this.forumRepository.DeletePost(postToDelete);
 
-            if (this.forumRepository.GetTopicById(id) != null)
+            if (this.forumRepository.GetTopicById(postToDelete.Topic.Id) != null)
             {
                 return this.RedirectToAction("Topic", new { id = postToDelete.Topic.Id, name = this.Url.ToFriendlyUrl(postToDelete.Topic.Title) });
             }

@@ -223,6 +223,7 @@
     <Compile Include="Core\Data\NHInfrastructure\Conventions\FkConvention.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Mapping\AutoMapGenerator.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Mapping\ForumMapper.cs" />
+    <Compile Include="Core\Data\NHInfrastructure\Mapping\ForumTopicsExcludedUserMapper.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Mapping\IAutoMapGenerator.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Mapping\MediaCommUserMapper.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Mapping\MovieMapper.cs" />
@@ -258,6 +259,7 @@
     <Compile Include="Core\Infrastructure\NHibernateActionFilter.cs" />
     <Compile Include="Core\Infrastructure\SmDependencyResolver.cs" />
     <Compile Include="Core\Model\Forums\Forum.cs" />
+    <Compile Include="Core\Model\Forums\ForumTopicsExcludedUser.cs" />
     <Compile Include="Core\Model\Forums\Poll.cs" />
     <Compile Include="Core\Model\Forums\PollAnswer.cs" />
     <Compile Include="Core\Model\Forums\PollType.cs" />

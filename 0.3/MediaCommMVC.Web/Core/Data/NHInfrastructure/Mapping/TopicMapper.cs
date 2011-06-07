@@ -16,7 +16,9 @@ namespace MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping
             mapping.Map(t => t.Title).Not.Nullable();
             mapping.References(t => t.Poll).Cascade.All();
             mapping.IgnoreProperty(t => t.ReadByCurrentUser);
-            mapping.HasManyToMany(t => t.ExcludedUsers).Not.LazyLoad().Table("ForumTopicsExcludedUsers").Cascade.None();
+            mapping.IgnoreProperty(t => t.ExcludedUsernames);
+            mapping.HasManyToMany(t => t.ExcludedUsers).Table("ForumTopicsExcludedUsers").Cascade.None();
+            //mapping.Map(t => t.ExcludedUserNames).Formula("(SELECT u.UserName FROM MediaCommUsers u JOIN ForumTopicsExcludedUsers ex ON (u.Id = ex.MediaCommUserID) WHERE ex.TopicID = Id)");
         }
     }
 }

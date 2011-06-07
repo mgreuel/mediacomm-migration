@@ -51,7 +51,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         #region Constructors and Destructors
 
         public ForumRepository(ISessionContainer sessionContainer, IConfigAccessor configAccessor, ILogger logger)
-            //: base(sessionContainer, configAccessor, logger)
+        //: base(sessionContainer, configAccessor, logger)
         {
             this.sessionContainer = sessionContainer;
             this.configAccessor = configAccessor;
@@ -73,6 +73,8 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         {
             this.Session.Save(post);
             this.UpdateLastPostInfo(post);
+
+#warning set topicRead
         }
 
         public Topic AddTopic(Topic topic, Post post)
@@ -88,6 +90,8 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             this.Session.Save(post);
 
             this.UpdateLastPostInfo(post);
+
+#warning set topicRead
 
             return topic;
         }
@@ -135,6 +139,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         {
             List<Forum> allForums = this.Session.Query<Forum>().ToList();
 
+            // FutureValue does not work, because "Sql queries in MultiQuery are currently not supported."
             foreach (Forum forum in allForums)
             {
                 forum.HasUnreadTopics =
@@ -210,7 +215,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         /// <returns>The post with the id.</returns>
         public Post GetPostById(int id)
         {
-            Post post = this.Session.Get<Post>(id);
+            Post post = this.Session.Query<Post>().Fetch(p => p.Topic).ThenFetch(t => t.Forum).Single(p => p.Id == id);
 
             return post;
         }
@@ -233,15 +238,13 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
             if (isLastPage)
             {
-
                 TopicRead topicRead =
                     this.Session.Query<TopicRead>().SingleOrDefault(r => r.ReadByUser.Id == currentUser.Id && r.ReadTopic.Id == topicId) ??
-                    new TopicRead { ReadByUser = currentUser, ReadTopic = this.Session.Get<Topic>(topicId) };
+                    new TopicRead { ReadByUser = currentUser, ReadTopic = this.Session.Load<Topic>(topicId) };
 
                 topicRead.LastVisit = DateTime.Now;
 
                 this.Session.SaveOrUpdate(topicRead);
-
             }
 
             return posts;
@@ -249,7 +252,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         public Topic GetTopicById(int id)
         {
-            Topic topic = this.Session.Query<Topic>().Fetch(t => t.Poll).Fetch(t => t.Forum).Single(t => t.Id == id);
+            Topic topic = this.Session.Query<Topic>().Fetch(t => t.Poll).Fetch(t => t.Forum).SingleOrDefault(t => t.Id == id);
 
 #warning check excluded users
 
@@ -264,6 +267,20 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
                         t => t.DisplayPriority).ThenByDescending(t => t.LastPostTime).ThenByDescending(t => t.Id).Skip(
                             (pagingParameters.CurrentPage - 1) * pagingParameters.PageSize).Take(
                                 pagingParameters.PageSize).ToList();
+
+            List<int> topicIds = topics.Select(t => t.Id).ToList();
+
+            var x = this.Session.Query<ForumTopicsExcludedUser>().ToList();
+
+            ILookup<int, string> excludedUsernames =
+                this.Session.Query<ForumTopicsExcludedUser>().Where(ex => topicIds.Contains(ex.Topic.Id)).ToLookup(
+                    ex => ex.Topic.Id, ex => ex.MediaCommUser.UserName);
+
+            foreach (Topic topic in topics)
+            {
+                topic.ExcludedUsernames = excludedUsernames.FirstOrDefault(ex => ex.Key == topic.Id);
+            }
+
 
             this.UpdateTopicReadStatus(topics.Where(t => t.LastPostTime > DateTime.Now - this.topicUnreadValidity), currentUser);
 
@@ -324,7 +341,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         private void UpdateTopicReadStatus(IEnumerable<Topic> topics, MediaCommUser currentUser)
         {
-            List<TopicRead> readTopics = this.Session.Query<TopicRead>().Where(r => r.LastVisit > DateTime.Now - this.topicUnreadValidity).ToList();
+            List<TopicRead> readTopics = this.Session.Query<TopicRead>().Fetch(tr => tr.ReadTopic).Fetch(tr => tr.ReadByUser).Where(r => r.LastVisit > DateTime.Now - this.topicUnreadValidity).ToList();
 
             foreach (Topic topic in topics)
             {

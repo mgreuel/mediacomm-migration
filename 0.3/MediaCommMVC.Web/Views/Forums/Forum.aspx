@@ -58,10 +58,10 @@
                            }%>
                         <%= Html.NumbersOnlyPager(new PagingParameters { PageSize = this.Model.PostsPerTopicPage, TotalCount = topic.PostCount}, 
                                 string.Format("/Forums/Topic/{0}/{1}", topic.Id, Url.ToFriendlyUrl(topic.Title)))%>
-                        <% if (topic.ExcludedUsers.Count() > 0)
+                        <% if (topic.ExcludedUsernames != null && topic.ExcludedUsernames.Count() > 0)
                            {
                                this.Writer.Write("&nbsp;");
-                               this.Writer.Write(Forums.InvisibleFor + string.Join(", ", topic.ExcludedUsers.Select(u => u.UserName)));
+                               this.Writer.Write(Forums.InvisibleFor + string.Join(", ", topic.ExcludedUsernames));
                            }%>
                     </span>
                 </td>

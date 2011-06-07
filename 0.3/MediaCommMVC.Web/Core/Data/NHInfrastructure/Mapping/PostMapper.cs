@@ -22,7 +22,7 @@ namespace MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping
         {
             mapping.Table("ForumPosts");
             mapping.References(p => p.Topic).Not.Nullable().Cascade.SaveUpdate();
-            mapping.References(p => p.Author).Not.Nullable().Cascade.SaveUpdate();
+            mapping.References(p => p.Author).Not.LazyLoad().Not.Nullable().Cascade.SaveUpdate();
             mapping.Map(p => p.Text).CustomSqlType("nvarchar(MAX)");
             mapping.Map(p => p.Created).CustomSqlType("datetime2");
         }
