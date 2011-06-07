@@ -10,8 +10,6 @@
 
     public class NHibernateActionFilter : ActionFilterAttribute
     {
-        #region Public Methods
-
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             ISession session = HttpContextSessionContainer.SessionFactory.OpenSession();
@@ -38,7 +36,5 @@
                 }
             }
         }
-
-        #endregion
     }
 }
