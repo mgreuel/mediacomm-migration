@@ -170,7 +170,10 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
                 (this.Session.Query<TopicRead>().SingleOrDefault(tr => tr.ReadByUser.UserName == user.UserName && tr.ReadTopic.Id == id) ??
                  new TopicRead { LastVisit = DateTime.Now.AddMonths(-1) }).LastVisit;
 
-            Post post = this.Session.Query<Post>().Where(p => p.Topic.Id == id && p.Created > date).OrderByDescending(p => p.Created).FirstOrDefault();
+            // Get FIrst unread post or the newwest one if all are read
+            Post post =
+                this.Session.Query<Post>().Where(p => p.Topic.Id == id && p.Created > date).OrderBy(p => p.Created).FirstOrDefault() ??
+                this.Session.Query<Post>().Where(p => p.Topic.Id == id).OrderByDescending(p => p.Created).First();
 
             return post;
         }
@@ -341,7 +344,9 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         private void UpdateTopicReadStatus(IEnumerable<Topic> topics, MediaCommUser currentUser)
         {
-            List<TopicRead> readTopics = this.Session.Query<TopicRead>().Fetch(tr => tr.ReadTopic).Fetch(tr => tr.ReadByUser).Where(r => r.LastVisit > DateTime.Now - this.topicUnreadValidity).ToList();
+            List<TopicRead> readTopics =
+                this.Session.Query<TopicRead>().Fetch(tr => tr.ReadTopic).Fetch(tr => tr.ReadByUser).Where(
+                    tr => tr.LastVisit > DateTime.Now - this.topicUnreadValidity && tr.ReadByUser.Id == currentUser.Id).ToList();
 
             foreach (Topic topic in topics)
             {
