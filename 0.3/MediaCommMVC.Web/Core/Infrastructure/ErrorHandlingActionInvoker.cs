@@ -3,20 +3,10 @@ using System.Web.Mvc;
 
 namespace MediaCommMVC.Web.Core.Infrastructure
 {
-    /// <summary>
-    /// This class allows an Exception filter to be injected when an MVC action is invoked.
-    /// </summary>
     public class ErrorHandlingActionInvoker : ControllerActionInvoker
     {
-        /// <summary>
-        /// The exception filter.
-        /// </summary>
         private readonly IExceptionFilter filter;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorHandlingActionInvoker"/> class.
-        /// </summary>
-        /// <param name="filter">The exception filter to inject.</param>
         public ErrorHandlingActionInvoker(IExceptionFilter filter)
         {
             if (filter == null)
@@ -27,13 +17,6 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             this.filter = filter;
         }
 
-        /// <summary>
-        /// This methods returns all of the normal filters used.
-        /// PLUS it appends our custom filter to the end of the list.
-        /// </summary>
-        /// <param name="controllerContext">The context of the controller.</param>
-        /// <param name="actionDescriptor">The action descriptor.</param>
-        /// <returns>All of the action filters.</returns>
         protected override FilterInfo GetFilters(
             ControllerContext controllerContext,
             ActionDescriptor actionDescriptor)

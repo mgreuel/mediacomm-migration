@@ -1,22 +1,11 @@
-﻿#region Using Directives
-
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 using MediaCommMVC.Web.Core.Model.Forums;
 
-#endregion
-
 namespace MediaCommMVC.Web.Core.Helpers
 {
-    /// <summary>Determines icon filenames.</summary>
     public static class IconHelper
     {
-        #region Public Methods
-
-        /// <summary>Gets the filename for a topic icon.</summary>
-        /// <param name="helper">The url helper.</param>
-        /// <param name="forum">The topic.</param>
-        /// <returns>The filename of the topic icon.</returns>
         public static string ForumIcon(this UrlHelper helper, Forum forum)
         {
             string filename = "folder";
@@ -29,10 +18,6 @@ namespace MediaCommMVC.Web.Core.Helpers
             return filename + ".gif";
         }
 
-        /// <summary>Gets the filename for a topic icon.</summary>
-        /// <param name="helper">The url helper.</param>
-        /// <param name="topic">The topic.</param>
-        /// <returns>The filename of the topic icon.</returns>
         public static string TopicIcon(this UrlHelper helper, Topic topic)
         {
             string filename = "folder";
@@ -49,7 +34,5 @@ namespace MediaCommMVC.Web.Core.Helpers
 
             return filename + ".gif";
         }
-
-        #endregion
     }
 }
