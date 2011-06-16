@@ -9,18 +9,12 @@ namespace MediaCommMVC.Web.Core.Helpers
 {
     public static class Pagination
     {
-        public static MvcHtmlString NumbersOnlyPager(
-            this HtmlHelper helper, 
-            PagingParameters pagingParameters, 
-            string baseUrl)
+        public static MvcHtmlString NumbersOnlyPager(this HtmlHelper helper, PagingParameters pagingParameters, string baseUrl)
         {
             return BuildPager(pagingParameters, baseUrl, true);
         }
 
-        public static MvcHtmlString Pager(
-            this HtmlHelper helper, 
-            PagingParameters pagingParameters, 
-            string baseUrl)
+        public static MvcHtmlString Pager(this HtmlHelper helper, PagingParameters pagingParameters, string baseUrl)
         {
             return BuildPager(pagingParameters, baseUrl, false);
         }
@@ -34,15 +28,14 @@ namespace MediaCommMVC.Web.Core.Helpers
                 return MvcHtmlString.Empty;
             }
 
-            StringBuilder pagerBuilder = new StringBuilder("[ "  + General.GoToPage);
+            StringBuilder pagerBuilder = new StringBuilder("[ " + General.GoToPage);
 
             const string FormatNormal = "<span> <a href='{0}/{1}'>{2}</a></span>";
             const string FormatSelected = "<span class='selected'> {0}</span>";
 
             if (!numbersOnly && pagingParameters.CurrentPage > 1)
             {
-                pagerBuilder.AppendFormat(
-                    FormatNormal, baseUrl, pagingParameters.CurrentPage - 1, General.Previous);
+                pagerBuilder.AppendFormat(FormatNormal, baseUrl, pagingParameters.CurrentPage - 1, General.Previous);
             }
 
             for (int i = 1; i <= totalPages; i++)
@@ -59,8 +52,7 @@ namespace MediaCommMVC.Web.Core.Helpers
 
             if (!numbersOnly && pagingParameters.CurrentPage < totalPages)
             {
-                pagerBuilder.AppendFormat(
-                    FormatNormal, baseUrl, pagingParameters.CurrentPage + 1, General.Next);
+                pagerBuilder.AppendFormat(FormatNormal, baseUrl, pagingParameters.CurrentPage + 1, General.Next);
             }
 
             return MvcHtmlString.Create(pagerBuilder + " ]");

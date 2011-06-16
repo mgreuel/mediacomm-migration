@@ -4,7 +4,8 @@
 
     public class SessionNotInitializedException : Exception
     {
-        public SessionNotInitializedException(string message) : base(message)
+        public SessionNotInitializedException(string message)
+            : base(message)
         {
         }
     }

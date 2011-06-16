@@ -7,22 +7,22 @@ namespace MediaCommMVC.Web.Core.DataInterfaces
 {
     public interface IVideoRepository
     {
-        VideoCategory GetCategoryById(int id);
+        void AddCategory(VideoCategory videoCategory);
+
+        void AddVideo(Video video);
 
         IEnumerable<VideoCategory> GetAllCategories();
+
+        VideoCategory GetCategoryById(int id);
+
+        Image GetThumbnailImage(int videoId);
+
+        IEnumerable<string> GetUnmappedPosterFiles();
 
         IEnumerable<string> GetUnmappedThumbnailFiles();
 
         IEnumerable<string> GetUnmappedVideoFiles();
 
-        void AddCategory(VideoCategory videoCategory);
-
-        void AddVideo(Video video);
-
-        Image GetThumbnailImage(int videoId);
-
         Video GetVideoById(int id);
-
-        IEnumerable<string> GetUnmappedPosterFiles();
     }
 }

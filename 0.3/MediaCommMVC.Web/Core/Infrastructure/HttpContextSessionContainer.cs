@@ -36,7 +36,8 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             {
                 if (InternalSession == null)
                 {
-                    throw new SessionNotInitializedException("The NH session has not been initialized. Make sure all actions accessing the DB have the NHibernateActionFilter attribute.");
+                    throw new SessionNotInitializedException(
+                        "The NH session has not been initialized. Make sure all actions accessing the DB have the NHibernateActionFilter attribute.");
                 }
 
                 return InternalSession;
@@ -50,8 +51,15 @@ namespace MediaCommMVC.Web.Core.Infrastructure
 
         private static ISession InternalSession
         {
-            get { return HttpContext.Current.Items["NHibernateSession"] as ISession; }
-            set { HttpContext.Current.Items["NHibernateSession"] = value; }
+            get
+            {
+                return HttpContext.Current.Items["NHibernateSession"] as ISession;
+            }
+
+            set
+            {
+                HttpContext.Current.Items["NHibernateSession"] = value;
+            }
         }
 
         private static ISessionFactory CreateSessionFactory()

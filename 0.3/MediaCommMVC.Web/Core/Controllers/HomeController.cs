@@ -3,14 +3,12 @@ using System.Web.Mvc;
 
 using MediaCommMVC.Web.Core.DataInterfaces;
 using MediaCommMVC.Web.Core.Infrastructure;
-
 using MediaCommMVC.Web.Core.Model.Forums;
 using MediaCommMVC.Web.Core.Model.Photos;
 using MediaCommMVC.Web.Core.ViewModel;
 
 namespace MediaCommMVC.Web.Core.Controllers
 {
-
     [HandleError]
     [Authorize]
     public class HomeController : Controller

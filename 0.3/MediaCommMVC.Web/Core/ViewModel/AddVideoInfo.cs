@@ -6,12 +6,12 @@ namespace MediaCommMVC.Web.Core.ViewModel
 {
     public class AddVideoInfo
     {
-        public IEnumerable<string> AvailableVideos { get; set; }
-
-        public IEnumerable<string> AvailableThumbnails { get; set; }
-
         public IEnumerable<VideoCategory> AvailableCategories { get; set; }
 
         public IEnumerable<string> AvailablePosters { get; set; }
+
+        public IEnumerable<string> AvailableThumbnails { get; set; }
+
+        public IEnumerable<string> AvailableVideos { get; set; }
     }
 }

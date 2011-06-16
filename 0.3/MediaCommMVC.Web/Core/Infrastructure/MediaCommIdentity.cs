@@ -14,7 +14,10 @@ namespace MediaCommMVC.Web.Core.Infrastructure
 
         public string AuthenticationType
         {
-            get { return "MediaCommMVCUser"; }
+            get
+            {
+                return "MediaCommMVCUser";
+            }
         }
 
         public string FriendlyName
@@ -27,12 +30,18 @@ namespace MediaCommMVC.Web.Core.Infrastructure
 
         public bool IsAuthenticated
         {
-            get { return true; }
+            get
+            {
+                return true;
+            }
         }
 
         public string Name
         {
-            get { return this.ticket.Name; }
+            get
+            {
+                return this.ticket.Name;
+            }
         }
     }
 }

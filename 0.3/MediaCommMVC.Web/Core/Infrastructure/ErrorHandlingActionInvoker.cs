@@ -17,9 +17,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             this.filter = filter;
         }
 
-        protected override FilterInfo GetFilters(
-            ControllerContext controllerContext,
-            ActionDescriptor actionDescriptor)
+        protected override FilterInfo GetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
         {
             var filterInfo = base.GetFilters(controllerContext, actionDescriptor);
 

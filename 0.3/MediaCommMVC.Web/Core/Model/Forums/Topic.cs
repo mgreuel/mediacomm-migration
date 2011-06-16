@@ -19,9 +19,9 @@ namespace MediaCommMVC.Web.Core.Model.Forums
 
         public virtual TopicDisplayPriority DisplayPriority { get; set; }
 
-        public virtual IEnumerable<MediaCommUser> ExcludedUsers { get; set; }
-
         public virtual IEnumerable<string> ExcludedUsernames { get; set; }
+
+        public virtual IEnumerable<MediaCommUser> ExcludedUsers { get; set; }
 
         public virtual Forum Forum { get; set; }
 
