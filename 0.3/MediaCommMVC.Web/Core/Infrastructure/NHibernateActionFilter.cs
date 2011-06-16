@@ -1,13 +1,10 @@
-﻿namespace MediaCommMVC.Web.Core.Infrastructure
+﻿
+using System.Web.Mvc;
+
+using NHibernate;
+
+namespace MediaCommMVC.Web.Core.Infrastructure
 {
-    #region Using Directives
-
-    using System.Web.Mvc;
-
-    using NHibernate;
-
-    #endregion
-
     public class NHibernateActionFilter : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)

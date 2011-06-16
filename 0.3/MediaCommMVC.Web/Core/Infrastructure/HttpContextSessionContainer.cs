@@ -1,33 +1,28 @@
-﻿namespace MediaCommMVC.Web.Core.Infrastructure
+﻿using System.Web;
+
+using MediaCommMVC.Web.Core.Common.Exceptions;
+using MediaCommMVC.Web.Core.Data.NHInfrastructure.Config;
+using MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping;
+
+using NHibernate;
+
+namespace MediaCommMVC.Web.Core.Infrastructure
 {
-    #region Using Directives
-
-    using System.Web;
-
-    using MediaCommMVC.Web.Core.Common.Exceptions;
-    using MediaCommMVC.Web.Core.Data.NHInfrastructure.Config;
-    using MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping;
-
-    using NHibernate;
-
-    #endregion
-
     public class HttpContextSessionContainer : ISessionContainer
     {
-        #region Constants and Fields
-
         private static readonly object sessionFactoryLock = new object();
 
         private static ISessionFactory sessionFactory;
-
-        #endregion
-
-        #region Properties
 
         public static ISessionFactory SessionFactory
         {
             get
             {
+                if (sessionFactory != null)
+                {
+                    return sessionFactory;
+                }
+
                 lock (sessionFactoryLock)
                 {
                     return sessionFactory ?? (sessionFactory = CreateSessionFactory());
@@ -59,16 +54,10 @@
             set { HttpContext.Current.Items["NHibernateSession"] = value; }
         }
 
-        #endregion
-
-        #region Methods
-
         private static ISessionFactory CreateSessionFactory()
         {
             ConfigurationGenerator configurationGenerator = new ConfigurationGenerator(new AutoMapGenerator());
             return configurationGenerator.Generate().BuildSessionFactory();
         }
-
-        #endregion
     }
 }

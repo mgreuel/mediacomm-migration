@@ -1,26 +1,14 @@
-﻿#region Using Directives
-
-using System.Text;
+﻿using System.Text;
 using System.Web.Mvc;
 
 using MediaCommMVC.Web.Core.Parameters;
 
 using Resources;
 
-#endregion
-
 namespace MediaCommMVC.Web.Core.Helpers
 {
-    /// <summary>Html Helpers for pagination.</summary>
     public static class Pagination
     {
-        #region Public Methods
-
-        /// <summary>Creates a pager displaying only the page numbers.</summary>
-        /// <param name="helper">The helper.</param>
-        /// <param name="pagingParameters">The paging parameters.</param>
-        /// <param name="baseUrl">The base URL.</param>
-        /// <returns>The paging html code.</returns>
         public static MvcHtmlString NumbersOnlyPager(
             this HtmlHelper helper, 
             PagingParameters pagingParameters, 
@@ -29,11 +17,6 @@ namespace MediaCommMVC.Web.Core.Helpers
             return BuildPager(pagingParameters, baseUrl, true);
         }
 
-        /// <summary>Creates a pager with text and page numbers.</summary>
-        /// <param name="helper">The helper.</param>
-        /// <param name="pagingParameters">The paging parameters.</param>
-        /// <param name="baseUrl">The base URL.</param>
-        /// <returns>The paging html code.</returns>
         public static MvcHtmlString Pager(
             this HtmlHelper helper, 
             PagingParameters pagingParameters, 
@@ -42,15 +25,6 @@ namespace MediaCommMVC.Web.Core.Helpers
             return BuildPager(pagingParameters, baseUrl, false);
         }
 
-        #endregion
-
-        #region Methods
-
-        /// <summary>Builds the pager html.</summary>
-        /// <param name="pagingParameters">The paging parameters.</param>
-        /// <param name="baseUrl">The base URL.</param>
-        /// <param name="numbersOnly">if set to <c>true</c> [only the numbers are created].</param>
-        /// <returns>The pager html code.</returns>
         private static MvcHtmlString BuildPager(PagingParameters pagingParameters, string baseUrl, bool numbersOnly)
         {
             int totalPages = pagingParameters.NumberOfPages;
@@ -91,7 +65,5 @@ namespace MediaCommMVC.Web.Core.Helpers
 
             return MvcHtmlString.Create(pagerBuilder + " ]");
         }
-
-        #endregion
     }
 }

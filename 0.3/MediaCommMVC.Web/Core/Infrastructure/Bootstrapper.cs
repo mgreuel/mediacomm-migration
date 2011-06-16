@@ -1,51 +1,13 @@
-﻿#region Using Directives
-
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
+using StructureMap;
 
 using log4net.Config;
 
-using MediaCommMVC.Web.Core.Common.Config;
-using MediaCommMVC.Web.Core.Common.Logging;
-using MediaCommMVC.Web.Core.Data;
-using MediaCommMVC.Web.Core.Data.NHInfrastructure;
-using MediaCommMVC.Web.Core.Data.NHInfrastructure.Config;
-using MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping;
-using MediaCommMVC.Web.Core.Data.Repositories;
-using MediaCommMVC.Web.Core.DataInterfaces;
-
-
-using WebExtensions = Combres.WebExtensions;
-
-#endregion
-
 namespace MediaCommMVC.Web.Core.Infrastructure
 {
-    using StructureMap;
-
-    /// <summary>Boostrapper initializing the web application.</summary>
     public class Bootstrapper
     {
-        #region Constants and Fields
-
-        #endregion
-
-        #region Constructors and Destructors
-
-        /// <summary>Initializes a new instance of the <see cref="Bootstrapper"/> class.</summary>
-        /// <param name="container">The container.</param>
-        /// <param name="logger">The logger.</param>
-        //public Bootstrapper(IUnityContainer container, ILogger logger)
-        //{
-        //    this.container = container;
-        //    this.logger = logger;
-        //}
-
-        #endregion
-
-        #region Public Methods
-
-        /// <summary>Runs the bootstrapper.</summary>
         public void Run()
         {
             IContainer container = StructureMapSetup.Initialize();
@@ -55,17 +17,11 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             ConfigureLog4Net();
         }
 
-        #endregion
-
-        #region Methods
-
-        /// <summary>Configures the log4net logger using the web.config.</summary>
         private static void ConfigureLog4Net()
         {
             XmlConfigurator.Configure();
         }
 
-        /// <summary>Registers the routes.</summary>
         private static void RegisterRoutes()
         {
             RouteCollection routes = RouteTable.Routes;
@@ -120,7 +76,5 @@ namespace MediaCommMVC.Web.Core.Infrastructure
 
             routes.MapRoute("Error", "Error", new { controller = "Home", action = "Error" });
         }
-
-        #endregion
     }
 }
