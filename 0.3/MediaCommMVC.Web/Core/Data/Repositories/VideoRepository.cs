@@ -7,71 +7,23 @@ using System.Linq;
 using MediaCommMVC.Web.Core.Common;
 using MediaCommMVC.Web.Core.Common.Config;
 using MediaCommMVC.Web.Core.Common.Logging;
-using MediaCommMVC.Web.Core.Data.NHInfrastructure;
 using MediaCommMVC.Web.Core.DataInterfaces;
+using MediaCommMVC.Web.Core.Infrastructure;
 using MediaCommMVC.Web.Core.Model.Videos;
 
 using NHibernate.Linq;
 
-using Enumerable = System.Linq.Enumerable;
-
 namespace MediaCommMVC.Web.Core.Data.Repositories
 {
-    using MediaCommMVC.Web.Core.Infrastructure;
-
     public class VideoRepository : RepositoryBase, IVideoRepository
     {
-        private const string videoRootDirKey = "VideoRootDir";
-
         private const string IncomingvideosFolderName = "incoming";
+
+        private const string videoRootDirKey = "VideoRootDir";
 
         public VideoRepository(ISessionContainer sessionManager, IConfigAccessor configAccessor, ILogger logger)
             : base(sessionManager, configAccessor, logger)
         {
-        }
-
-        #region Implementation of IVideoRepository
-
-        public VideoCategory GetCategoryById(int id)
-        {
-            return this.Session.Get<VideoCategory>(id);
-        }
-
-        public IEnumerable<VideoCategory> GetAllCategories()
-        {
-            return Enumerable.ToList<VideoCategory>(this.Session.Query<VideoCategory>());
-        }
-
-        public IEnumerable<string> GetUnmappedThumbnailFiles()
-        {
-            string incomingVideoPath = this.GetIncomingVideosPath();
-
-            return
-                Enumerable.ToList<string>(Directory.GetFiles(incomingVideoPath).Where(
-                            f =>
-                            f.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
-                            f.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase)).Select(
-                                f => f.Substring(f.LastIndexOf('\\') + 1)));
-        }
-
-        private string GetIncomingVideosPath()
-        {
-            string basePath = this.ConfigAccessor.GetConfigValue(videoRootDirKey);
-            string incomingVideosPath = Path.Combine(basePath, IncomingvideosFolderName);
-
-            if (!Directory.Exists(incomingVideosPath))
-            {
-                Directory.CreateDirectory(incomingVideosPath);
-            }
-
-            return incomingVideosPath;
-        }
-
-        public IEnumerable<string> GetUnmappedVideoFiles()
-        {
-            string incomingVideoPath = this.GetIncomingVideosPath();
-
-            return Directory.GetFiles(incomingVideoPath, "*.webm").Select(f => f.Substring(f.LastIndexOf('\\') + 1)).ToList();
         }
 
         public void AddCategory(VideoCategory videoCategory)
@@ -86,6 +38,16 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             this.Session.Save(video);
         }
 
+        public IEnumerable<VideoCategory> GetAllCategories()
+        {
+            return this.Session.Query<VideoCategory>().ToList();
+        }
+
+        public VideoCategory GetCategoryById(int id)
+        {
+            return this.Session.Get<VideoCategory>(id);
+        }
+
         public Image GetThumbnailImage(int videoId)
         {
             Video video = this.Session.Get<Video>(videoId);
@@ -96,21 +58,49 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             return Image.FromFile(thumbnailFilename);
         }
 
-        public Video GetVideoById(int id)
-        {
-            return this.Session.Get<Video>(id);
-        }
-
         public IEnumerable<string> GetUnmappedPosterFiles()
         {
             string incomingVideoPath = this.GetIncomingVideosPath();
 
             return
                 Directory.GetFiles(incomingVideoPath).Where(
-                    f =>
-                    f.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
-                    f.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase)).Select(
+                    f => f.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase)).Select(
                         f => f.Substring(f.LastIndexOf('\\') + 1)).ToList();
+        }
+
+        public IEnumerable<string> GetUnmappedThumbnailFiles()
+        {
+            string incomingVideoPath = this.GetIncomingVideosPath();
+
+            return
+                Directory.GetFiles(incomingVideoPath).Where(
+                    f => f.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase)).Select(
+                        f => f.Substring(f.LastIndexOf('\\') + 1)).ToList();
+        }
+
+        public IEnumerable<string> GetUnmappedVideoFiles()
+        {
+            string incomingVideoPath = this.GetIncomingVideosPath();
+
+            return Directory.GetFiles(incomingVideoPath, "*.webm").Select(f => f.Substring(f.LastIndexOf('\\') + 1)).ToList();
+        }
+
+        public Video GetVideoById(int id)
+        {
+            return this.Session.Get<Video>(id);
+        }
+
+        private string GetIncomingVideosPath()
+        {
+            string basePath = this.ConfigAccessor.GetConfigValue(videoRootDirKey);
+            string incomingVideosPath = Path.Combine(basePath, IncomingvideosFolderName);
+
+            if (!Directory.Exists(incomingVideosPath))
+            {
+                Directory.CreateDirectory(incomingVideosPath);
+            }
+
+            return incomingVideosPath;
         }
 
         private void MoveVideoFiles(Video video)
@@ -137,7 +127,5 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             video.ThumbnailFileName = urlEncodedThumbnailFileName;
             video.PosterFileName = urlEncodedPosterFileName;
         }
-
-        #endregion
     }
 }

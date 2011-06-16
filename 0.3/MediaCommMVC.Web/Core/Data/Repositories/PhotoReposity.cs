@@ -1,6 +1,4 @@
-﻿#region Using Directives
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -9,65 +7,32 @@ using System.Text.RegularExpressions;
 
 using MediaCommMVC.Web.Core.Common.Config;
 using MediaCommMVC.Web.Core.Common.Logging;
-using MediaCommMVC.Web.Core.Data.NHInfrastructure;
 using MediaCommMVC.Web.Core.DataInterfaces;
+using MediaCommMVC.Web.Core.Infrastructure;
 using MediaCommMVC.Web.Core.Model.Photos;
 using MediaCommMVC.Web.Core.Model.Users;
 
-using NHibernate;
 using NHibernate.Linq;
-
-using Enumerable = System.Linq.Enumerable;
-using Queryable = System.Linq.Queryable;
-
-#endregion
 
 namespace MediaCommMVC.Web.Core.Data.Repositories
 {
-    using MediaCommMVC.Web.Core.Infrastructure;
-
-    /// <summary>Implements the IPhotoRepository using NHibernate.</summary>
     public class PhotoRepository : RepositoryBase, IPhotoRepository
     {
-        #region Constants and Fields
-
-        /// <summary>Folder containing unprocessed files.</summary>
         private const string UnprocessedPhotosFolder = "unprocessed";
 
-        /// <summary>The image generator.</summary>
         private readonly IImageGenerator imageGenerator;
 
-        #endregion
-
-        #region Constructors and Destructors
-
-        /// <summary>Initializes a new instance of the <see cref="PhotoRepository"/> class.</summary>
-        /// <param name="sessionManager">The session manager.</param>
-        /// <param name="configAccessor">The config Accessor.</param>
-        /// <param name="logger">The logger.</param>
-        /// <param name="imageGenerator">The image generator.</param>
         public PhotoRepository(ISessionContainer sessionManager, IConfigAccessor configAccessor, ILogger logger, IImageGenerator imageGenerator)
             : base(sessionManager, configAccessor, logger)
         {
             this.imageGenerator = imageGenerator;
         }
 
-        #endregion
-
-        #region Implemented Interfaces
-
-        #region IPhotoRepository
-
-        /// <summary>Adds the category to the persistence layer.</summary>
-        /// <param name="category">The category.</param>
         public void AddCategory(PhotoCategory category)
         {
             this.Session.SaveOrUpdate(category);
         }
 
-        /// <summary>Adds the photos in the specified folder to the DB.</summary>
-        /// <param name="album">The album.</param>
-        /// <param name="uploader">The uploader.</param>
         public void AddPhotos(PhotoAlbum album, MediaCommUser uploader)
         {
             string targetPath = this.GetTargetPath(album);
@@ -80,43 +45,29 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             this.imageGenerator.GenerateImages(targetPath, UnprocessedPhotosFolder);
         }
 
-        /// <summary>Gets the 4 newest albums.</summary>
-        /// <returns>The 4 newest albums.</returns>
         public IEnumerable<PhotoAlbum> Get4NewestAlbums()
         {
-            List<PhotoAlbum> albums = this.Session.Query<PhotoAlbum>().OrderByDescending(a => a.LastPicturesAdded).Take(4).ToList();
-
-            return albums;
+            return this.Session.Query<PhotoAlbum>().OrderByDescending(a => a.LastPicturesAdded).Take(4).ToList();
         }
 
         public PhotoAlbum GetAlbumById(int albumId)
         {
-            PhotoAlbum album = this.Session.Get<PhotoAlbum>(albumId);
-
-            return album;
+            return this.Session.Get<PhotoAlbum>(albumId);
         }
 
         public IEnumerable<PhotoAlbum> GetAlbumsForCategoryIdStartingWith(int catId, string term)
         {
-            IEnumerable<PhotoAlbum> albums =
-                this.Session.Query<PhotoAlbum>().Where(
-                    a => a.PhotoCategory.Id == catId && a.Name.StartsWith(term)).ToList();
-
-            return albums;
+            return this.Session.Query<PhotoAlbum>().Where(a => a.PhotoCategory.Id == catId && a.Name.StartsWith(term)).ToList();
         }
 
         public IEnumerable<PhotoCategory> GetAllCategories()
         {
-            IEnumerable<PhotoCategory> categories = this.Session.Query<PhotoCategory>().ToList();
-
-            return categories;
+            return this.Session.Query<PhotoCategory>().ToList();
         }
 
         public PhotoCategory GetCategoryById(int id)
         {
-            PhotoCategory category = this.Session.Query<PhotoCategory>().FetchMany(c => c.Albums).Single(c => c.Id == id);
-
-            return category;
+            return this.Session.Query<PhotoCategory>().FetchMany(c => c.Albums).Single(c => c.Id == id);
         }
 
         public Image GetImage(int photoId, string size)
@@ -125,10 +76,11 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
             string fileName = photo.FileName.Insert(photo.FileName.LastIndexOf("."), size);
 
-            string imagePath =
+            string imagePath = Path.Combine(
+                this.ConfigAccessor.GetConfigValue("PhotoRootDir"), 
                 Path.Combine(
-                    this.ConfigAccessor.GetConfigValue("PhotoRootDir"),
-                    Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.PhotoCategory.Name), Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.Name), fileName)));
+                    this.GetValidDirectoryName(photo.PhotoAlbum.PhotoCategory.Name), 
+                    Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.Name), fileName)));
 
             Image image = Image.FromFile(imagePath);
 
@@ -144,9 +96,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         public Photo GetPhotoById(int id)
         {
-            Photo photo = this.Session.Get<Photo>(id);
-
-            return photo;
+            return this.Session.Get<Photo>(id);
         }
 
         public string GetStoragePathForAlbum(PhotoAlbum album)
@@ -160,12 +110,6 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
             return storagePathForAlbum;
         }
-
-        #endregion
-
-        #endregion
-
-        #region Methods
 
         private static IEnumerable<FileInfo> GetFilesRecursive(DirectoryInfo directory)
         {
@@ -185,10 +129,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         private void AddPicturesToDB(IEnumerable<FileInfo> filesToAdd, PhotoAlbum album, MediaCommUser uploader)
         {
-            this.Logger.Debug("Adding {0} photos from the folder to the database. Album: '{1}', Uploader: '{2}'", filesToAdd.Count(), album, uploader);
-
-            PhotoAlbum photoAlbum =
-                Queryable.SingleOrDefault<PhotoAlbum>(this.Session.Query<PhotoAlbum>(), a => a.Name.Equals(album.Name)) ?? album;
+            PhotoAlbum photoAlbum = this.Session.Query<PhotoAlbum>().SingleOrDefault(a => a.Name.Equals(album.Name)) ?? album;
 
             photoAlbum.LastPicturesAdded = DateTime.Now;
 
@@ -201,12 +142,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
                 Photo photo = new Photo
                     {
-                        PhotoAlbum = photoAlbum,
-                        FileName = file.Name,
-                        FileSize = file.Length,
-                        Height = height,
-                        Uploader = uploader,
-                        Width = width
+                       PhotoAlbum = photoAlbum, FileName = file.Name, FileSize = file.Length, Height = height, Uploader = uploader, Width = width 
                     };
 
                 this.Session.Save(photo);
@@ -216,7 +152,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         private string GetTargetPath(PhotoAlbum album)
         {
             string targetPath = Path.Combine(
-                this.ConfigAccessor.GetConfigValue("PhotoRootDir"),
+                this.ConfigAccessor.GetConfigValue("PhotoRootDir"), 
                 Path.Combine(this.GetValidDirectoryName(album.PhotoCategory.Name), this.GetValidDirectoryName(album.Name)));
 
             if (!Directory.Exists(targetPath))
@@ -229,26 +165,16 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         private string GetValidDirectoryName(string directoryName)
         {
-            this.Logger.Debug("Getting valid directory name for '{0}'", directoryName);
-
             char[] invalidChars = Path.GetInvalidFileNameChars().Concat(Path.GetInvalidPathChars()).Distinct().ToArray();
             string invalidCharsRegexString = string.Format(@"[{0}]", Regex.Escape(new string(invalidChars) + " $.§ß%^&;=,'^´`#"));
             string validName = Regex.Replace(directoryName, invalidCharsRegexString, "_");
 
-            this.Logger.Debug("Got '{0}' as valid directory name", validName);
-
             return validName;
         }
 
-        /// <summary>Moves the photos to the final folder and renames duplicates.</summary>
-        /// <param name="targetPath">The target path.</param>
-        /// <param name="unprocessedPath">The path containing the unprocessed photos.</param>
-        /// <returns>A list of all file path.</returns>
         private IEnumerable<FileInfo> MovePhotos(string targetPath, string unprocessedPath)
         {
             IEnumerable<FileInfo> allFiles = GetFilesRecursive(new DirectoryInfo(unprocessedPath)).ToList();
-
-            this.Logger.Debug("Moving {2} photos from '{0}' to '{1}'", unprocessedPath, targetPath, allFiles.Count());
 
             List<FileInfo> newFiles = new List<FileInfo>();
 
@@ -282,7 +208,5 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
             return newFiles;
         }
-
-        #endregion
     }
 }

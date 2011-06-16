@@ -18,7 +18,6 @@ namespace MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping
             mapping.IgnoreProperty(t => t.ReadByCurrentUser);
             mapping.IgnoreProperty(t => t.ExcludedUsernames);
             mapping.HasManyToMany(t => t.ExcludedUsers).Table("ForumTopicsExcludedUsers").Cascade.None();
-            //mapping.Map(t => t.ExcludedUserNames).Formula("(SELECT u.UserName FROM MediaCommUsers u JOIN ForumTopicsExcludedUsers ex ON (u.Id = ex.MediaCommUserID) WHERE ex.TopicID = Id)");
         }
     }
 }

@@ -1,13 +1,9 @@
-﻿#region Using Directives
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using MediaCommMVC.Web.Core.Common.Config;
-using MediaCommMVC.Web.Core.Common.Logging;
-using MediaCommMVC.Web.Core.Data.NHInfrastructure;
 using MediaCommMVC.Web.Core.DataInterfaces;
+using MediaCommMVC.Web.Core.Infrastructure;
 using MediaCommMVC.Web.Core.Model.Forums;
 using MediaCommMVC.Web.Core.Model.Users;
 using MediaCommMVC.Web.Core.Parameters;
@@ -15,30 +11,18 @@ using MediaCommMVC.Web.Core.Parameters;
 using NHibernate;
 using NHibernate.Linq;
 
-using Enumerable = System.Linq.Enumerable;
-using Queryable = System.Linq.Queryable;
-
-#endregion
-
 namespace MediaCommMVC.Web.Core.Data.Repositories
 {
-    using MediaCommMVC.Web.Core.Infrastructure;
-
-    /// <summary>Implements the IForumRepository using NHibernate.</summary>
     public class ForumRepository : IForumRepository
     {
         private readonly ISessionContainer sessionContainer;
 
-        private readonly IConfigAccessor configAccessor;
-
-        private readonly ILogger logger;
-
-        #region Constants and Fields
-
-        /// <summary>The timespan a topic can be marked as unread.</summary>
         private readonly TimeSpan topicUnreadValidity = new TimeSpan(days: 30, hours: 0, minutes: 0, seconds: 0);
 
-        #endregion
+        public ForumRepository(ISessionContainer sessionContainer)
+        {
+            this.sessionContainer = sessionContainer;
+        }
 
         protected ISession Session
         {
@@ -47,22 +31,6 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
                 return this.sessionContainer.CurrentSession;
             }
         }
-
-        #region Constructors and Destructors
-
-        public ForumRepository(ISessionContainer sessionContainer, IConfigAccessor configAccessor, ILogger logger)
-        //: base(sessionContainer, configAccessor, logger)
-        {
-            this.sessionContainer = sessionContainer;
-            this.configAccessor = configAccessor;
-            this.logger = logger;
-        }
-
-        #endregion
-
-        #region Implemented Interfaces
-
-        #region IForumRepository
 
         public void AddForum(Forum forum)
         {
@@ -128,7 +96,9 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         public IEnumerable<Topic> Get10TopicsWithNewestPosts(MediaCommUser currentUser)
         {
-            List<Topic> topics = this.Session.Query<Topic>().Where(t => !t.ExcludedUsers.Contains(currentUser)).OrderByDescending(t => t.LastPostTime).Take(10).ToList();
+            List<Topic> topics =
+                this.Session.Query<Topic>().Where(t => !t.ExcludedUsers.Contains(currentUser)).OrderByDescending(t => t.LastPostTime).Take(10).ToList(
+                    );
 
             this.UpdateTopicReadStatus(topics.Where(t => t.LastPostTime > DateTime.Now - this.topicUnreadValidity), currentUser);
 
@@ -143,16 +113,15 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             foreach (Forum forum in allForums)
             {
                 forum.HasUnreadTopics =
-                   bool.Parse(this.Session.CreateSQLQuery(
-                        @"select case when COUNT(id) = 0 then 'False' else 'True' end
+                    bool.Parse(
+                        this.Session.CreateSQLQuery(
+                            @"select case when COUNT(id) = 0 then 'False' else 'True' end
 						from ForumTopics 
 						where ForumID = :forumId
 							and LastPostTime > DATEADD(day, -30, GETDATE())
 							and Id not in 
 								(select ReadTopicID from ForumTopicsRead where ReadByUserID = :userId and LastVisit > DATEADD(day, -30, GETDATE()) and LastVisit > LastPostTime)")
-                    .SetParameter("forumId", forum.Id)
-                    .SetParameter("userId", currentUser.Id)
-                    .UniqueResult<string>());
+                            .SetParameter("forumId", forum.Id).SetParameter("userId", currentUser.Id).UniqueResult<string>());
             }
 
             return allForums;
@@ -170,10 +139,9 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
                 (this.Session.Query<TopicRead>().SingleOrDefault(tr => tr.ReadByUser.UserName == user.UserName && tr.ReadTopic.Id == id) ??
                  new TopicRead { LastVisit = DateTime.Now.AddMonths(-1) }).LastVisit;
 
-            // Get FIrst unread post or the newwest one if all are read
-            Post post =
-                this.Session.Query<Post>().Where(p => p.Topic.Id == id && p.Created > date).OrderBy(p => p.Created).FirstOrDefault() ??
-                this.Session.Query<Post>().Where(p => p.Topic.Id == id).OrderByDescending(p => p.Created).First();
+            // Get First unread post or the newest one if all are read
+            Post post = this.Session.Query<Post>().Where(p => p.Topic.Id == id && p.Created > date).OrderBy(p => p.Created).FirstOrDefault() ??
+                        this.Session.Query<Post>().Where(p => p.Topic.Id == id).OrderByDescending(p => p.Created).First();
 
             return post;
         }
@@ -205,17 +173,11 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             return page;
         }
 
-        /// <summary>Gets the poll answer by id.</summary>
-        /// <param name="answerId">The answer id.</param>
-        /// <returns>The poll answer.</returns>
         public PollAnswer GetPollAnswerById(int answerId)
         {
             return this.Session.Get<PollAnswer>(answerId);
         }
 
-        /// <summary>Gets a post by id.</summary>
-        /// <param name="id">The post id.</param>
-        /// <returns>The post with the id.</returns>
         public Post GetPostById(int id)
         {
             Post post = this.Session.Query<Post>().Fetch(p => p.Topic).ThenFetch(t => t.Forum).Single(p => p.Id == id);
@@ -223,11 +185,6 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             return post;
         }
 
-        /// <summary>Gets the posts for the specified page of the topic.</summary>
-        /// <param name="topicId">The topic ID.</param>
-        /// <param name="pagingParameters">The paging parameters.</param>
-        /// <param name="currentUser">The current user.</param>
-        /// <returns>The posts.</returns>
         public IEnumerable<Post> GetPostsForTopic(int topicId, PagingParameters pagingParameters, MediaCommUser currentUser)
         {
             int postsToSkip = (pagingParameters.CurrentPage - 1) * pagingParameters.PageSize;
@@ -265,11 +222,9 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         public IEnumerable<Topic> GetTopicsForForum(int forumId, PagingParameters pagingParameters, MediaCommUser currentUser)
         {
             List<Topic> topics =
-                this.Session.Query<Topic>().Where(
-                    t => t.Forum.Id == forumId && !t.ExcludedUsers.Contains(currentUser)).OrderByDescending(
-                        t => t.DisplayPriority).ThenByDescending(t => t.LastPostTime).ThenByDescending(t => t.Id).Skip(
-                            (pagingParameters.CurrentPage - 1) * pagingParameters.PageSize).Take(
-                                pagingParameters.PageSize).ToList();
+                this.Session.Query<Topic>().Where(t => t.Forum.Id == forumId && !t.ExcludedUsers.Contains(currentUser)).OrderByDescending(
+                    t => t.DisplayPriority).ThenByDescending(t => t.LastPostTime).ThenByDescending(t => t.Id).Skip(
+                        (pagingParameters.CurrentPage - 1) * pagingParameters.PageSize).Take(pagingParameters.PageSize).ToList();
 
             List<int> topicIds = topics.Select(t => t.Id).ToList();
 
@@ -283,7 +238,6 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             {
                 topic.ExcludedUsernames = excludedUsernames.FirstOrDefault(ex => ex.Key == topic.Id);
             }
-
 
             this.UpdateTopicReadStatus(topics.Where(t => t.LastPostTime > DateTime.Now - this.topicUnreadValidity), currentUser);
 
@@ -310,23 +264,6 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             this.Session.Update(topic);
         }
 
-        #endregion
-
-        #endregion
-
-        #region Methods
-
-        private void UpdateLastPostInfo(Post post)
-        {
-            post.Topic.LastPostTime = post.Created;
-            post.Topic.LastPostAuthor = post.Author.UserName;
-
-            post.Topic.Forum.LastPostAuthor = post.Author.UserName;
-            post.Topic.Forum.LastPostTime = post.Created;
-
-            this.Session.Update(post);
-        }
-
         private void DeleteTopic(Topic topic)
         {
             this.Session.Query<Post>().Where(p => p.Topic.Id == topic.Id).ToList().ForEach(this.Session.Delete);
@@ -342,6 +279,17 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             return !topicHasOlderPosts;
         }
 
+        private void UpdateLastPostInfo(Post post)
+        {
+            post.Topic.LastPostTime = post.Created;
+            post.Topic.LastPostAuthor = post.Author.UserName;
+
+            post.Topic.Forum.LastPostAuthor = post.Author.UserName;
+            post.Topic.Forum.LastPostTime = post.Created;
+
+            this.Session.Update(post);
+        }
+
         private void UpdateTopicReadStatus(IEnumerable<Topic> topics, MediaCommUser currentUser)
         {
             List<TopicRead> readTopics =
@@ -351,13 +299,8 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             foreach (Topic topic in topics)
             {
                 topic.ReadByCurrentUser =
-                    readTopics.Any(
-                        r =>
-                        r.ReadByUser.Id == currentUser.Id && r.ReadTopic.Id == topic.Id &&
-                        topic.LastPostTime < r.LastVisit);
+                    readTopics.Any(r => r.ReadByUser.Id == currentUser.Id && r.ReadTopic.Id == topic.Id && topic.LastPostTime < r.LastVisit);
             }
         }
-
-        #endregion
     }
 }
