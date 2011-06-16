@@ -1,6 +1,4 @@
-﻿#region Using Directives
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -12,14 +10,10 @@ using System.Threading;
 using MediaCommMVC.Web.Core.Common.Config;
 using MediaCommMVC.Web.Core.Common.Logging;
 
-#endregion
-
 namespace MediaCommMVC.Web.Core.Data
 {
     public class MixedImageGenerator : IImageGenerator
     {
-        #region Constants and Fields
-
         private const int MaxThumbnailHeight = 175;
 
         private const int MaxThumbnailWidth = 175;
@@ -28,21 +22,11 @@ namespace MediaCommMVC.Web.Core.Data
 
         private readonly ILogger logger;
 
-        #endregion
-
-        #region Constructors and Destructors
-
         public MixedImageGenerator(ILogger logger, IConfigAccessor configAccessor)
         {
             this.logger = logger;
             this.configAccessor = configAccessor;
         }
-
-        #endregion
-
-        #region Implemented Interfaces
-
-        #region IImageGenerator
 
         [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
         [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
@@ -55,12 +39,6 @@ namespace MediaCommMVC.Web.Core.Data
             Tuple<string, string> paths = new Tuple<string, string>(pathToPhotos, sourcePath);
             ThreadPool.QueueUserWorkItem(this.QueueImageGeneration, paths);
         }
-
-        #endregion
-
-        #endregion
-
-        #region Methods
 
         private static void GenerateSmallImages(object pathsTupel)
         {
@@ -82,20 +60,18 @@ namespace MediaCommMVC.Web.Core.Data
             }
         }
 
-        private static Bitmap GetThumbnail(Bitmap bmp)
+        private static Bitmap GetThumbnail(Image image)
         {
             float maxH = Convert.ToSingle(MaxThumbnailHeight);
             float maxW = Convert.ToSingle(MaxThumbnailWidth);
-            float height = Convert.ToSingle(bmp.Height);
-            float width = Convert.ToSingle(bmp.Width);
+            float height = Convert.ToSingle(image.Height);
+            float width = Convert.ToSingle(image.Width);
 
             float scale = Math.Max(height / maxH, width / maxW);
             int h = Convert.ToInt32(height / scale);
             int w = Convert.ToInt32(width / scale);
 
-            Bitmap temp = new Bitmap(bmp.GetThumbnailImage(w, h, null, IntPtr.Zero));
-
-            return temp;
+            return new Bitmap(image.GetThumbnailImage(w, h, null, IntPtr.Zero));
         }
 
         private void GenerateMediumAndLargeImages(string targetPath, string sourcePath)
@@ -120,7 +96,5 @@ namespace MediaCommMVC.Web.Core.Data
             GenerateSmallImages(pathsTupel);
             this.GenerateMediumAndLargeImages(paths.Item1, paths.Item2);
         }
-
-        #endregion
     }
 }

@@ -1,29 +1,14 @@
-﻿#region Using Directives
-
-using System;
-using System.Data;
-
-using MediaCommMVC.Web.Core.Common.Config;
+﻿using MediaCommMVC.Web.Core.Common.Config;
 using MediaCommMVC.Web.Core.Common.Logging;
-using MediaCommMVC.Web.Core.Data.NHInfrastructure;
+using MediaCommMVC.Web.Core.Infrastructure;
 
 using NHibernate;
 
-#endregion
-
 namespace MediaCommMVC.Web.Core.Data.Repositories
 {
-    using MediaCommMVC.Web.Core.Infrastructure;
-
     public class RepositoryBase
     {
-        #region Constants and Fields
-
         private readonly ISessionContainer sessionManager;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         public RepositoryBase(ISessionContainer sessionManager, IConfigAccessor configAccessor, ILogger logger)
         {
@@ -31,10 +16,6 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             this.ConfigAccessor = configAccessor;
             this.Logger = logger;
         }
-
-        #endregion
-
-        #region Properties
 
         protected IConfigAccessor ConfigAccessor { get; private set; }
 
@@ -47,7 +28,5 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
                 return this.sessionManager.CurrentSession;
             }
         }
-
-        #endregion
     }
 }
