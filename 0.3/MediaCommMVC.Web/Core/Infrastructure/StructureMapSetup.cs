@@ -18,10 +18,10 @@ namespace MediaCommMVC.Web.Core.Infrastructure
         {
             container.Scan(
                 scan =>
-                {
-                    scan.TheCallingAssembly();
-                    scan.WithDefaultConventions();
-                });
+                    {
+                        scan.TheCallingAssembly();
+                        scan.WithDefaultConventions();
+                    });
 
             container.For<ISessionContainer>().Use<HttpContextSessionContainer>();
             container.For<IConfigAccessor>().Use<FileConfigAccessor>();

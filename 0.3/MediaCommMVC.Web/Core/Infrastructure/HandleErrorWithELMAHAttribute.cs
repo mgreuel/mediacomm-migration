@@ -14,9 +14,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             base.OnException(context);
 
             var e = context.Exception;
-            if (!context.ExceptionHandled
-                || RaiseErrorSignal(e)
-                || IsFiltered(context))
+            if (!context.ExceptionHandled || RaiseErrorSignal(e) || IsFiltered(context))
             {
                 return;
             }

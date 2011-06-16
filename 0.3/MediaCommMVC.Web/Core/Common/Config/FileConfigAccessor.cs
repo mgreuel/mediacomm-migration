@@ -13,24 +13,12 @@ namespace MediaCommMVC.Web.Core.Common.Config
 {
     public class FileConfigAccessor : IConfigAccessor
     {
-        #region Constants and Fields
-
         private readonly ILogger logger;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         public FileConfigAccessor(ILogger logger)
         {
             this.logger = logger;
         }
-
-        #endregion
-
-        #region Implemented Interfaces
-
-        #region IConfigAccessor
 
         public string GetConfigValue(string key)
         {
@@ -40,8 +28,7 @@ namespace MediaCommMVC.Web.Core.Common.Config
 
             if (value == null)
             {
-                throw new ConfigurationErrorsException(
-                    string.Format("Configuration value with the key {0} does not exist.", key));
+                throw new ConfigurationErrorsException(string.Format("Configuration value with the key {0} does not exist.", key));
             }
 
             this.logger.Debug("Got '{0}' as configuration value for key '{1}'", value, key);
@@ -57,8 +44,7 @@ namespace MediaCommMVC.Web.Core.Common.Config
 
             if (values == null || values.Count() == 0)
             {
-                throw new ConfigurationErrorsException(
-                    string.Format("Configuration value with the key {0} does not exist.", key));
+                throw new ConfigurationErrorsException(string.Format("Configuration value with the key {0} does not exist.", key));
             }
 
             this.logger.Debug("Got '{0}' as configuration values for key '{1}'", ConfigurationManager.AppSettings[key], key);
@@ -75,9 +61,5 @@ namespace MediaCommMVC.Web.Core.Common.Config
         {
             throw new NotSupportedException();
         }
-
-        #endregion
-
-        #endregion
     }
 }

@@ -77,9 +77,9 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             string fileName = photo.FileName.Insert(photo.FileName.LastIndexOf("."), size);
 
             string imagePath = Path.Combine(
-                this.ConfigAccessor.GetConfigValue("PhotoRootDir"), 
+                this.ConfigAccessor.GetConfigValue("PhotoRootDir"),
                 Path.Combine(
-                    this.GetValidDirectoryName(photo.PhotoAlbum.PhotoCategory.Name), 
+                    this.GetValidDirectoryName(photo.PhotoAlbum.PhotoCategory.Name),
                     Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.Name), fileName)));
 
             Image image = Image.FromFile(imagePath);

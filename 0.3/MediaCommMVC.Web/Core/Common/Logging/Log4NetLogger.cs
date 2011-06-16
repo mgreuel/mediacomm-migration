@@ -94,17 +94,13 @@ namespace MediaCommMVC.Web.Core.Common.Logging
             }
             catch (FormatException ex)
             {
-                string errorMessage =
-                    string.Format(
-                        "The message to format does not fit the parameter count. Message: '{0}', Parameters: '{1}'",
-                        message,
-                        data);
+                string errorMessage = string.Format(
+                    "The message to format does not fit the parameter count. Message: '{0}', Parameters: '{1}'", message, data);
 
                 this.Error(errorMessage, ex);
             }
 
             return formattedLogMessage;
         }
-
     }
 }

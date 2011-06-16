@@ -18,7 +18,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             {
                 throw new MediaCommException("The Image must not be null");
             }
-  
+
             context.HttpContext.Response.Clear();
             context.HttpContext.Response.ContentType = "image/jpeg";
             context.HttpContext.Response.Cache.SetCacheability(HttpCacheability.Public);

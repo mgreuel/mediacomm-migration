@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-using MediaCommMVC.Web.Core.Model.Users;
+﻿using MediaCommMVC.Web.Core.Model.Users;
 
 namespace MediaCommMVC.Web.Core.Model.Forums
 {
     public class ForumTopicsExcludedUser
     {
-        //public virtual int Id { get; set; }
-
         public virtual MediaCommUser MediaCommUser { get; set; }
 
         public virtual Topic Topic { get; set; }
@@ -18,7 +11,8 @@ namespace MediaCommMVC.Web.Core.Model.Forums
         public override bool Equals(object obj)
         {
             ForumTopicsExcludedUser otherExclusion = obj as ForumTopicsExcludedUser;
-            if (otherExclusion == null || otherExclusion.Topic == null || otherExclusion.MediaCommUser == null || this.MediaCommUser == null || this.Topic == null)
+            if (otherExclusion == null || otherExclusion.Topic == null || otherExclusion.MediaCommUser == null || this.MediaCommUser == null ||
+                this.Topic == null)
             {
                 return false;
             }
