@@ -6,24 +6,37 @@ using System.Linq;
 
 using MediaCommMVC.Web.Core.Common;
 using MediaCommMVC.Web.Core.Common.Config;
-using MediaCommMVC.Web.Core.Common.Logging;
 using MediaCommMVC.Web.Core.DataInterfaces;
 using MediaCommMVC.Web.Core.Infrastructure;
 using MediaCommMVC.Web.Core.Model.Videos;
 
+using NHibernate;
 using NHibernate.Linq;
 
 namespace MediaCommMVC.Web.Core.Data.Repositories
 {
-    public class VideoRepository : RepositoryBase, IVideoRepository
+    public class VideoRepository : IVideoRepository
     {
         private const string IncomingvideosFolderName = "incoming";
 
-        private const string videoRootDirKey = "VideoRootDir";
+        private const string VideoRootDirKey = "VideoRootDir";
 
-        public VideoRepository(ISessionContainer sessionManager, IConfigAccessor configAccessor, ILogger logger)
-            : base(sessionManager, configAccessor, logger)
+        private readonly IConfigAccessor configAccessor;
+
+        private readonly ISessionContainer sessionContainer;
+
+        public VideoRepository(ISessionContainer sessionContainer, IConfigAccessor configAccessor)
         {
+            this.sessionContainer = sessionContainer;
+            this.configAccessor = configAccessor;
+        }
+
+        protected ISession Session
+        {
+            get
+            {
+                return this.sessionContainer.CurrentSession;
+            }
         }
 
         public void AddCategory(VideoCategory videoCategory)
@@ -52,7 +65,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         {
             Video video = this.Session.Get<Video>(videoId);
 
-            string basePath = this.ConfigAccessor.GetConfigValue(videoRootDirKey);
+            string basePath = this.configAccessor.GetConfigValue(VideoRootDirKey);
             string thumbnailFilename = Path.Combine(basePath, video.VideoCategory.Name, video.ThumbnailFileName);
 
             return Image.FromFile(thumbnailFilename);
@@ -92,7 +105,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         private string GetIncomingVideosPath()
         {
-            string basePath = this.ConfigAccessor.GetConfigValue(videoRootDirKey);
+            string basePath = this.configAccessor.GetConfigValue(VideoRootDirKey);
             string incomingVideosPath = Path.Combine(basePath, IncomingvideosFolderName);
 
             if (!Directory.Exists(incomingVideosPath))
@@ -105,7 +118,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         private void MoveVideoFiles(Video video)
         {
-            string basePath = this.ConfigAccessor.GetConfigValue(videoRootDirKey);
+            string basePath = this.configAccessor.GetConfigValue(VideoRootDirKey);
             string incomingVideosPath = this.GetIncomingVideosPath();
 
             string targetPath = Path.Combine(basePath, video.VideoCategory.Name);

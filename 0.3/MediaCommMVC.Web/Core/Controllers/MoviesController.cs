@@ -30,10 +30,8 @@ namespace MediaCommMVC.Web.Core.Controllers
         [NHibernateActionFilter]
         public ActionResult DeleteMovie(int id)
         {
-            this.logger.Debug("Deleting movie with id: " + id);
             try
             {
-#warning check if allowed
                 this.movieRepository.DeleteMovieWithId(id);
 
                 return this.Json(new { success = true });

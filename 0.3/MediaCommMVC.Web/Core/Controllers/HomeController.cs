@@ -19,13 +19,10 @@ namespace MediaCommMVC.Web.Core.Controllers
 
         private readonly IPhotoRepository photoRepository;
 
-        private readonly IUserRepository userRepository;
-
-        public HomeController(IForumRepository forumRepository, IPhotoRepository photoRepository, IUserRepository userRepository)
+        public HomeController(IForumRepository forumRepository, IPhotoRepository photoRepository)
         {
             this.forumRepository = forumRepository;
             this.photoRepository = photoRepository;
-            this.userRepository = userRepository;
         }
 
         public ActionResult Error()
@@ -37,7 +34,7 @@ namespace MediaCommMVC.Web.Core.Controllers
         public ActionResult Index()
         {
             IEnumerable<Topic> topicsWithNewestPosts =
-                this.forumRepository.Get10TopicsWithNewestPosts(this.userRepository.GetUserByName(this.User.Identity.Name));
+                this.forumRepository.Get10TopicsWithNewestPosts();
 
             IEnumerable<PhotoAlbum> newestPhotoAlbums = this.photoRepository.Get4NewestAlbums();
 

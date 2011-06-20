@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
-using MediaCommMVC.Web.Core.Common.Logging;
 using MediaCommMVC.Web.Core.DataInterfaces;
 using MediaCommMVC.Web.Core.Helpers;
 using MediaCommMVC.Web.Core.Infrastructure;
@@ -23,30 +22,26 @@ namespace MediaCommMVC.Web.Core.Controllers
 
         private readonly IForumRepository forumRepository;
 
-        private readonly ILogger logger;
-
         private readonly IUserRepository userRepository;
 
-        private MediaCommUser currentUser;
+        private readonly CurrentUserContainer currentUserContainer;
 
-        public ForumsController(IForumRepository forumRepository, IUserRepository userRepository, ILogger logger)
+        public ForumsController(IForumRepository forumRepository, IUserRepository userRepository, CurrentUserContainer currentUserContainer)
         {
             this.forumRepository = forumRepository;
             this.userRepository = userRepository;
-            this.logger = logger;
+            this.currentUserContainer = currentUserContainer;
         }
 
         [HttpPost]
         [NHibernateActionFilter]
         public RedirectResult AnswerPoll(int pollId, int[] answerIds)
         {
-            this.logger.Debug("User '{0}' answered poll '{1}' with '{2}'", this.GetCurrentUser().UserName, pollId, string.Join(",", answerIds));
-
             foreach (int id in answerIds)
             {
                 PollAnswer answer = this.forumRepository.GetPollAnswerById(id);
                 Poll poll = answer.Poll;
-                PollUserAnswer userAnswer = new PollUserAnswer { User = this.GetCurrentUser(), Answer = answer, Poll = poll };
+                PollUserAnswer userAnswer = new PollUserAnswer { User = this.currentUserContainer.User, Answer = answer, Poll = poll };
 
                 this.forumRepository.SavePollUserAnswer(userAnswer);
             }
@@ -70,8 +65,6 @@ namespace MediaCommMVC.Web.Core.Controllers
         [NHibernateActionFilter]
         public ActionResult CreateTopic(Topic topic, Post post, int id, bool sticky, string excludedUsers, Poll poll)
         {
-            this.logger.Debug("Creating topic '{0}' with post '{1}' and forumId '{2}'", topic, post, id);
-
             post.Author = this.userRepository.GetUserByName(this.User.Identity.Name);
             topic.Forum = this.forumRepository.GetForumById(id);
             List<MediaCommUser> usersToExclude = new List<MediaCommUser>();
@@ -96,6 +89,8 @@ namespace MediaCommMVC.Web.Core.Controllers
                 topic.Poll = poll;
             }
 
+            post.Text = UrlResolver.ResolveLinks(post.Text);
+
             Topic createdTopic = this.forumRepository.AddTopic(topic, post);
 
             return this.RedirectToAction("Topic", new { id = createdTopic.Id, name = this.Url.ToFriendlyUrl(createdTopic.Title) });
@@ -105,7 +100,6 @@ namespace MediaCommMVC.Web.Core.Controllers
         [NHibernateActionFilter]
         public ActionResult DeletePost(int id)
         {
-#warning check if allowed
             Post postToDelete = this.forumRepository.GetPostById(id);
             this.forumRepository.DeletePost(postToDelete);
 
@@ -124,8 +118,12 @@ namespace MediaCommMVC.Web.Core.Controllers
         [NHibernateActionFilter]
         public ActionResult EditPost(int id)
         {
-#warning check if allowed
             Post post = this.forumRepository.GetPostById(id);
+
+            if (post.Author != this.currentUserContainer.User && !this.currentUserContainer.User.IsAdmin)
+            {
+                throw new UnauthorizedAccessException("Only Administrator can edit posts made by other users");
+            }
 
             return this.View(post);
         }
@@ -135,11 +133,16 @@ namespace MediaCommMVC.Web.Core.Controllers
         [NHibernateActionFilter]
         public ActionResult EditPost(int id, Post post)
         {
-#warning check if allowed
-            this.logger.Debug("Updating post '{0}' with topicId '{1}'", post, id);
-
             Post postToUpdate = this.forumRepository.GetPostById(id);
             postToUpdate.Text = post.Text;
+
+            if (postToUpdate.Author != this.currentUserContainer.User && !this.currentUserContainer.User.IsAdmin)
+            {
+                throw new UnauthorizedAccessException("Only Administrator can edit posts made by other users");
+            }
+
+            postToUpdate.Text = UrlResolver.ResolveLinks(postToUpdate.Text);
+
 
             this.forumRepository.UpdatePost(postToUpdate);
 
@@ -151,7 +154,7 @@ namespace MediaCommMVC.Web.Core.Controllers
         [NHibernateActionFilter]
         public ActionResult FirstNewPostInTopic(int id)
         {
-            Post post = this.forumRepository.GetFirstUnreadPostForTopic(id, this.GetCurrentUser());
+            Post post = this.forumRepository.GetFirstUnreadPostForTopic(id);
 
             string url = this.GetPostUrl(id, post);
             return this.Redirect(url);
@@ -161,14 +164,12 @@ namespace MediaCommMVC.Web.Core.Controllers
         [NHibernateActionFilter]
         public ActionResult Forum(int id, int page)
         {
-            this.logger.Debug("Displaying page {0} of the forum with id '{1}'", page, id);
-
             PagingParameters pagingParameters = new PagingParameters { CurrentPage = page, PageSize = TopicsPerForumPage };
 
             Forum forum = this.forumRepository.GetForumById(id);
             pagingParameters.TotalCount = forum.TopicCount;
 
-            IEnumerable<Topic> topics = this.forumRepository.GetTopicsForForum(id, pagingParameters, this.GetCurrentUser());
+            IEnumerable<Topic> topics = this.forumRepository.GetTopicsForForum(id, pagingParameters);
 
             return
                 this.View(
@@ -179,7 +180,7 @@ namespace MediaCommMVC.Web.Core.Controllers
         [NHibernateActionFilter]
         public ActionResult Index()
         {
-            return this.View(this.forumRepository.GetAllForums(this.GetCurrentUser()));
+            return this.View(this.forumRepository.GetAllForums());
         }
 
         [HttpGet]
@@ -202,8 +203,7 @@ namespace MediaCommMVC.Web.Core.Controllers
             Topic topic = this.forumRepository.GetTopicById(id);
             pagingParameters.TotalCount = topic.PostCount;
 
-            IEnumerable<Post> posts = this.forumRepository.GetPostsForTopic(
-                id, pagingParameters, this.userRepository.GetUserByName(this.User.Identity.Name));
+            IEnumerable<Post> posts = this.forumRepository.GetPostsForTopic(id, pagingParameters);
 
             return this.View(new TopicPage { Topic = topic, Posts = posts, PagingParameters = pagingParameters });
         }
@@ -213,33 +213,21 @@ namespace MediaCommMVC.Web.Core.Controllers
         [NHibernateActionFilter]
         public ActionResult Topic(int id, Post post)
         {
-            this.logger.Debug("Adding post '{0}' to the topic with id '{1}'", post, id);
-
             post.Topic = this.forumRepository.GetTopicById(id);
-            post.Author = this.GetCurrentUser();
+            post.Author = this.currentUserContainer.User;
             post.Created = DateTime.Now;
+
+            post.Text = UrlResolver.ResolveLinks(post.Text);
 
             this.forumRepository.AddPost(post);
 
-            int lastPage = this.forumRepository.GetLastPageNumberForTopic(id, PostsPerTopicPage);
-
-            this.logger.Debug("Redirecting to page {0} of the topic with the id '{0}'", lastPage, id);
-
-#warning redirect to latest post
-            return this.RedirectToAction("Topic", new { page = lastPage });
-        }
-
-        private MediaCommUser GetCurrentUser()
-        {
-            return this.currentUser ?? (this.currentUser = this.userRepository.GetUserByName(this.User.Identity.Name));
+            return this.Redirect(this.GetPostUrl(id, post));
         }
 
         private string GetPostUrl(int topicId, Post post)
         {
             int page = this.forumRepository.GetPageNumberForPost(postId: post.Id, topicId: topicId, pageSize: PostsPerTopicPage);
             string postAnker = string.Format("#{0}", post.Id);
-
-            this.logger.Debug("Redirecting to page {0} of the topic with the id '{0}'", page, topicId);
 
             return this.Url.RouteUrl("ViewTopic", new { id = post.Topic.Id, page, name = this.Url.ToFriendlyUrl(post.Topic.Title) }) + postAnker;
         }

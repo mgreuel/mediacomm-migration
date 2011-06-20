@@ -241,14 +241,15 @@
     <Compile Include="Core\Data\Repositories\ForumRepository.cs" />
     <Compile Include="Core\Data\Repositories\MovieRepository.cs" />
     <Compile Include="Core\Data\Repositories\PhotoReposity.cs" />
-    <Compile Include="Core\Data\Repositories\RepositoryBase.cs" />
     <Compile Include="Core\Data\Repositories\UserRepository.cs" />
     <Compile Include="Core\Data\Repositories\VideoRepository.cs" />
     <Compile Include="Core\Helpers\EnumHelper.cs" />
     <Compile Include="Core\Helpers\IconHelper.cs" />
     <Compile Include="Core\Helpers\Pagination.cs" />
     <Compile Include="Core\Helpers\UrlEncoder.cs" />
+    <Compile Include="Core\Helpers\UrlResolver.cs" />
     <Compile Include="Core\Infrastructure\Bootstrapper.cs" />
+    <Compile Include="Core\Infrastructure\CurrentUserContainer.cs" />
     <Compile Include="Core\Infrastructure\ErrorHandlingActionInvoker.cs" />
     <Compile Include="Core\Infrastructure\HandleErrorWithELMAHAttribute.cs" />
     <Compile Include="Core\Infrastructure\HttpContextSessionContainer.cs" />

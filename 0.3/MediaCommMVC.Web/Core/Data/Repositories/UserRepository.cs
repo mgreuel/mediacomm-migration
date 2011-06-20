@@ -2,22 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using MediaCommMVC.Web.Core.Common.Config;
 using MediaCommMVC.Web.Core.Common.Exceptions;
-using MediaCommMVC.Web.Core.Common.Logging;
 using MediaCommMVC.Web.Core.DataInterfaces;
 using MediaCommMVC.Web.Core.Infrastructure;
 using MediaCommMVC.Web.Core.Model.Users;
 
+using NHibernate;
 using NHibernate.Linq;
 
 namespace MediaCommMVC.Web.Core.Data.Repositories
 {
-    public class UserRepository : RepositoryBase, IUserRepository
+    public class UserRepository : IUserRepository
     {
-        public UserRepository(ISessionContainer sessionManager, IConfigAccessor configAccessor, ILogger logger)
-            : base(sessionManager, configAccessor, logger)
+        private readonly ISessionContainer sessionContainer;
+
+        public UserRepository(ISessionContainer sessionContainer)
         {
+            this.sessionContainer = sessionContainer;
+        }
+
+        protected ISession Session
+        {
+            get
+            {
+                return this.sessionContainer.CurrentSession;
+            }
         }
 
         public void CreateAdmin(string userName, string password, string mailAddress)
@@ -45,7 +54,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         public MediaCommUser GetUserByName(string userName)
         {
-            return this.Session.Query<MediaCommUser>().Single(u => u.UserName.Equals(userName));
+            return this.Session.Query<MediaCommUser>().Single(u => u.UserName == userName);
         }
 
         public void UpdateUser(MediaCommUser user)
