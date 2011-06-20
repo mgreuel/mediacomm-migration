@@ -18,11 +18,11 @@ namespace MediaCommMVC.Web.Core.DataInterfaces
 
         void DeletePost(Post post);
 
-        IEnumerable<Topic> Get10TopicsWithNewestPosts(MediaCommUser currentUser);
+        IEnumerable<Topic> Get10TopicsWithNewestPosts();
 
-        IEnumerable<Forum> GetAllForums(MediaCommUser currentUser);
+        IEnumerable<Forum> GetAllForums();
 
-        Post GetFirstUnreadPostForTopic(int id, MediaCommUser user);
+        Post GetFirstUnreadPostForTopic(int id);
 
         Forum GetForumById(int id);
 
@@ -34,11 +34,11 @@ namespace MediaCommMVC.Web.Core.DataInterfaces
 
         Post GetPostById(int id);
 
-        IEnumerable<Post> GetPostsForTopic(int topicId, PagingParameters pagingParameters, MediaCommUser currentUser);
+        IEnumerable<Post> GetPostsForTopic(int topicId, PagingParameters pagingParameters);
 
         Topic GetTopicById(int id);
 
-        IEnumerable<Topic> GetTopicsForForum(int forumId, PagingParameters pagingParameters, MediaCommUser currentUser);
+        IEnumerable<Topic> GetTopicsForForum(int forumId, PagingParameters pagingParameters);
 
         void SavePollUserAnswer(PollUserAnswer userAnswer);
 

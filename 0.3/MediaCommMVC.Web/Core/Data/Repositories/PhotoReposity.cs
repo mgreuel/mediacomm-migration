@@ -12,20 +12,37 @@ using MediaCommMVC.Web.Core.Infrastructure;
 using MediaCommMVC.Web.Core.Model.Photos;
 using MediaCommMVC.Web.Core.Model.Users;
 
+using NHibernate;
 using NHibernate.Linq;
 
 namespace MediaCommMVC.Web.Core.Data.Repositories
 {
-    public class PhotoRepository : RepositoryBase, IPhotoRepository
+    public class PhotoRepository : IPhotoRepository
     {
         private const string UnprocessedPhotosFolder = "unprocessed";
 
+        private readonly IConfigAccessor configAccessor;
+
         private readonly IImageGenerator imageGenerator;
 
-        public PhotoRepository(ISessionContainer sessionManager, IConfigAccessor configAccessor, ILogger logger, IImageGenerator imageGenerator)
-            : base(sessionManager, configAccessor, logger)
+        private readonly ILogger logger;
+
+        private readonly ISessionContainer sessionContainer;
+
+        public PhotoRepository(ISessionContainer sessionContainer, IImageGenerator imageGenerator, IConfigAccessor configAccessor, ILogger logger)
         {
+            this.sessionContainer = sessionContainer;
             this.imageGenerator = imageGenerator;
+            this.configAccessor = configAccessor;
+            this.logger = logger;
+        }
+
+        protected ISession Session
+        {
+            get
+            {
+                return this.sessionContainer.CurrentSession;
+            }
         }
 
         public void AddCategory(PhotoCategory category)
@@ -77,9 +94,9 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             string fileName = photo.FileName.Insert(photo.FileName.LastIndexOf("."), size);
 
             string imagePath = Path.Combine(
-                this.ConfigAccessor.GetConfigValue("PhotoRootDir"),
+                this.configAccessor.GetConfigValue("PhotoRootDir"), 
                 Path.Combine(
-                    this.GetValidDirectoryName(photo.PhotoAlbum.PhotoCategory.Name),
+                    this.GetValidDirectoryName(photo.PhotoAlbum.PhotoCategory.Name), 
                     Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.Name), fileName)));
 
             Image image = Image.FromFile(imagePath);
@@ -152,7 +169,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         private string GetTargetPath(PhotoAlbum album)
         {
             string targetPath = Path.Combine(
-                this.ConfigAccessor.GetConfigValue("PhotoRootDir"), 
+                this.configAccessor.GetConfigValue("PhotoRootDir"), 
                 Path.Combine(this.GetValidDirectoryName(album.PhotoCategory.Name), this.GetValidDirectoryName(album.Name)));
 
             if (!Directory.Exists(targetPath))
@@ -202,7 +219,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
                 }
                 catch (IOException ex)
                 {
-                    this.Logger.Error(string.Format("Unable to copy file '{0}' to '{1}'", file, newPath), ex);
+                    this.logger.Error(string.Format("Unable to copy file '{0}' to '{1}'", file, newPath), ex);
                 }
             }
 
