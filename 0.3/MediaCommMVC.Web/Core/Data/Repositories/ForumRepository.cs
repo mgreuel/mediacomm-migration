@@ -15,9 +15,9 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 {
     public class ForumRepository : IForumRepository
     {
-        private readonly ISessionContainer sessionContainer;
-
         private readonly CurrentUserContainer currentUserContainer;
+
+        private readonly ISessionContainer sessionContainer;
 
         private readonly TimeSpan topicUnreadValidity = new TimeSpan(days: 30, hours: 0, minutes: 0, seconds: 0);
 
@@ -35,27 +35,12 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             }
         }
 
-        public IEnumerable<Topic> GetTopicsForForum(int forumId, PagingParameters pagingParameters)
+        private MediaCommUser MediaCommUser
         {
-            List<Topic> topics =
-                this.Session.Query<Topic>().Where(t => t.Forum.Id == forumId && !t.ExcludedUsers.Contains(this.currentUserContainer.User)).OrderByDescending(
-                    t => t.DisplayPriority).ThenByDescending(t => t.LastPostTime).ThenByDescending(t => t.Id).Skip(
-                        (pagingParameters.CurrentPage - 1) * pagingParameters.PageSize).Take(pagingParameters.PageSize).ToList();
-
-            List<int> topicIds = topics.Select(t => t.Id).ToList();
-
-            ILookup<int, string> excludedUsernames =
-                this.Session.Query<ForumTopicsExcludedUser>().Where(ex => topicIds.Contains(ex.Topic.Id)).ToLookup(
-                    ex => ex.Topic.Id, ex => ex.MediaCommUser.UserName);
-
-            foreach (Topic topic in topics)
+            get
             {
-                topic.ExcludedUsernames = excludedUsernames.FirstOrDefault(ex => ex.Key == topic.Id);
+                return this.currentUserContainer.User;
             }
-
-            this.UpdateTopicReadStatus(topics.Where(t => t.LastPostTime > DateTime.Now - this.topicUnreadValidity));
-
-            return topics;
         }
 
         public void AddForum(Forum forum)
@@ -97,7 +82,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         public void DeletePost(Post post)
         {
-            if (post.Author != this.currentUserContainer.User && !this.currentUserContainer.User.IsAdmin)
+            if (post.Author != this.MediaCommUser && !this.MediaCommUser.IsAdmin)
             {
                 throw new UnauthorizedAccessException("Only Admins can delete posts made by other users");
             }
@@ -128,7 +113,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         public IEnumerable<Topic> Get10TopicsWithNewestPosts()
         {
             List<Topic> topics =
-                this.Session.Query<Topic>().Where(t => !t.ExcludedUsers.Contains(this.currentUserContainer.User)).OrderByDescending(t => t.LastPostTime).Take(10).
+                this.Session.Query<Topic>().Where(t => !t.ExcludedUsers.Contains(this.MediaCommUser)).OrderByDescending(t => t.LastPostTime).Take(10).
                     ToList();
 
             this.UpdateTopicReadStatus(topics.Where(t => t.LastPostTime > DateTime.Now - this.topicUnreadValidity));
@@ -151,8 +136,10 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 						where ForumID = :forumId
 							and LastPostTime > DATEADD(day, -30, GETDATE())
 							and Id not in 
-								(select ReadTopicID from ForumTopicsRead where ReadByUserID = :userId and LastVisit > DATEADD(day, -30, GETDATE()) and LastVisit > LastPostTime)")
-                            .SetParameter("forumId", forum.Id).SetParameter("userId", this.currentUserContainer.User.Id).UniqueResult<string>());
+								(select ReadTopicID from ForumTopicsRead where ReadByUserID = :userId and LastVisit > DATEADD(day, -30, GETDATE()) and LastVisit > LastPostTime)
+                            and Id not in
+                                (SELECT TopicId FROM ForumTopicsExcludedUsers WHERE MediaCOmmUserId = :userId)")
+                            .SetParameter("forumId", forum.Id).SetParameter("userId", this.MediaCommUser.Id).UniqueResult<string>());
             }
 
             return allForums;
@@ -167,7 +154,8 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
                        orderby p.Created descending
                        select p).FirstOrDefault();*/
             DateTime date =
-                (this.Session.Query<TopicRead>().SingleOrDefault(tr => tr.ReadByUser.UserName == this.currentUserContainer.UserName && tr.ReadTopic.Id == id) ??
+                (this.Session.Query<TopicRead>().SingleOrDefault(
+                    tr => tr.ReadByUser.UserName == this.currentUserContainer.UserName && tr.ReadTopic.Id == id) ??
                  new TopicRead { LastVisit = DateTime.Now.AddMonths(-1) }).LastVisit;
 
             // Get First unread post or the newest one if all are read
@@ -239,9 +227,32 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         {
             Topic topic =
                 this.Session.Query<Topic>().Fetch(t => t.Poll).Fetch(t => t.Forum).SingleOrDefault(
-                    t => t.Id == id && !t.ExcludedUsers.Contains(this.currentUserContainer.User));
+                    t => t.Id == id && !t.ExcludedUsers.Contains(this.MediaCommUser));
 
             return topic;
+        }
+
+        public IEnumerable<Topic> GetTopicsForForum(int forumId, PagingParameters pagingParameters)
+        {
+            List<Topic> topics =
+                this.Session.Query<Topic>().Where(t => t.Forum.Id == forumId && !t.ExcludedUsers.Contains(this.MediaCommUser)).OrderByDescending(
+                    t => t.DisplayPriority).ThenByDescending(t => t.LastPostTime).ThenByDescending(t => t.Id).Skip(
+                        (pagingParameters.CurrentPage - 1) * pagingParameters.PageSize).Take(pagingParameters.PageSize).ToList();
+
+            List<int> topicIds = topics.Select(t => t.Id).ToList();
+
+            ILookup<int, string> excludedUsernames =
+                this.Session.Query<ForumTopicsExcludedUser>().Where(ex => topicIds.Contains(ex.Topic.Id)).ToLookup(
+                    ex => ex.Topic.Id, ex => ex.MediaCommUser.UserName);
+
+            foreach (Topic topic in topics)
+            {
+                topic.ExcludedUsernames = excludedUsernames.FirstOrDefault(ex => ex.Key == topic.Id);
+            }
+
+            this.UpdateTopicReadStatus(topics.Where(t => t.LastPostTime > DateTime.Now - this.topicUnreadValidity));
+
+            return topics;
         }
 
         public void SavePollUserAnswer(PollUserAnswer userAnswer)
@@ -282,10 +293,11 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         private void SetTopicReadDate(int topicId)
         {
             TopicRead topicRead =
-                this.Session.Query<TopicRead>().SingleOrDefault(r => r.ReadByUser.Id == this.currentUserContainer.User.Id && r.ReadTopic.Id == topicId) ??
-                new TopicRead { ReadByUser = this.currentUserContainer.User, ReadTopic = this.Session.Load<Topic>(topicId) };
+                this.Session.Query<TopicRead>().SingleOrDefault(r => r.ReadByUser.Id == this.MediaCommUser.Id && r.ReadTopic.Id == topicId) ??
+                new TopicRead { ReadByUser = this.MediaCommUser, ReadTopic = this.Session.Load<Topic>(topicId) };
 
-            topicRead.LastVisit = DateTime.Now;
+            // Add one second to prevent false unread results for own posts 
+            topicRead.LastVisit = DateTime.Now.AddSeconds(1);
 
             this.Session.SaveOrUpdate(topicRead);
         }
@@ -305,12 +317,12 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         {
             List<TopicRead> readTopics =
                 this.Session.Query<TopicRead>().Fetch(tr => tr.ReadTopic).Fetch(tr => tr.ReadByUser).Where(
-                    tr => tr.LastVisit > DateTime.Now - this.topicUnreadValidity && tr.ReadByUser.Id == this.currentUserContainer.User.Id).ToList();
+                    tr => tr.LastVisit > DateTime.Now - this.topicUnreadValidity && tr.ReadByUser.Id == this.MediaCommUser.Id).ToList();
 
             foreach (Topic topic in topics)
             {
                 topic.ReadByCurrentUser =
-                    readTopics.Any(r => r.ReadByUser.Id == this.currentUserContainer.User.Id && r.ReadTopic.Id == topic.Id && topic.LastPostTime < r.LastVisit);
+                    readTopics.Any(r => r.ReadByUser.Id == this.MediaCommUser.Id && r.ReadTopic.Id == topic.Id && topic.LastPostTime < r.LastVisit);
             }
         }
     }
