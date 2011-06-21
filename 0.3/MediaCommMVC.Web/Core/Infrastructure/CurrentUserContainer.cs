@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 
 using MediaCommMVC.Web.Core.DataInterfaces;
@@ -12,11 +13,11 @@ namespace MediaCommMVC.Web.Core.Infrastructure
     {
         private readonly IUserRepository userRepository;
 
-        private readonly MediaCommIdentity mediaCommIdentity;
+        private readonly IIdentity mediaCommIdentity;
 
         private MediaCommUser user;
 
-        public CurrentUserContainer(IUserRepository userRepository, MediaCommIdentity mediaCommIdentity)
+        public CurrentUserContainer(IUserRepository userRepository, IIdentity mediaCommIdentity)
         {
             this.userRepository = userRepository;
             this.mediaCommIdentity = mediaCommIdentity;

@@ -6,11 +6,19 @@ namespace MediaCommMVC.Web.Core.Helpers
     public class UrlResolver
     {
         private static readonly string link = "<a href=\"{0}{1}\">{2}</a>";
-
+        //( ?)( |<br>|br />)
         private static readonly Regex regex = new Regex(
-            "((http://|https://|www\\.)([A-Z0-9.-:]{1,})\\.[0-9A-Z?;~&#=\\-_\\./]{2,})", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            "( |&nbsp;|<br>|br />|<br/>|<p>)( ?)((http://|https://|www\\.)([A-Z0-9.-:]{1,})\\.[0-9A-Z?;~&#=\\-_\\./]{2,})", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-        public static string ResolveLinks(string html)
+        public static Regex LinkRecognitionRegex
+        {
+            get
+            {
+                return regex;
+            }
+        }
+
+            public static string ResolveLinks(string html)
         {
 #warning breaks the html if a link is parsed twice
             if (string.IsNullOrEmpty(html))
@@ -27,7 +35,7 @@ namespace MediaCommMVC.Web.Core.Helpers
                     prefix = "http://";
                 }
 
-                html = html.Replace(match.Value, string.Format(link, prefix, match.Value, ShortenUrl(match.Value, 50)));
+                html = html.Replace(match.Groups[3].Value, string.Format(link, prefix, match.Groups[3].Value, ShortenUrl(match.Groups[3].Value, 50)));
             }
 
             return html;
