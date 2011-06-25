@@ -216,7 +216,7 @@
     <Compile Include="Core\DataInterfaces\IUserRepository.cs" />
     <Compile Include="Core\DataInterfaces\IVideoRepository.cs" />
     <Compile Include="Core\Data\IImageGenerator.cs" />
-    <Compile Include="Core\Data\MixedImageGenerator.cs" />
+    <Compile Include="Core\Data\ImageGenerator.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Config\ConfigurationGenerator.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Config\IConfigurationGenerator.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Conventions\EnumConvention.cs" />
@@ -686,12 +686,13 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="combres.readme" />
-    <None Include="hibernate.cfg.xml">
+    <Content Include="hibernate.cfg.xml.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
-    </None>
+    </Content>
     <Content Include="Scripts\custom\global.js" />
     <Content Include="Scripts\highslide-with-gallery.packed.js" />
+    <Content Include="Scripts\highslide.config.js" />
     <Content Include="Scripts\jquery-1.4.2-vsdoc.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.lazyload.js" />

@@ -7,6 +7,10 @@ using NHibernate.Cfg;
 
 namespace MediaCommMVC.Web.Core.Data.NHInfrastructure.Config
 {
+    using FluentNHibernate.Cfg.Db;
+
+    using NHibernate.ByteCode.Castle;
+
     public class ConfigurationGenerator : IConfigurationGenerator
     {
         private readonly IAutoMapGenerator autoMapGenerator;
@@ -18,21 +22,13 @@ namespace MediaCommMVC.Web.Core.Data.NHInfrastructure.Config
 
         public FluentConfiguration Generate()
         {
-            Configuration config = CreateNHibernateConfiguration();
             AutoPersistenceModel autoMapModel = this.autoMapGenerator.Generate();
-            FluentConfiguration fluentConfiguration = Fluently.Configure(config).Mappings(m => m.AutoMappings.Add(autoMapModel));
+
+            FluentConfiguration fluentConfiguration = Fluently.Configure().Database(
+                MsSqlConfiguration.MsSql2008.ConnectionString(c => c.FromConnectionStringWithKey("MediaCommDb")).AdoNetBatchSize(100))
+                .ProxyFactoryFactory(typeof(ProxyFactoryFactory)).CurrentSessionContext("web").Mappings(m => m.AutoMappings.Add(autoMapModel));
 
             return fluentConfiguration;
-        }
-
-        private static Configuration CreateNHibernateConfiguration()
-        {
-            Configuration config = new Configuration();
-
-            // Reads the configuration from hibernate.cfg.xml
-            config.Configure();
-
-            return config;
         }
     }
 }

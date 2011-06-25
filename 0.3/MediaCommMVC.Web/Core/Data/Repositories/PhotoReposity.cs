@@ -69,7 +69,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         public PhotoAlbum GetAlbumById(int albumId)
         {
-            return this.Session.Get<PhotoAlbum>(albumId);
+            return this.Session.Query<PhotoAlbum>().FetchMany(a => a.Photos).Single(a => a.Id == albumId);
         }
 
         public IEnumerable<PhotoAlbum> GetAlbumsForCategoryIdStartingWith(int catId, string term)

@@ -32,6 +32,7 @@
     </resourceSet>
     <resourceSet name="photosJs" type="js">
       <resource path="~/Scripts/highslide-with-gallery.packed.js" />
+      <resource path="~/Scripts/highslide.config.js"/>
       <resource path="~/Scripts/jquery.lazyload.js" />
     </resourceSet>    
   </resourceSets>

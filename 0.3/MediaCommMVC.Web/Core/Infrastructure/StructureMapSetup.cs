@@ -31,7 +31,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             container.For<ISessionContainer>().Use<HttpContextSessionContainer>();
             container.For<IConfigAccessor>().Use<FileConfigAccessor>();
             container.For<ILogger>().Use<Log4NetLogger>();
-            container.For<IImageGenerator>().Use<MixedImageGenerator>();
+            container.For<IImageGenerator>().Use<ImageGenerator>();
             container.For<IIdentity>().Use(i => HttpContext.Current.User.Identity);
         }
     }
