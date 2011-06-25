@@ -5,7 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.Web", "MediaCo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7BD4A439-1E18-4529-BC39-F28D3D0F46B1}"
 	ProjectSection(SolutionItems) = preProject
-		createpictures.bat = createpictures.bat
 		Local.testsettings = Local.testsettings
 		MediaCommMVC 0.3.vsmdi = MediaCommMVC 0.3.vsmdi
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
