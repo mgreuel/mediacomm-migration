@@ -4,7 +4,7 @@ using log4net;
 
 namespace MediaCommMVC.Web.Core.Common.Logging
 {
-    public class Log4NetLogger : ILogger
+    public sealed class Log4NetLogger : ILogger
     {
         private readonly ILog log;
 

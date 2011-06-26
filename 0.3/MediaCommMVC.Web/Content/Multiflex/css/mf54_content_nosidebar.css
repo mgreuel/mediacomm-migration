@@ -370,26 +370,6 @@ p.text
     padding-left: 6px;
 }
 
-#myProfileTable
-{
-    width: 300px;
-}
-
-#myProfileTable .firstColumn
-{
-    width: 100px !important;
-    text-align: right !important;
-}
-
-#myProfileTable .secondColumn
-{
-    width: 200px !important;
-}
-
-#myProfileTable .secondColumn input[type=text]
-{
-    width: 98%;
-}
 
 #uploadTable
 {

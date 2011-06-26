@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class SessionNotInitializedException : Exception
+    public sealed class SessionNotInitializedException : Exception
     {
         public SessionNotInitializedException(string message)
             : base(message)

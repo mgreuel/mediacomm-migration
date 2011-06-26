@@ -27,7 +27,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             this.currentUserContainer = currentUserContainer;
         }
 
-        protected ISession Session
+        private ISession Session
         {
             get
             {
@@ -260,19 +260,10 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             this.Session.Save(userAnswer);
         }
 
-        public void UpdateForum(Forum forum)
-        {
-            this.Session.Update(forum);
-        }
 
         public void UpdatePost(Post post)
         {
             this.Session.Update(post);
-        }
-
-        public void UpdateTopic(Topic topic)
-        {
-            this.Session.Update(topic);
         }
 
         private void DeleteTopic(Topic topic)

@@ -93,11 +93,10 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
             string fileName = photo.FileName.Insert(photo.FileName.LastIndexOf("."), size);
 
-            string imagePath = Path.Combine(
-                this.configAccessor.GetConfigValue("PhotoRootDir"), 
-                Path.Combine(
-                    this.GetValidDirectoryName(photo.PhotoAlbum.PhotoCategory.Name), 
-                    Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.Name), fileName)));
+            string directoryPath = Path.Combine(
+                this.GetValidDirectoryName(photo.PhotoAlbum.PhotoCategory.Name),
+                Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.Name), fileName));
+            string imagePath = Path.Combine(this.configAccessor.GetConfigValue("PhotoRootDir"), directoryPath);
 
             Image image = Image.FromFile(imagePath);
 
@@ -159,7 +158,12 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
                 Photo photo = new Photo
                     {
-                       PhotoAlbum = photoAlbum, FileName = file.Name, FileSize = file.Length, Height = height, Uploader = uploader, Width = width 
+                        PhotoAlbum = photoAlbum,
+                        FileName = file.Name,
+                        FileSize = file.Length,
+                        Height = height,
+                        Uploader = uploader,
+                        Width = width
                     };
 
                 this.Session.Save(photo);
@@ -169,7 +173,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         private string GetTargetPath(PhotoAlbum album)
         {
             string targetPath = Path.Combine(
-                this.configAccessor.GetConfigValue("PhotoRootDir"), 
+                this.configAccessor.GetConfigValue("PhotoRootDir"),
                 Path.Combine(this.GetValidDirectoryName(album.PhotoCategory.Name), this.GetValidDirectoryName(album.Name)));
 
             if (!Directory.Exists(targetPath))

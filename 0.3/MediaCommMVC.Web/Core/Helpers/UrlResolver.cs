@@ -5,28 +5,27 @@ namespace MediaCommMVC.Web.Core.Helpers
     // credit goes to http://madskristensen.net/post/Resolve-and-shorten-URLs-in-Csharp.aspx
     public class UrlResolver
     {
-        private static readonly string link = "<a href=\"{0}{1}\">{2}</a>";
-        //( ?)( |<br>|br />)
-        private static readonly Regex regex = new Regex(
+        private const string LinkPattern = "<a href=\"{0}{1}\">{2}</a>";
+
+        private static readonly Regex UrlRecognitionRegex = new Regex(
             "( |&nbsp;|<br>|br />|<br/>|<p>)( ?)((http://|https://|www\\.)([A-Z0-9.-:]{1,})\\.[0-9A-Z?;~&#=\\-_\\./]{2,})", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         public static Regex LinkRecognitionRegex
         {
             get
             {
-                return regex;
+                return UrlRecognitionRegex;
             }
         }
 
             public static string ResolveLinks(string html)
         {
-#warning breaks the html if a link is parsed twice
             if (string.IsNullOrEmpty(html))
             {
                 return html;
             }
 
-            foreach (Match match in regex.Matches(html))
+            foreach (Match match in UrlRecognitionRegex.Matches(html))
             {
                 string prefix = string.Empty;
 
@@ -35,7 +34,7 @@ namespace MediaCommMVC.Web.Core.Helpers
                     prefix = "http://";
                 }
 
-                html = html.Replace(match.Groups[3].Value, string.Format(link, prefix, match.Groups[3].Value, ShortenUrl(match.Groups[3].Value, 50)));
+                html = html.Replace(match.Groups[3].Value, string.Format(LinkPattern, prefix, match.Groups[3].Value, ShortenUrl(match.Groups[3].Value, 50)));
             }
 
             return html;

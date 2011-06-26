@@ -18,12 +18,12 @@
 
 #myProfileTable
 {
-    width: 300px;
+    width: 400px;
 }
 
 #myProfileTable .firstColumn
 {
-    width: 100px !important;
+    width: 200px !important;
     text-align: right !important;
 }
 
@@ -35,4 +35,9 @@
 #myProfileTable .secondColumn input[type=text]
 {
     width: 98%;
+}
+
+#myProfileTable .secondColumn select
+{
+    width: 99%;
 }

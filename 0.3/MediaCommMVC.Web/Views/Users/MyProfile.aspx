@@ -1,6 +1,6 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.Model.Users.MediaCommUser>" %>
-<%@ Import Namespace="Resources" %>
 
+<%@ Import Namespace="Resources" %>
 <asp:Content ID="changePasswordTitle" ContentPlaceHolderID="BreadCrumbContent" runat="server">
     <%= Html.ActionLink(Navigation.Users, "Index") %>
     » <strong>
@@ -17,7 +17,7 @@
                 <%= Users.FirstName%>:
             </td>
             <td>
-                <%= Html.TextBox("user.FirstName", Model.FirstName, new { minlength = "2", maxlength="75"})%>
+                <%= Html.TextBox("FirstName", Model.FirstName, new { minlength = "2", maxlength="75"})%>
             </td>
         </tr>
         <tr>
@@ -25,23 +25,23 @@
                 <%= Users.LastName%>:
             </td>
             <td>
-                <%= Html.TextBox("user.LastName", Model.LastName, new { minlength = "2", maxlength="75"})%>
+                <%= Html.TextBox("LastName", Model.LastName, new { minlength = "2", maxlength="75"})%>
             </td>
         </tr>
-<%--        <tr>
+        <tr>
             <td>
-                <%= Resources.Users.DateOfBirth %>:
+                <%= Users.DateOfBirth %>:
             </td>
             <td>
-                <%= Html.TextBox("user.DateOfBirth", Model.DateOfBirth, new { @class = "date" })%>
+                <%= Html.TextBox("DateOfBirth", Model.DateOfBirth, new { @class = "date" })%>
             </td>
-        </tr>--%>
+        </tr>
         <tr>
             <td>
                 <%= Users.Street%>:
             </td>
             <td>
-                <%= Html.TextBox("user.Street", Model.Street, new { minlength = "2", maxlength="100"})%>
+                <%= Html.TextBox("Street", Model.Street, new { minlength = "2", maxlength="100"})%>
             </td>
         </tr>
         <tr>
@@ -49,7 +49,7 @@
                 <%= Users.ZipCode%>:
             </td>
             <td>
-                <%= Html.TextBox("user.ZipCode", Model.ZipCode, new { maxlength="10"})%>
+                <%= Html.TextBox("ZipCode", Model.ZipCode, new { maxlength="10"})%>
             </td>
         </tr>
         <tr>
@@ -57,7 +57,7 @@
                 <%= Users.City%>:
             </td>
             <td>
-                <%= Html.TextBox("user.City", Model.City, new { minlength = "2", maxlength="75"})%>
+                <%= Html.TextBox("City", Model.City, new { minlength = "2", maxlength="75"})%>
             </td>
         </tr>
         <tr>
@@ -65,7 +65,7 @@
                 <%= Users.PhoneNumber%>:
             </td>
             <td>
-                <%= Html.TextBox("user.PhoneNumber", Model.PhoneNumber, new { minlength = "5", maxlength="30"})%>
+                <%= Html.TextBox("PhoneNumber", Model.PhoneNumber, new { minlength = "5", maxlength="30"})%>
             </td>
         </tr>
         <tr>
@@ -73,7 +73,7 @@
                 <%= Users.MobilePhoneNumber%>:
             </td>
             <td>
-                <%= Html.TextBox("user.MobilePhoneNumber", Model.MobilePhoneNumber, new { minlength = "5", maxlength="30"})%>
+                <%= Html.TextBox("MobilePhoneNumber", Model.MobilePhoneNumber, new { minlength = "5", maxlength="30"})%>
             </td>
         </tr>
         <tr>
@@ -81,7 +81,7 @@
                 <%= Users.EMailAddress%>:
             </td>
             <td>
-                <%= Html.TextBox("user.EMailAddress", Model.EMailAddress, new { @class = "required email" })%>
+                <%= Html.TextBox("EMailAddress", Model.EMailAddress, new { @class = "required email" })%>
             </td>
         </tr>
         <tr>
@@ -89,7 +89,7 @@
                 <%= Users.ICQUin%>:
             </td>
             <td>
-                <%= Html.TextBox("user.IcqUin", Model.IcqUin, new { minlength = "5", maxlength="30"})%>
+                <%= Html.TextBox("IcqUin", Model.IcqUin, new { minlength = "5", maxlength="30"})%>
             </td>
         </tr>
         <tr>
@@ -97,7 +97,31 @@
                 <%= Users.SkypeNick%>:
             </td>
             <td>
-                <%= Html.TextBox("user.SkypeNick", Model.SkypeNick, new { minlength = "3", maxlength="75"})%>
+                <%= Html.TextBox("SkypeNick", Model.SkypeNick, new { minlength = "3", maxlength="75"})%>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <%= Users.ForumsNotificationInterval%>:
+            </td>
+            <td>
+                <%= Html.DropDownListFor(m => m.ForumsNotificationInterval, (SelectList)ViewData["NotificationIntervals"])%>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <%= Users.PhotosNotificationInterval%>:
+            </td>
+            <td>
+                <%= Html.DropDownListFor(m => m.PhotosNotificationInterval, (SelectList)ViewData["NotificationIntervals"])%>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <%= Users.VideosNotificationInterval%>:
+            </td>
+            <td>
+                <%= Html.DropDownListFor(m => m.VideosNotificationInterval, (SelectList)ViewData["NotificationIntervals"])%>
             </td>
         </tr>
         <tr>
@@ -117,12 +141,11 @@
     <% } %>
     <script type="text/javascript">
 
-        $(document).ready(function ()
-        {
+        $(document).ready(function () {
             $("#myProfileTable > tbody > tr > td:nth-child(odd)")._addClass("firstColumn");
             $("#myProfileTable > tbody > tr > td:nth-child(even)")._addClass("secondColumn");
 
-            $("#user_DateOfBirth").datepicker();
+            $("#user_DateOfBirth").datepicker({ dateFormat: 'yy-mm-dd', yearRange: "-40:-20", changeYear: true, changeMonth: true });
 
             $("form").validate();
         });

@@ -3,7 +3,7 @@ using System.Web.Security;
 
 namespace MediaCommMVC.Web.Core.Infrastructure
 {
-    public class MediaCommIdentity : IIdentity
+    public sealed class MediaCommIdentity : IIdentity
     {
         private readonly FormsAuthenticationTicket ticket;
 
@@ -17,14 +17,6 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             get
             {
                 return "MediaCommMVCUser";
-            }
-        }
-
-        public string FriendlyName
-        {
-            get
-            {
-                return this.ticket.Name;
             }
         }
 

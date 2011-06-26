@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 
 using MediaCommMVC.Web.Core.Model.Forums;
-using MediaCommMVC.Web.Core.Model.Users;
 using MediaCommMVC.Web.Core.Parameters;
 
 namespace MediaCommMVC.Web.Core.DataInterfaces
@@ -42,10 +41,6 @@ namespace MediaCommMVC.Web.Core.DataInterfaces
 
         void SavePollUserAnswer(PollUserAnswer userAnswer);
 
-        void UpdateForum(Forum forum);
-
         void UpdatePost(Post post);
-
-        void UpdateTopic(Topic topic);
     }
 }

@@ -1,36 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Threading;
 
 using MediaCommMVC.Web.Core.Common.Logging;
 
 namespace MediaCommMVC.Web.Core.Data
 {
-    using System.Drawing.Drawing2D;
-    using System.Linq;
-
     public class ImageGenerator : IImageGenerator
     {
-        private readonly ILogger logger;
-
-        private const float MaxThumbnailHeight = 175;
-
-        private const float MaxThumbnailWidth = 175;
-
-        private const float MaxMediumHeight = 500;
-
-        private const float MaxMediumWidth = 750;
+        private const long JpegQuality = 80;
 
         private const float MaxLargeHeight = 700;
 
         private const float MaxLargeWidth = 1050;
 
-        private const int JpegQuality = 80;
+        private const float MaxMediumHeight = 500;
+
+        private const float MaxMediumWidth = 750;
+
+        private const float MaxThumbnailHeight = 175;
+
+        private const float MaxThumbnailWidth = 175;
 
         private static readonly ImageCodecInfo JpegEncoder = ImageCodecInfo.GetImageDecoders().SingleOrDefault(c => c.FormatID == ImageFormat.Jpeg.Guid);
+
+        private readonly ILogger logger;
 
         public ImageGenerator(ILogger logger)
         {
@@ -64,7 +63,8 @@ namespace MediaCommMVC.Web.Core.Data
                             string targetFilename = string.Format(
                                 "{0}small{1}", originalFile.Name.Replace(originalFile.Extension, string.Empty), originalFile.Extension);
 
-                            resizedImage.Save(Path.Combine(paths.Item1, targetFilename), ImageFormat.Jpeg);
+                            string targetFilePath = Path.Combine(paths.Item1, targetFilename);
+                            this.SaveResizedImage(resizedImage, targetFilePath);
                         }
 
                         using (Image resizedImage = this.GetResizedImage(originalImage, MaxMediumWidth, MaxMediumHeight))
@@ -93,18 +93,6 @@ namespace MediaCommMVC.Web.Core.Data
             }
         }
 
-        private void SaveResizedImage(Image resizedImage, string targetFilePath)
-        {
-            using (EncoderParameters encoderParameters = new EncoderParameters(1))
-            {
-                using (EncoderParameter qualityEncoderParameter = new EncoderParameter(Encoder.Quality, JpegQuality))
-                {
-                    encoderParameters.Param[0] = qualityEncoderParameter;
-                    resizedImage.Save(targetFilePath, JpegEncoder, encoderParameters);
-                }
-            }
-        }
-
         private Image GetResizedImage(Image originalImage, float maxWidth, float maxHeight)
         {
             float originalHeight = Convert.ToSingle(originalImage.Height);
@@ -124,6 +112,18 @@ namespace MediaCommMVC.Web.Core.Data
             }
 
             return resizedImage;
+        }
+
+        private void SaveResizedImage(Image resizedImage, string targetFilePath)
+        {
+            using (EncoderParameters encoderParameters = new EncoderParameters(1))
+            {
+                using (EncoderParameter qualityEncoderParameter = new EncoderParameter(Encoder.Quality, JpegQuality))
+                {
+                    encoderParameters.Param[0] = qualityEncoderParameter;
+                    resizedImage.Save(targetFilePath, JpegEncoder, encoderParameters);
+                }
+            }
         }
     }
 }
