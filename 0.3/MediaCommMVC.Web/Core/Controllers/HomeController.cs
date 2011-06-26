@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 using MediaCommMVC.Web.Core.DataInterfaces;
 using MediaCommMVC.Web.Core.Infrastructure;
 using MediaCommMVC.Web.Core.Model.Forums;
 using MediaCommMVC.Web.Core.Model.Photos;
+using MediaCommMVC.Web.Core.Model.Users;
 using MediaCommMVC.Web.Core.ViewModel;
 
 namespace MediaCommMVC.Web.Core.Controllers
@@ -19,10 +21,16 @@ namespace MediaCommMVC.Web.Core.Controllers
 
         private readonly IPhotoRepository photoRepository;
 
-        public HomeController(IForumRepository forumRepository, IPhotoRepository photoRepository)
+        private readonly IUserRepository userRepository;
+
+        private readonly CurrentUserContainer currentUserContainer;
+
+        public HomeController(IForumRepository forumRepository, IPhotoRepository photoRepository, IUserRepository userRepository, CurrentUserContainer currentUserContainer)
         {
             this.forumRepository = forumRepository;
             this.photoRepository = photoRepository;
+            this.userRepository = userRepository;
+            this.currentUserContainer = currentUserContainer;
         }
 
         public ActionResult Error()
@@ -37,6 +45,11 @@ namespace MediaCommMVC.Web.Core.Controllers
                 this.forumRepository.Get10TopicsWithNewestPosts();
 
             IEnumerable<PhotoAlbum> newestPhotoAlbums = this.photoRepository.Get4NewestAlbums();
+
+            MediaCommUser currentUser = this.currentUserContainer.User;
+            currentUser.LastVisit = DateTime.Now;
+
+            this.userRepository.UpdateUser(currentUser);
 
             return this.View(new WhatsNewInfo { Topics = topicsWithNewestPosts, PostsPerTopicPage = PostsPerTopicPage, Albums = newestPhotoAlbums });
         }

@@ -142,8 +142,7 @@ namespace MediaCommMVC.Web.Core.Controllers
             }
 
             postToUpdate.Text = UrlResolver.ResolveLinks(postToUpdate.Text);
-
-
+            
             this.forumRepository.UpdatePost(postToUpdate);
 
             string url = this.GetPostUrl(postToUpdate.Topic.Id, postToUpdate);
@@ -180,18 +179,12 @@ namespace MediaCommMVC.Web.Core.Controllers
         [NHibernateActionFilter]
         public ActionResult Index()
         {
+            MediaCommUser currentUser = this.currentUserContainer.User;
+            currentUser.LastVisit = DateTime.Now;
+
+            this.userRepository.UpdateUser(currentUser);
+
             return this.View(this.forumRepository.GetAllForums());
-        }
-
-        [HttpGet]
-        [NHibernateActionFilter]
-        public ActionResult Post(int id)
-        {
-            Post post = this.forumRepository.GetPostById(id);
-
-            string url = this.GetPostUrl(post.Topic.Id, post);
-
-            return this.Redirect(url);
         }
 
         [HttpGet]

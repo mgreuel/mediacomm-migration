@@ -2,14 +2,15 @@
 using System.Web.Mvc;
 
 using MediaCommMVC.Web.Core.DataInterfaces;
+using MediaCommMVC.Web.Core.Helpers;
+using MediaCommMVC.Web.Core.Infrastructure;
+using MediaCommMVC.Web.Core.Model;
 using MediaCommMVC.Web.Core.Model.Users;
 
 using Resources;
 
 namespace MediaCommMVC.Web.Core.Controllers
 {
-    using MediaCommMVC.Web.Core.Infrastructure;
-
     [Authorize]
     public class UsersController : Controller
     {
@@ -31,6 +32,10 @@ namespace MediaCommMVC.Web.Core.Controllers
         public ActionResult MyProfile()
         {
             MediaCommUser currentUser = this.userRepository.GetUserByName(this.User.Identity.Name);
+
+            IEnumerable<SelectListItem> notificationIntervalList = NotificationInterval.None.ToSelectList();
+            ViewData["NotificationIntervals"] = notificationIntervalList;
+
             return this.View(currentUser);
         }
 
@@ -40,9 +45,12 @@ namespace MediaCommMVC.Web.Core.Controllers
         {
             MediaCommUser user = this.userRepository.GetUserByName(username);
 
-            this.UpdateModel(user, "user", null, new[] { "Id", "LastVisit", "UserName", "DateOfBirth" });
+            this.UpdateModel(user, null, null, new[] { "Id", "LastVisit", "UserName" });
 
             this.ViewData["ChangesSaved"] = General.ChangesSaved;
+
+            IEnumerable<SelectListItem> notificationIntervalList = NotificationInterval.None.ToSelectList();
+            ViewData["NotificationIntervals"] = notificationIntervalList;
 
             this.userRepository.UpdateUser(user);
             return this.View(user);
@@ -52,6 +60,7 @@ namespace MediaCommMVC.Web.Core.Controllers
         public ActionResult Profile(string username)
         {
             MediaCommUser user = this.userRepository.GetUserByName(username);
+
             return this.View(user);
         }
     }

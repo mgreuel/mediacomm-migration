@@ -48,6 +48,12 @@ namespace MediaCommMVC.Web.Core.Model.Users
 
         public virtual string ZipCode { get; set; }
 
+        public virtual NotificationInterval ForumsNotificationInterval { get; set; }
+
+        public virtual NotificationInterval PhotosNotificationInterval { get; set; }
+
+        public virtual NotificationInterval VideosNotificationInterval { get; set; }
+
         public override string ToString()
         {
             return string.Format("Username: '{0}', Id: '{1}", this.UserName, this.Id);

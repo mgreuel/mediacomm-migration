@@ -1,17 +1,14 @@
 ﻿using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
 
 using MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping;
 
-using NHibernate.Cfg;
+using NHibernate.ByteCode.Castle;
 
 namespace MediaCommMVC.Web.Core.Data.NHInfrastructure.Config
 {
-    using FluentNHibernate.Cfg.Db;
-
-    using NHibernate.ByteCode.Castle;
-
-    public class ConfigurationGenerator : IConfigurationGenerator
+    public sealed class ConfigurationGenerator : IConfigurationGenerator
     {
         private readonly IAutoMapGenerator autoMapGenerator;
 

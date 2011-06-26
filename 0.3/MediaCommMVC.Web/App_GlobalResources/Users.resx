@@ -198,4 +198,13 @@
   <data name="PasswordChangedText" xml:space="preserve">
     <value>Your password was successfully changed.</value>
   </data>
+  <data name="ForumsNotificationInterval" xml:space="preserve">
+    <value>Forums Notification Interval</value>
+  </data>
+  <data name="PhotosNotificationInterval" xml:space="preserve">
+    <value>Photos Notification Interval</value>
+  </data>
+  <data name="VideosNotificationInterval" xml:space="preserve">
+    <value>Videos Notification Interval</value>
+  </data>
 </root>

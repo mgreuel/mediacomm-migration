@@ -1,13 +1,9 @@
-﻿#region Using Directives
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 
 using MediaCommMVC.Web.Core.Common.Logging;
-
-#endregion
 
 namespace MediaCommMVC.Web.Core.Common.Config
 {

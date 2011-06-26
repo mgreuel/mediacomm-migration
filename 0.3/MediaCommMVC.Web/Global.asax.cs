@@ -24,6 +24,8 @@ namespace MediaCommMVC.Web
         {
             AreaRegistration.RegisterAllAreas();
 
+            GlobalFilters.Filters.Add(new HandleErrorWithELMAHAttribute());
+
             try
             {
                 new Bootstrapper().Run();

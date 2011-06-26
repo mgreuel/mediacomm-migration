@@ -20,7 +20,7 @@ namespace MediaCommMVC.Web.Core.Common
             for (int i = 0; i < urlToEncode.Length; i++)
             {
                 c = urlToEncode[i];
-                if (c == ' ' || c == ',' /*|| c == '.'*/|| c == '/' || c == '\\' || c == '-')
+                if (c == ' ' || c == ',' || c == '/' || c == '\\' || c == '-')
                 {
                     if (!prevdash)
                     {
