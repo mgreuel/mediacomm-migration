@@ -54,6 +54,12 @@ namespace MediaCommMVC.Web.Core.Model.Users
 
         public virtual NotificationInterval VideosNotificationInterval { get; set; }
 
+        public virtual DateTime? LastForumsNotification { get; set; }
+
+        public virtual DateTime? LastPhotosNotification { get; set; }
+
+        public virtual DateTime? LastVideosNotification { get; set; }
+
         public override string ToString()
         {
             return string.Format("Username: '{0}', Id: '{1}", this.UserName, this.Id);

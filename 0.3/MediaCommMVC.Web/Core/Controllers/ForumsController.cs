@@ -14,7 +14,7 @@ using MediaCommMVC.Web.Core.ViewModel;
 namespace MediaCommMVC.Web.Core.Controllers
 {
     [Authorize]
-    public class ForumsController : Controller
+    public sealed class ForumsController : Controller
     {
         private const int PostsPerTopicPage = 15;
 
@@ -26,16 +26,19 @@ namespace MediaCommMVC.Web.Core.Controllers
 
         private readonly CurrentUserContainer currentUserContainer;
 
-        public ForumsController(IForumRepository forumRepository, IUserRepository userRepository, CurrentUserContainer currentUserContainer)
+        private readonly INotificationSender notificationSender;
+
+        public ForumsController(IForumRepository forumRepository, IUserRepository userRepository, CurrentUserContainer currentUserContainer, INotificationSender notificationSender)
         {
             this.forumRepository = forumRepository;
             this.userRepository = userRepository;
             this.currentUserContainer = currentUserContainer;
+            this.notificationSender = notificationSender;
         }
 
         [HttpPost]
         [NHibernateActionFilter]
-        public RedirectResult AnswerPoll(int pollId, int[] answerIds)
+        public RedirectResult AnswerPoll(IEnumerable<int> answerIds)
         {
             foreach (int id in answerIds)
             {
@@ -92,6 +95,8 @@ namespace MediaCommMVC.Web.Core.Controllers
             post.Text = UrlResolver.ResolveLinks(post.Text);
 
             Topic createdTopic = this.forumRepository.AddTopic(topic, post);
+
+            this.notificationSender.SendForumsNotification(createdTopic);
 
             return this.RedirectToAction("Topic", new { id = createdTopic.Id, name = this.Url.ToFriendlyUrl(createdTopic.Title) });
         }
@@ -213,6 +218,8 @@ namespace MediaCommMVC.Web.Core.Controllers
             post.Text = UrlResolver.ResolveLinks(post.Text);
 
             this.forumRepository.AddPost(post);
+
+            this.notificationSender.SendForumsNotification(post);
 
             return this.Redirect(this.GetPostUrl(id, post));
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using MediaCommMVC.Web.Core.Model.Users;
 
@@ -17,5 +18,7 @@ namespace MediaCommMVC.Web.Core.DataInterfaces
         void UpdateUser(MediaCommUser user);
 
         bool ValidateUser(string userName, string password);
+
+        IEnumerable<string> GetMailAddressesToNotifyAboutNewPost();
     }
 }

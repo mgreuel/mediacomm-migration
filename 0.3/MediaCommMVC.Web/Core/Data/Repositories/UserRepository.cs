@@ -21,7 +21,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             this.sessionContainer = sessionContainer;
         }
 
-        protected ISession Session
+        private ISession Session
         {
             get
             {
@@ -65,6 +65,21 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         public bool ValidateUser(string userName, string password)
         {
             return this.Session.Query<MediaCommUser>().Any(u => u.UserName.Equals(userName) && u.Password.Equals(password));
+        }
+
+        public IEnumerable<string> GetMailAddressesToNotifyAboutNewPost()
+        {
+            IEnumerable<string> mailAddresses =
+                this.Session.CreateSQLQuery(
+                    @"SELECT     EMailAddress
+                    FROM         MediaCommUsers
+                    WHERE     (ForumsNotificationInterval = 1) AND (LastForumsNotification IS NULL) OR
+                      (ForumsNotificationInterval = 1) AND (LastVisit IS NULL) OR
+                      (ForumsNotificationInterval = 1) AND (LastForumsNotification < LastVisit) OR
+                      (ForumsNotificationInterval = 1) AND (LastForumsNotification < DATEADD(day, - 7, GETDATE()))")
+                    .List<string>();
+
+            return mailAddresses;
         }
     }
 }

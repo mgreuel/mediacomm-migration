@@ -7,7 +7,7 @@ using StructureMap;
 
 namespace MediaCommMVC.Web.Core.Infrastructure
 {
-    public class Bootstrapper
+    public sealed class Bootstrapper
     {
         public void Run()
         {

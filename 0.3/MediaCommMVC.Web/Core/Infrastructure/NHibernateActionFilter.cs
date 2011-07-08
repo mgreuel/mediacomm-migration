@@ -28,7 +28,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            ISession session = HttpContextSessionContainer.SessionFactory.OpenSession();
+            ISession session = SessionFactoryContainer.SessionFactory.OpenSession();
             session.BeginTransaction();
             new HttpContextSessionContainer().CurrentSession = session;
         }
