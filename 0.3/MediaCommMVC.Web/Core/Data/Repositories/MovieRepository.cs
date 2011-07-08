@@ -24,7 +24,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             this.currentUserContainer = currentUserContainer;
         }
 
-        protected ISession Session
+        private ISession Session
         {
             get
             {

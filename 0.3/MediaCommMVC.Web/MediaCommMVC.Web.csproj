@@ -99,6 +99,12 @@
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.2\lib\StructureMap.dll</HintPath>
     </Reference>
+    <Reference Include="StyleCop">
+      <HintPath>..\packages\StyleCop.4.5.25.0\lib\net35\StyleCop.dll</HintPath>
+    </Reference>
+    <Reference Include="StyleCop.CSharp">
+      <HintPath>..\packages\StyleCop.4.5.25.0\lib\net35\StyleCop.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -166,6 +172,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Home.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Mail.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mail.resx</DependentUpon>
     </Compile>
     <Compile Include="App_GlobalResources\Movies.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -250,10 +261,13 @@
     <Compile Include="Core\Helpers\UrlResolver.cs" />
     <Compile Include="Core\Infrastructure\Bootstrapper.cs" />
     <Compile Include="Core\Infrastructure\CurrentUserContainer.cs" />
-    <Compile Include="Core\Infrastructure\ErrorHandlingActionInvoker.cs" />
     <Compile Include="Core\Infrastructure\HandleErrorWithELMAHAttribute.cs" />
     <Compile Include="Core\Infrastructure\HttpContextSessionContainer.cs" />
     <Compile Include="Core\Infrastructure\ImageResult.cs" />
+    <Compile Include="Core\Infrastructure\INotificationSender.cs" />
+    <Compile Include="Core\Infrastructure\AsyncNotificationSender.cs" />
+    <Compile Include="Core\Infrastructure\MemorySessionContainer.cs" />
+    <Compile Include="Core\Infrastructure\SessionFactoryContainer.cs" />
     <Compile Include="Core\Infrastructure\StructureMapSetup.cs" />
     <Compile Include="Core\Infrastructure\ISessionContainer.cs" />
     <Compile Include="Core\Infrastructure\MediaCommIdentity.cs" />
@@ -269,10 +283,11 @@
     <Compile Include="Core\Model\Forums\Topic.cs" />
     <Compile Include="Core\Model\Forums\TopicDisplayPriority.cs" />
     <Compile Include="Core\Model\Forums\TopicRead.cs" />
+    <Compile Include="Core\Model\MailConfiguration.cs" />
     <Compile Include="Core\Model\Movies\Movie.cs" />
     <Compile Include="Core\Model\Movies\MovieLanguage.cs" />
     <Compile Include="Core\Model\Movies\MovieQuality.cs" />
-    <Compile Include="Core\Model\NotificationInterval.cs" />
+    <Compile Include="Core\Model\Users\NotificationInterval.cs" />
     <Compile Include="Core\Model\Photos\Photo.cs" />
     <Compile Include="Core\Model\Photos\PhotoAlbum.cs" />
     <Compile Include="Core\Model\Photos\PhotoCategory.cs" />
@@ -799,6 +814,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Mail.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Mail.Designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

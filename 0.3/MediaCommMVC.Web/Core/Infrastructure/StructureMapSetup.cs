@@ -33,6 +33,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             container.For<ILogger>().Use<Log4NetLogger>();
             container.For<IImageGenerator>().Use<ImageGenerator>();
             container.For<IIdentity>().Use(i => HttpContext.Current.User.Identity);
+            container.For<INotificationSender>().Use<AsyncNotificationSender>();
         }
     }
 }

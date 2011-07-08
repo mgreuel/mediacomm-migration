@@ -1,35 +1,13 @@
 ﻿using System.Web;
 
 using MediaCommMVC.Web.Core.Common.Exceptions;
-using MediaCommMVC.Web.Core.Data.NHInfrastructure.Config;
-using MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping;
 
 using NHibernate;
 
 namespace MediaCommMVC.Web.Core.Infrastructure
 {
-    public class HttpContextSessionContainer : ISessionContainer
+    public sealed class HttpContextSessionContainer : ISessionContainer
     {
-        private static readonly object sessionFactoryLock = new object();
-
-        private static ISessionFactory sessionFactory;
-
-        public static ISessionFactory SessionFactory
-        {
-            get
-            {
-                if (sessionFactory != null)
-                {
-                    return sessionFactory;
-                }
-
-                lock (sessionFactoryLock)
-                {
-                    return sessionFactory ?? (sessionFactory = CreateSessionFactory());
-                }
-            }
-        }
-
         public ISession CurrentSession
         {
             get
@@ -60,12 +38,6 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             {
                 HttpContext.Current.Items["NHibernateSession"] = value;
             }
-        }
-
-        private static ISessionFactory CreateSessionFactory()
-        {
-            ConfigurationGenerator configurationGenerator = new ConfigurationGenerator(new AutoMapGenerator());
-            return configurationGenerator.Generate().BuildSessionFactory();
         }
     }
 }

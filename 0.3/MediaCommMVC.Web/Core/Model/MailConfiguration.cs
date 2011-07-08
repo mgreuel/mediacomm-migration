@@ -5,11 +5,10 @@ using System.Web;
 
 namespace MediaCommMVC.Web.Core.Model
 {
-    public enum NotificationInterval
+    public class MailConfiguration
     {
-        None,
-        Immediate,
-        Daily,
-        Weekly
+        public string SmtpHost { get; set; }
+
+        public string MailFrom { get; set; }
     }
 }
