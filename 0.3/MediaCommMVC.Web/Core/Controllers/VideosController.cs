@@ -16,12 +16,15 @@ namespace MediaCommMVC.Web.Core.Controllers
     {
         private readonly IUserRepository userRepository;
 
+        private readonly INotificationSender notificationSender;
+
         private readonly IVideoRepository videoRepository;
 
-        public VideosController(IVideoRepository videoRepository, IUserRepository userRepository)
+        public VideosController(IVideoRepository videoRepository, IUserRepository userRepository, INotificationSender notificationSender)
         {
             this.videoRepository = videoRepository;
             this.userRepository = userRepository;
+            this.notificationSender = notificationSender;
         }
 
         [HttpPost]
@@ -32,6 +35,8 @@ namespace MediaCommMVC.Web.Core.Controllers
             video.VideoCategory = this.videoRepository.GetCategoryById(category.Id);
 
             this.videoRepository.AddVideo(video);
+
+            this.notificationSender.SendVideosNotification(video);
 
             return this.RedirectToAction("UploadSuccessFull");
         }

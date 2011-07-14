@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.UI;
 
 using Elmah;
 
@@ -23,15 +24,18 @@ namespace MediaCommMVC.Web.Core.Controllers
     {
         private readonly ILogger logger;
 
+        private readonly INotificationSender notificationSender;
+
         private readonly IPhotoRepository photoRepository;
 
         private readonly IUserRepository userRepository;
 
-        public PhotosController(IPhotoRepository photoRepository, IUserRepository userRepository, ILogger logger)
+        public PhotosController(IPhotoRepository photoRepository, IUserRepository userRepository, ILogger logger, INotificationSender notificationSender)
         {
             this.photoRepository = photoRepository;
             this.userRepository = userRepository;
             this.logger = logger;
+            this.notificationSender = notificationSender;
         }
 
         [Authorize]
@@ -63,6 +67,8 @@ namespace MediaCommMVC.Web.Core.Controllers
 
             MediaCommUser uploader = this.userRepository.GetUserByName(this.User.Identity.Name);
             this.photoRepository.AddPhotos(album, uploader);
+
+            this.notificationSender.SendPhotosNotification(album, this.User.Identity.Name);
 
             return this.RedirectToAction("UploadSuccessFull");
         }

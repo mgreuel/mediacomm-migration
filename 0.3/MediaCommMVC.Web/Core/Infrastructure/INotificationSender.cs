@@ -13,7 +13,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
     {
         void SendForumsNotification(Post newPost);
 
-        void SendPhotosNotification(PhotoAlbum albumContainingNewPhotos);
+        void SendPhotosNotification(PhotoAlbum albumContainingNewPhotos, string uploaderName);
 
         void SendVideosNotification(Video newVideo);
 

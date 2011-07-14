@@ -61,6 +61,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} uploaded new photos in the album &apos;{1}&apos;.
+        /// </summary>
+        internal static string NewPhotosBody {
+            get {
+                return ResourceManager.GetString("NewPhotosBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New photos on .
+        /// </summary>
+        internal static string NewPhotosTitle {
+            get {
+                return ResourceManager.GetString("NewPhotosTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} replied to the topic &apos;{1}&apos; on {2}.
         /// </summary>
         internal static string NewPostBody {
@@ -75,6 +93,42 @@ namespace Resources {
         internal static string NewPostTitle {
             get {
                 return ResourceManager.GetString("NewPostTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} created the topic &apos;{1}&apos; on {2}.
+        /// </summary>
+        internal static string NewTopicBody {
+            get {
+                return ResourceManager.GetString("NewTopicBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New topic on .
+        /// </summary>
+        internal static string NewTopicTitle {
+            get {
+                return ResourceManager.GetString("NewTopicTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} uploaded the video &apos;{1}&apos; on {2}.
+        /// </summary>
+        internal static string NewVideoBody {
+            get {
+                return ResourceManager.GetString("NewVideoBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New video on .
+        /// </summary>
+        internal static string NewVideoTitle {
+            get {
+                return ResourceManager.GetString("NewVideoTitle", resourceCulture);
             }
         }
     }

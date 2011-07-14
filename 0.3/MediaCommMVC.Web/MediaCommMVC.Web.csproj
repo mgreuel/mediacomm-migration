@@ -266,6 +266,7 @@
     <Compile Include="Core\Infrastructure\ImageResult.cs" />
     <Compile Include="Core\Infrastructure\INotificationSender.cs" />
     <Compile Include="Core\Infrastructure\AsyncNotificationSender.cs" />
+    <Compile Include="Core\Infrastructure\MailConfiguration.cs" />
     <Compile Include="Core\Infrastructure\MemorySessionContainer.cs" />
     <Compile Include="Core\Infrastructure\SessionFactoryContainer.cs" />
     <Compile Include="Core\Infrastructure\StructureMapSetup.cs" />
@@ -283,7 +284,6 @@
     <Compile Include="Core\Model\Forums\Topic.cs" />
     <Compile Include="Core\Model\Forums\TopicDisplayPriority.cs" />
     <Compile Include="Core\Model\Forums\TopicRead.cs" />
-    <Compile Include="Core\Model\MailConfiguration.cs" />
     <Compile Include="Core\Model\Movies\Movie.cs" />
     <Compile Include="Core\Model\Movies\MovieLanguage.cs" />
     <Compile Include="Core\Model\Movies\MovieQuality.cs" />
