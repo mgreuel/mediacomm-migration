@@ -33,7 +33,7 @@
                 <%= Users.DateOfBirth %>:
             </td>
             <td>
-                <%= Html.TextBox("DateOfBirth", Model.DateOfBirth, new { @class = "date" })%>
+                <%= Html.TextBox("DateOfBirth", Model.DateOfBirth.HasValue ? Model.DateOfBirth.Value.ToString("yyyy-MM-dd") :string.Empty, new { @class = "date" })%>
             </td>
         </tr>
         <tr>
