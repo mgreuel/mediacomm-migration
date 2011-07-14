@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
-using System.Web;
 
 using MediaCommMVC.Web.Core.Common.Logging;
 using MediaCommMVC.Web.Core.Data.Repositories;
 using MediaCommMVC.Web.Core.DataInterfaces;
-using MediaCommMVC.Web.Core.Model;
 using MediaCommMVC.Web.Core.Model.Forums;
 using MediaCommMVC.Web.Core.Model.Photos;
-using MediaCommMVC.Web.Core.Model.Users;
 using MediaCommMVC.Web.Core.Model.Videos;
 
-using NHibernate;
+using Resources;
 
 namespace MediaCommMVC.Web.Core.Infrastructure
 {
@@ -24,25 +20,17 @@ namespace MediaCommMVC.Web.Core.Infrastructure
 
         private readonly MailConfiguration mailConfiguration;
 
-        private readonly IUserRepository userRepository;
-
-        private delegate void NewPostNotificationDelegate(Post newPost);
-
         private readonly NewPostNotificationDelegate newPostNotificationDelegate;
-
-        private delegate void NewTopicNotificationDelegate(Topic newTopic);
 
         private readonly NewTopicNotificationDelegate newTopicNotificationDelegate;
 
-        private delegate void PhotosNotificationDelegate(PhotoAlbum albumWithNewPhotos);
-
         private readonly PhotosNotificationDelegate photosNotificationDelegate;
 
-        private delegate void VideosNotificationDelegate(Video newVideo);
+        private readonly MemorySessionContainer sessionContainer;
+
+        private readonly IUserRepository userRepository;
 
         private readonly VideosNotificationDelegate videosNotificationDelegate;
-
-        private readonly MemorySessionContainer sessionContainer;
 
         public AsyncNotificationSender(ILogger logger, MailConfiguration mailConfiguration)
         {
@@ -57,6 +45,14 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             this.newTopicNotificationDelegate = new NewTopicNotificationDelegate(this.SendNewTopicNotificationAsync);
         }
 
+        private delegate void NewPostNotificationDelegate(Post newPost);
+
+        private delegate void NewTopicNotificationDelegate(Topic newTopic);
+
+        private delegate void PhotosNotificationDelegate(PhotoAlbum albumWithNewPhotos, string uploaderName);
+
+        private delegate void VideosNotificationDelegate(Video newVideo);
+
         public void SendForumsNotification(Post newPost)
         {
             this.newPostNotificationDelegate.BeginInvoke(newPost, null, null);
@@ -67,9 +63,9 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             this.newTopicNotificationDelegate.BeginInvoke(newTopic, null, null);
         }
 
-        public void SendPhotosNotification(PhotoAlbum albumContainingNewPhotos)
+        public void SendPhotosNotification(PhotoAlbum albumContainingNewPhotos, string uploaderName)
         {
-            this.photosNotificationDelegate.BeginInvoke(albumContainingNewPhotos, null, null);
+            this.photosNotificationDelegate.BeginInvoke(albumContainingNewPhotos, uploaderName, null, null);
         }
 
         public void SendVideosNotification(Video newVideo)
@@ -77,27 +73,15 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             this.videosNotificationDelegate.BeginInvoke(newVideo, null, null);
         }
 
-        private void SendNewPostNotificationAsync(Post newPost)
-        {
-            this.ExecuteNotification(delegate()
-                {
-                    IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewPost();
-
-                    string subject = Resources.Mail.NewPostTitle + Resources.General.Title;
-                    string body = string.Format(Resources.Mail.NewPostBody, newPost.Author.UserName, newPost.Created);
-                    this.SendNotificationMail(subject, body, usersMailAddressesToNotify);
-
-                    this.sessionContainer.EndSessionAndCommitTransaftion();
-                });
-        }
-
         private void ExecuteNotification(Action action)
         {
-            this.sessionContainer.BeginSessionAndTransaction();
-
             try
             {
+                this.sessionContainer.BeginSessionAndTransaction();
+
                 action();
+
+                this.sessionContainer.EndSessionAndCommitTransaftion();
             }
             catch (Exception exception)
             {
@@ -107,38 +91,86 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             }
         }
 
+        private void SendNewPostNotificationAsync(Post newPost)
+        {
+            this.ExecuteNotification(
+                () =>
+                {
+                    DateTime notificationTime = DateTime.Now;
+                    IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewPost();
+
+                    if (usersMailAddressesToNotify.Count() == 0)
+                    {
+                        return;
+                    }
+
+                    string subject = Mail.NewPostTitle + General.Title;
+                    string body = string.Format(Mail.NewPostBody, newPost.Author.UserName, newPost.Topic.Title, newPost.Created);
+                    this.SendNotificationMail(subject, body, usersMailAddressesToNotify);
+
+                    this.userRepository.UpdateLastForumsNotification(usersMailAddressesToNotify, notificationTime);
+                });
+        }
+
         private void SendNewTopicNotificationAsync(Topic newTopic)
         {
-            IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewPost();
+            this.ExecuteNotification(
+                () =>
+                {
+                    DateTime notificationTime = DateTime.Now;
+                    IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewPost();
 
-            string bcc = string.Join(";", usersMailAddressesToNotify);
-        }
+                    string subject = Mail.NewTopicTitle + General.Title;
+                    string body = string.Format(Mail.NewTopicBody, newTopic.CreatedBy, newTopic.Title, newTopic.Created);
+                    this.SendNotificationMail(subject, body, usersMailAddressesToNotify);
 
-        private void SendPhotosNotificationAsync(PhotoAlbum albumContainingNewPhotos)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void SendVideosNotificationAsync(Video newVideo)
-        {
-            throw new NotImplementedException();
+                    this.userRepository.UpdateLastForumsNotification(usersMailAddressesToNotify, notificationTime);
+                });
         }
 
         private void SendNotificationMail(string subject, string body, IEnumerable<string> recipients)
         {
             this.logger.Info("Sending mail with subject '{0}' to '{1}'", subject, string.Join(";", recipients));
-            
-            var smtp = new SmtpClient
-            {
-                Host = this.mailConfiguration.SmtpHost,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-            };
+
+            var smtp = new SmtpClient { Host = this.mailConfiguration.SmtpHost, DeliveryMethod = SmtpDeliveryMethod.Network, };
 
             using (MailMessage message = new MailMessage(this.mailConfiguration.MailFrom, string.Empty) { Subject = subject, Body = body })
             {
                 recipients.ToList().ForEach(r => message.Bcc.Add(r));
                 smtp.Send(message);
             }
+        }
+
+        private void SendPhotosNotificationAsync(PhotoAlbum albumContainingNewPhoto, string uploaderName)
+        {
+            this.ExecuteNotification(
+                () =>
+                {
+                    DateTime notificationTime = DateTime.Now;
+                    IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewPhotos();
+
+                    string subject = Mail.NewPhotosTitle + General.Title;
+                    string body = string.Format(Mail.NewPhotosBody, uploaderName, albumContainingNewPhoto.Name);
+                    this.SendNotificationMail(subject, body, usersMailAddressesToNotify);
+
+                    this.userRepository.UpdateLastPhotosNotification(usersMailAddressesToNotify, notificationTime);
+                });
+        }
+
+        private void SendVideosNotificationAsync(Video newVideo)
+        {
+            this.ExecuteNotification(
+                () =>
+                {
+                    DateTime notificationTime = DateTime.Now;
+                    IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewVideos();
+
+                    string subject = Mail.NewVideoTitle + General.Title;
+                    string body = string.Format(Mail.NewVideoBody, newVideo.Uploader.UserName, newVideo.Title);
+                    this.SendNotificationMail(subject, body, usersMailAddressesToNotify);
+
+                    this.userRepository.UpdateLastVideosNotification(usersMailAddressesToNotify, notificationTime);
+                });
         }
     }
 }

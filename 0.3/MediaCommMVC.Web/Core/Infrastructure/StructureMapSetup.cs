@@ -1,3 +1,4 @@
+using System.Configuration;
 using System.Security.Principal;
 using System.Web;
 
@@ -34,6 +35,10 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             container.For<IImageGenerator>().Use<ImageGenerator>();
             container.For<IIdentity>().Use(i => HttpContext.Current.User.Identity);
             container.For<INotificationSender>().Use<AsyncNotificationSender>();
+
+            MailConfiguration mailConfiguration = new MailConfiguration
+                { MailFrom = ConfigurationManager.AppSettings["mail-from"], SmtpHost = ConfigurationManager.AppSettings["mail-smtpHost"] };
+            container.For<MailConfiguration>().Use(m => mailConfiguration);
         }
     }
 }
