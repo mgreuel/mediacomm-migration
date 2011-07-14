@@ -106,10 +106,11 @@ namespace MediaCommMVC.Web.Core.Infrastructure
                     if (usersMailAddressesToNotify.Count() == 0)
                     {
                         return;
-
                     }
+
                     string subject = Mail.NewPostTitle + General.Title;
-                    string body = string.Format(Mail.NewPostBody, newPost.Author.UserName, newPost.Topic.Title, newPost.Created);
+                    string body = string.Format(Mail.NewPostBody, newPost.Author.UserName, newPost.Topic.Title, newPost.Created) + "<br /><br />" +
+                                  General.WebSite;
                     this.SendNotificationMail(subject, body, usersMailAddressesToNotify);
 
                     this.userRepository.UpdateLastForumsNotification(usersMailAddressesToNotify, notificationTime);
@@ -127,8 +128,14 @@ namespace MediaCommMVC.Web.Core.Infrastructure
                     IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewPost().Where(
                             m => !notifyTopic.ExcludedUsers.Select(u => u.EMailAddress).Contains(m)).ToList();
 
+                    if (usersMailAddressesToNotify.Count() == 0)
+                    {
+                        return;
+                    }
+
                     string subject = Mail.NewTopicTitle + General.Title;
-                    string body = string.Format(Mail.NewTopicBody, newTopic.CreatedBy, newTopic.Title, newTopic.Created);
+                    string body = string.Format(Mail.NewTopicBody, newTopic.CreatedBy, newTopic.Title, newTopic.Created) + "<br /><br />" +
+                                  General.WebSite;
                     this.SendNotificationMail(subject, body, usersMailAddressesToNotify);
 
                     this.userRepository.UpdateLastForumsNotification(usersMailAddressesToNotify, notificationTime);
@@ -143,6 +150,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
 
             using (MailMessage message = new MailMessage(this.mailConfiguration.MailFrom, recipients.First()) { Subject = subject, Body = body })
             {
+                message.IsBodyHtml = true;
                 recipients.ToList().ForEach(r => message.Bcc.Add(r));
                 smtp.Send(message);
             }
@@ -156,8 +164,14 @@ namespace MediaCommMVC.Web.Core.Infrastructure
                     DateTime notificationTime = DateTime.Now;
                     IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewPhotos();
 
+                    if (usersMailAddressesToNotify.Count() == 0)
+                    {
+                        return;
+                    }
+
                     string subject = Mail.NewPhotosTitle + General.Title;
-                    string body = string.Format(Mail.NewPhotosBody, uploaderName, albumContainingNewPhoto.Name);
+                    string body = string.Format(Mail.NewPhotosBody, uploaderName, albumContainingNewPhoto.Name) + "<br /><br />" +
+                                  General.WebSite;
                     this.SendNotificationMail(subject, body, usersMailAddressesToNotify);
 
                     this.userRepository.UpdateLastPhotosNotification(usersMailAddressesToNotify, notificationTime);
@@ -172,8 +186,14 @@ namespace MediaCommMVC.Web.Core.Infrastructure
                     DateTime notificationTime = DateTime.Now;
                     IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewVideos();
 
+                    if (usersMailAddressesToNotify.Count() == 0)
+                    {
+                        return;
+                    }
+
                     string subject = Mail.NewVideoTitle + General.Title;
-                    string body = string.Format(Mail.NewVideoBody, newVideo.Uploader.UserName, newVideo.Title);
+                    string body = string.Format(Mail.NewVideoBody, newVideo.Uploader.UserName, newVideo.Title) + "<br /><br />" +
+                                  General.WebSite;
                     this.SendNotificationMail(subject, body, usersMailAddressesToNotify);
 
                     this.userRepository.UpdateLastVideosNotification(usersMailAddressesToNotify, notificationTime);
