@@ -145,7 +145,7 @@
             $("#myProfileTable > tbody > tr > td:nth-child(odd)")._addClass("firstColumn");
             $("#myProfileTable > tbody > tr > td:nth-child(even)")._addClass("secondColumn");
 
-            $("#user_DateOfBirth").datepicker({ dateFormat: 'yy-mm-dd', yearRange: "-40:-20", changeYear: true, changeMonth: true });
+            $("#DateOfBirth").datepicker({ dateFormat: 'yy-mm-dd', yearRange: "-40:-20", changeYear: true, changeMonth: true });
 
             $("form").validate();
         });
