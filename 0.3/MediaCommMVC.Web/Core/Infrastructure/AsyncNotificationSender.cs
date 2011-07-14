@@ -96,14 +96,18 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             this.ExecuteNotification(
                 () =>
                 {
+                    Topic notifyTopic = this.sessionContainer.CurrentSession.Get<Topic>(newPost.Topic.Id);
+
                     DateTime notificationTime = DateTime.Now;
-                    IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewPost();
+                    IEnumerable<string> usersMailAddressesToNotify =
+                        this.userRepository.GetMailAddressesToNotifyAboutNewPost().Where(
+                            m => !notifyTopic.ExcludedUsers.Select(u => u.EMailAddress).Contains(m)).ToList();
 
                     if (usersMailAddressesToNotify.Count() == 0)
                     {
                         return;
-                    }
 
+                    }
                     string subject = Mail.NewPostTitle + General.Title;
                     string body = string.Format(Mail.NewPostBody, newPost.Author.UserName, newPost.Topic.Title, newPost.Created);
                     this.SendNotificationMail(subject, body, usersMailAddressesToNotify);
@@ -117,8 +121,11 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             this.ExecuteNotification(
                 () =>
                 {
+                    Topic notifyTopic = this.sessionContainer.CurrentSession.Get<Topic>(newTopic.Id);
+
                     DateTime notificationTime = DateTime.Now;
-                    IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewPost();
+                    IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewPost().Where(
+                            m => !notifyTopic.ExcludedUsers.Select(u => u.EMailAddress).Contains(m)).ToList();
 
                     string subject = Mail.NewTopicTitle + General.Title;
                     string body = string.Format(Mail.NewTopicBody, newTopic.CreatedBy, newTopic.Title, newTopic.Created);
@@ -134,7 +141,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
 
             var smtp = new SmtpClient { Host = this.mailConfiguration.SmtpHost, DeliveryMethod = SmtpDeliveryMethod.Network, };
 
-            using (MailMessage message = new MailMessage(this.mailConfiguration.MailFrom, string.Empty) { Subject = subject, Body = body })
+            using (MailMessage message = new MailMessage(this.mailConfiguration.MailFrom, recipients.First()) { Subject = subject, Body = body })
             {
                 recipients.ToList().ForEach(r => message.Bcc.Add(r));
                 smtp.Send(message);

@@ -138,7 +138,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 							and Id not in 
 								(select ReadTopicID from ForumTopicsRead where ReadByUserID = :userId and LastVisit > DATEADD(day, -30, GETDATE()) and LastVisit > LastPostTime)
                             and Id not in
-                                (SELECT TopicId FROM ForumTopicsExcludedUsers WHERE MediaCOmmUserId = :userId)")
+                                (SELECT TopicId FROM ForumTopicsExcludedUsers WHERE MediaCommUserId = :userId)")
                             .SetParameter("forumId", forum.Id).SetParameter("userId", this.MediaCommUser.Id).UniqueResult<string>());
             }
 
