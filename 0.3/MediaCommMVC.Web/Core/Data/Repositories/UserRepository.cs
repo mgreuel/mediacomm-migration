@@ -12,7 +12,7 @@ using NHibernate.Linq;
 
 namespace MediaCommMVC.Web.Core.Data.Repositories
 {
-    public class UserRepository : IUserRepository
+    public sealed class UserRepository : IUserRepository
     {
         private readonly ISessionContainer sessionContainer;
 

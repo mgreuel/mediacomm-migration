@@ -8,6 +8,7 @@ using MediaCommMVC.Web.Core.Data.Repositories;
 using MediaCommMVC.Web.Core.DataInterfaces;
 using MediaCommMVC.Web.Core.Model.Forums;
 using MediaCommMVC.Web.Core.Model.Photos;
+using MediaCommMVC.Web.Core.Model.Users;
 using MediaCommMVC.Web.Core.Model.Videos;
 
 using Resources;
@@ -101,7 +102,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
                     DateTime notificationTime = DateTime.Now;
                     IEnumerable<string> usersMailAddressesToNotify =
                         this.userRepository.GetMailAddressesToNotifyAboutNewPost().Where(
-                            m => !notifyTopic.ExcludedUsers.Select(u => u.EMailAddress).Contains(m)).ToList();
+                            m => !notifyTopic.ExcludedUsers.Select(u => u.EMailAddress).Contains(m) && m != newPost.Author.EMailAddress).ToList();
 
                     if (usersMailAddressesToNotify.Count() == 0)
                     {
@@ -123,10 +124,11 @@ namespace MediaCommMVC.Web.Core.Infrastructure
                 () =>
                 {
                     Topic notifyTopic = this.sessionContainer.CurrentSession.Get<Topic>(newTopic.Id);
+                    MediaCommUser author = this.userRepository.GetUserByName(notifyTopic.CreatedBy);
 
                     DateTime notificationTime = DateTime.Now;
                     IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewPost().Where(
-                            m => !notifyTopic.ExcludedUsers.Select(u => u.EMailAddress).Contains(m)).ToList();
+                            m => !notifyTopic.ExcludedUsers.Select(u => u.EMailAddress).Contains(m) && m != author.EMailAddress).ToList();
 
                     if (usersMailAddressesToNotify.Count() == 0)
                     {
@@ -162,7 +164,8 @@ namespace MediaCommMVC.Web.Core.Infrastructure
                 () =>
                 {
                     DateTime notificationTime = DateTime.Now;
-                    IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewPhotos();
+                    MediaCommUser uploader = this.userRepository.GetUserByName(uploaderName);
+                    IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewPhotos().Where(m => m != uploader.EMailAddress);
 
                     if (usersMailAddressesToNotify.Count() == 0)
                     {
@@ -184,7 +187,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
                 () =>
                 {
                     DateTime notificationTime = DateTime.Now;
-                    IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewVideos();
+                    IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewVideos().Where(m => m != newVideo.Uploader.EMailAddress);
 
                     if (usersMailAddressesToNotify.Count() == 0)
                     {
