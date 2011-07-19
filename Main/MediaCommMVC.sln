@@ -17,13 +17,13 @@ Global
 		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = MediaCommMVC.Web\\MediaCommMVC.Web.csproj
-		SccProjectName1 = MediaCommMVC.Web
-		SccLocalPath1 = MediaCommMVC.Web
-		SccProjectUniqueName2 = MediaCommMVC.Web.Tests\\MediaCommMVC.Web.Tests.csproj
-		SccProjectName2 = MediaCommMVC.Web.Tests
-		SccLocalPath2 = MediaCommMVC.Web.Tests
+		SccProjectUniqueName0 = MediaCommMVC.Web\\MediaCommMVC.Web.csproj
+		SccProjectName0 = MediaCommMVC.Web
+		SccLocalPath0 = MediaCommMVC.Web
+		SccProjectUniqueName1 = MediaCommMVC.Web.Tests\\MediaCommMVC.Web.Tests.csproj
+		SccProjectName1 = MediaCommMVC.Web.Tests
+		SccLocalPath1 = MediaCommMVC.Web.Tests
+		SccLocalPath2 = .
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = MediaCommMVC 0.3.vsmdi
