@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 using MediaCommMVC.Web.Core.DataInterfaces;
@@ -147,7 +148,7 @@ namespace MediaCommMVC.Web.Core.Controllers
             }
 
             postToUpdate.Text = UrlResolver.ResolveLinks(postToUpdate.Text);
-            
+
             this.forumRepository.UpdatePost(postToUpdate);
 
             string url = this.GetPostUrl(postToUpdate.Topic.Id, postToUpdate);
@@ -199,6 +200,12 @@ namespace MediaCommMVC.Web.Core.Controllers
             PagingParameters pagingParameters = new PagingParameters { CurrentPage = page, PageSize = PostsPerTopicPage };
 
             Topic topic = this.forumRepository.GetTopicById(id);
+
+            if (topic == null)
+            {
+                throw new HttpException(404, "HTTP/1.1 404 Not Found");
+            }
+
             pagingParameters.TotalCount = topic.PostCount;
 
             IEnumerable<Post> posts = this.forumRepository.GetPostsForTopic(id, pagingParameters);

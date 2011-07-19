@@ -58,7 +58,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         public VideoCategory GetCategoryById(int id)
         {
-            return this.Session.Get<VideoCategory>(id);
+            return this.Session.Query<VideoCategory>().FetchMany(c => c.Videos).Single(c => c.Id == id);
         }
 
         public Image GetThumbnailImage(int videoId)
@@ -100,7 +100,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
         public Video GetVideoById(int id)
         {
-            return this.Session.Get<Video>(id);
+            return this.Session.Query<Video>().Fetch(v => v.VideoCategory).Single(v => v.Id == id);
         }
 
         private string GetIncomingVideosPath()

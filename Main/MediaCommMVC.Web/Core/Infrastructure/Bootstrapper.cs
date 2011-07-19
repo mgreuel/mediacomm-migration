@@ -44,13 +44,13 @@ namespace MediaCommMVC.Web.Core.Infrastructure
 
             routes.MapRoute("Profile", "Users/{username}", new { controller = "Users", action = "Profile" });
 
+            routes.MapRoute("Error", "Error", new { controller = "Home", action = "Error" });
+
             routes.MapRoute("DefaultWithIdAndName", "{controller}/{action}/{id}/{name}");
 
             routes.MapRoute("DefaultWithId", "{controller}/{action}/{id}");
 
             routes.MapRoute("Default", "{controller}/{action}", new { controller = "Home", action = "Index" });
-
-            routes.MapRoute("Error", "Error", new { controller = "Home", action = "Error" });
         }
     }
 }

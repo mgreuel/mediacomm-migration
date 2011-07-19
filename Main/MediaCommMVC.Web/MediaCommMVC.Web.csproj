@@ -75,9 +75,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FluentNHibernate.1.2.0.712\lib\FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="HibernatingRhinos.Profiler.Appender.v4.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0774796e73ebf640, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernateProfiler.1.0.0.879\lib\Net40\HibernatingRhinos.Profiler.Appender.v4.0.dll</HintPath>
-    </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\Iesi.Collections.3.1.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
@@ -204,7 +201,6 @@
       <DependentUpon>Videos.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\Combres.cs" />
-    <Compile Include="App_Start\NHibernateProfilerBootstrapper.cs" />
     <Compile Include="Core\Common\Config\FileConfigAccessor.cs" />
     <Compile Include="Core\Common\Config\IConfigAccessor.cs" />
     <Compile Include="Core\Common\Exceptions\CreateUserException.cs" />
@@ -310,7 +306,6 @@
     <Content Include="App_Data\MediaCommDemo_log.LDF">
       <DependentUpon>MediaCommDemo.mdf</DependentUpon>
     </Content>
-    <Content Include="App_Start\NHibernateProfilerBootstrapper.vb" />
     <Content Include="Content\Custom\account.css" />
     <Content Include="Content\Custom\admin.css" />
     <Compile Include="Global.asax.cs">
