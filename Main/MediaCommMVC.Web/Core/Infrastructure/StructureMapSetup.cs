@@ -2,6 +2,8 @@ using System.Configuration;
 using System.Security.Principal;
 using System.Web;
 
+using MarkdownSharp;
+
 using MediaCommMVC.Web.Core.Common.Config;
 using MediaCommMVC.Web.Core.Common.Logging;
 using MediaCommMVC.Web.Core.Data;
@@ -35,6 +37,8 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             container.For<IImageGenerator>().Use<ImageGenerator>();
             container.For<IIdentity>().Use(i => HttpContext.Current.User.Identity);
             container.For<INotificationSender>().Use<AsyncNotificationSender>();
+            container.For<Markdown>().Use(
+                new Markdown(new MarkdownOptions { AutoHyperlink = true, AutoNewLines = true, EncodeProblemUrlCharacters = true }));
 
             MailConfiguration mailConfiguration = new MailConfiguration
                 { MailFrom = ConfigurationManager.AppSettings["mail-from"], SmtpHost = ConfigurationManager.AppSettings["mail-smtpHost"] };

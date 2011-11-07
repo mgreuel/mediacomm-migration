@@ -1,12 +1,10 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<MediaCommMVC.Web.Core.ViewModel.CreateTopicInfo>" %>
 
 <%@ Import Namespace="Combres.Mvc" %>
-
 <%@ Import Namespace="Resources" %>
-
 <%@ Import Namespace="MediaCommMVC.Web.Core.Helpers" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
-    <script src="/Content/tiny_mce/tiny_mce.js" type="text/javascript"></script>
+    <%= Html.CombresLink("editorJs")%>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="BreadCrumbContent" runat="server">
     <%= Html.ActionLink( Navigation.Forums, "Index" ) %>
@@ -39,7 +37,21 @@
                         <%= Forums.Message %>:</label>
                 </td>
                 <td class="secondColumn reset">
-                    <%= Html.TextArea("Post.Text", null, new { @class = "required fullWidth", minlength = "3" }) %>
+                    <div id="postBody">
+                        <ul>
+                            <li><a href="#wmd-editor">
+                                <%= Resources.Forums.Input %></a> </li>
+                            <li><a href="#wmd-preview">
+                                <%= Resources.Forums.Preview %></a> </li>
+                        </ul>
+                        <div id="wmd-editor">
+                            <div id="wmd-button-bar" class="wmd-button-bar">
+                            </div>
+                            <%= Html.TextArea("Post.Text", null, new { id= "wmd-input", @class = "required wmd-input", minlength = "3" }) %>
+                        </div>
+                        <div id="wmd-preview" class="wmd-preview">
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -126,58 +138,41 @@
         </tbody>
     </table>
     <% } %>
-    <script type="text/javascript" language="javascript">
-        tinyMCE.init(
-        {
-            mode: "textareas",
+    <script type="text/javascript">
 
-            theme: "advanced",
-            theme_advanced_toolbar_location: "top",
+        $(document).ready(function () {
 
-            theme_advanced_buttons1: "bold,italic,underline,strikethrough,|,forecolor,link,|,bullist,numlist",
-            theme_advanced_buttons2: "",
-            theme_advanced_buttons3: ""
-        });
-
-
-        $(document).ready(function ()
-        {
-            $('#submitTopic').click(function ()
-            {
-                var content = tinyMCE.activeEditor.getContent();
-                $('#Post_Text').val(content);
-            });
+            var converter = Markdown.getSanitizingConverter();
+            var editor = new Markdown.Editor(converter);
+            editor.run();
 
             $("form").validate();
 
+            $("#postBody").tabs();
+
             $("#optionsButton").toggle
             (
-                function ()
-                {
+                function () {
                     $(this).text('<%= Forums.HideOptions %>');
                     $(".hide").toggle();
                 },
-                function ()
-                {
+                function () {
                     $(this).text('<%= Forums.ShowOptions %>');
                     $(".hide").toggle();
                 }
             );
         });
 
-        function AddExcludedUser()
-        {
+        function AddExcludedUser() {
             var username = $("#userNameToExclude").val();
             var excludedUserNames = $("#excludedUsers").val();
 
-            if (excludedUserNames.indexOf(" " + username + ";") == -1)
-            {
+            if (excludedUserNames.indexOf(" " + username + ";") == -1) {
                 $("#excludedUsers").val(excludedUserNames + " " + username + ";");
             }
         }
 
-        function AddPollAnswer()
-        {
+        function AddPollAnswer() {
             var answerCount = $("#createPoll .answer").length;
 
             $("#createPoll").append('<tr class="answer"><td><strong>' + '<%= Forums.Answer %> '

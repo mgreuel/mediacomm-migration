@@ -6,7 +6,7 @@
 <%@ Import Namespace="Resources" %>
 <%@ Import Namespace="MediaCommMVC.Web.Core.Helpers" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
-    <script src="/Content/tiny_mce/tiny_mce.js" type="text/javascript"></script>
+    <%= Html.CombresLink("editorJs")%>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="BreadcrumbContent" runat="server">
     <%= Html.ActionLink( Navigation.Forums, "Index" ) %>
@@ -85,8 +85,8 @@
                 <tr>
                     <td>
                         <%
-                        if (this.Model.Topic.Poll.Type == PollType.SingleAnswer)
-                        {%>
+                       if (this.Model.Topic.Poll.Type == PollType.SingleAnswer)
+                       {%>
                         <input type="radio" class="pollAnswerInput" name="answerIds" value="<%=possibleAnswer.Id%>" />
                         <%
                         }
@@ -94,14 +94,14 @@
                         {%>
                         <input type="checkbox" name="answerIds" value="<%=possibleAnswer.Id%>" />
                         <%
-                            }%>
+                        }%>
                         <label>
                             <%:possibleAnswer.Text%></label>
                     </td>
                 </tr>
                 <%
 
-                    }
+                   }
                 %>
             </tbody>
         </table>
@@ -186,44 +186,44 @@
         <h2>
             <%=Forums.Reply%>
         </h2>
-        <%=Html.TextArea("post.Text", null, new { @class = "required", minlength = "3" })%>
-        <input id="submitReply" type="submit" value='<%=Forums.Reply%>' />
+        <div id="postBody">
+            <ul>
+                <li><a href="#wmd-editor">
+                    <%= Resources.Forums.Input %></a> </li>
+                <li><a href="#wmd-preview">
+                    <%= Resources.Forums.Preview %></a> </li>
+            </ul>
+            <div id="wmd-editor">
+                <div id="wmd-button-bar" class="wmd-button-bar">
+                </div>
+                <%= Html.TextArea("Post.Text", null, new { id= "wmd-input", @class = "required fullWidth wmd-input", minlength = "3" }) %>
+            </div>
+            <div id="wmd-preview" class="wmd-preview">
+            </div>
+            <input id="submitReply" type="submit" value='<%=Forums.Reply%>' />
+        </div>
     </div>
     <%
         }
     %>
     <script type="text/javascript">
-        $(document).ready(function ()
-        {
+        $(document).ready(function () {
             $("tbody > tr:odd > td").css("background-color", "#dfeffc");
 
-            $('#submitReply').click(function ()
-            {
-                var content = tinyMCE.activeEditor.getContent();
-                $('#post_Text').val(content);
-            });
-
-            $(".deletePost").click(function ()
-            {
-                if (confirm("Do you really want to delete the this post ?"))
-                {
+            $(".deletePost").click(function () {
+                if (confirm("Do you really want to delete the this post ?")) {
                     $(this).closest("form").submit();
                 }
             });
 
             $("form").validate();
+
+            var converter = Markdown.getSanitizingConverter();
+            var editor = new Markdown.Editor(converter);
+            editor.run();
+
+            $("#postBody").tabs();
         });
 
-        tinyMCE.init(
-        {
-            mode: "textareas",
-
-            theme: "advanced",
-            theme_advanced_toolbar_location: "top",
-
-            theme_advanced_buttons1: "bold,italic,underline,strikethrough,|,forecolor,link,|,bullist,numlist",
-            theme_advanced_buttons2: "",
-            theme_advanced_buttons3: ""
-        });
     </script>
 </asp:Content>

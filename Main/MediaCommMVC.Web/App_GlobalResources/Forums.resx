@@ -231,4 +231,10 @@
   <data name="InvisibleFor" xml:space="preserve">
     <value>Invisible for: </value>
   </data>
+  <data name="Input" xml:space="preserve">
+    <value>Input</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
 </root>
