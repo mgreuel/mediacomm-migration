@@ -49,7 +49,8 @@
                 <td width="100%">
                     <span class="topicTitle">
                         <%= Html.ActionLink(topic.Title, "Topic", new { id = topic.Id, name= Url.ToFriendlyUrl(topic.Title) }) %>
-                    </span><span class="smallpager">
+                    </span>
+                    <span class="smallpager">
                         <br />
                         <% if (!topic.ReadByCurrentUser)
                            {

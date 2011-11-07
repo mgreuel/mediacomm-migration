@@ -85,7 +85,7 @@
 
 #createTopicTable .fullWidth
 {
-    width: 99%;
+    /*width: 99%;*/
 }
 
 #Post_Text
@@ -175,7 +175,14 @@
 {
     margin-top: 10px;
     margin-right: 30px;
+    font-size: 120%;
 }
+
+#reply textarea, #reply .wmd-preview
+{
+    font-size: 120%;
+}
+
 
 .postOptions
 {
@@ -234,3 +241,22 @@
 /* Show Topic End */
 
 
+/* Edit post Start */
+
+#editPost
+{
+    margin-left: 20px;
+    margin-right: 142px;
+    margin-top: 6px;
+    text-align: left;
+    font-size: 120%;
+}
+
+
+#editPost #save
+{
+    margin-left: 14px;
+    margin-bottom: 6px;
+}
+
+/* Edit post End */

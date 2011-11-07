@@ -36,11 +36,21 @@
                         <td width="100%">
                             <span class="topicTitle">
                                 <%= Html.ActionLink(topic.Title, "Topic", "Forums", new { id = topic.Id, name = Url.ToFriendlyUrl(topic.Title) }, null) %>
-                            </span><span class="smallpager">
-                                <br />
-                                <%= Html.NumbersOnlyPager(new PagingParameters { PageSize = this.Model.PostsPerTopicPage, TotalCount = topic.PostCount}, 
+                                <span class="smallpager">
+                                    <br />
+                                    <% if (!topic.ReadByCurrentUser)
+                                       {
+                                           this.Writer.Write(Html.ActionLink(Forums.NewPost, "FirstNewPostInTopic", "Forums", new { id = topic.Id }, new { title = Forums.GotoFirstNewPost }));
+                                           this.Writer.Write("&nbsp;");
+                                       }%>
+                                    <%= Html.NumbersOnlyPager(new PagingParameters { PageSize = this.Model.PostsPerTopicPage, TotalCount = topic.PostCount}, 
                                 string.Format("/Forums/Topic/{0}/{1}", topic.Id, Url.ToFriendlyUrl(topic.Title)))%>
-                            </span>
+                                    <% if (topic.ExcludedUsernames != null && topic.ExcludedUsernames.Count() > 0)
+                                       {
+                                           this.Writer.Write("&nbsp;");
+                                           this.Writer.Write(Forums.InvisibleFor + string.Join(", ", topic.ExcludedUsernames));
+                                       }%>
+                                </span>
                         </td>
                         <td style="white-space: nowrap; text-align: center;">
                             <div>

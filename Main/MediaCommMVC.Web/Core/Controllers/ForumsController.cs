@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using MarkdownSharp;
+
 using MediaCommMVC.Web.Core.DataInterfaces;
 using MediaCommMVC.Web.Core.Helpers;
 using MediaCommMVC.Web.Core.Infrastructure;
@@ -17,7 +19,7 @@ namespace MediaCommMVC.Web.Core.Controllers
     [Authorize]
     public sealed class ForumsController : Controller
     {
-        private const int PostsPerTopicPage = 15;
+        private const int PostsPerTopicPage = 25;
 
         private const int TopicsPerForumPage = 25;
 
@@ -29,12 +31,15 @@ namespace MediaCommMVC.Web.Core.Controllers
 
         private readonly INotificationSender notificationSender;
 
-        public ForumsController(IForumRepository forumRepository, IUserRepository userRepository, CurrentUserContainer currentUserContainer, INotificationSender notificationSender)
+        private readonly Markdown markdownConverter;
+
+        public ForumsController(IForumRepository forumRepository, IUserRepository userRepository, CurrentUserContainer currentUserContainer, INotificationSender notificationSender, Markdown markdownConverter)
         {
             this.forumRepository = forumRepository;
             this.userRepository = userRepository;
             this.currentUserContainer = currentUserContainer;
             this.notificationSender = notificationSender;
+            this.markdownConverter = markdownConverter;
         }
 
         [HttpPost]
@@ -93,7 +98,7 @@ namespace MediaCommMVC.Web.Core.Controllers
                 topic.Poll = poll;
             }
 
-            post.Text = UrlResolver.ResolveLinks(post.Text);
+            post.Text = HtmlSanitizer.Sanitize(this.markdownConverter.Transform(post.Text));
 
             Topic createdTopic = this.forumRepository.AddTopic(topic, post);
 
@@ -147,7 +152,7 @@ namespace MediaCommMVC.Web.Core.Controllers
                 throw new UnauthorizedAccessException("Only Administrator can edit posts made by other users");
             }
 
-            postToUpdate.Text = UrlResolver.ResolveLinks(postToUpdate.Text);
+            postToUpdate.Text = HtmlSanitizer.Sanitize(this.markdownConverter.Transform(postToUpdate.Text));
 
             this.forumRepository.UpdatePost(postToUpdate);
 
@@ -222,7 +227,7 @@ namespace MediaCommMVC.Web.Core.Controllers
             post.Author = this.currentUserContainer.User;
             post.Created = DateTime.Now;
 
-            post.Text = UrlResolver.ResolveLinks(post.Text);
+            post.Text = HtmlSanitizer.Sanitize(this.markdownConverter.Transform(post.Text));
 
             this.forumRepository.AddPost(post);
 
