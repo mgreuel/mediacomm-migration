@@ -15,7 +15,7 @@ namespace MediaCommMVC.Web.Core.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private const int PostsPerTopicPage = 15;
+        private const int PostsPerTopicPage = 25;
 
         private readonly IForumRepository forumRepository;
 
