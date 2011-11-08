@@ -1,4 +1,10 @@
-﻿/* Forums Index Start */
+﻿/* No empty lines afters paragraphs */
+p
+{
+    margin-bottom: 10px;
+}
+
+/* Forums Index Start */
 .forumTitle, .topicTitle
 {
     font-size: 12px !important;
