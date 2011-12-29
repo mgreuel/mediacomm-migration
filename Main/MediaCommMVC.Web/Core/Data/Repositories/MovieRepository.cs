@@ -5,7 +5,6 @@ using System.Linq;
 using MediaCommMVC.Web.Core.DataInterfaces;
 using MediaCommMVC.Web.Core.Infrastructure;
 using MediaCommMVC.Web.Core.Model.Movies;
-using MediaCommMVC.Web.Core.Model.Users;
 
 using NHibernate;
 using NHibernate.Linq;
@@ -36,7 +35,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
         {
             Movie movie = this.Session.Get<Movie>(movieId);
 
-            if (movie.Owner != this.currentUserContainer.User && this.currentUserContainer.User.IsAdmin)
+            if (movie.Owner != this.currentUserContainer.User && !this.currentUserContainer.User.IsAdmin)
             {
                 throw new UnauthorizedAccessException("Only Administrator can delete movies added by other users");
             }
