@@ -32,6 +32,8 @@ namespace MediaCommMVC.Web.Core.Model.Forums
                             this.answerCount.Add(possibleAnswer, 0);
                         }
                     }
+
+                    this.answerCount = this.answerCount.OrderByDescending(a => a.Value).ToDictionary(a => a.Key, a => a.Value);
                 }
 
                 return this.answerCount;
