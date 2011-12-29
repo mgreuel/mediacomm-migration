@@ -45,10 +45,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AjaxMin.4.30.4295.16112\lib\AjaxMin.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Castle.Core.2.5.1\lib\NET35\Castle.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Combres, Version=2.2.1.0, Culture=neutral, PublicKeyToken=1ca6b37997dd7536, processorArchitecture=MSIL">
       <HintPath>..\packages\combres.2.2.2.0\lib\net40\Combres.dll</HintPath>
     </Reference>
@@ -69,9 +65,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\fasterflect.2.0.1\lib\net40\Fasterflect.dll</HintPath>
     </Reference>
-    <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+    <Reference Include="FluentNHibernate, Version=1.3.0.717, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FluentNHibernate.1.2.0.712\lib\FluentNHibernate.dll</HintPath>
+      <HintPath>..\packages\FluentNHibernate.1.3.0.717\lib\FluentNHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
@@ -87,13 +83,15 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NHibernate.3.1.0.4000\lib\Net35\NHibernate.dll</HintPath>
+    <Reference Include="MiniProfiler.Contrib.NHibernate">
+      <HintPath>..\packages\MiniProfiler.Contrib.NHibernate.1.0.4289.24845\lib\net40\MiniProfiler.Contrib.NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate.ByteCode.Castle, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+    <Reference Include="MvcMiniProfiler">
+      <HintPath>..\packages\MiniProfiler.1.9\lib\net40\MvcMiniProfiler.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NHibernate.Castle.3.1.0.4000\lib\Net35\NHibernate.ByteCode.Castle.dll</HintPath>
+      <HintPath>..\packages\NHibernate.3.2.0.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="RouteDebugger, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -209,6 +207,7 @@
       <DependentUpon>Videos.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\Combres.cs" />
+    <Compile Include="App_Start\MiniProfiler.cs" />
     <Compile Include="Core\Common\Config\FileConfigAccessor.cs" />
     <Compile Include="Core\Common\Config\IConfigAccessor.cs" />
     <Compile Include="Core\Common\Exceptions\CreateUserException.cs" />
@@ -531,6 +530,7 @@
     <Content Include="packages.config" />
     <None Include="combres.readme" />
     <None Include="Settings.StyleCop" />
+    <Content Include="Views\Shared\_MINIPROFILER UPDATED Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Admin.resx">

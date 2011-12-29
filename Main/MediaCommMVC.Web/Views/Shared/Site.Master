@@ -144,5 +144,7 @@
         <div class="corner-page-bottom">
         </div>
     </div>
+
+    <%= MvcMiniProfiler.MiniProfiler.RenderIncludes() %>
 </body>
 </html>

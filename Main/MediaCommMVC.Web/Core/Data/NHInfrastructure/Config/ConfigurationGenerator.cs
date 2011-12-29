@@ -4,7 +4,7 @@ using FluentNHibernate.Cfg.Db;
 
 using MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping;
 
-using NHibernate.ByteCode.Castle;
+using NHibernate.Cfg;
 
 namespace MediaCommMVC.Web.Core.Data.NHInfrastructure.Config
 {
@@ -21,10 +21,17 @@ namespace MediaCommMVC.Web.Core.Data.NHInfrastructure.Config
         {
             AutoPersistenceModel autoMapModel = this.autoMapGenerator.Generate();
 
-            FluentConfiguration fluentConfiguration = Fluently.Configure().Database(
-                MsSqlConfiguration.MsSql2008.ConnectionString(c => c.FromConnectionStringWithKey("MediaCommDb")).AdoNetBatchSize(100))
-                .ProxyFactoryFactory(typeof(ProxyFactoryFactory)).CurrentSessionContext("web").Mappings(m => m.AutoMappings.Add(autoMapModel));
+            Configuration configuration = new Configuration();
 
+            configuration.SetProperty(
+                Environment.ConnectionDriver, typeof(MiniProfilerContrib.NHibernate.ProfiledSql2008ClientDriver).AssemblyQualifiedName);
+
+            configuration.SetProperty(Environment.CurrentSessionContextClass, "web");
+
+            FluentConfiguration fluentConfiguration = Fluently.Configure(configuration).Database(
+                MsSqlConfiguration.MsSql2008.ConnectionString(c => c.FromConnectionStringWithKey("MediaCommDb")).AdoNetBatchSize(100))
+                .Mappings(m => m.AutoMappings.Add(autoMapModel));
+            
             return fluentConfiguration;
         }
     }
