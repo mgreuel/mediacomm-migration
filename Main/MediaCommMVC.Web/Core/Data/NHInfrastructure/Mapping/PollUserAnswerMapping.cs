@@ -10,6 +10,7 @@ namespace MediaCommMVC.Web.Core.Data.NHInfrastructure.Mapping
         public void Override(AutoMapping<PollUserAnswer> mapping)
         {
             mapping.Table("PollUserAnswers");
+            mapping.References(ua => ua.User).Not.LazyLoad();
         }
     }
 }
