@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace MediaCommMVC.Web.Core.Model.Photos
 {
@@ -12,7 +13,7 @@ namespace MediaCommMVC.Web.Core.Model.Photos
         {
             get
             {
-                return this.albums;
+                return this.albums.OrderByDescending(a => a.LastPicturesAdded).ToList();
             }
 
             protected set
