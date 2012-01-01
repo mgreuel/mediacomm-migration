@@ -29,6 +29,8 @@ function updateApprovals() {
         url: "/Approvals/getApprovalsForUrls",
         data: data,
         success: function (resultData) {
+            $(".approvals").html("");
+
             $.each(resultData, function () {
                 var approval = this;
                 var $approvals = $(".approvals[data-url='" + approval.Url + "']");

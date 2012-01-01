@@ -178,7 +178,7 @@ p
     color: #5C9CCC;
 }
 
-.postText .approvalButton 
+.postText .approvalButton a
 {
     margin-bottom: 6px;
 }
@@ -221,7 +221,6 @@ p
 {
     font-size: 120%;
 }
-
 
 .postOptions
 {
