@@ -37,6 +37,14 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             RegisterMoviesRoutes(routes);
             RegisterVideoRoutes(routes);
             RegisterAdminRoutes(routes);
+            RegisterApprovalsRoutes(routes);
+        }
+
+        private static void RegisterApprovalsRoutes(RouteCollection routes)
+        {
+            routes.MapRoute("ApproveUrl", "Approvals/Approve", new { controller = "Approvals", action = "Approve" });
+            routes.MapRoute("GetApprovalsForUrl", "Approvals/getApprovalsForUrls", new { controller = "Approvals", action = "GetApprovalsForUrls" });
+            
         }
 
         private static void RegisterAdminRoutes(RouteCollection routes)

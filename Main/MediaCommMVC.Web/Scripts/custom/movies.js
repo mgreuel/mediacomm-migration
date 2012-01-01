@@ -1,7 +1,6 @@
 ﻿var oTable;
 
-$(document).ready(function ()
-{
+$(document).ready(function () {
     oTable = $("#movieTable").dataTable(
                                 {
                                     "bJQueryUI": true,
@@ -24,29 +23,23 @@ $(document).ready(function ()
 
     oTable.fnSetColumnVis(0, false);
 
-    $(".deleteMovie").each(function ()
-    {
+    $(".deleteMovie").each(function () {
         var deleteCell = $(this);
 
-        if (deleteCell.text().length > 2)
-        {
+        if (deleteCell.text().length > 2) {
             deleteCell.css("cursor", "pointer");
 
-            deleteCell.click(function ()
-            {
+            deleteCell.click(function () {
                 var aPos = oTable.fnGetPosition(this);
                 var row = aPos[0];
 
                 var movieName = $.trim(oTable.fnGetData(row)[1]);
                 var movieId = $.trim(oTable.fnGetData(row)[0]);
 
-                if (confirm("Do you really want to delete the movie '" + movieName + "' ?"))
-                {
+                if (confirm("Do you really want to delete the movie '" + movieName + "' ?")) {
 
-                    $.post("/Movies/DeleteMovie/" + movieId, null, function (result)
-                    {
-                        if (result.success === true)
-                        {
+                    $.post("/Movies/DeleteMovie/" + movieId, null, function (result) {
+                        if (result.success === true) {
                             oTable.fnDeleteRow(row);
                         }
                     },
@@ -57,8 +50,7 @@ $(document).ready(function ()
     });
 });
 
-function ShowAddPopup()
-{
+function ShowAddPopup() {
     $("#editMovie").dialog(
             {
                 modal: true,

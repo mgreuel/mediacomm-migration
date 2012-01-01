@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 
 using MediaCommMVC.Web.Core.Common;
+using MediaCommMVC.Web.Core.Model.Forums;
 
 namespace MediaCommMVC.Web.Core.Helpers
 {

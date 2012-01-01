@@ -161,6 +161,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Admin.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Approval.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Approval.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Forums.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -218,12 +223,14 @@
     <Compile Include="Core\Common\UrlStripper.cs" />
     <Compile Include="Core\Controllers\AccountController.cs" />
     <Compile Include="Core\Controllers\AdminController.cs" />
+    <Compile Include="Core\Controllers\ApprovalsController.cs" />
     <Compile Include="Core\Controllers\ForumsController.cs" />
     <Compile Include="Core\Controllers\HomeController.cs" />
     <Compile Include="Core\Controllers\MoviesController.cs" />
     <Compile Include="Core\Controllers\PhotosController.cs" />
     <Compile Include="Core\Controllers\UsersController.cs" />
     <Compile Include="Core\Controllers\VideosController.cs" />
+    <Compile Include="Core\DataInterfaces\IApprovalsRepository.cs" />
     <Compile Include="Core\DataInterfaces\IForumRepository.cs" />
     <Compile Include="Core\DataInterfaces\IMovieRepository.cs" />
     <Compile Include="Core\DataInterfaces\IPhotoRepository.cs" />
@@ -235,6 +242,7 @@
     <Compile Include="Core\Data\NHInfrastructure\Config\IConfigurationGenerator.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Conventions\EnumConvention.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Conventions\FkConvention.cs" />
+    <Compile Include="Core\Data\NHInfrastructure\Mapping\ApprovalMapper.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Mapping\AutoMapGenerator.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Mapping\ForumMapper.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Mapping\ForumTopicsExcludedUserMapper.cs" />
@@ -252,12 +260,14 @@
     <Compile Include="Core\Data\NHInfrastructure\Mapping\TopicReadMapper.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Mapping\VideoCategoryMapper.cs" />
     <Compile Include="Core\Data\NHInfrastructure\Mapping\VideoMapper.cs" />
+    <Compile Include="Core\Data\Repositories\ApprovalsRepository.cs" />
     <Compile Include="Core\Data\Repositories\ForumRepository.cs" />
     <Compile Include="Core\Data\Repositories\MovieRepository.cs" />
     <Compile Include="Core\Data\Repositories\PhotoReposity.cs" />
     <Compile Include="Core\Data\Repositories\UserRepository.cs" />
     <Compile Include="Core\Data\Repositories\VideoRepository.cs" />
     <Compile Include="Core\Helpers\EnumHelper.cs" />
+    <Compile Include="Core\Helpers\ForumsUrlHelper.cs" />
     <Compile Include="Core\Helpers\HtmlSanitizer.cs" />
     <Compile Include="Core\Helpers\IconHelper.cs" />
     <Compile Include="Core\Helpers\Pagination.cs" />
@@ -277,6 +287,7 @@
     <Compile Include="Core\Infrastructure\MediaCommIdentity.cs" />
     <Compile Include="Core\Infrastructure\NHibernateActionFilter.cs" />
     <Compile Include="Core\Infrastructure\SmDependencyResolver.cs" />
+    <Compile Include="Core\Model\Approval.cs" />
     <Compile Include="Core\Model\Forums\Forum.cs" />
     <Compile Include="Core\Model\Forums\ForumTopicsExcludedUser.cs" />
     <Compile Include="Core\Model\Forums\Poll.cs" />
@@ -303,6 +314,8 @@
     <Compile Include="Core\ViewModel\Account\CreateUser.cs" />
     <Compile Include="Core\ViewModel\Account\UserLogin.cs" />
     <Compile Include="Core\ViewModel\AddVideoInfo.cs" />
+    <Compile Include="Core\ViewModel\ApprovalPaneViewModel.cs" />
+    <Compile Include="Core\ViewModel\ApprovalViewModel.cs" />
     <Compile Include="Core\ViewModel\CreateTopicInfo.cs" />
     <Compile Include="Core\ViewModel\ForumPage.cs" />
     <Compile Include="Core\ViewModel\PhotoUpload.cs" />
@@ -348,6 +361,7 @@
     <Content Include="Content\pagedown\wmd-buttons.png" />
     <Content Include="Content\pagedown\wmd.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Scripts\custom\approvals.js" />
     <Content Include="Scripts\custom\photos.js" />
     <Content Include="Scripts\custom\movies.js" />
   </ItemGroup>
@@ -530,7 +544,7 @@
     <Content Include="packages.config" />
     <None Include="combres.readme" />
     <None Include="Settings.StyleCop" />
-    <Content Include="Views\Shared\_MINIPROFILER UPDATED Layout.cshtml" />
+    <Content Include="Views\Shared\Approval.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Admin.resx">
@@ -589,6 +603,12 @@
     <Content Include="App_GlobalResources\Mail.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Mail.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Approval.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Approval.Designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

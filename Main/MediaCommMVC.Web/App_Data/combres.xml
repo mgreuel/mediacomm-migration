@@ -24,6 +24,7 @@
       <resource path="~/Scripts/jquery.dataTables.min.js" />
       <resource path="~/Scripts/custom/global.js" />
       <resource path="~/Scripts/custom/photos.js" />
+      <resource path="~/Scripts/custom/approvals.js" />
     </resourceSet>
     <resourceSet name="uploadJs" type="js">
       <resource path="~/Scripts/jquery.uploadify.v2.1.0.min.js" />

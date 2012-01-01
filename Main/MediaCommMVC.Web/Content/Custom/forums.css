@@ -166,6 +166,39 @@ p
     padding-top: 6px !important;
 }
 
+.postText .approvalContainer
+{
+    padding-top: 6px;
+}
+
+.postText .approval 
+{
+    display: block;
+    font-weight: bold;
+    color: #5C9CCC;
+}
+
+.postText .approvalButton 
+{
+    margin-bottom: 6px;
+}
+
+.postText .approvalButton .ui-button-text
+{
+    font-weight: bolder;
+}
+
+.postText .button 
+{
+       
+    float: right;    
+}
+
+.postBody 
+{
+    padding-right: 80px;    
+}
+
 #reply
 {
     margin-left: 20px;
@@ -193,6 +226,11 @@ p
 .postOptions
 {
     float: right;
+}
+
+.postOptions .button
+{
+    margin-bottom: 6px;
 }
 
 .pollAnswer

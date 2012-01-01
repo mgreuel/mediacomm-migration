@@ -239,9 +239,7 @@ namespace MediaCommMVC.Web.Core.Controllers
         private string GetPostUrl(int topicId, Post post)
         {
             int page = this.forumRepository.GetPageNumberForPost(postId: post.Id, topicId: topicId, pageSize: PostsPerTopicPage);
-            string postAnker = string.Format("#{0}", post.Id);
-
-            return this.Url.RouteUrl("ViewTopic", new { id = post.Topic.Id, page, name = this.Url.ToFriendlyUrl(post.Topic.Title) }) + postAnker;
+            return this.Url.GetPostUrl(post, page);
         }
     }
 }
