@@ -20,6 +20,10 @@
         rel="stylesheet" type="text/css" />
     <%= Html.CombresLink("siteCss") %>
     <%= Html.CombresLink("siteJs")%>
+    <script type="text/javascript">
+        var approvalText = '<%= Resources.Approval.ApprovalText %>';
+        var currentUsername = '<%= HttpContext.Current.User.Identity.Name %>';
+    </script>
     <asp:ContentPlaceHolder ID="Header" runat="server" />
 </head>
 <!-- Global IE fix to avoid layout crash when single word size wider than column width -->

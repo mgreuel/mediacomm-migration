@@ -3,6 +3,7 @@
 <%@ Import Namespace="MediaCommMVC.Web.Core.Model.Forums" %>
 <%@ Import Namespace="MediaCommMVC.Web.Core.Infrastructure" %>
 <%@ Import Namespace="MediaCommMVC.Web.Core.Model.Forums" %>
+<%@ Import Namespace="MediaCommMVC.Web.Core.ViewModel" %>
 <%@ Import Namespace="Resources" %>
 <%@ Import Namespace="MediaCommMVC.Web.Core.Helpers" %>
 <asp:Content runat="server" ID="HeaderContent" ContentPlaceHolderID="Header">
@@ -153,20 +154,25 @@
                     if (post.Author.UserName.Equals(this.User.Identity.Name, StringComparison.OrdinalIgnoreCase) ||
                         HttpContext.Current.User.IsInRole("Administrators"))
                     {
-                        Writer.Write(Html.ActionLink(Forums.Edit, "EditPost", new { id = post.Id }));
+                        Writer.Write(Html.ActionLink(Forums.Edit, "EditPost", new { id = post.Id }, new { @class = "button" }));
 
                         using (Html.BeginForm("DeletePost", "Forums", new { id = post.Id }))
                         {
                         %>
-                        <a id='<%= "submitDelete_" + post.Id %>' class="deletePost" href="#">
+                        <a id='<%= "submitDelete_" + post.Id %>' class="deletePost button" href="#">
                             <%=Forums.Delete%></a>
                         <%
                         }
                     }%>
                     </div>
-                    <div>
+                    <div class="postBody">
                         <%=post.Text%>
                     </div>
+                    <%= Html.Partial("Approval", new ApprovalPaneViewModel
+                            {
+                                Url = Url.GetPostUrl(post, this.Model.PagingParameters.CurrentPage), 
+                                ShowButton = !post.Author.UserName.Equals(this.User.Identity.Name, StringComparison.OrdinalIgnoreCase)
+                            }) %>
                 </td>
             </tr>
             <%
