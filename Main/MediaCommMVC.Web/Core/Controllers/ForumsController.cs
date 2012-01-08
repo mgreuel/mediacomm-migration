@@ -96,6 +96,8 @@ namespace MediaCommMVC.Web.Core.Controllers
             if (poll != null && !string.IsNullOrEmpty(poll.Question))
             {
                 topic.Poll = poll;
+
+                topic.Poll.PossibleAnswers = poll.PossibleAnswers.Where(pa => !string.IsNullOrEmpty(pa.Text)).ToList();
             }
 
             post.Text = HtmlSanitizer.Sanitize(this.markdownConverter.Transform(post.Text));
@@ -135,6 +137,11 @@ namespace MediaCommMVC.Web.Core.Controllers
             {
                 throw new UnauthorizedAccessException("Only Administrator can edit posts made by other users");
             }
+
+            post.Text = post.Text.Replace("<br />", "<br />\n");
+            post.Text = post.Text.Replace("</p>", "</p>\n");
+            post.Text = post.Text.Replace("</ul>", "</ul>\n");
+            post.Text = post.Text.Replace("</li>", "</li>\n");
 
             return this.View(post);
         }
