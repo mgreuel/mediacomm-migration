@@ -168,7 +168,7 @@
                     <div class="postBody">
                         <%=post.Text%>
                     </div>
-                    <%= Html.Partial("Approval", new ApprovalPaneViewModel
+                    <%= Html.Partial("ApprovalPane", new ApprovalPaneViewModel
                             {
                                 Url = Url.GetPostUrl(post, this.Model.PagingParameters.CurrentPage), 
                                 ShowButton = !post.Author.UserName.Equals(this.User.Identity.Name, StringComparison.OrdinalIgnoreCase)

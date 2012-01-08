@@ -110,10 +110,10 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             }
         }
 
-        public IEnumerable<Topic> Get10TopicsWithNewestPosts()
+        public IEnumerable<Topic> GetTopicsWithNewestPosts()
         {
             List<Topic> topics =
-                this.Session.Query<Topic>().Where(t => !t.ExcludedUsers.Contains(this.MediaCommUser)).OrderByDescending(t => t.LastPostTime).Take(10).
+                this.Session.Query<Topic>().Where(t => !t.ExcludedUsers.Contains(this.MediaCommUser)).OrderByDescending(t => t.LastPostTime).Take(6).
                     ToList();
 
             this.UpdateTopicReadStatus(topics.Where(t => t.LastPostTime > DateTime.Now - this.topicUnreadValidity));

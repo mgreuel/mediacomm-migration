@@ -1,0 +1,28 @@
+﻿@model System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, int>>
+<h3>
+    @Resources.Approval.MostApprovals</h3>
+<table id="newApprovals" class="defaultTable">
+    <thead>
+        <tr>
+            <th>
+                @Resources.General.Url
+            </th>
+            <th>
+                @Resources.Approval.ApprovalCount
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var approvedUrl in this.Model.OrderByDescending(u => u.Value))
+        {
+            <tr>
+                <td>
+                    <a href="@approvedUrl.Key">@approvedUrl.Key</a>
+                </td>
+                <td>
+                   <strong>@approvedUrl.Value</strong> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

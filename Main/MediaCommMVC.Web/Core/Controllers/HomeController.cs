@@ -42,7 +42,7 @@ namespace MediaCommMVC.Web.Core.Controllers
         public ActionResult Index()
         {
             IEnumerable<Topic> topicsWithNewestPosts =
-                this.forumRepository.Get10TopicsWithNewestPosts();
+                this.forumRepository.GetTopicsWithNewestPosts();
 
             IEnumerable<PhotoAlbum> newestPhotoAlbums = this.photoRepository.Get4NewestAlbums();
 

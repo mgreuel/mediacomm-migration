@@ -101,17 +101,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
     </Reference>
-    <Reference Include="StyleCop">
-      <HintPath>..\packages\StyleCop.4.5.25.0\lib\net35\StyleCop.dll</HintPath>
-    </Reference>
-    <Reference Include="StyleCop.CSharp">
-      <HintPath>..\packages\StyleCop.4.5.25.0\lib\net35\StyleCop.CSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -124,9 +116,6 @@
     </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -137,7 +126,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Web.Mobile" />
     <Reference Include="WebActivator, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebActivator.1.5\lib\net40\WebActivator.dll</HintPath>
@@ -334,6 +322,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Content\Custom\forums.css" />
+    <Content Include="Content\Custom\home.css" />
     <Content Include="Content\Custom\movies.css" />
     <Content Include="Content\Custom\photos.css" />
     <Content Include="Content\Custom\users.css" />
@@ -499,6 +488,7 @@
     <Content Include="Views\Admin\CreateUser.aspx" />
     <Content Include="Views\Admin\CreateVideoCategory.aspx" />
     <Content Include="Views\Admin\UserCreated.aspx" />
+    <Content Include="Views\Approvals\Index.aspx" />
     <Content Include="Views\Forums\CreateTopic.aspx" />
     <Content Include="Views\Forums\EditPost.aspx" />
     <Content Include="Views\Forums\Forum.aspx" />
@@ -544,7 +534,9 @@
     <Content Include="packages.config" />
     <None Include="combres.readme" />
     <None Include="Settings.StyleCop" />
-    <Content Include="Views\Shared\Approval.cshtml" />
+    <Content Include="Views\Shared\ApprovalPane.cshtml" />
+    <Content Include="Views\Shared\NewestApprovals.cshtml" />
+    <Content Include="Views\Approvals\MostApprovals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Admin.resx">

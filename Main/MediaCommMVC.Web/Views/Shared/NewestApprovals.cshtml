@@ -1,0 +1,18 @@
+@model MediaCommMVC.Web.Core.ViewModel.ApprovalViewModel[]
+<h3>
+    @Resources.Approval.NewestApprovals</h3>
+<table id="newApprovals" class="defaultTable">
+    <thead>
+    </thead>
+    <tbody>
+        @foreach(var approval in this.Model)
+        {
+            <tr>
+                <td>
+                    <span class="approval">@approval.ApprovedByUsername @Resources.Approval.ApprovalText
+                        @Resources.General.To</span> <a href="@approval.Url">@approval.Url</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

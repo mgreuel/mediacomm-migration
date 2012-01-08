@@ -17,7 +17,7 @@ namespace MediaCommMVC.Web.Core.DataInterfaces
 
         void DeletePost(Post post);
 
-        IEnumerable<Topic> Get10TopicsWithNewestPosts();
+        IEnumerable<Topic> GetTopicsWithNewestPosts();
 
         IEnumerable<Forum> GetAllForums();
 

@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Absolut! Count.
+        /// </summary>
+        internal static string ApprovalCount {
+            get {
+                return ResourceManager.GetString("ApprovalCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to says: Absolut!.
         /// </summary>
         internal static string ApprovalText {
@@ -75,6 +84,24 @@ namespace Resources {
         internal static string IApprove {
             get {
                 return ResourceManager.GetString("IApprove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Highest Absolut! Counts.
+        /// </summary>
+        internal static string MostApprovals {
+            get {
+                return ResourceManager.GetString("MostApprovals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The newest Absolut!.
+        /// </summary>
+        internal static string NewestApprovals {
+            get {
+                return ResourceManager.GetString("NewestApprovals", resourceCulture);
             }
         }
     }

@@ -117,10 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApprovalCount" xml:space="preserve">
+    <value>Absolut! Count</value>
+  </data>
   <data name="ApprovalText" xml:space="preserve">
     <value>says: Absolut!</value>
   </data>
   <data name="IApprove" xml:space="preserve">
     <value>Absolut!</value>
+  </data>
+  <data name="MostApprovals" xml:space="preserve">
+    <value>Highest Absolut! Counts</value>
+  </data>
+  <data name="NewestApprovals" xml:space="preserve">
+    <value>The newest Absolut!</value>
   </data>
 </root>

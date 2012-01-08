@@ -97,6 +97,11 @@
                     </ul>
                 </li>
             </ul>
+            <ul>
+                <li>
+                    <%= Html.ActionLink(Navigation.Approvals, "Index", "Approvals") %>
+                </li>
+            </ul>
             <% if (HttpContext.Current.User.IsInRole("Administrators"))
                { %>
             <ul>
@@ -148,7 +153,6 @@
         <div class="corner-page-bottom">
         </div>
     </div>
-
     <%= MvcMiniProfiler.MiniProfiler.RenderIncludes() %>
 </body>
 </html>
