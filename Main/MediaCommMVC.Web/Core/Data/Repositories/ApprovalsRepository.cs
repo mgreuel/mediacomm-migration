@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 using MediaCommMVC.Web.Core.DataInterfaces;
 using MediaCommMVC.Web.Core.Infrastructure;
@@ -39,6 +40,24 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
                 this.Session.Query<Approval>().Where(a => approvalUrls.Contains(a.ApprovedUrl)).ToArray();
 
             return approvals;
+        }
+
+        public Approval[] GetNewestApprovals(int count)
+        {
+            Approval[] approvals = this.Session.Query<Approval>().OrderByDescending(a => a.Id).Take(count).ToArray();
+
+            return approvals;
+        }
+
+        public IEnumerable<KeyValuePair<string, int>> GetUrlsWithMostApprovals(int count)
+        {
+            IEnumerable<KeyValuePair<string, int>> urlsWithMostApprovals =
+                this.Session.Query<Approval>()
+                    .GroupBy(a => a.ApprovedUrl)
+                    .OrderByDescending(g => g.Count())
+                    .ToDictionary(g => g.Key, g => g.Count());
+
+            return urlsWithMostApprovals;
         }
     }
 }

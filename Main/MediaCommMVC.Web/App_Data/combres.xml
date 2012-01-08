@@ -18,6 +18,7 @@
       <resource path="~/Content/Custom/movies.css" />
       <resource path="~/Content/Custom/users.css" />
       <resource path="~/Content/Custom/video.css" />
+      <resource path="~/Content/Custom/home.css" />
       <resource path="~/Content/pagedown/wmd.css" />
     </resourceSet>
     <resourceSet name="siteJs" type="js">

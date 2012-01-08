@@ -44,7 +44,9 @@ namespace MediaCommMVC.Web.Core.Infrastructure
         {
             routes.MapRoute("ApproveUrl", "Approvals/Approve", new { controller = "Approvals", action = "Approve" });
             routes.MapRoute("GetApprovalsForUrl", "Approvals/getApprovalsForUrls", new { controller = "Approvals", action = "GetApprovalsForUrls" });
-            
+            routes.MapRoute("NewestApprovals", "Approvals/NewestApprovals/{count}", new { controller = "Approvals", action = "NewestApprovals" });
+            routes.MapRoute("ApprovalIndex", "Approvals/Index", new { controller = "Approvals", action = "Index" });
+            routes.MapRoute("MostApprovals", "Approvals/MostApprovals/{count}", new { controller = "Approvals", action = "MostApprovals" });
         }
 
         private static void RegisterAdminRoutes(RouteCollection routes)

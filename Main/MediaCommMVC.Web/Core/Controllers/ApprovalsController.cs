@@ -56,5 +56,31 @@ namespace MediaCommMVC.Web.Core.Controllers
 
             return this.Json(approvals, JsonRequestBehavior.AllowGet);
         }
+
+        [ChildActionOnly]
+        [NHibernateActionFilter]
+        public ActionResult NewestApprovals(int count)
+        {
+            ApprovalViewModel[] newestApprovals = this.approvalsRepository.GetNewestApprovals(count)
+                .Select(a => new ApprovalViewModel { Url = a.ApprovedUrl, ApprovedByUsername = a.ApprovedBy.UserName })
+                .ToArray();
+
+            return this.View(newestApprovals);
+        }
+
+        [NHibernateActionFilter]
+        [ChildActionOnly]
+        public ActionResult MostApprovals(int count)
+        {
+           IEnumerable<KeyValuePair<string, int>> urlsWithMostApprovals = this.approvalsRepository.GetUrlsWithMostApprovals(count);
+
+           return this.View(urlsWithMostApprovals);
+        }
+
+        [NHibernateActionFilter]
+        public ActionResult Index()
+        {
+            return this.View();
+        }
     }
 }
