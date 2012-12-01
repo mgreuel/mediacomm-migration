@@ -50,6 +50,16 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             this.Session.SaveOrUpdate(category);
         }
 
+        public void GenerateImagesForUnprocessedUploads(PhotoAlbum album)
+        {
+            string targetPath = this.GetTargetPath(album);
+            string unprocessedPath = Path.Combine(targetPath, UnprocessedPhotosFolder);
+
+            IEnumerable<FileInfo> newFiles = this.MovePhotos(targetPath, unprocessedPath);
+
+            this.imageGenerator.GenerateImages(targetPath, newFiles);
+        }
+
         public void AddPhotos(PhotoAlbum album, MediaCommUser uploader)
         {
             string targetPath = this.GetTargetPath(album);
@@ -59,7 +69,7 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
 
             this.AddPicturesToDB(newFiles, album, uploader);
 
-            this.imageGenerator.GenerateImages(targetPath, UnprocessedPhotosFolder);
+            this.imageGenerator.GenerateImages(targetPath, newFiles);
         }
 
         public IEnumerable<PhotoAlbum> Get4NewestAlbums()
@@ -202,23 +212,10 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
             foreach (FileInfo file in allFiles)
             {
                 string newPath = Path.Combine(targetPath, file.Name);
-                string newFilename = file.Name;
 
                 try
                 {
-                    // Copy files from subdirectories to the unprocessed folder
-                    if (!file.FullName.Equals(Path.Combine(unprocessedPath, file.Name)))
-                    {
-                        if (File.Exists(Path.Combine(unprocessedPath, file.Name)))
-                        {
-                            newFilename = file.Name.Replace(file.Extension, file.Directory.Name) + file.Extension;
-                            newPath = Path.Combine(targetPath, newFilename);
-                        }
-
-                        File.Copy(file.FullName, Path.Combine(unprocessedPath, newFilename));
-                    }
-
-                    File.Copy(file.FullName, newPath);
+                    File.Move(file.FullName, newPath);
                     newFiles.Add(new FileInfo(newPath));
                 }
                 catch (IOException ex)

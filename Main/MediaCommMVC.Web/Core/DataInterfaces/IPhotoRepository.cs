@@ -27,5 +27,7 @@ namespace MediaCommMVC.Web.Core.DataInterfaces
         Photo GetPhotoById(int id);
 
         string GetStoragePathForAlbum(PhotoAlbum album);
+
+        void GenerateImagesForUnprocessedUploads(PhotoAlbum album);
     }
 }
