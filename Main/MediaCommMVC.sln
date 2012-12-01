@@ -10,20 +10,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCommMVC.Web.Tests", "MediaCommMVC.Web.Tests\MediaCommMVC.Web.Tests.csproj", "{8B75764E-313E-4146-80F7-06DCE7801009}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 2
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = MediaCommMVC.Web\\MediaCommMVC.Web.csproj
 		SccProjectName1 = MediaCommMVC.Web
 		SccLocalPath1 = MediaCommMVC.Web
-		SccProjectUniqueName2 = MediaCommMVC.Web.Tests\\MediaCommMVC.Web.Tests.csproj
-		SccProjectName2 = MediaCommMVC.Web.Tests
-		SccLocalPath2 = MediaCommMVC.Web.Tests
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = MediaCommMVC.vsmdi
@@ -47,16 +42,6 @@ Global
 		{D746E91F-7B79-4416-B5D5-FCE5FCA74D52}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D746E91F-7B79-4416-B5D5-FCE5FCA74D52}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D746E91F-7B79-4416-B5D5-FCE5FCA74D52}.Release|x86.ActiveCfg = Release|Any CPU
-		{8B75764E-313E-4146-80F7-06DCE7801009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B75764E-313E-4146-80F7-06DCE7801009}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8B75764E-313E-4146-80F7-06DCE7801009}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{8B75764E-313E-4146-80F7-06DCE7801009}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{8B75764E-313E-4146-80F7-06DCE7801009}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{8B75764E-313E-4146-80F7-06DCE7801009}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B75764E-313E-4146-80F7-06DCE7801009}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8B75764E-313E-4146-80F7-06DCE7801009}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{8B75764E-313E-4146-80F7-06DCE7801009}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{8B75764E-313E-4146-80F7-06DCE7801009}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
