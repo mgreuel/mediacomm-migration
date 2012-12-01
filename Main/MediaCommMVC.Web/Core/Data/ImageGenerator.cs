@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 using MediaCommMVC.Web.Core.Common.Logging;
 
@@ -36,11 +37,9 @@ namespace MediaCommMVC.Web.Core.Data
             this.logger = logger;
         }
 
-        public void GenerateImages(string pathToPhotos, string unprocessedPhotosFolder)
+        public void GenerateImages(string pathToPhotos, IEnumerable<FileInfo> sourceImages)
         {
-            string sourcePath = Path.Combine(pathToPhotos, unprocessedPhotosFolder);
-
-            Tuple<string, string> paths = new Tuple<string, string>(pathToPhotos, sourcePath);
+            Tuple<string, IEnumerable<FileInfo>> paths = new Tuple<string, IEnumerable<FileInfo>>(pathToPhotos, sourceImages);
 
             Thread imageGenerationThread = new Thread(this.GenerateAllImages);
             imageGenerationThread.Start(paths);
@@ -50,9 +49,9 @@ namespace MediaCommMVC.Web.Core.Data
         {
             try
             {
-                Tuple<string, string> paths = (Tuple<string, string>)pathsTupel;
+                Tuple<string, IEnumerable<FileInfo>> paths = (Tuple<string, IEnumerable<FileInfo>>)pathsTupel;
 
-                IEnumerable<FileInfo> originalImages = new DirectoryInfo(paths.Item2).GetFiles();
+                IEnumerable<FileInfo> originalImages = paths.Item2;
 
                 foreach (FileInfo originalFile in originalImages)
                 {

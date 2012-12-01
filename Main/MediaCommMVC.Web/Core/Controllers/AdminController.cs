@@ -104,5 +104,13 @@ namespace MediaCommMVC.Web.Core.Controllers
         {
             return this.View();
         }
+
+        [HttpGet]
+        [NHibernateActionFilter]
+        public void ProcessImagesForAlbum(int id)
+        {
+            PhotoAlbum album = this.photoRepository.GetAlbumById(id);
+            this.photoRepository.GenerateImagesForUnprocessedUploads(album);
+        }
     }
 }

@@ -57,6 +57,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
             routes.MapRoute("CreateForum", "Admin/CreateForum", new { controller = "Admin", action = "CreateForum" });
             routes.MapRoute("CreatePhotoCategory", "Admin/CreatePhotoCategory", new { controller = "Admin", action = "CreatePhotoCategory" });
             routes.MapRoute("CreateVideoCategory", "Admin/CreateVideoCategory", new { controller = "Admin", action = "CreateVideoCategory" });
+            routes.MapRoute("ProcessImagesForAlbum", "Admin/ProcessImagesForAlbum/{id}", new { controller = "Admin", action = "ProcessImagesForAlbum" });
         }
 
         private static void RegisterIgnores(RouteCollection routes)
