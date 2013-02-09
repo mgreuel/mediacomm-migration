@@ -108,7 +108,16 @@ namespace MediaCommMVC.Web.Core.Data.Repositories
                 Path.Combine(this.GetValidDirectoryName(photo.PhotoAlbum.Name), fileName));
             string imagePath = Path.Combine(this.configAccessor.GetConfigValue("PhotoRootDir"), directoryPath);
 
-            Image image = Image.FromFile(imagePath);
+            Image image;
+            try
+            {
+                 image = Image.FromFile(imagePath);
+            }
+            catch (IOException exception)
+            {
+                this.logger.Error(string.Format("Unable to load Image from file '{0}'", imagePath), exception);
+                return new Bitmap(32,32);
+            }
 
             // Increase viewcount if the image was not loaded as thumbnail
             if (!size.Equals("small", StringComparison.OrdinalIgnoreCase))
