@@ -1,0 +1,150 @@
+2015-04-11 17:25:06,621 [8] DEBUG Combres.Configuration - Reload Combres settings
+2015-04-11 17:25:06,621 [6] DEBUG Combres.ChangeMonitor - Dynamic resource change monitor thread starts...
+2015-04-11 17:25:06,649 [8] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: 
+2015-04-11 17:25:06,651 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Multiflex/css/mf54_reset.css' (Mode: Static)
+2015-04-11 17:25:06,652 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Multiflex/css/mf54_grid_nosidebar.css' (Mode: Static)
+2015-04-11 17:25:06,652 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Multiflex/css/mf54_content_nosidebar.css' (Mode: Static)
+2015-04-11 17:25:06,652 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/UploadIfy/uploadify.css' (Mode: Static)
+2015-04-11 17:25:06,653 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Highslide/highslide.css' (Mode: Static)
+2015-04-11 17:25:06,653 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/forums.css' (Mode: Static)
+2015-04-11 17:25:06,653 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/photos.css' (Mode: Static)
+2015-04-11 17:25:06,653 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/account.css' (Mode: Static)
+2015-04-11 17:25:06,654 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/admin.css' (Mode: Static)
+2015-04-11 17:25:06,654 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/movies.css' (Mode: Static)
+2015-04-11 17:25:06,654 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/users.css' (Mode: Static)
+2015-04-11 17:25:06,654 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/video.css' (Mode: Static)
+2015-04-11 17:25:06,654 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/home.css' (Mode: Static)
+2015-04-11 17:25:06,655 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/pagedown/wmd.css' (Mode: Static)
+2015-04-11 17:25:06,657 [8] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - New hash: 1713977790
+2015-04-11 17:25:06,657 [8] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: 
+2015-04-11 17:25:06,657 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/jquery.dataTables.min.js' (Mode: Static)
+2015-04-11 17:25:06,658 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/custom/global.js' (Mode: Static)
+2015-04-11 17:25:06,658 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/custom/photos.js' (Mode: Static)
+2015-04-11 17:25:06,658 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/custom/approvals.js' (Mode: Static)
+2015-04-11 17:25:06,658 [8] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -1044868011
+2015-04-11 17:25:06,658 [8] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set uploadJs.  Current hash: 
+2015-04-11 17:25:06,658 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/jquery.uploadify.v2.1.0.min.js' (Mode: Static)
+2015-04-11 17:25:06,659 [8] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - New hash: 284843018
+2015-04-11 17:25:06,659 [8] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set editorJs.  Current hash: 
+2015-04-11 17:25:06,659 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/pagedown/Markdown.Converter.js' (Mode: Static)
+2015-04-11 17:25:06,659 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/pagedown/Markdown.Sanitizer.js' (Mode: Static)
+2015-04-11 17:25:06,659 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/pagedown/Markdown.Editor.js' (Mode: Static)
+2015-04-11 17:25:06,660 [8] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - New hash: 928873157
+2015-04-11 17:25:06,660 [8] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set moviesJs.  Current hash: 
+2015-04-11 17:25:06,660 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/custom/movies.js' (Mode: Static)
+2015-04-11 17:25:06,660 [8] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -1598958241
+2015-04-11 17:25:06,660 [8] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set photosJs.  Current hash: 
+2015-04-11 17:25:06,660 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/highslide-with-gallery.packed.js' (Mode: Static)
+2015-04-11 17:25:06,661 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/highslide.config.js' (Mode: Static)
+2015-04-11 17:25:06,661 [8] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/jquery.lazyload.js' (Mode: Static)
+2015-04-11 17:25:06,661 [8] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -931387011
+2015-04-11 17:25:06,661 [8] DEBUG Combres.ChangeMonitor - Watch new settings
+2015-04-11 17:25:06,668 [8] DEBUG Combres.Configuration - Elapsed time for 'ReloadSettings': 39 ms
+2015-04-11 17:25:09,669 [6] DEBUG Combres.Configuration - Reload Combres settings
+2015-04-11 17:25:09,669 [7] DEBUG Combres.ChangeMonitor - Dynamic resource change monitor thread starts...
+2015-04-11 17:25:09,697 [6] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: 
+2015-04-11 17:25:09,698 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Multiflex/css/mf54_reset.css' (Mode: Static)
+2015-04-11 17:25:09,699 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Multiflex/css/mf54_grid_nosidebar.css' (Mode: Static)
+2015-04-11 17:25:09,700 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Multiflex/css/mf54_content_nosidebar.css' (Mode: Static)
+2015-04-11 17:25:09,700 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/UploadIfy/uploadify.css' (Mode: Static)
+2015-04-11 17:25:09,700 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Highslide/highslide.css' (Mode: Static)
+2015-04-11 17:25:09,700 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/forums.css' (Mode: Static)
+2015-04-11 17:25:09,701 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/photos.css' (Mode: Static)
+2015-04-11 17:25:09,701 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/account.css' (Mode: Static)
+2015-04-11 17:25:09,701 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/admin.css' (Mode: Static)
+2015-04-11 17:25:09,701 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/movies.css' (Mode: Static)
+2015-04-11 17:25:09,702 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/users.css' (Mode: Static)
+2015-04-11 17:25:09,702 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/video.css' (Mode: Static)
+2015-04-11 17:25:09,702 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/home.css' (Mode: Static)
+2015-04-11 17:25:09,702 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/pagedown/wmd.css' (Mode: Static)
+2015-04-11 17:25:09,704 [6] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - New hash: 1713977790
+2015-04-11 17:25:09,704 [6] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: 
+2015-04-11 17:25:09,704 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/jquery.dataTables.min.js' (Mode: Static)
+2015-04-11 17:25:09,705 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/custom/global.js' (Mode: Static)
+2015-04-11 17:25:09,705 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/custom/photos.js' (Mode: Static)
+2015-04-11 17:25:09,705 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/custom/approvals.js' (Mode: Static)
+2015-04-11 17:25:09,706 [6] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -1044868011
+2015-04-11 17:25:09,706 [6] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set uploadJs.  Current hash: 
+2015-04-11 17:25:09,706 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/jquery.uploadify.v2.1.0.min.js' (Mode: Static)
+2015-04-11 17:25:09,706 [6] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - New hash: 284843018
+2015-04-11 17:25:09,706 [6] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set editorJs.  Current hash: 
+2015-04-11 17:25:09,706 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/pagedown/Markdown.Converter.js' (Mode: Static)
+2015-04-11 17:25:09,707 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/pagedown/Markdown.Sanitizer.js' (Mode: Static)
+2015-04-11 17:25:09,707 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/pagedown/Markdown.Editor.js' (Mode: Static)
+2015-04-11 17:25:09,708 [6] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - New hash: 928873157
+2015-04-11 17:25:09,708 [6] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set moviesJs.  Current hash: 
+2015-04-11 17:25:09,708 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/custom/movies.js' (Mode: Static)
+2015-04-11 17:25:09,708 [6] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -1598958241
+2015-04-11 17:25:09,708 [6] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set photosJs.  Current hash: 
+2015-04-11 17:25:09,708 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/highslide-with-gallery.packed.js' (Mode: Static)
+2015-04-11 17:25:09,709 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/highslide.config.js' (Mode: Static)
+2015-04-11 17:25:09,709 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/jquery.lazyload.js' (Mode: Static)
+2015-04-11 17:25:09,709 [6] DEBUG Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -931387011
+2015-04-11 17:25:09,710 [6] DEBUG Combres.ChangeMonitor - Watch new settings
+2015-04-11 17:25:09,717 [6] DEBUG Combres.Configuration - Elapsed time for 'ReloadSettings': 40 ms
+2015-04-11 17:25:09,719 [6] DEBUG Combres.RequestProcessor - ***** Processing request for resource set siteCss
+2015-04-11 17:25:09,722 [6] DEBUG Combres.RequestProcessor - Reading content of ~/Content/Multiflex/css/mf54_reset.css...
+2015-04-11 17:25:09,722 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Multiflex/css/mf54_reset.css' (Mode: Static)
+2015-04-11 17:25:09,723 [6] DEBUG Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/Content/Multiflex/css/mf54_reset.css' (Mode: Static)...
+2015-04-11 17:25:09,725 [6] DEBUG Combres.RequestProcessor - Reading content of ~/Content/Multiflex/css/mf54_grid_nosidebar.css...
+2015-04-11 17:25:09,726 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Multiflex/css/mf54_grid_nosidebar.css' (Mode: Static)
+2015-04-11 17:25:09,726 [6] DEBUG Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/Content/Multiflex/css/mf54_grid_nosidebar.css' (Mode: Static)...
+2015-04-11 17:25:09,727 [6] DEBUG Combres.RequestProcessor - Reading content of ~/Content/Multiflex/css/mf54_content_nosidebar.css...
+2015-04-11 17:25:09,727 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Multiflex/css/mf54_content_nosidebar.css' (Mode: Static)
+2015-04-11 17:25:09,727 [6] DEBUG Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/Content/Multiflex/css/mf54_content_nosidebar.css' (Mode: Static)...
+2015-04-11 17:25:09,727 [6] DEBUG Combres.RequestProcessor - Reading content of ~/Content/UploadIfy/uploadify.css...
+2015-04-11 17:25:09,727 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/UploadIfy/uploadify.css' (Mode: Static)
+2015-04-11 17:25:09,728 [6] DEBUG Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/Content/UploadIfy/uploadify.css' (Mode: Static)...
+2015-04-11 17:25:09,728 [6] DEBUG Combres.RequestProcessor - Reading content of ~/Content/Highslide/highslide.css...
+2015-04-11 17:25:09,728 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Highslide/highslide.css' (Mode: Static)
+2015-04-11 17:25:09,728 [6] DEBUG Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/Content/Highslide/highslide.css' (Mode: Static)...
+2015-04-11 17:25:09,729 [6] DEBUG Combres.RequestProcessor - Reading content of ~/Content/Custom/forums.css...
+2015-04-11 17:25:09,729 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/forums.css' (Mode: Static)
+2015-04-11 17:25:09,729 [6] DEBUG Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/Content/Custom/forums.css' (Mode: Static)...
+2015-04-11 17:25:09,729 [6] DEBUG Combres.RequestProcessor - Reading content of ~/Content/Custom/photos.css...
+2015-04-11 17:25:09,729 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/photos.css' (Mode: Static)
+2015-04-11 17:25:09,729 [6] DEBUG Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/Content/Custom/photos.css' (Mode: Static)...
+2015-04-11 17:25:09,730 [6] DEBUG Combres.RequestProcessor - Reading content of ~/Content/Custom/account.css...
+2015-04-11 17:25:09,730 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/account.css' (Mode: Static)
+2015-04-11 17:25:09,730 [6] DEBUG Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/Content/Custom/account.css' (Mode: Static)...
+2015-04-11 17:25:09,730 [6] DEBUG Combres.RequestProcessor - Reading content of ~/Content/Custom/admin.css...
+2015-04-11 17:25:09,730 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/admin.css' (Mode: Static)
+2015-04-11 17:25:09,730 [6] DEBUG Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/Content/Custom/admin.css' (Mode: Static)...
+2015-04-11 17:25:09,730 [6] DEBUG Combres.RequestProcessor - Reading content of ~/Content/Custom/movies.css...
+2015-04-11 17:25:09,730 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/movies.css' (Mode: Static)
+2015-04-11 17:25:09,730 [6] DEBUG Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/Content/Custom/movies.css' (Mode: Static)...
+2015-04-11 17:25:09,730 [6] DEBUG Combres.RequestProcessor - Reading content of ~/Content/Custom/users.css...
+2015-04-11 17:25:09,731 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/users.css' (Mode: Static)
+2015-04-11 17:25:09,731 [6] DEBUG Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/Content/Custom/users.css' (Mode: Static)...
+2015-04-11 17:25:09,731 [6] DEBUG Combres.RequestProcessor - Reading content of ~/Content/Custom/video.css...
+2015-04-11 17:25:09,731 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/video.css' (Mode: Static)
+2015-04-11 17:25:09,731 [6] DEBUG Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/Content/Custom/video.css' (Mode: Static)...
+2015-04-11 17:25:09,731 [6] DEBUG Combres.RequestProcessor - Reading content of ~/Content/Custom/home.css...
+2015-04-11 17:25:09,731 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/Custom/home.css' (Mode: Static)
+2015-04-11 17:25:09,731 [6] DEBUG Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/Content/Custom/home.css' (Mode: Static)...
+2015-04-11 17:25:09,731 [6] DEBUG Combres.RequestProcessor - Reading content of ~/Content/pagedown/wmd.css...
+2015-04-11 17:25:09,731 [6] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/pagedown/wmd.css' (Mode: Static)
+2015-04-11 17:25:09,732 [6] DEBUG Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/Content/pagedown/wmd.css' (Mode: Static)...
+2015-04-11 17:25:09,732 [6] DEBUG Combres.RequestProcessor - Elapsed time for 'Reading & filtering siteCss': 10 ms
+2015-04-11 17:25:09,732 [6] DEBUG Combres.RequestProcessor - Combining resources' contents...
+2015-04-11 17:25:09,733 [6] DEBUG Combres.RequestProcessor - Elapsed time for 'Combining & filtering siteCss': 0 ms
+2015-04-11 17:25:09,733 [6] DEBUG Combres.RequestProcessor - Compressing combined content...
+2015-04-11 17:25:09,734 [9] DEBUG Combres.RequestProcessor - ***** Processing request for resource set siteJs
+2015-04-11 17:25:09,734 [9] DEBUG Combres.RequestProcessor - Reading content of ~/Scripts/jquery.dataTables.min.js...
+2015-04-11 17:25:09,734 [9] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/jquery.dataTables.min.js' (Mode: Static)
+2015-04-11 17:25:09,735 [9] DEBUG Combres.RequestProcessor - Reading content of ~/Scripts/custom/global.js...
+2015-04-11 17:25:09,735 [9] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/custom/global.js' (Mode: Static)
+2015-04-11 17:25:09,735 [9] DEBUG Combres.RequestProcessor - Reading content of ~/Scripts/custom/photos.js...
+2015-04-11 17:25:09,735 [9] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/custom/photos.js' (Mode: Static)
+2015-04-11 17:25:09,735 [9] DEBUG Combres.RequestProcessor - Reading content of ~/Scripts/custom/approvals.js...
+2015-04-11 17:25:09,735 [9] DEBUG Combres.ResourceContentReader - Retrieving new content for Resource '~/Scripts/custom/approvals.js' (Mode: Static)
+2015-04-11 17:25:09,736 [9] DEBUG Combres.RequestProcessor - Elapsed time for 'Reading & filtering siteJs': 1 ms
+2015-04-11 17:25:09,736 [9] DEBUG Combres.RequestProcessor - Combining resources' contents...
+2015-04-11 17:25:09,736 [9] DEBUG Combres.RequestProcessor - Elapsed time for 'Combining & filtering siteJs': 0 ms
+2015-04-11 17:25:09,736 [9] DEBUG Combres.RequestProcessor - Compressing combined content...
+2015-04-11 17:25:09,737 [6] DEBUG Combres.RequestProcessor - Elapsed time for 'Compressing & filtering siteCss': 4 ms
+2015-04-11 17:25:09,738 [6] DEBUG Combres.RequestProcessor - Writing content to browser...
+2015-04-11 17:25:09,738 [6] DEBUG Combres.RequestProcessor - Elapsed time for 'Processing siteCss': 17 ms
+2015-04-11 17:25:09,740 [9] DEBUG Combres.RequestProcessor - Elapsed time for 'Compressing & filtering siteJs': 4 ms
+2015-04-11 17:25:09,740 [9] DEBUG Combres.RequestProcessor - Writing content to browser...
+2015-04-11 17:25:09,740 [9] DEBUG Combres.RequestProcessor - Elapsed time for 'Processing siteJs': 5 ms
