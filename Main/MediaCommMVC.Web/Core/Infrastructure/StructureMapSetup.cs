@@ -7,8 +7,6 @@ using MarkdownSharp;
 using MediaCommMVC.Web.Core.Common.Config;
 using MediaCommMVC.Web.Core.Common.Logging;
 using MediaCommMVC.Web.Core.Data;
-using MediaCommMVC.Web.Core.DataInterfaces;
-using MediaCommMVC.Web.Core.Model.Users;
 
 using StructureMap;
 
@@ -41,7 +39,12 @@ namespace MediaCommMVC.Web.Core.Infrastructure
                 new Markdown(new MarkdownOptions { AutoHyperlink = true, AutoNewLines = true, EncodeProblemUrlCharacters = true }));
 
             MailConfiguration mailConfiguration = new MailConfiguration
-                { MailFrom = ConfigurationManager.AppSettings["mail-from"], SmtpHost = ConfigurationManager.AppSettings["mail-smtpHost"] };
+            {
+                MailFrom = ConfigurationManager.AppSettings["mail-from"],
+                SmtpHost = ConfigurationManager.AppSettings["mail-smtpHost"],
+                Username = ConfigurationManager.AppSettings["mail-username"],
+                Password = ConfigurationManager.AppSettings["mail-password"]
+            };
             container.For<MailConfiguration>().Use(m => mailConfiguration);
         }
     }

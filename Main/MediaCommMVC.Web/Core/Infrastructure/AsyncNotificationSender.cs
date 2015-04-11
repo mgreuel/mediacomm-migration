@@ -104,7 +104,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
                         this.userRepository.GetMailAddressesToNotifyAboutNewPost().Where(
                             m => !notifyTopic.ExcludedUsers.Select(u => u.EMailAddress).Contains(m) && m != newPost.Author.EMailAddress).ToList();
 
-                    if (usersMailAddressesToNotify.Count() == 0)
+                    if (!usersMailAddressesToNotify.Any())
                     {
                         return;
                     }
@@ -130,7 +130,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
                     IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewPost().Where(
                             m => !notifyTopic.ExcludedUsers.Select(u => u.EMailAddress).Contains(m) && m != author.EMailAddress).ToList();
 
-                    if (usersMailAddressesToNotify.Count() == 0)
+                    if (!usersMailAddressesToNotify.Any())
                     {
                         return;
                     }
@@ -148,7 +148,13 @@ namespace MediaCommMVC.Web.Core.Infrastructure
         {
             this.logger.Info("Sending mail with subject '{0}' to '{1}'", subject, string.Join(";", recipients));
 
-            var smtp = new SmtpClient { Host = this.mailConfiguration.SmtpHost, DeliveryMethod = SmtpDeliveryMethod.Network, };
+            var smtp = new SmtpClient
+            {
+                Host = this.mailConfiguration.SmtpHost,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                Credentials =
+                    new System.Net.NetworkCredential(this.mailConfiguration.Username, this.mailConfiguration.Password)
+            };
 
             using (MailMessage message = new MailMessage(this.mailConfiguration.MailFrom, recipients.First()) { Subject = subject, Body = body })
             {
@@ -167,7 +173,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
                     MediaCommUser uploader = this.userRepository.GetUserByName(uploaderName);
                     IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewPhotos().Where(m => m != uploader.EMailAddress);
 
-                    if (usersMailAddressesToNotify.Count() == 0)
+                    if (!usersMailAddressesToNotify.Any())
                     {
                         return;
                     }
@@ -189,7 +195,7 @@ namespace MediaCommMVC.Web.Core.Infrastructure
                     DateTime notificationTime = DateTime.Now;
                     IEnumerable<string> usersMailAddressesToNotify = this.userRepository.GetMailAddressesToNotifyAboutNewVideos().Where(m => m != newVideo.Uploader.EMailAddress);
 
-                    if (usersMailAddressesToNotify.Count() == 0)
+                    if (!usersMailAddressesToNotify.Any())
                     {
                         return;
                     }
